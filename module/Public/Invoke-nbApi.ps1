@@ -11,7 +11,7 @@
 function Invoke-nbApi
 {
     [CmdletBinding()]
-    [Alias(inb)]
+    [Alias("inb")]
     Param (
         # The resource path to connect to
         [Parameter(Mandatory = $true,
@@ -64,25 +64,34 @@ function Invoke-nbApi
                 ).Uri
 
             }
+            else
+            {
+                $Script:APIUrl = $APIUrl
+            }
+
         }
     }
     process
     {
-        $QueryString = ""
-        if ($Query)
+        if (-not $Query)
         {
-            $QueryString = ($Query.Keys | ForEach-Object {
-                    "{0}={1}" -f $_, $Query[$_]
-                }) -join '&'
+            $Query = New-Object hashtable
         }
-
-        #Make sure resource is constructed '/path/path'
-        $Resource = "/$($Resource.TrimStart('/'))"
+        $Query["format"] = "json"
+        $QueryString = ""
+        #Format a hashtable to key=value&key2=value2 format.
+        $QueryString = (
+            $Query.Keys |
+            ForEach-Object {
+                "{0}={1}" -f $_, $Query[$_]
+            }
+        ) -join '&'
+        $Resource = "$($Resource.Trim('/'))/"
         #construct the uri
         $URI = new-Object UriBuilder -Property @{
             Scheme = $Script:APIUrl.Scheme
             Host   = $Script:APIUrl.DnsSafeHost
-            Path   = "/santaba/rest{0}" -f $Resource
+            Path   = $Script:APIUrl.LocalPath + $Resource
             Query  = $QueryString
         }
 
@@ -92,7 +101,7 @@ function Invoke-nbApi
             Code for SecureString to String
             https://blogs.msdn.microsoft.com/fpintos/2009/06/12/how-to-properly-convert-securestring-to-string/
             #>
-            $unmanagedString = [System.Runtime.InteropServices.Marshal]::SecureStringToGlobalAllocUnicode($Script:AccessKey)
+            $unmanagedString = [System.Runtime.InteropServices.Marshal]::SecureStringToGlobalAllocUnicode($Script:Token)
             $Params = @{
                 Uri         = $URI.Uri
                 Method      = $HttpVerb
@@ -100,6 +109,7 @@ function Invoke-nbApi
                 Headers     = @{
                     Authorization = "token {0}" -f [System.Runtime.InteropServices.Marshal]::PtrToStringUni($unmanagedString)
                 }
+
                 ContentType = 'application/json'
                 Body        = $Body
                 #TimeoutSec
@@ -109,11 +119,11 @@ function Invoke-nbApi
 
             #splat the paramaters into Invoke-Restmethod
             $Response = Invoke-RestMethod @Params
-            Write-Verbose "Status $($Response.status)"
-            if ($Response.status -ne 200)
-            {
-                Write-Error -Message "Call to NB failed! $($Response.errmsg)" -ErrorId $Response.status
-            }
+            #Write-Verbose "Status $($Response.status)"
+            #if ($Response.status -ne 200)
+            #{
+            #    Write-Error -Message "Call to NB failed! $($Response.errmsg)" -ErrorId $Response.status
+            #}
             $Response
         }
         Catch
