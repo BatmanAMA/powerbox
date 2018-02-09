@@ -1,108 +1,68 @@
-// Available variables which can be used inside of strings.
-// ${workspaceRoot}: the root folder of the team
-// ${file}: the current opened file
-// ${relativeFile}: the current opened file relative to workspaceRoot
-// ${fileBasename}: the current opened file's basename
-// ${fileDirname}: the current opened file's dirname
-// ${fileExtname}: the current opened file's extension
-// ${cwd}: the current working directory of the spawned process
 {
     // See https://go.microsoft.com/fwlink/?LinkId=733558
     // for the documentation about the tasks.json format
-    "version": "0.1.0",
-    "runner": "terminal",
-
-    // Start PowerShell
-    "windows": {
-        "command": "PowerShell.exe"
-    },
-    "linux": {
-        "command": "/usr/bin/powershell"
-    },
-    "osx": {
-        "command": "/usr/local/bin/powershell"
-    },
-
-    // The command is a shell script
-    "isShellCommand": true,
-
-    // Show the output window always
-    "showOutput": "always",
-
-    "args": [
-        "-NoProfile", "-ExecutionPolicy", "Bypass"
-    ],
-
-    // Associate with test task runner
+    "version": "2.0.0",
     "tasks": [
         {
-            "taskName": "Clean",
-            "suppressTaskName": true,
-            "showOutput": "always",
-            "args": [
-                "Invoke-Build -Task Clean"
-            ]
+            "label": "build",
+            "type": "shell",
+            "command": "Invoke-Build",
+            "group": "build",
+            "presentation": {
+                "reveal": "never",
+                "panel": "shared"
+            }
         },
         {
-            "taskName": "Build",
-            "suppressTaskName": true,
-            "isBuildCommand": true,
-            "showOutput": "always",
-            "args": [
-                "Invoke-Build"
-            ]
+            "label": "documentation",
+            "type": "shell",
+            "command": "Invoke-Build -Task BuildDocs",
+            "group": "build",
+            "presentation": {
+                "reveal": "never",
+                "panel": "shared"
+            }
         },
         {
-            "taskName": "BuildHelp",
-            "suppressTaskName": true,
-            "showOutput": "always",
-            "args": [
-                "Invoke-Build -Task BuildDocs"
-            ]
+            "label": "clean",
+            "type": "shell",
+            "command": "Invoke-Build -Task Clean",
+            "group": "build",
+            "presentation": {
+                "reveal": "never",
+                "panel": "shared"
+            }
         },
         {
-            "taskName": "Analyze",
-            "suppressTaskName": true,
-            "showOutput": "always",
-            "args": [
-                "Invoke-Build -Task Analyze"
-            ]
+            "label": "analyze",
+            "type": "shell",
+            "command": "Invoke-Build -Task Analyze",
+            "group": "test",
+            "presentation": {
+                "reveal": "never",
+                "panel": "shared"
+            }
         },
         {
-            "taskName": "Install",
-            "suppressTaskName": true,
-            "showOutput": "always",
-            "args": [
-                "Invoke-Build -Task Install"
-            ]
+            "label": "install",
+            "type": "shell",
+            "command": "Invoke-Build -Task Install",
+            "group": "none",
+            "presentation": {
+                "reveal": "never",
+                "panel": "shared"
+            }
         },
         {
-            "taskName": "Test",
-            "suppressTaskName": true,
-            "isTestCommand": true,
-            "showOutput": "always",
-            "args": [
-                "Invoke-Build -Task Test"
-            ],
-            "problemMatcher": [
-                {
-                    "owner": "powershell",
-                    "fileLocation": ["absolute"],
-                    "severity": "error",
-                    "pattern": [
-                        {
-                            "regexp": "^\\s*(\\[-\\]\\s*.*?)(\\d+)ms\\s*$",
-                            "message": 1
-                        },
-                        {
-                            "regexp": "^\\s+at\\s+[^,]+,\\s*(.*?):\\s+line\\s+(\\d+)$",
-                            "file": 1,
-                            "line": 2
-                        }
-                    ]
-                }
-            ]
+            "label": "test",
+            "type": "shell",
+            "command": "Invoke-Build -Task Test",
+            "group": "test",
+            "presentation": {
+                "reveal": "never",
+                "panel": "shared"
+            },
+            "problemMatcher": "$pester"
         }
     ]
 }
-
