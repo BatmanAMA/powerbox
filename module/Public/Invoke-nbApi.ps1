@@ -91,7 +91,7 @@ function Invoke-nbApi
         $URI = new-Object UriBuilder -Property @{
             Scheme = $Script:APIUrl.Scheme
             Host   = $Script:APIUrl.DnsSafeHost
-            Path   = $Script:APIUrl.LocalPath + $Resource
+            Path   = $Script:APIUrl.LocalPath.TrimEnd('/') + '/' + $Resource
             Query  = $QueryString
         }
 

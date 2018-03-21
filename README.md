@@ -15,7 +15,7 @@ Install-Module powerbox -Scope CurrentUser
 ```
 
 ### Source
-
+(requires invokebuild)
 ```powershell
 git clone 'https://github.com/batmanama/powerbox.git'
 Set-Location .\powerbox
