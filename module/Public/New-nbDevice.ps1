@@ -41,21 +41,15 @@ function New-nbDevice {
         $Properties
     )
 
-    $object = @{custom_properties = @{}}
+    $object = @{custom_fields = @{}}
     for ($i = 0; $i -lt $Properties.Count; $i += 2) {
         $Name = $Properties[$i] -replace '-' -replace ':'
         $value = $Properties[$i + 1]
         if ($name -in $lookup.keys) {
-            if ($lookup[$name] -match '.*\\_choices')
-            {
-                $value = Invoke-nbApi -resource ($lookup[$name]) |
-                    Where-object label -eq $value |
-                    Select-Object -ExpandProperty value
-            }
-            $value = (Invoke-nbApi -resource ($lookup[$name]) -Query @{slug = $Properties[$i + 1]}).results[0].id
+            $value = ConvertTo-nbID -source $value -value $name
         }
         if ($name -in $CustomProperties) {
-            $object.custom_properties[$name] = $value
+            $object.custom_fields[$name] = $value
         }
         else {
             $object[$name] = $value
@@ -64,5 +58,4 @@ function New-nbDevice {
     $object = New-Object -TypeName psobject -Property $object
 
     Invoke-nbApi -Resource dcim/devices -HttpVerb POST -Body ($object | ConvertTo-Json)
-
 }
