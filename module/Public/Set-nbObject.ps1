@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-    Sets properties on a device in Netbox
+    Sets properties on a object in Netbox
 .DESCRIPTION
     This should handle mapping a simple hashtable of values and looking up any references.
 .EXAMPLE
@@ -18,11 +18,11 @@
         site = 'chicago'
         status = 'active'
     }
-    Set-nbDevice -id 22 -lookup $lookup @device
+    Set-nbObject -resource dcim/devices -id 22 -lookup $lookup @device
 .EXAMPLE
-    Set-nbDevice -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type,site
+    Set-nbObject -resource dcim/devices -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type,site
 #>
-function New-nbDevice {
+function New-nbObject {
     [CmdletBinding()]
     Param (
         # ID of the device to set
@@ -50,7 +50,7 @@ function New-nbDevice {
     )
     if ($Patch.IsPresent)
     {
-        $OldObject = Invoke-nbApi -Resource dcim/device/$id
+        $OldObject = Invoke-nbApi -Resource $Resource/$id
         #flatten the object
         Foreach ($prop in ($OldObject | get-Member -MemberType Properties))
         {
@@ -82,7 +82,7 @@ function New-nbDevice {
     {
         $notChanged = $object | compare-object -ReferenceObject $OldObject -ExcludeDifferent -PassThru
         $object = $object | Select-Object -ExcludeProperty $notChanged
-        return Invoke-nbApi -Resource dcim/devices/$id -HttpVerb Patch -Body ($object | ConvertTo-Json)
+        return Invoke-nbApi -Resource $Resource/$id -HttpVerb Patch -Body ($object | ConvertTo-Json)
     }
-    return Invoke-nbApi -Resource dcim/devices/$id -HttpVerb Put -Body ($object | ConvertTo-Json)
+    return Invoke-nbApi -Resource $Resource/$id -HttpVerb Put -Body ($object | ConvertTo-Json)
 }

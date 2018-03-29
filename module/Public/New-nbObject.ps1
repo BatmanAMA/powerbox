@@ -18,13 +18,18 @@
         site = 'chicago'
         status = 'active'
     }
-    New-nbDevice -lookup $lookup @device
+    New-nbObject -lookup $lookup @device
 .EXAMPLE
-    New-nbDevice -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
+    New-nbObject -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
 #>
-function New-nbDevice {
+function New-nbObject {
     [CmdletBinding()]
     Param (
+        # object/resource type
+        [parameter(Mandatory=$true)]
+        [String]
+        [Alias("type","object")]
+        $Resource,
 
         # List of custom properties
         [Parameter()]
@@ -57,5 +62,5 @@ function New-nbDevice {
     }
     $object = New-Object -TypeName psobject -Property $object
 
-    Invoke-nbApi -Resource dcim/devices -HttpVerb POST -Body ($object | ConvertTo-Json)
+    Invoke-nbApi -Resource $Resource -HttpVerb POST -Body ($object | ConvertTo-Json)
 }
