@@ -22,11 +22,11 @@
         site = 'chicago'
         status = 'active'
     }
-    Set-nbcircuittermination -id 22 -lookup $lookup @device
+    Set-nbCircuitTermination -id 22 -lookup $lookup @device
 .EXAMPLE
-    Set-nbcircuittermination -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
+    Set-nbCircuitTermination -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
 #>
-Function Set-nbcircuittermination {
+Function Set-nbCircuitTermination {
     Set-nbObject -Resource 'circuits/circuit-terminations' @args
 }
 
@@ -53,11 +53,11 @@ Function Set-nbcircuittermination {
         site = 'chicago'
         status = 'active'
     }
-    Set-nbcircuittype -id 22 -lookup $lookup @device
+    Set-nbCircuitType -id 22 -lookup $lookup @device
 .EXAMPLE
-    Set-nbcircuittype -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
+    Set-nbCircuitType -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
 #>
-Function Set-nbcircuittype {
+Function Set-nbCircuitType {
     Set-nbObject -Resource 'circuits/circuit-types' @args
 }
 
@@ -84,11 +84,11 @@ Function Set-nbcircuittype {
         site = 'chicago'
         status = 'active'
     }
-    Set-nbcircuit -id 22 -lookup $lookup @device
+    Set-nbCircuit -id 22 -lookup $lookup @device
 .EXAMPLE
-    Set-nbcircuit -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
+    Set-nbCircuit -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
 #>
-Function Set-nbcircuit {
+Function Set-nbCircuit {
     Set-nbObject -Resource 'circuits/circuits' @args
 }
 
@@ -115,11 +115,11 @@ Function Set-nbcircuit {
         site = 'chicago'
         status = 'active'
     }
-    Set-nbprovider -id 22 -lookup $lookup @device
+    Set-nbProvider -id 22 -lookup $lookup @device
 .EXAMPLE
-    Set-nbprovider -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
+    Set-nbProvider -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
 #>
-Function Set-nbprovider {
+Function Set-nbProvider {
     Set-nbObject -Resource 'circuits/providers' @args
 }
 
@@ -146,17 +146,17 @@ Function Set-nbprovider {
         site = 'chicago'
         status = 'active'
     }
-    Set-nbconnecteddevice -id 22 -lookup $lookup @device
+    Set-nbConnectedDevice -id 22 -lookup $lookup @device
 .EXAMPLE
-    Set-nbconnecteddevice -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
+    Set-nbConnectedDevice -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
 #>
-Function Set-nbconnecteddevice {
+Function Set-nbConnectedDevice {
     Set-nbObject -Resource 'dcim/connected-device' @args
 }
 
 <#
 .SYNOPSIS
-    Sets properties on a consoleconnection in netbox
+    Sets properties on a consoleConnection in netbox
 .DESCRIPTION
     This should handle mapping a simple hashtable of values and looking up any references.
 .NOTES
@@ -177,17 +177,17 @@ Function Set-nbconnecteddevice {
         site = 'chicago'
         status = 'active'
     }
-    Set-nbconsoleconnection -id 22 -lookup $lookup @device
+    Set-nbConsoleConnection -id 22 -lookup $lookup @device
 .EXAMPLE
-    Set-nbconsoleconnection -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
+    Set-nbConsoleConnection -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
 #>
-Function Set-nbconsoleconnection {
+Function Set-nbConsoleConnection {
     Set-nbObject -Resource 'dcim/console-connections' @args
 }
 
 <#
 .SYNOPSIS
-    Sets properties on a consoleporttemplate in netbox
+    Sets properties on a consoleportTemplate in netbox
 .DESCRIPTION
     This should handle mapping a simple hashtable of values and looking up any references.
 .NOTES
@@ -208,11 +208,11 @@ Function Set-nbconsoleconnection {
         site = 'chicago'
         status = 'active'
     }
-    Set-nbconsoleporttemplate -id 22 -lookup $lookup @device
+    Set-nbConsolePortTemplate -id 22 -lookup $lookup @device
 .EXAMPLE
-    Set-nbconsoleporttemplate -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
+    Set-nbConsolePortTemplate -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
 #>
-Function Set-nbconsoleporttemplate {
+Function Set-nbConsolePortTemplate {
     Set-nbObject -Resource 'dcim/console-port-templates' @args
 }
 
@@ -239,17 +239,17 @@ Function Set-nbconsoleporttemplate {
         site = 'chicago'
         status = 'active'
     }
-    Set-nbconsoleport -id 22 -lookup $lookup @device
+    Set-nbConsolePort -id 22 -lookup $lookup @device
 .EXAMPLE
-    Set-nbconsoleport -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
+    Set-nbConsolePort -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
 #>
-Function Set-nbconsoleport {
+Function Set-nbConsolePort {
     Set-nbObject -Resource 'dcim/console-ports' @args
 }
 
 <#
 .SYNOPSIS
-    Sets properties on a consoleserverporttemplate in netbox
+    Sets properties on a consoleserverportTemplate in netbox
 .DESCRIPTION
     This should handle mapping a simple hashtable of values and looking up any references.
 .NOTES
@@ -270,11 +270,11 @@ Function Set-nbconsoleport {
         site = 'chicago'
         status = 'active'
     }
-    Set-nbconsoleserverporttemplate -id 22 -lookup $lookup @device
+    Set-nbConsoleServerPortTemplate -id 22 -lookup $lookup @device
 .EXAMPLE
-    Set-nbconsoleserverporttemplate -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
+    Set-nbConsoleServerPortTemplate -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
 #>
-Function Set-nbconsoleserverporttemplate {
+Function Set-nbConsoleServerPortTemplate {
     Set-nbObject -Resource 'dcim/console-server-port-templates' @args
 }
 
@@ -301,17 +301,17 @@ Function Set-nbconsoleserverporttemplate {
         site = 'chicago'
         status = 'active'
     }
-    Set-nbconsoleserverport -id 22 -lookup $lookup @device
+    Set-nbConsoleServerPort -id 22 -lookup $lookup @device
 .EXAMPLE
-    Set-nbconsoleserverport -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
+    Set-nbConsoleServerPort -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
 #>
-Function Set-nbconsoleserverport {
+Function Set-nbConsoleServerPort {
     Set-nbObject -Resource 'dcim/console-server-ports' @args
 }
 
 <#
 .SYNOPSIS
-    Sets properties on a devicebaytemplate in netbox
+    Sets properties on a devicebayTemplate in netbox
 .DESCRIPTION
     This should handle mapping a simple hashtable of values and looking up any references.
 .NOTES
@@ -332,11 +332,11 @@ Function Set-nbconsoleserverport {
         site = 'chicago'
         status = 'active'
     }
-    Set-nbdevicebaytemplate -id 22 -lookup $lookup @device
+    Set-nbDevicebayTemplate -id 22 -lookup $lookup @device
 .EXAMPLE
-    Set-nbdevicebaytemplate -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
+    Set-nbDevicebayTemplate -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
 #>
-Function Set-nbdevicebaytemplate {
+Function Set-nbDevicebayTemplate {
     Set-nbObject -Resource 'dcim/device-bay-templates' @args
 }
 
@@ -363,11 +363,11 @@ Function Set-nbdevicebaytemplate {
         site = 'chicago'
         status = 'active'
     }
-    Set-nbdevicebay -id 22 -lookup $lookup @device
+    Set-nbDevicebay -id 22 -lookup $lookup @device
 .EXAMPLE
-    Set-nbdevicebay -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
+    Set-nbDevicebay -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
 #>
-Function Set-nbdevicebay {
+Function Set-nbDevicebay {
     Set-nbObject -Resource 'dcim/device-bays' @args
 }
 
@@ -394,11 +394,11 @@ Function Set-nbdevicebay {
         site = 'chicago'
         status = 'active'
     }
-    Set-nbdevicerole -id 22 -lookup $lookup @device
+    Set-nbDeviceRole -id 22 -lookup $lookup @device
 .EXAMPLE
-    Set-nbdevicerole -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
+    Set-nbDeviceRole -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
 #>
-Function Set-nbdevicerole {
+Function Set-nbDeviceRole {
     Set-nbObject -Resource 'dcim/device-roles' @args
 }
 
@@ -425,11 +425,11 @@ Function Set-nbdevicerole {
         site = 'chicago'
         status = 'active'
     }
-    Set-nbdevicetype -id 22 -lookup $lookup @device
+    Set-nbDeviceType -id 22 -lookup $lookup @device
 .EXAMPLE
-    Set-nbdevicetype -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
+    Set-nbDeviceType -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
 #>
-Function Set-nbdevicetype {
+Function Set-nbDeviceType {
     Set-nbObject -Resource 'dcim/device-types' @args
 }
 
@@ -456,17 +456,17 @@ Function Set-nbdevicetype {
         site = 'chicago'
         status = 'active'
     }
-    Set-nbdevice -id 22 -lookup $lookup @device
+    Set-nbDevice -id 22 -lookup $lookup @device
 .EXAMPLE
-    Set-nbdevice -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
+    Set-nbDevice -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
 #>
-Function Set-nbdevice {
+Function Set-nbDevice {
     Set-nbObject -Resource 'dcim/devices' @args
 }
 
 <#
 .SYNOPSIS
-    Sets properties on a interfaceconnection in netbox
+    Sets properties on a interfaceConnection in netbox
 .DESCRIPTION
     This should handle mapping a simple hashtable of values and looking up any references.
 .NOTES
@@ -487,17 +487,17 @@ Function Set-nbdevice {
         site = 'chicago'
         status = 'active'
     }
-    Set-nbinterfaceconnection -id 22 -lookup $lookup @device
+    Set-nbInterfaceConnection -id 22 -lookup $lookup @device
 .EXAMPLE
-    Set-nbinterfaceconnection -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
+    Set-nbInterfaceConnection -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
 #>
-Function Set-nbinterfaceconnection {
+Function Set-nbInterfaceConnection {
     Set-nbObject -Resource 'dcim/interface-connections' @args
 }
 
 <#
 .SYNOPSIS
-    Sets properties on a interfacetemplate in netbox
+    Sets properties on a interfaceTemplate in netbox
 .DESCRIPTION
     This should handle mapping a simple hashtable of values and looking up any references.
 .NOTES
@@ -518,11 +518,11 @@ Function Set-nbinterfaceconnection {
         site = 'chicago'
         status = 'active'
     }
-    Set-nbinterfacetemplate -id 22 -lookup $lookup @device
+    Set-nbInterfaceTemplate -id 22 -lookup $lookup @device
 .EXAMPLE
-    Set-nbinterfacetemplate -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
+    Set-nbInterfaceTemplate -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
 #>
-Function Set-nbinterfacetemplate {
+Function Set-nbInterfaceTemplate {
     Set-nbObject -Resource 'dcim/interface-templates' @args
 }
 
@@ -549,11 +549,11 @@ Function Set-nbinterfacetemplate {
         site = 'chicago'
         status = 'active'
     }
-    Set-nbinterface -id 22 -lookup $lookup @device
+    Set-nbInterface -id 22 -lookup $lookup @device
 .EXAMPLE
-    Set-nbinterface -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
+    Set-nbInterface -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
 #>
-Function Set-nbinterface {
+Function Set-nbInterface {
     Set-nbObject -Resource 'dcim/interfaces' @args
 }
 
@@ -580,11 +580,11 @@ Function Set-nbinterface {
         site = 'chicago'
         status = 'active'
     }
-    Set-nbinventoryitem -id 22 -lookup $lookup @device
+    Set-nbInventoryItem -id 22 -lookup $lookup @device
 .EXAMPLE
-    Set-nbinventoryitem -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
+    Set-nbInventoryItem -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
 #>
-Function Set-nbinventoryitem {
+Function Set-nbInventoryItem {
     Set-nbObject -Resource 'dcim/inventory-items' @args
 }
 
@@ -611,11 +611,11 @@ Function Set-nbinventoryitem {
         site = 'chicago'
         status = 'active'
     }
-    Set-nbmanufacturer -id 22 -lookup $lookup @device
+    Set-nbManufacturer -id 22 -lookup $lookup @device
 .EXAMPLE
-    Set-nbmanufacturer -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
+    Set-nbManufacturer -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
 #>
-Function Set-nbmanufacturer {
+Function Set-nbManufacturer {
     Set-nbObject -Resource 'dcim/manufacturers' @args
 }
 
@@ -642,17 +642,17 @@ Function Set-nbmanufacturer {
         site = 'chicago'
         status = 'active'
     }
-    Set-nbplatform -id 22 -lookup $lookup @device
+    Set-nbPlatform -id 22 -lookup $lookup @device
 .EXAMPLE
-    Set-nbplatform -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
+    Set-nbPlatform -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
 #>
-Function Set-nbplatform {
+Function Set-nbPlatform {
     Set-nbObject -Resource 'dcim/platforms' @args
 }
 
 <#
 .SYNOPSIS
-    Sets properties on a powerconnection in netbox
+    Sets properties on a powerConnection in netbox
 .DESCRIPTION
     This should handle mapping a simple hashtable of values and looking up any references.
 .NOTES
@@ -673,17 +673,17 @@ Function Set-nbplatform {
         site = 'chicago'
         status = 'active'
     }
-    Set-nbpowerconnection -id 22 -lookup $lookup @device
+    Set-nbPowerConnection -id 22 -lookup $lookup @device
 .EXAMPLE
-    Set-nbpowerconnection -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
+    Set-nbPowerConnection -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
 #>
-Function Set-nbpowerconnection {
+Function Set-nbPowerConnection {
     Set-nbObject -Resource 'dcim/power-connections' @args
 }
 
 <#
 .SYNOPSIS
-    Sets properties on a poweroutlettemplate in netbox
+    Sets properties on a poweroutletTemplate in netbox
 .DESCRIPTION
     This should handle mapping a simple hashtable of values and looking up any references.
 .NOTES
@@ -704,11 +704,11 @@ Function Set-nbpowerconnection {
         site = 'chicago'
         status = 'active'
     }
-    Set-nbpoweroutlettemplate -id 22 -lookup $lookup @device
+    Set-nbPowerOutletTemplate -id 22 -lookup $lookup @device
 .EXAMPLE
-    Set-nbpoweroutlettemplate -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
+    Set-nbPowerOutletTemplate -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
 #>
-Function Set-nbpoweroutlettemplate {
+Function Set-nbPowerOutletTemplate {
     Set-nbObject -Resource 'dcim/power-outlet-templates' @args
 }
 
@@ -735,17 +735,17 @@ Function Set-nbpoweroutlettemplate {
         site = 'chicago'
         status = 'active'
     }
-    Set-nbpoweroutlet -id 22 -lookup $lookup @device
+    Set-nbPowerOutlet -id 22 -lookup $lookup @device
 .EXAMPLE
-    Set-nbpoweroutlet -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
+    Set-nbPowerOutlet -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
 #>
-Function Set-nbpoweroutlet {
+Function Set-nbPowerOutlet {
     Set-nbObject -Resource 'dcim/power-outlets' @args
 }
 
 <#
 .SYNOPSIS
-    Sets properties on a powerporttemplate in netbox
+    Sets properties on a powerportTemplate in netbox
 .DESCRIPTION
     This should handle mapping a simple hashtable of values and looking up any references.
 .NOTES
@@ -766,11 +766,11 @@ Function Set-nbpoweroutlet {
         site = 'chicago'
         status = 'active'
     }
-    Set-nbpowerporttemplate -id 22 -lookup $lookup @device
+    Set-nbPowerPortTemplate -id 22 -lookup $lookup @device
 .EXAMPLE
-    Set-nbpowerporttemplate -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
+    Set-nbPowerPortTemplate -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
 #>
-Function Set-nbpowerporttemplate {
+Function Set-nbPowerPortTemplate {
     Set-nbObject -Resource 'dcim/power-port-templates' @args
 }
 
@@ -797,11 +797,11 @@ Function Set-nbpowerporttemplate {
         site = 'chicago'
         status = 'active'
     }
-    Set-nbpowerport -id 22 -lookup $lookup @device
+    Set-nbPowerPort -id 22 -lookup $lookup @device
 .EXAMPLE
-    Set-nbpowerport -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
+    Set-nbPowerPort -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
 #>
-Function Set-nbpowerport {
+Function Set-nbPowerPort {
     Set-nbObject -Resource 'dcim/power-ports' @args
 }
 
@@ -828,11 +828,11 @@ Function Set-nbpowerport {
         site = 'chicago'
         status = 'active'
     }
-    Set-nbrackgroup -id 22 -lookup $lookup @device
+    Set-nbRackGroup -id 22 -lookup $lookup @device
 .EXAMPLE
-    Set-nbrackgroup -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
+    Set-nbRackGroup -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
 #>
-Function Set-nbrackgroup {
+Function Set-nbRackGroup {
     Set-nbObject -Resource 'dcim/rack-groups' @args
 }
 
@@ -859,11 +859,11 @@ Function Set-nbrackgroup {
         site = 'chicago'
         status = 'active'
     }
-    Set-nbrackreservation -id 22 -lookup $lookup @device
+    Set-nbRackReservation -id 22 -lookup $lookup @device
 .EXAMPLE
-    Set-nbrackreservation -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
+    Set-nbRackReservation -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
 #>
-Function Set-nbrackreservation {
+Function Set-nbRackReservation {
     Set-nbObject -Resource 'dcim/rack-reservations' @args
 }
 
@@ -890,11 +890,11 @@ Function Set-nbrackreservation {
         site = 'chicago'
         status = 'active'
     }
-    Set-nbrackrole -id 22 -lookup $lookup @device
+    Set-nbRackRole -id 22 -lookup $lookup @device
 .EXAMPLE
-    Set-nbrackrole -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
+    Set-nbRackRole -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
 #>
-Function Set-nbrackrole {
+Function Set-nbRackRole {
     Set-nbObject -Resource 'dcim/rack-roles' @args
 }
 
@@ -921,11 +921,11 @@ Function Set-nbrackrole {
         site = 'chicago'
         status = 'active'
     }
-    Set-nbrack -id 22 -lookup $lookup @device
+    Set-nbRack -id 22 -lookup $lookup @device
 .EXAMPLE
-    Set-nbrack -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
+    Set-nbRack -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
 #>
-Function Set-nbrack {
+Function Set-nbRack {
     Set-nbObject -Resource 'dcim/racks' @args
 }
 
@@ -952,11 +952,11 @@ Function Set-nbrack {
         site = 'chicago'
         status = 'active'
     }
-    Set-nbregion -id 22 -lookup $lookup @device
+    Set-nbRegion -id 22 -lookup $lookup @device
 .EXAMPLE
-    Set-nbregion -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
+    Set-nbRegion -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
 #>
-Function Set-nbregion {
+Function Set-nbRegion {
     Set-nbObject -Resource 'dcim/regions' @args
 }
 
@@ -983,11 +983,11 @@ Function Set-nbregion {
         site = 'chicago'
         status = 'active'
     }
-    Set-nbsite -id 22 -lookup $lookup @device
+    Set-nbSite -id 22 -lookup $lookup @device
 .EXAMPLE
-    Set-nbsite -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
+    Set-nbSite -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
 #>
-Function Set-nbsite {
+Function Set-nbSite {
     Set-nbObject -Resource 'dcim/sites' @args
 }
 
@@ -1014,17 +1014,17 @@ Function Set-nbsite {
         site = 'chicago'
         status = 'active'
     }
-    Set-nbvirtualchassi -id 22 -lookup $lookup @device
+    Set-nbVirtualChassis -id 22 -lookup $lookup @device
 .EXAMPLE
-    Set-nbvirtualchassi -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
+    Set-nbVirtualChassis -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
 #>
-Function Set-nbvirtualchassi {
+Function Set-nbVirtualChassis {
     Set-nbObject -Resource 'dcim/virtual-chassis' @args
 }
 
 <#
 .SYNOPSIS
-    Sets properties on a exporttemplate in netbox
+    Sets properties on a exportTemplate in netbox
 .DESCRIPTION
     This should handle mapping a simple hashtable of values and looking up any references.
 .NOTES
@@ -1045,11 +1045,11 @@ Function Set-nbvirtualchassi {
         site = 'chicago'
         status = 'active'
     }
-    Set-nbexporttemplate -id 22 -lookup $lookup @device
+    Set-nbExportTemplate -id 22 -lookup $lookup @device
 .EXAMPLE
-    Set-nbexporttemplate -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
+    Set-nbExportTemplate -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
 #>
-Function Set-nbexporttemplate {
+Function Set-nbExportTemplate {
     Set-nbObject -Resource 'extras/export-templates' @args
 }
 
@@ -1076,11 +1076,11 @@ Function Set-nbexporttemplate {
         site = 'chicago'
         status = 'active'
     }
-    Set-nbgraph -id 22 -lookup $lookup @device
+    Set-nbGraph -id 22 -lookup $lookup @device
 .EXAMPLE
-    Set-nbgraph -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
+    Set-nbGraph -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
 #>
-Function Set-nbgraph {
+Function Set-nbGraph {
     Set-nbObject -Resource 'extras/graphs' @args
 }
 
@@ -1107,17 +1107,17 @@ Function Set-nbgraph {
         site = 'chicago'
         status = 'active'
     }
-    Set-nbimageattachment -id 22 -lookup $lookup @device
+    Set-nbImageAttachment -id 22 -lookup $lookup @device
 .EXAMPLE
-    Set-nbimageattachment -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
+    Set-nbImageAttachment -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
 #>
-Function Set-nbimageattachment {
+Function Set-nbImageAttachment {
     Set-nbObject -Resource 'extras/image-attachments' @args
 }
 
 <#
 .SYNOPSIS
-    Sets properties on a recentactivit in netbox
+    Sets properties on a recentactivity in netbox
 .DESCRIPTION
     This should handle mapping a simple hashtable of values and looking up any references.
 .NOTES
@@ -1138,11 +1138,11 @@ Function Set-nbimageattachment {
         site = 'chicago'
         status = 'active'
     }
-    Set-nbrecentactivit -id 22 -lookup $lookup @device
+    Set-nbRecentActivity -id 22 -lookup $lookup @device
 .EXAMPLE
-    Set-nbrecentactivit -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
+    Set-nbRecentActivity -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
 #>
-Function Set-nbrecentactivit {
+Function Set-nbRecentActivity {
     Set-nbObject -Resource 'extras/recent-activity' @args
 }
 
@@ -1169,11 +1169,11 @@ Function Set-nbrecentactivit {
         site = 'chicago'
         status = 'active'
     }
-    Set-nbreport -id 22 -lookup $lookup @device
+    Set-nbReport -id 22 -lookup $lookup @device
 .EXAMPLE
-    Set-nbreport -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
+    Set-nbReport -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
 #>
-Function Set-nbreport {
+Function Set-nbReport {
     Set-nbObject -Resource 'extras/reports' @args
 }
 
@@ -1200,11 +1200,11 @@ Function Set-nbreport {
         site = 'chicago'
         status = 'active'
     }
-    Set-nbtopologymap -id 22 -lookup $lookup @device
+    Set-nbTopologyMap -id 22 -lookup $lookup @device
 .EXAMPLE
-    Set-nbtopologymap -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
+    Set-nbTopologyMap -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
 #>
-Function Set-nbtopologymap {
+Function Set-nbTopologyMap {
     Set-nbObject -Resource 'extras/topology-maps' @args
 }
 
@@ -1231,11 +1231,11 @@ Function Set-nbtopologymap {
         site = 'chicago'
         status = 'active'
     }
-    Set-nbaggregate -id 22 -lookup $lookup @device
+    Set-nbAggregate -id 22 -lookup $lookup @device
 .EXAMPLE
-    Set-nbaggregate -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
+    Set-nbAggregate -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
 #>
-Function Set-nbaggregate {
+Function Set-nbAggregate {
     Set-nbObject -Resource 'ipam/aggregates' @args
 }
 
@@ -1262,17 +1262,17 @@ Function Set-nbaggregate {
         site = 'chicago'
         status = 'active'
     }
-    Set-nbipaddresse -id 22 -lookup $lookup @device
+    Set-nbIpAddress -id 22 -lookup $lookup @device
 .EXAMPLE
-    Set-nbipaddresse -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
+    Set-nbIpAddress -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
 #>
-Function Set-nbipaddresse {
+Function Set-nbIpAddress {
     Set-nbObject -Resource 'ipam/ip-addresses' @args
 }
 
 <#
 .SYNOPSIS
-    Sets properties on a prefixe in netbox
+    Sets properties on a prefix in netbox
 .DESCRIPTION
     This should handle mapping a simple hashtable of values and looking up any references.
 .NOTES
@@ -1293,11 +1293,11 @@ Function Set-nbipaddresse {
         site = 'chicago'
         status = 'active'
     }
-    Set-nbprefixe -id 22 -lookup $lookup @device
+    Set-nbPrefix -id 22 -lookup $lookup @device
 .EXAMPLE
-    Set-nbprefixe -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
+    Set-nbPrefix -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
 #>
-Function Set-nbprefixe {
+Function Set-nbPrefix {
     Set-nbObject -Resource 'ipam/prefixes' @args
 }
 
@@ -1324,11 +1324,11 @@ Function Set-nbprefixe {
         site = 'chicago'
         status = 'active'
     }
-    Set-nbrir -id 22 -lookup $lookup @device
+    Set-nbRir -id 22 -lookup $lookup @device
 .EXAMPLE
-    Set-nbrir -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
+    Set-nbRir -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
 #>
-Function Set-nbrir {
+Function Set-nbRir {
     Set-nbObject -Resource 'ipam/rirs' @args
 }
 
@@ -1355,11 +1355,11 @@ Function Set-nbrir {
         site = 'chicago'
         status = 'active'
     }
-    Set-nbrole -id 22 -lookup $lookup @device
+    Set-nbRole -id 22 -lookup $lookup @device
 .EXAMPLE
-    Set-nbrole -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
+    Set-nbRole -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
 #>
-Function Set-nbrole {
+Function Set-nbRole {
     Set-nbObject -Resource 'ipam/roles' @args
 }
 
@@ -1386,11 +1386,11 @@ Function Set-nbrole {
         site = 'chicago'
         status = 'active'
     }
-    Set-nbservice -id 22 -lookup $lookup @device
+    Set-nbService -id 22 -lookup $lookup @device
 .EXAMPLE
-    Set-nbservice -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
+    Set-nbService -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
 #>
-Function Set-nbservice {
+Function Set-nbService {
     Set-nbObject -Resource 'ipam/services' @args
 }
 
@@ -1417,11 +1417,11 @@ Function Set-nbservice {
         site = 'chicago'
         status = 'active'
     }
-    Set-nbvlangroup -id 22 -lookup $lookup @device
+    Set-nbVlanGroup -id 22 -lookup $lookup @device
 .EXAMPLE
-    Set-nbvlangroup -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
+    Set-nbVlanGroup -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
 #>
-Function Set-nbvlangroup {
+Function Set-nbVlanGroup {
     Set-nbObject -Resource 'ipam/vlan-groups' @args
 }
 
@@ -1448,11 +1448,11 @@ Function Set-nbvlangroup {
         site = 'chicago'
         status = 'active'
     }
-    Set-nbvlan -id 22 -lookup $lookup @device
+    Set-nbVlan -id 22 -lookup $lookup @device
 .EXAMPLE
-    Set-nbvlan -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
+    Set-nbVlan -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
 #>
-Function Set-nbvlan {
+Function Set-nbVlan {
     Set-nbObject -Resource 'ipam/vlans' @args
 }
 
@@ -1479,11 +1479,11 @@ Function Set-nbvlan {
         site = 'chicago'
         status = 'active'
     }
-    Set-nbvrf -id 22 -lookup $lookup @device
+    Set-nbVrf -id 22 -lookup $lookup @device
 .EXAMPLE
-    Set-nbvrf -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
+    Set-nbVrf -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
 #>
-Function Set-nbvrf {
+Function Set-nbVrf {
     Set-nbObject -Resource 'ipam/vrfs' @args
 }
 
@@ -1510,11 +1510,11 @@ Function Set-nbvrf {
         site = 'chicago'
         status = 'active'
     }
-    Set-nbtenantgroup -id 22 -lookup $lookup @device
+    Set-nbTenantGroup -id 22 -lookup $lookup @device
 .EXAMPLE
-    Set-nbtenantgroup -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
+    Set-nbTenantGroup -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
 #>
-Function Set-nbtenantgroup {
+Function Set-nbTenantGroup {
     Set-nbObject -Resource 'tenancy/tenant-groups' @args
 }
 
@@ -1541,11 +1541,11 @@ Function Set-nbtenantgroup {
         site = 'chicago'
         status = 'active'
     }
-    Set-nbtenant -id 22 -lookup $lookup @device
+    Set-nbTenant -id 22 -lookup $lookup @device
 .EXAMPLE
-    Set-nbtenant -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
+    Set-nbTenant -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
 #>
-Function Set-nbtenant {
+Function Set-nbTenant {
     Set-nbObject -Resource 'tenancy/tenants' @args
 }
 
@@ -1572,11 +1572,11 @@ Function Set-nbtenant {
         site = 'chicago'
         status = 'active'
     }
-    Set-nbclustergroup -id 22 -lookup $lookup @device
+    Set-nbClusterGroup -id 22 -lookup $lookup @device
 .EXAMPLE
-    Set-nbclustergroup -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
+    Set-nbClusterGroup -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
 #>
-Function Set-nbclustergroup {
+Function Set-nbClusterGroup {
     Set-nbObject -Resource 'virtualization/cluster-groups' @args
 }
 
@@ -1603,11 +1603,11 @@ Function Set-nbclustergroup {
         site = 'chicago'
         status = 'active'
     }
-    Set-nbclustertype -id 22 -lookup $lookup @device
+    Set-nbClusterType -id 22 -lookup $lookup @device
 .EXAMPLE
-    Set-nbclustertype -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
+    Set-nbClusterType -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
 #>
-Function Set-nbclustertype {
+Function Set-nbClusterType {
     Set-nbObject -Resource 'virtualization/cluster-types' @args
 }
 
@@ -1634,11 +1634,11 @@ Function Set-nbclustertype {
         site = 'chicago'
         status = 'active'
     }
-    Set-nbcluster -id 22 -lookup $lookup @device
+    Set-nbCluster -id 22 -lookup $lookup @device
 .EXAMPLE
-    Set-nbcluster -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
+    Set-nbCluster -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
 #>
-Function Set-nbcluster {
+Function Set-nbCluster {
     Set-nbObject -Resource 'virtualization/clusters' @args
 }
 
@@ -1665,17 +1665,17 @@ Function Set-nbcluster {
         site = 'chicago'
         status = 'active'
     }
-    Set-nbinterface -id 22 -lookup $lookup @device
+    Set-nbInterface -id 22 -lookup $lookup @device
 .EXAMPLE
-    Set-nbinterface -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
+    Set-nbInterface -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
 #>
-Function Set-nbinterface {
+Function Set-nbInterface {
     Set-nbObject -Resource 'virtualization/interfaces' @args
 }
 
 <#
 .SYNOPSIS
-    Sets properties on a virtualmachine in netbox
+    Sets properties on a virtual machine in netbox
 .DESCRIPTION
     This should handle mapping a simple hashtable of values and looking up any references.
 .NOTES
@@ -1696,10 +1696,10 @@ Function Set-nbinterface {
         site = 'chicago'
         status = 'active'
     }
-    Set-nbvirtualmachine -id 22 -lookup $lookup @device
+    Set-nbVirtualMachine -id 22 -lookup $lookup @device
 .EXAMPLE
-    Set-nbvirtualmachine -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
+    Set-nbVirtualMachine -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
 #>
-Function Set-nbvirtualmachine {
+Function Set-nbVirtualMachine {
     Set-nbObject -Resource 'virtualization/virtual-machines' @args
 }
