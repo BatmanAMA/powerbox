@@ -14,8 +14,7 @@ Connect-nbAPI -APIurl Contoso -Token $pass
 .NOTES
 General notes
 #>
-function Connect-nbAPI
-{
+function Connect-nbAPI {
     param(
         #Token for this API
         [Parameter(Mandatory = $true)]
@@ -26,18 +25,14 @@ function Connect-nbAPI
         [String]
         $APIurl
     )
-    process
-    {
+    process {
         $Script:Token = $Token
         $Script:Token.MakeReadOnly()
-        if (-not $APIUrl.IsAbsoluteUri)
-        {
-            $Script:APIUrl = (
-                new-Object UriBuilder -Property @{
-                    Scheme = 'http'
-                    Host   = $APIUrl.DnsSafeHost
-                }
-            ).Uri
+
+        if (-not $APIUrl.IsAbsoluteUri) {
+            Write-Warning -Message "Inconsistent behavior can happen with non-absolute URLs. Recommend specifying HTTP:// or HTTPS://"
         }
+        $Script:APIUrl = $APIUrl
+        Write-Verbose "Saved connection to $Script:APIUrl"
     }
 }
