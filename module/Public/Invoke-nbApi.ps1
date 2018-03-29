@@ -1,15 +1,14 @@
 <#
 .SYNOPSIS
-    Short description
+    Invokes the Netbox API
 .DESCRIPTION
-    Long description
+    This wraps the netbox API to make it a little simpler to work with in powershell.
 .EXAMPLE
     #Get devices from site 1
 
     Invoke-nbApi -Resource dcim/racks -Query @{site_id=1} -APIurl https://nb.contoso.com/ -token asd1239asd13lsdfs
 #>
-function Invoke-nbApi
-{
+function Invoke-nbApi {
     [CmdletBinding()]
     [Alias("inb")]
     Param (
@@ -48,33 +47,22 @@ function Invoke-nbApi
         $Body
     )
 
-    begin
-    {
-        if (!($Script:APIUrl) -and $PSCmdlet.ParameterSetName -eq 'Connect')
-        {
-            $Script:Token = $Token
-            $Script:Token.MakeReadOnly()
-            if (-not $APIUrl.IsAbsoluteUri)
-            {
-                $Script:APIUrl = (
-                    new-Object UriBuilder -Property @{
-                        Scheme = 'http'
-                        Host   = $APIUrl.DnsSafeHost
-                    }
-                ).Uri
-
-            }
-            else
-            {
-                $Script:APIUrl = $APIUrl
-            }
-
+    begin {
+        if (!($Script:APIUrl) -and $PSCmdlet.ParameterSetName -ne 'Connect') {
+            $errorRecord = New-Object System.Management.Automation.ErrorRecord(
+                (New-Object Exception "You must connect (using Connect-nbApi) before using this module"),
+                'Not.Connected',
+                [System.Management.Automation.ErrorCategory]::ConnectionError,
+                $Resource
+            )
+            $PSCmdlet.ThrowTerminatingError($errorRecord)
+        }
+        if (!($Script:APIUrl) -and $PSCmdlet.ParameterSetName -eq 'Connect') {
+            Connect-nbAPI -Token $token -APIurl $APIUrl
         }
     }
-    process
-    {
-        if (-not $Query)
-        {
+    process {
+        if (-not $Query) {
             $Query = New-Object hashtable
         }
         $Query["format"] = "json"
@@ -82,7 +70,7 @@ function Invoke-nbApi
         #Format a hashtable to key=value&key2=value2 format.
         $QueryString = (
             $Query.Keys |
-            ForEach-Object {
+                ForEach-Object {
                 "{0}={1}" -f $_, $Query[$_]
             }
         ) -join '&'
@@ -95,8 +83,7 @@ function Invoke-nbApi
             Query  = $QueryString
         }
 
-        try
-        {
+        try {
             <#
             Code for SecureString to String
             https://blogs.msdn.microsoft.com/fpintos/2009/06/12/how-to-properly-convert-securestring-to-string/
@@ -126,19 +113,16 @@ function Invoke-nbApi
             #}
             $Response
         }
-        Catch
-        {
+        Catch {
             Write-Error -Message ("NB API failure: {0}" -f $_.Exception.Message)
         }
-        finally
-        {
+        finally {
             #Clean up the insecure stuff
             [System.Runtime.InteropServices.Marshal]::ZeroFreeGlobalAllocUnicode($unmanagedString)
             Remove-Variable unmanagedString -Force
             Remove-Variable Params -Force
         }
     }
-    end
-    {
+    end {
     }
 }
