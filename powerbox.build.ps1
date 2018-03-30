@@ -18,6 +18,7 @@ $script:Folders  = @{
     Release    = '{0}\Release\{1}\{2}' -f $PSScriptRoot, $moduleName, $manifest.Version
     Docs       = "$PSScriptRoot\docs"
     Test       = "$PSScriptRoot\test"
+    Logs       = "$PSScriptRoot\BuildLogs"
     PesterCC   = "$PSScriptRoot\*.psm1", "$PSScriptRoot\Public\*.ps1", "$PSScriptRoot\Private\*.ps1"
 }
 
@@ -33,9 +34,11 @@ task Clean {
     $null = New-Item $script:Folders.Release -ItemType Directory
 }
 
-task BuildDocs -If { $script:Discovery.HasDocs } {
-    $null = New-ExternalHelp -Path       $PSScriptRoot\docs\$PSCulture `
-                             -OutputPath ('{0}\{1}' -f $script:Folders.Release, $PSCulture)
+task BuildDocs {
+    Remove-Module $moduleName -ErrorAction SilentlyContinue
+    $modulePath = Join-Path -Path $script:Folders.Release  -ChildPath "$moduleName.psd1"
+    Import-Module $modulePath -Force
+    $null = Update-MarkdownHelpModule -Path $script:Folders.Docs -LogPath "$($script:Folders.Logs)\docs.log"
 }
 
 task CopyToRelease  {
@@ -74,21 +77,12 @@ task DoPublish {
     if (-not (Test-Path $env:NUGET_API_KEY)) {
         throw 'Could not find API key!'
     }
-
     $apiKey = $env:NUGET_API_KEY
-    $apiUrl = $env:NUGET_API_URL
-    try
-    {
-        Publish-Module -Name $script:Folders.Release -NuGetApiKey $apiKey -Confirm -Repository
-    }
-    catch
-    {
-
-    }
+    Publish-Module -Name $script:Folders.Release -NuGetApiKey $apiKey -Confirm
 
 }
 
-task Build -Jobs Clean, CopyToRelease
+task Build -Jobs Clean, CopyToRelease, BuildDocs
 
 task PreRelease -Jobs Build, Analyze, Test
 
