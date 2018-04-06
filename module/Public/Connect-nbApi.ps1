@@ -7,12 +7,11 @@ This command saves the relevant information to be able to use the other Netbox c
 
 .EXAMPLE
 $Pass = Read-Host -AsSecureString
->>Y2SSbf7aD7te~)9MYiMR~](32P7T%s^^Fi6AS6RG
-
 Connect-nbAPI -APIurl Contoso -Token $pass
 
+This asks you for your token and then connects to the netbox API
 .NOTES
-General notes
+This command mainly takes the variable state information (APIURL and Token) and stores them in module level variables so that further calls to functions will use them.
 #>
 function Connect-nbAPI {
     param(
