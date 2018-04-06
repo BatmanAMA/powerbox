@@ -12,4 +12,3 @@ Describe 'module manifest values' {
         $script:manifest.Guid | Should Be '1e8270f5-6b38-4cbb-b814-58ec2599da36'
     }
 }
-
