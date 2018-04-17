@@ -22,7 +22,7 @@
 .EXAMPLE
     Set-nbObject -resource dcim/devices -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type,site
 #>
-function New-nbObject {
+function Set-nbObject {
     [CmdletBinding()]
     Param (
         # ID of the device to set
