@@ -63,7 +63,7 @@ function Invoke-nbApi {
     }
     process {
         if (-not $Query) {
-            $Query = New-Object hashtable
+            $Query = @{}
         }
         $Query["format"] = "json"
         $QueryString = ""

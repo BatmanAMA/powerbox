@@ -5,15 +5,15 @@ online version:
 schema: 2.0.0
 ---
 
-# Set-nbprefixe
+# Set-nbRecentActivity
 
 ## SYNOPSIS
-Sets properties on a prefixe in netbox
+Sets properties on a recentactivity in netbox
 
 ## SYNTAX
 
 ```
-Set-nbprefixe [<CommonParameters>]
+Set-nbRecentActivity [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -40,11 +40,11 @@ $device = @{
     site = 'chicago'
     status = 'active'
 }
-Set-nbprefixe -id 22 -lookup $lookup @device
+Set-nbRecentActivity -id 22 -lookup $lookup @device
 
 ### EXAMPLE 2
 ```
-Set-nbprefixe -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
+Set-nbRecentActivity -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
 ```
 
 ## PARAMETERS

@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Set-nbdevicebay
+# Set-nbDevicebay
 
 ## SYNOPSIS
 Sets properties on a devicebay in netbox
@@ -13,7 +13,7 @@ Sets properties on a devicebay in netbox
 ## SYNTAX
 
 ```
-Set-nbdevicebay [<CommonParameters>]
+Set-nbDevicebay [<CommonParameters>]
 ```
 
 ## DESCRIPTION

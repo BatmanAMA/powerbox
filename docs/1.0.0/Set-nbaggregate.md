@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Set-nbaggregate
+# Set-nbAggregate
 
 ## SYNOPSIS
 Sets properties on a aggregate in netbox
@@ -13,7 +13,7 @@ Sets properties on a aggregate in netbox
 ## SYNTAX
 
 ```
-Set-nbaggregate [<CommonParameters>]
+Set-nbAggregate [<CommonParameters>]
 ```
 
 ## DESCRIPTION

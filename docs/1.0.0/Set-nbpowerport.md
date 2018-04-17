@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Set-nbpowerport
+# Set-nbPowerPort
 
 ## SYNOPSIS
 Sets properties on a powerport in netbox
@@ -13,7 +13,7 @@ Sets properties on a powerport in netbox
 ## SYNTAX
 
 ```
-Set-nbpowerport [<CommonParameters>]
+Set-nbPowerPort [<CommonParameters>]
 ```
 
 ## DESCRIPTION

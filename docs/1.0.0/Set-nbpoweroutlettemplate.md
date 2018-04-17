@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Set-nbpoweroutlettemplate
+# Set-nbPowerOutletTemplate
 
 ## SYNOPSIS
 Sets properties on a poweroutlettemplate in netbox
@@ -13,7 +13,7 @@ Sets properties on a poweroutlettemplate in netbox
 ## SYNTAX
 
 ```
-Set-nbpoweroutlettemplate [<CommonParameters>]
+Set-nbPowerOutletTemplate [<CommonParameters>]
 ```
 
 ## DESCRIPTION

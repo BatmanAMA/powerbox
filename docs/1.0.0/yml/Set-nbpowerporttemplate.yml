@@ -11,7 +11,7 @@ inputs: []
 links: []
 module:
   name: powerbox
-name: Set-nbpowerporttemplate
+name: Set-nbPowerPortTemplate
 notes: This function wraps the "Set-nbObject" function and just recalls it with the type specified
 optionalParameters: []
 outputs: []

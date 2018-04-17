@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Set-nbdevicerole
+# Set-nbDeviceRole
 
 ## SYNOPSIS
 Sets properties on a devicerole in netbox
@@ -13,7 +13,7 @@ Sets properties on a devicerole in netbox
 ## SYNTAX
 
 ```
-Set-nbdevicerole [<CommonParameters>]
+Set-nbDeviceRole [<CommonParameters>]
 ```
 
 ## DESCRIPTION

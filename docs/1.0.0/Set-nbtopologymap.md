@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Set-nbtopologymap
+# Set-nbTopologyMap
 
 ## SYNOPSIS
 Sets properties on a topologymap in netbox
@@ -13,7 +13,7 @@ Sets properties on a topologymap in netbox
 ## SYNTAX
 
 ```
-Set-nbtopologymap [<CommonParameters>]
+Set-nbTopologyMap [<CommonParameters>]
 ```
 
 ## DESCRIPTION

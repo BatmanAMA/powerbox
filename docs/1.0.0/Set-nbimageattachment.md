@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Set-nbimageattachment
+# Set-nbImageAttachment
 
 ## SYNOPSIS
 Sets properties on a imageattachment in netbox
@@ -13,7 +13,7 @@ Sets properties on a imageattachment in netbox
 ## SYNTAX
 
 ```
-Set-nbimageattachment [<CommonParameters>]
+Set-nbImageAttachment [<CommonParameters>]
 ```
 
 ## DESCRIPTION

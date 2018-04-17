@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Set-nbsite
+# Set-nbSite
 
 ## SYNOPSIS
 Sets properties on a site in netbox
@@ -13,7 +13,7 @@ Sets properties on a site in netbox
 ## SYNTAX
 
 ```
-Set-nbsite [<CommonParameters>]
+Set-nbSite [<CommonParameters>]
 ```
 
 ## DESCRIPTION

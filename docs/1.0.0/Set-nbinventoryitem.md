@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Set-nbinventoryitem
+# Set-nbInventoryItem
 
 ## SYNOPSIS
 Sets properties on a inventoryitem in netbox
@@ -13,7 +13,7 @@ Sets properties on a inventoryitem in netbox
 ## SYNTAX
 
 ```
-Set-nbinventoryitem [<CommonParameters>]
+Set-nbInventoryItem [<CommonParameters>]
 ```
 
 ## DESCRIPTION

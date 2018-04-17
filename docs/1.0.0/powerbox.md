@@ -182,165 +182,165 @@ Creates a new vlangroup in netbox
 ### [New-nbVrf](New-nbVrf.md)
 Creates a new vrf in netbox
 
-### [Set-nbaggregate](Set-nbaggregate.md)
+### [Set-nbAggregate](Set-nbAggregate.md)
 Sets properties on a aggregate in netbox
 
-### [Set-nbcircuit](Set-nbcircuit.md)
+### [Set-nbCircuit](Set-nbCircuit.md)
 Sets properties on a circuit in netbox
 
-### [Set-nbcircuittermination](Set-nbcircuittermination.md)
+### [Set-nbCircuitTermination](Set-nbCircuitTermination.md)
 Sets properties on a circuittermination in netbox
 
-### [Set-nbcircuittype](Set-nbcircuittype.md)
+### [Set-nbCircuitType](Set-nbCircuitType.md)
 Sets properties on a circuittype in netbox
 
-### [Set-nbcluster](Set-nbcluster.md)
+### [Set-nbCluster](Set-nbCluster.md)
 Sets properties on a cluster in netbox
 
-### [Set-nbclustergroup](Set-nbclustergroup.md)
+### [Set-nbClusterGroup](Set-nbClusterGroup.md)
 Sets properties on a clustergroup in netbox
 
-### [Set-nbclustertype](Set-nbclustertype.md)
+### [Set-nbClusterType](Set-nbClusterType.md)
 Sets properties on a clustertype in netbox
 
-### [Set-nbconnecteddevice](Set-nbconnecteddevice.md)
+### [Set-nbConnectedDevice](Set-nbConnectedDevice.md)
 Sets properties on a connecteddevice in netbox
 
-### [Set-nbconsoleconnection](Set-nbconsoleconnection.md)
+### [Set-nbConsoleConnection](Set-nbConsoleConnection.md)
 Sets properties on a consoleconnection in netbox
 
-### [Set-nbconsoleport](Set-nbconsoleport.md)
+### [Set-nbConsolePort](Set-nbConsolePort.md)
 Sets properties on a consoleport in netbox
 
-### [Set-nbconsoleporttemplate](Set-nbconsoleporttemplate.md)
+### [Set-nbConsolePortTemplate](Set-nbConsolePortTemplate.md)
 Sets properties on a consoleporttemplate in netbox
 
-### [Set-nbconsoleserverport](Set-nbconsoleserverport.md)
+### [Set-nbConsoleServerPort](Set-nbConsoleServerPort.md)
 Sets properties on a consoleserverport in netbox
 
-### [Set-nbconsoleserverporttemplate](Set-nbconsoleserverporttemplate.md)
+### [Set-nbConsoleServerPortTemplate](Set-nbConsoleServerPortTemplate.md)
 Sets properties on a consoleserverporttemplate in netbox
 
-### [Set-nbdevice](Set-nbdevice.md)
+### [Set-nbDevice](Set-nbDevice.md)
 Sets properties on a device in netbox
 
-### [Set-nbdevicebay](Set-nbdevicebay.md)
+### [Set-nbDevicebay](Set-nbDevicebay.md)
 Sets properties on a devicebay in netbox
 
-### [Set-nbdevicebaytemplate](Set-nbdevicebaytemplate.md)
+### [Set-nbDevicebayTemplate](Set-nbDevicebayTemplate.md)
 Sets properties on a devicebaytemplate in netbox
 
-### [Set-nbdevicerole](Set-nbdevicerole.md)
+### [Set-nbDeviceRole](Set-nbDeviceRole.md)
 Sets properties on a devicerole in netbox
 
-### [Set-nbdevicetype](Set-nbdevicetype.md)
+### [Set-nbDeviceType](Set-nbDeviceType.md)
 Sets properties on a devicetype in netbox
 
-### [Set-nbexporttemplate](Set-nbexporttemplate.md)
+### [Set-nbExportTemplate](Set-nbExportTemplate.md)
 Sets properties on a exporttemplate in netbox
 
-### [Set-nbgraph](Set-nbgraph.md)
+### [Set-nbGraph](Set-nbGraph.md)
 Sets properties on a graph in netbox
 
-### [Set-nbimageattachment](Set-nbimageattachment.md)
+### [Set-nbImageAttachment](Set-nbImageAttachment.md)
 Sets properties on a imageattachment in netbox
 
-### [Set-nbinterface](Set-nbinterface.md)
+### [Set-nbInterface](Set-nbInterface.md)
 Sets properties on a interface in netbox
 
-### [Set-nbinterfaceconnection](Set-nbinterfaceconnection.md)
+### [Set-nbInterfaceConnection](Set-nbInterfaceConnection.md)
 Sets properties on a interfaceconnection in netbox
 
-### [Set-nbinterfacetemplate](Set-nbinterfacetemplate.md)
+### [Set-nbInterfaceTemplate](Set-nbInterfaceTemplate.md)
 Sets properties on a interfacetemplate in netbox
 
-### [Set-nbinventoryitem](Set-nbinventoryitem.md)
+### [Set-nbInventoryItem](Set-nbInventoryItem.md)
 Sets properties on a inventoryitem in netbox
 
-### [Set-nbipaddresse](Set-nbipaddresse.md)
+### [Set-nbIpAddress](Set-nbIpAddress.md)
 Sets properties on a ipaddresse in netbox
 
-### [Set-nbmanufacturer](Set-nbmanufacturer.md)
+### [Set-nbManufacturer](Set-nbManufacturer.md)
 Sets properties on a manufacturer in netbox
 
-### [Set-nbplatform](Set-nbplatform.md)
+### [Set-nbPlatform](Set-nbPlatform.md)
 Sets properties on a platform in netbox
 
-### [Set-nbpowerconnection](Set-nbpowerconnection.md)
+### [Set-nbPowerConnection](Set-nbPowerConnection.md)
 Sets properties on a powerconnection in netbox
 
-### [Set-nbpoweroutlet](Set-nbpoweroutlet.md)
+### [Set-nbPowerOutlet](Set-nbPowerOutlet.md)
 Sets properties on a poweroutlet in netbox
 
-### [Set-nbpoweroutlettemplate](Set-nbpoweroutlettemplate.md)
+### [Set-nbPowerOutletTemplate](Set-nbPowerOutletTemplate.md)
 Sets properties on a poweroutlettemplate in netbox
 
-### [Set-nbpowerport](Set-nbpowerport.md)
+### [Set-nbPowerPort](Set-nbPowerPort.md)
 Sets properties on a powerport in netbox
 
-### [Set-nbpowerporttemplate](Set-nbpowerporttemplate.md)
+### [Set-nbPowerPortTemplate](Set-nbPowerPortTemplate.md)
 Sets properties on a powerporttemplate in netbox
 
-### [Set-nbprefixe](Set-nbprefixe.md)
-Sets properties on a prefixe in netbox
+### [Set-nbPrefix](Set-nbPrefix.md)
+Sets properties on a prefix in netbox
 
-### [Set-nbprovider](Set-nbprovider.md)
+### [Set-nbProvider](Set-nbProvider.md)
 Sets properties on a provider in netbox
 
-### [Set-nbrack](Set-nbrack.md)
+### [Set-nbRack](Set-nbRack.md)
 Sets properties on a rack in netbox
 
-### [Set-nbrackgroup](Set-nbrackgroup.md)
+### [Set-nbRackGroup](Set-nbRackGroup.md)
 Sets properties on a rackgroup in netbox
 
-### [Set-nbrackreservation](Set-nbrackreservation.md)
+### [Set-nbRackReservation](Set-nbRackReservation.md)
 Sets properties on a rackreservation in netbox
 
-### [Set-nbrackrole](Set-nbrackrole.md)
+### [Set-nbRackRole](Set-nbRackRole.md)
 Sets properties on a rackrole in netbox
 
-### [Set-nbrecentactivit](Set-nbrecentactivit.md)
-Sets properties on a recentactivit in netbox
+### [Set-nbRecentActivity](Set-nbRecentActivity.md)
+Sets properties on a recentactivity in netbox
 
-### [Set-nbregion](Set-nbregion.md)
+### [Set-nbRegion](Set-nbRegion.md)
 Sets properties on a region in netbox
 
-### [Set-nbreport](Set-nbreport.md)
+### [Set-nbReport](Set-nbReport.md)
 Sets properties on a report in netbox
 
-### [Set-nbrir](Set-nbrir.md)
+### [Set-nbRir](Set-nbRir.md)
 Sets properties on a rir in netbox
 
-### [Set-nbrole](Set-nbrole.md)
+### [Set-nbRole](Set-nbRole.md)
 Sets properties on a role in netbox
 
-### [Set-nbservice](Set-nbservice.md)
+### [Set-nbService](Set-nbService.md)
 Sets properties on a service in netbox
 
-### [Set-nbsite](Set-nbsite.md)
+### [Set-nbSite](Set-nbSite.md)
 Sets properties on a site in netbox
 
-### [Set-nbtenant](Set-nbtenant.md)
+### [Set-nbTenant](Set-nbTenant.md)
 Sets properties on a tenant in netbox
 
-### [Set-nbtenantgroup](Set-nbtenantgroup.md)
+### [Set-nbTenantGroup](Set-nbTenantGroup.md)
 Sets properties on a tenantgroup in netbox
 
-### [Set-nbtopologymap](Set-nbtopologymap.md)
+### [Set-nbTopologyMap](Set-nbTopologyMap.md)
 Sets properties on a topologymap in netbox
 
-### [Set-nbvirtualchassi](Set-nbvirtualchassi.md)
+### [Set-nbVirtualChassis](Set-nbVirtualChassis.md)
 Sets properties on a virtualchassi in netbox
 
-### [Set-nbvirtualmachine](Set-nbvirtualmachine.md)
+### [Set-nbVirtualMachine](Set-nbVirtualMachine.md)
 Sets properties on a virtualmachine in netbox
 
-### [Set-nbvlan](Set-nbvlan.md)
+### [Set-nbVlan](Set-nbVlan.md)
 Sets properties on a vlan in netbox
 
-### [Set-nbvlangroup](Set-nbvlangroup.md)
+### [Set-nbVlanGroup](Set-nbVlanGroup.md)
 Sets properties on a vlangroup in netbox
 
-### [Set-nbvrf](Set-nbvrf.md)
+### [Set-nbVrf](Set-nbVrf.md)
 Sets properties on a vrf in netbox
 

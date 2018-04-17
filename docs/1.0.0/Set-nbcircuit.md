@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Set-nbcircuit
+# Set-nbCircuit
 
 ## SYNOPSIS
 Sets properties on a circuit in netbox
@@ -13,7 +13,7 @@ Sets properties on a circuit in netbox
 ## SYNTAX
 
 ```
-Set-nbcircuit [<CommonParameters>]
+Set-nbCircuit [<CommonParameters>]
 ```
 
 ## DESCRIPTION

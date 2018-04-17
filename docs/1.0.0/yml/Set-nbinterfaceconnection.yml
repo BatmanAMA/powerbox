@@ -11,7 +11,7 @@ inputs: []
 links: []
 module:
   name: powerbox
-name: Set-nbinterfaceconnection
+name: Set-nbInterfaceConnection
 notes: This function wraps the "Set-nbObject" function and just recalls it with the type specified
 optionalParameters: []
 outputs: []

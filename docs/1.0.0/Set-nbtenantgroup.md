@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Set-nbtenantgroup
+# Set-nbTenantGroup
 
 ## SYNOPSIS
 Sets properties on a tenantgroup in netbox
@@ -13,7 +13,7 @@ Sets properties on a tenantgroup in netbox
 ## SYNTAX
 
 ```
-Set-nbtenantgroup [<CommonParameters>]
+Set-nbTenantGroup [<CommonParameters>]
 ```
 
 ## DESCRIPTION
