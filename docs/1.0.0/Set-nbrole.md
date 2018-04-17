@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Set-nbrole
+# Set-nbRole
 
 ## SYNOPSIS
 Sets properties on a role in netbox
@@ -13,7 +13,7 @@ Sets properties on a role in netbox
 ## SYNTAX
 
 ```
-Set-nbrole [<CommonParameters>]
+Set-nbRole [<CommonParameters>]
 ```
 
 ## DESCRIPTION

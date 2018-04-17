@@ -993,7 +993,7 @@ Function Set-nbSite {
 
 <#
 .SYNOPSIS
-    Sets properties on a virtualchassi in netbox
+    Sets properties on a virtualchassis in netbox
 .DESCRIPTION
     This should handle mapping a simple hashtable of values and looking up any references.
 .NOTES

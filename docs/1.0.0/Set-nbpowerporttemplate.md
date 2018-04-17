@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Set-nbpowerporttemplate
+# Set-nbPowerPortTemplate
 
 ## SYNOPSIS
 Sets properties on a powerporttemplate in netbox
@@ -13,7 +13,7 @@ Sets properties on a powerporttemplate in netbox
 ## SYNTAX
 
 ```
-Set-nbpowerporttemplate [<CommonParameters>]
+Set-nbPowerPortTemplate [<CommonParameters>]
 ```
 
 ## DESCRIPTION

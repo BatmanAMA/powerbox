@@ -5,15 +5,15 @@ online version:
 schema: 2.0.0
 ---
 
-# Set-nbipaddresse
+# Set-nbVirtualChassis
 
 ## SYNOPSIS
-Sets properties on a ipaddresse in netbox
+Sets properties on a virtualchassi in netbox
 
 ## SYNTAX
 
 ```
-Set-nbipaddresse [<CommonParameters>]
+Set-nbVirtualChassis [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -40,11 +40,11 @@ $device = @{
     site = 'chicago'
     status = 'active'
 }
-Set-nbipaddresse -id 22 -lookup $lookup @device
+Set-nbVirtualChassis -id 22 -lookup $lookup @device
 
 ### EXAMPLE 2
 ```
-Set-nbipaddresse -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
+Set-nbVirtualChassis -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
 ```
 
 ## PARAMETERS

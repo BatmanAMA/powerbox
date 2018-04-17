@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Set-nbinterfacetemplate
+# Set-nbInterfaceTemplate
 
 ## SYNOPSIS
 Sets properties on a interfacetemplate in netbox
@@ -13,7 +13,7 @@ Sets properties on a interfacetemplate in netbox
 ## SYNTAX
 
 ```
-Set-nbinterfacetemplate [<CommonParameters>]
+Set-nbInterfaceTemplate [<CommonParameters>]
 ```
 
 ## DESCRIPTION

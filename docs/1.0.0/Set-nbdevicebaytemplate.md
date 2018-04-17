@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Set-nbdevicebaytemplate
+# Set-nbDevicebayTemplate
 
 ## SYNOPSIS
 Sets properties on a devicebaytemplate in netbox
@@ -13,7 +13,7 @@ Sets properties on a devicebaytemplate in netbox
 ## SYNTAX
 
 ```
-Set-nbdevicebaytemplate [<CommonParameters>]
+Set-nbDevicebayTemplate [<CommonParameters>]
 ```
 
 ## DESCRIPTION

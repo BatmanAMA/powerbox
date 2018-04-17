@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Set-nbclustertype
+# Set-nbClusterType
 
 ## SYNOPSIS
 Sets properties on a clustertype in netbox
@@ -13,7 +13,7 @@ Sets properties on a clustertype in netbox
 ## SYNTAX
 
 ```
-Set-nbclustertype [<CommonParameters>]
+Set-nbClusterType [<CommonParameters>]
 ```
 
 ## DESCRIPTION

@@ -21,7 +21,7 @@ function Connect-nbAPI {
         $Token,
         #APIurl for this API
         [Parameter(Mandatory = $true)]
-        [String]
+        [uri]
         $APIurl
     )
     process {

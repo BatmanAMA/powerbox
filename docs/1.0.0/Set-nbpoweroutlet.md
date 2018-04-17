@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Set-nbpoweroutlet
+# Set-nbPowerOutlet
 
 ## SYNOPSIS
 Sets properties on a poweroutlet in netbox
@@ -13,7 +13,7 @@ Sets properties on a poweroutlet in netbox
 ## SYNTAX
 
 ```
-Set-nbpoweroutlet [<CommonParameters>]
+Set-nbPowerOutlet [<CommonParameters>]
 ```
 
 ## DESCRIPTION

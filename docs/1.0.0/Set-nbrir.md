@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Set-nbrir
+# Set-nbRir
 
 ## SYNOPSIS
 Sets properties on a rir in netbox
@@ -13,7 +13,7 @@ Sets properties on a rir in netbox
 ## SYNTAX
 
 ```
-Set-nbrir [<CommonParameters>]
+Set-nbRir [<CommonParameters>]
 ```
 
 ## DESCRIPTION

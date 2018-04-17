@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Set-nbregion
+# Set-nbRegion
 
 ## SYNOPSIS
 Sets properties on a region in netbox
@@ -13,7 +13,7 @@ Sets properties on a region in netbox
 ## SYNTAX
 
 ```
-Set-nbregion [<CommonParameters>]
+Set-nbRegion [<CommonParameters>]
 ```
 
 ## DESCRIPTION

@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Set-nbprovider
+# Set-nbProvider
 
 ## SYNOPSIS
 Sets properties on a provider in netbox
@@ -13,7 +13,7 @@ Sets properties on a provider in netbox
 ## SYNTAX
 
 ```
-Set-nbprovider [<CommonParameters>]
+Set-nbProvider [<CommonParameters>]
 ```
 
 ## DESCRIPTION

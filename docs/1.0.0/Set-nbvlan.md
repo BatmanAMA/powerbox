@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Set-nbvlan
+# Set-nbVlan
 
 ## SYNOPSIS
 Sets properties on a vlan in netbox
@@ -13,7 +13,7 @@ Sets properties on a vlan in netbox
 ## SYNTAX
 
 ```
-Set-nbvlan [<CommonParameters>]
+Set-nbVlan [<CommonParameters>]
 ```
 
 ## DESCRIPTION

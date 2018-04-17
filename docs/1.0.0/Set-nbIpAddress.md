@@ -5,15 +5,15 @@ online version:
 schema: 2.0.0
 ---
 
-# Set-nbrecentactivit
+# Set-nbIpAddress
 
 ## SYNOPSIS
-Sets properties on a recentactivit in netbox
+Sets properties on a ipaddresse in netbox
 
 ## SYNTAX
 
 ```
-Set-nbrecentactivit [<CommonParameters>]
+Set-nbIpAddress [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -40,11 +40,11 @@ $device = @{
     site = 'chicago'
     status = 'active'
 }
-Set-nbrecentactivit -id 22 -lookup $lookup @device
+Set-nbIpAddress -id 22 -lookup $lookup @device
 
 ### EXAMPLE 2
 ```
-Set-nbrecentactivit -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
+Set-nbIpAddress -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
 ```
 
 ## PARAMETERS

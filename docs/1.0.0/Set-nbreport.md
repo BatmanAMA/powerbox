@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Set-nbreport
+# Set-nbReport
 
 ## SYNOPSIS
 Sets properties on a report in netbox
@@ -13,7 +13,7 @@ Sets properties on a report in netbox
 ## SYNTAX
 
 ```
-Set-nbreport [<CommonParameters>]
+Set-nbReport [<CommonParameters>]
 ```
 
 ## DESCRIPTION
