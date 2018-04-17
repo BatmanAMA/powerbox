@@ -11,7 +11,7 @@ inputs: []
 links: []
 module:
   name: powerbox
-name: New-nbObject
+name: Set-nbObject
 notes: ''
 optionalParameters:
 - name: CustomProperties
@@ -30,6 +30,14 @@ optionalParameters:
   pipelineInput: False
   position: 3
   type: Hashtable
+- name: Patch
+  aliases: []
+  defaultValue: False
+  description: Looks up the current object and only sets changed properties
+  parameterValueGroup: []
+  pipelineInput: False
+  position: Named
+  type: SwitchParameter
 - name: Properties
   aliases: []
   defaultValue: None
@@ -40,21 +48,20 @@ optionalParameters:
   type: Object
 outputs: []
 requiredParameters:
-- name: Resource
-  aliases:
-  - type
-  - object
-  defaultValue: None
-  description: object/resource type
+- name: Id
+  aliases: []
+  defaultValue: 0
+  description: ID of the device to set
   parameterValueGroup: []
   pipelineInput: False
   position: 1
-  type: String
+  type: Int32
 remarks: This should handle mapping a simple hashtable of values and looking up any references.
 summary: Sets properties on a object in Netbox
 syntaxes:
 - parameters:
-  - Resource
+  - Id
   - CustomProperties
   - Lookup
   - Properties
+  - Patch
