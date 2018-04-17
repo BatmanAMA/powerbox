@@ -5,15 +5,15 @@ online version:
 schema: 2.0.0
 ---
 
-# Set-nbvirtualchassi
+# Set-nbPrefix
 
 ## SYNOPSIS
-Sets properties on a virtualchassi in netbox
+Sets properties on a prefix in netbox
 
 ## SYNTAX
 
 ```
-Set-nbvirtualchassi [<CommonParameters>]
+Set-nbPrefix [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -40,11 +40,11 @@ $device = @{
     site = 'chicago'
     status = 'active'
 }
-Set-nbvirtualchassi -id 22 -lookup $lookup @device
+Set-nbPrefix -id 22 -lookup $lookup @device
 
 ### EXAMPLE 2
 ```
-Set-nbvirtualchassi -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
+Set-nbPrefix -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
 ```
 
 ## PARAMETERS

@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Set-nbgraph
+# Set-nbGraph
 
 ## SYNOPSIS
 Sets properties on a graph in netbox
@@ -13,7 +13,7 @@ Sets properties on a graph in netbox
 ## SYNTAX
 
 ```
-Set-nbgraph [<CommonParameters>]
+Set-nbGraph [<CommonParameters>]
 ```
 
 ## DESCRIPTION

@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Set-nbconsoleport
+# Set-nbConsolePort
 
 ## SYNOPSIS
 Sets properties on a consoleport in netbox
@@ -13,7 +13,7 @@ Sets properties on a consoleport in netbox
 ## SYNTAX
 
 ```
-Set-nbconsoleport [<CommonParameters>]
+Set-nbConsolePort [<CommonParameters>]
 ```
 
 ## DESCRIPTION

@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Set-nbplatform
+# Set-nbPlatform
 
 ## SYNOPSIS
 Sets properties on a platform in netbox
@@ -13,7 +13,7 @@ Sets properties on a platform in netbox
 ## SYNTAX
 
 ```
-Set-nbplatform [<CommonParameters>]
+Set-nbPlatform [<CommonParameters>]
 ```
 
 ## DESCRIPTION

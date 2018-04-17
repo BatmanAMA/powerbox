@@ -13,7 +13,7 @@ Connects to the Netbox api for the other nb module commands
 ## SYNTAX
 
 ```
-Connect-nbAPI [-Token] <SecureString> [-APIurl] <String> [<CommonParameters>]
+Connect-nbAPI [-Token] <SecureString> [-APIurl] <Uri> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -36,7 +36,7 @@ Connect-nbAPI -APIurl Contoso -Token $pass
 APIurl for this API
 
 ```yaml
-Type: String
+Type: Uri
 Parameter Sets: (All)
 Aliases:
 

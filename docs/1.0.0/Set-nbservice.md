@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Set-nbservice
+# Set-nbService
 
 ## SYNOPSIS
 Sets properties on a service in netbox
@@ -13,7 +13,7 @@ Sets properties on a service in netbox
 ## SYNTAX
 
 ```
-Set-nbservice [<CommonParameters>]
+Set-nbService [<CommonParameters>]
 ```
 
 ## DESCRIPTION

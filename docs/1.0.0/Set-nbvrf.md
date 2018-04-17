@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Set-nbvrf
+# Set-nbVrf
 
 ## SYNOPSIS
 Sets properties on a vrf in netbox
@@ -13,7 +13,7 @@ Sets properties on a vrf in netbox
 ## SYNTAX
 
 ```
-Set-nbvrf [<CommonParameters>]
+Set-nbVrf [<CommonParameters>]
 ```
 
 ## DESCRIPTION

@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Set-nbpowerconnection
+# Set-nbPowerConnection
 
 ## SYNOPSIS
 Sets properties on a powerconnection in netbox
@@ -13,7 +13,7 @@ Sets properties on a powerconnection in netbox
 ## SYNTAX
 
 ```
-Set-nbpowerconnection [<CommonParameters>]
+Set-nbPowerConnection [<CommonParameters>]
 ```
 
 ## DESCRIPTION

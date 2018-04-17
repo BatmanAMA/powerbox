@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Set-nbconsoleporttemplate
+# Set-nbConsolePortTemplate
 
 ## SYNOPSIS
 Sets properties on a consoleporttemplate in netbox
@@ -13,7 +13,7 @@ Sets properties on a consoleporttemplate in netbox
 ## SYNTAX
 
 ```
-Set-nbconsoleporttemplate [<CommonParameters>]
+Set-nbConsolePortTemplate [<CommonParameters>]
 ```
 
 ## DESCRIPTION

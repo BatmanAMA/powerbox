@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Set-nbrackreservation
+# Set-nbRackReservation
 
 ## SYNOPSIS
 Sets properties on a rackreservation in netbox
@@ -13,7 +13,7 @@ Sets properties on a rackreservation in netbox
 ## SYNTAX
 
 ```
-Set-nbrackreservation [<CommonParameters>]
+Set-nbRackReservation [<CommonParameters>]
 ```
 
 ## DESCRIPTION

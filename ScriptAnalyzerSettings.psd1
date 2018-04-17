@@ -26,5 +26,6 @@
     # will be excluded.
 
     # ExcludeRules = @('PSAvoidUsingWriteHost')
-    # ExcludeRules = 'PSUseShouldProcessForStateChangingFunctions'
+    #todo: Implement this functionality
+    ExcludeRules = 'PSUseShouldProcessForStateChangingFunctions'
 }

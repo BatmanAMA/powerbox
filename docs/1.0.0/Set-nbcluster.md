@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Set-nbcluster
+# Set-nbCluster
 
 ## SYNOPSIS
 Sets properties on a cluster in netbox
@@ -13,7 +13,7 @@ Sets properties on a cluster in netbox
 ## SYNTAX
 
 ```
-Set-nbcluster [<CommonParameters>]
+Set-nbCluster [<CommonParameters>]
 ```
 
 ## DESCRIPTION

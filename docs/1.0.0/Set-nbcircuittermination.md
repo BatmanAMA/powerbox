@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Set-nbcircuittermination
+# Set-nbCircuitTermination
 
 ## SYNOPSIS
 Sets properties on a circuittermination in netbox
@@ -13,7 +13,7 @@ Sets properties on a circuittermination in netbox
 ## SYNTAX
 
 ```
-Set-nbcircuittermination [<CommonParameters>]
+Set-nbCircuitTermination [<CommonParameters>]
 ```
 
 ## DESCRIPTION

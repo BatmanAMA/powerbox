@@ -22,7 +22,7 @@ requiredParameters:
   parameterValueGroup: []
   pipelineInput: False
   position: 2
-  type: String
+  type: Uri
 - name: Token
   aliases: []
   defaultValue: None

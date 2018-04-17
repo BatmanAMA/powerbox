@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Set-nbrackrole
+# Set-nbRackRole
 
 ## SYNOPSIS
 Sets properties on a rackrole in netbox
@@ -13,7 +13,7 @@ Sets properties on a rackrole in netbox
 ## SYNTAX
 
 ```
-Set-nbrackrole [<CommonParameters>]
+Set-nbRackRole [<CommonParameters>]
 ```
 
 ## DESCRIPTION

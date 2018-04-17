@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Set-nbrack
+# Set-nbRack
 
 ## SYNOPSIS
 Sets properties on a rack in netbox
@@ -13,7 +13,7 @@ Sets properties on a rack in netbox
 ## SYNTAX
 
 ```
-Set-nbrack [<CommonParameters>]
+Set-nbRack [<CommonParameters>]
 ```
 
 ## DESCRIPTION

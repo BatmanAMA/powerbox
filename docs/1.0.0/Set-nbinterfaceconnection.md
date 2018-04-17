@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Set-nbinterfaceconnection
+# Set-nbInterfaceConnection
 
 ## SYNOPSIS
 Sets properties on a interfaceconnection in netbox
@@ -13,7 +13,7 @@ Sets properties on a interfaceconnection in netbox
 ## SYNTAX
 
 ```
-Set-nbinterfaceconnection [<CommonParameters>]
+Set-nbInterfaceConnection [<CommonParameters>]
 ```
 
 ## DESCRIPTION

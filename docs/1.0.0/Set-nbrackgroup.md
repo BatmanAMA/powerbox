@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Set-nbrackgroup
+# Set-nbRackGroup
 
 ## SYNOPSIS
 Sets properties on a rackgroup in netbox
@@ -13,7 +13,7 @@ Sets properties on a rackgroup in netbox
 ## SYNTAX
 
 ```
-Set-nbrackgroup [<CommonParameters>]
+Set-nbRackGroup [<CommonParameters>]
 ```
 
 ## DESCRIPTION

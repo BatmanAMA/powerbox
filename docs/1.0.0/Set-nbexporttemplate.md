@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Set-nbexporttemplate
+# Set-nbExportTemplate
 
 ## SYNOPSIS
 Sets properties on a exporttemplate in netbox
@@ -13,7 +13,7 @@ Sets properties on a exporttemplate in netbox
 ## SYNTAX
 
 ```
-Set-nbexporttemplate [<CommonParameters>]
+Set-nbExportTemplate [<CommonParameters>]
 ```
 
 ## DESCRIPTION

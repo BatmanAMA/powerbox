@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Set-nbvirtualmachine
+# Set-nbVirtualMachine
 
 ## SYNOPSIS
 Sets properties on a virtualmachine in netbox
@@ -13,7 +13,7 @@ Sets properties on a virtualmachine in netbox
 ## SYNTAX
 
 ```
-Set-nbvirtualmachine [<CommonParameters>]
+Set-nbVirtualMachine [<CommonParameters>]
 ```
 
 ## DESCRIPTION

@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Set-nbmanufacturer
+# Set-nbManufacturer
 
 ## SYNOPSIS
 Sets properties on a manufacturer in netbox
@@ -13,7 +13,7 @@ Sets properties on a manufacturer in netbox
 ## SYNTAX
 
 ```
-Set-nbmanufacturer [<CommonParameters>]
+Set-nbManufacturer [<CommonParameters>]
 ```
 
 ## DESCRIPTION

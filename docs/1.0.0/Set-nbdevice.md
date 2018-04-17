@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Set-nbdevice
+# Set-nbDevice
 
 ## SYNOPSIS
 Sets properties on a device in netbox
@@ -13,7 +13,7 @@ Sets properties on a device in netbox
 ## SYNTAX
 
 ```
-Set-nbdevice [<CommonParameters>]
+Set-nbDevice [<CommonParameters>]
 ```
 
 ## DESCRIPTION
