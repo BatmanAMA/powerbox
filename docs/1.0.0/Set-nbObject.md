@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# New-nbObject
+# Set-nbObject
 
 ## SYNOPSIS
 Sets properties on a object in Netbox
@@ -13,7 +13,7 @@ Sets properties on a object in Netbox
 ## SYNTAX
 
 ```
-New-nbObject [-Resource] <String> [[-CustomProperties] <String[]>] [[-Lookup] <Hashtable>]
+Set-nbObject [-Id] <Int32> [[-CustomProperties] <String[]>] [[-Lookup] <Hashtable>] [-Patch]
  [[-Properties] <Object>] [<CommonParameters>]
 ```
 
@@ -64,6 +64,21 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -Id
+ID of the device to set
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: 1
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Lookup
 List of properties to lookup
 
@@ -75,6 +90,21 @@ Aliases:
 Required: False
 Position: 3
 Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Patch
+Looks up the current object and only sets changed properties
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -94,21 +124,9 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Resource
-object/resource type```yaml
-Type: String
-Parameter Sets: (All)
-Aliases: type, object
-
-Required: True
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### CommonParameters
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable.
+For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
