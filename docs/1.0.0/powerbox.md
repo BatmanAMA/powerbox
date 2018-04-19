@@ -263,6 +263,9 @@ Sets properties on a ipaddresse in netbox
 ### [Set-nbManufacturer](Set-nbManufacturer.md)
 Sets properties on a manufacturer in netbox
 
+### [Set-nbObject](Set-nbObject.md)
+Sets properties on a object in Netbox
+
 ### [Set-nbPlatform](Set-nbPlatform.md)
 Sets properties on a platform in netbox
 
