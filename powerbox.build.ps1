@@ -107,11 +107,10 @@ task DoInstall {
 }
 
 task DoPublish {
-    if (!$ENV:CI -or !(Test-Path $env:NUGET_API_KEY)) {
-        exit 1
+    if (!$ENV:appveyor_repo_tag -or !(Test-Path $env:NUGET_API_KEY)) {
+        Write-Host "Not publishing, tag your release to publish"
     }
-    $apiKey = $env:NUGET_API_KEY
-    Publish-Module -Name $script:Folders.Release -NuGetApiKey $apiKey -Confirm
+    Publish-Module -Name $script:Folders.Release -NuGetApiKey $env:NUGET_API_KEY -Confirm
 }
 
 task Build -Jobs Clean, CopyToRelease

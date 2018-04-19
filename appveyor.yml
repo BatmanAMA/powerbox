@@ -16,8 +16,6 @@ test_script:
 - ps: invoke-build -task test
 deploy_script:
 - ps: invoke-build -task publish
-  on:
-    appveyor_repo_tag: true
 before_deploy:
   - git config --global credential.helper store
   - ps: Add-Content "$HOME\.git-credentials" "https://$($env:access_token):x-oauth-basic@github.com`n"
