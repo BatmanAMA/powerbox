@@ -13,9 +13,9 @@ environment:
 build_script:
 - ps: invoke-build
 test_script:
-- ps: invoke-build -action test
+- ps: invoke-build -task test
 deploy_script:
-- ps: invoke-build -action publish
+- ps: invoke-build -task publish
   on:
     appveyor_repo_tag: true
 before_deploy:
