@@ -1,6 +1,5 @@
 version: 1.0.{build}
 install:
-- ps: Install-PackageProvider -Name NuGet -RequiredVersion 2.8.5.210
 - ps: Install-Module -Name InvokeBuild -RequiredVersion 5.4.1
 - ps: Install-Module -Name PSScriptAnalyzer -RequiredVersion 1.16.1
 - ps: Install-Module -Name Pester -RequiredVersion 4.3.1
