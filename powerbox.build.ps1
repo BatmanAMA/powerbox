@@ -4,8 +4,7 @@ param()
 
 $moduleName = 'powerbox'
 
-if ($env:CI -and $env:REPO_TAG)
-{
+if ($env:CI -and $env:REPO_TAG -and $task -contains 'dopublish') {
     git checkout master
     $mainfestUpdate = @{
         Path          = "$PSScriptRoot\module\$moduleName.psd1"
@@ -15,7 +14,7 @@ if ($env:CI -and $env:REPO_TAG)
     Update-ModuleManifest @mainfestUpdate
     git add .
     git commit -m "Update version to $env:REPO_VERSION"
-    git pusha
+    git push
 }
 $manifest = Test-ModuleManifest -Path $PSScriptRoot\module\$moduleName.psd1 -ErrorAction Ignore -WarningAction Ignore
 $script:Settings = @{
@@ -115,7 +114,7 @@ task DoPublish {
     Publish-Module -Name $script:Folders.Release -NuGetApiKey $apiKey -Confirm
 }
 
-task Build -Jobs Clean, CopyToRelease#, BuildDocs
+task Build -Jobs Clean, CopyToRelease
 
 task PreRelease -Jobs Build, Analyze, Test
 
