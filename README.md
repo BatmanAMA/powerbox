@@ -1,7 +1,7 @@
 # powerbox
 
 powerbox is a PowerShell module to interact with [NetBox](https://github.com/digitalocean/netbox).
-![https://ci.appveyor.com/api/projects/status/github/batmanama/powerbox?svg=true](https://ci.appveyor.com/project/BatmanAMA/powerbox)
+![https://ci.appveyor.com/project/BatmanAMA/powerbox](https://ci.appveyor.com/api/projects/status/github/batmanama/powerbox?svg=true)
 
 ## Documentation
 
