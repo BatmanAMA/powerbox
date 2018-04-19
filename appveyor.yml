@@ -1,0 +1,27 @@
+version: 1.0.{build}
+install:
+- ps: >-
+    Install-PackageProvider -Name NuGet -RequiredVersion 2.8.5.210
+    Install-Module -Name InvokeBuild -RequiredVersion 5.4.1
+    Install-Module -Name PSScriptAnalyzer -RequiredVersion 1.16.1
+    Install-Module -Name Pester -RequiredVersion 4.3.1
+    Install-Module -Name PlatyPS -RequiredVersion 0.9.0
+
+environment:
+  nuget_api_key:
+    secure: TVDL0yRh7Mq8p85ZHiK1/bnBhxCfnKFogJqtuPKY39zJAzRUf8fHYTdVxbAbOEGU
+  access_token:
+    secure: aT1eVpfAKwN03D9Lx+W6uPuotoW2gOqEisBtTpnrZx5rf1A54XztZTw+NbcA6lqQ
+build_script:
+- ps: invoke-build
+test_script:
+- ps: invoke-build -action test
+deploy_script:
+- ps: invoke-build -action publish
+  on:
+    appveyor_repo_tag: true
+before_deploy:
+  - git config --global credential.helper store
+  - ps: Add-Content "$HOME\.git-credentials" "https://$($env:access_token):x-oauth-basic@github.com`n"
+  - git config --global user.email "batmanama@outlook.com"
+  - git config --global user.name "build"
