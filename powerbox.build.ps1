@@ -1,10 +1,23 @@
-#requires -Module InvokeBuild, PSScriptAnalyzer, Pester, PlatyPS -Version 5.1
+#requires -Module InvokeBuild, PSScriptAnalyzer, Pester, PlatyPS
 [CmdletBinding()]
 param()
 
 $moduleName = 'powerbox'
-$manifest = Test-ModuleManifest -Path $PSScriptRoot\module\$moduleName.psd1 -ErrorAction Ignore -WarningAction Ignore
 
+if ($env:CI -and $env:REPO_TAG)
+{
+    git checkout master
+    $mainfestUpdate = @{
+        Path          = "$PSScriptRoot\module\$moduleName.psd1"
+        ModuleVersion = $env:REPO_VERSION
+        ReleaseNotes  = $env:COMMIT_MESSAGE
+    }
+    Update-ModuleManifest @mainfestUpdate
+    git add .
+    git commit -m "Update version to $env:REPO_VERSION"
+    git pusha
+}
+$manifest = Test-ModuleManifest -Path $PSScriptRoot\module\$moduleName.psd1 -ErrorAction Ignore -WarningAction Ignore
 $script:Settings = @{
     Name          = $moduleName
     Manifest      = $manifest
@@ -76,7 +89,7 @@ task Analyze -If { $script:Settings.ShouldAnalyze } {
 }
 
 task Test -If { $script:Discovery.HasTests -and $script:Settings.ShouldTest } {
-    Invoke-Pester -PesterOption @{ IncludeVSCodeMarker = $true }
+    Invoke-Pester -OutputFormat NUnitXml -OutputFile TestsResults.xml -PassThru -PesterOption @{ IncludeVSCodeMarker = $true }
 }
 
 task DoInstall {
@@ -95,15 +108,14 @@ task DoInstall {
 }
 
 task DoPublish {
-    if (-not (Test-Path $env:NUGET_API_KEY)) {
-        throw 'Could not find API key!'
+    if (!$ENV:CI -or !(Test-Path $env:NUGET_API_KEY)) {
+        exit 1
     }
     $apiKey = $env:NUGET_API_KEY
     Publish-Module -Name $script:Folders.Release -NuGetApiKey $apiKey -Confirm
-
 }
 
-task Build -Jobs Clean, CopyToRelease, BuildDocs
+task Build -Jobs Clean, CopyToRelease#, BuildDocs
 
 task PreRelease -Jobs Build, Analyze, Test
 
