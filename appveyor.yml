@@ -5,8 +5,9 @@ install:
 - ps: Install-Module -Name Pester -RequiredVersion 4.3.1
 - ps: Install-Module -Name PlatyPS -RequiredVersion 0.9.0
 - ps: $ENV:COMMIT_MESSAGE = $ENV:APPVEYOR_REPO_COMMIT_MESSAGE + "`n" + $ENV:APPVEYOR_REPO_COMMIT_MESSAGE_EXTENDED
-- ps: $ENV:repo_version = IF ($ENV:APPVEYOR_REPO_TAG_NAME){$ENV:APPVEYOR_REPO_TAG_NAME} else {$ENV:APPVEYOR_BUILD_VERSIO}
+- ps: $ENV:repo_version = IF ($ENV:APPVEYOR_REPO_TAG_NAME){$ENV:APPVEYOR_REPO_TAG_NAME} else {$ENV:APPVEYOR_BUILD_VERSION}
 - ps: $ENV:REPO_TAG = $ENV:APPVEYOR_REPO_TAG
+- ps: if ($ENV:REPO_TAG) { Write-Host "Publishing version $($ENV:repo_version)" -foregroundcolor Magenta}
 
 environment:
   nuget_api_key:

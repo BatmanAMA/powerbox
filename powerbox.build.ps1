@@ -1,5 +1,6 @@
 #requires -Module InvokeBuild, PSScriptAnalyzer, Pester, PlatyPS
 [CmdletBinding()]
+[Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSAvoidUsingWriteHost")]
 param()
 
 $moduleName = 'powerbox'
@@ -82,13 +83,25 @@ task CopyToRelease {
 }
 
 task Analyze -If { $script:Settings.ShouldAnalyze } {
-    Invoke-ScriptAnalyzer -Path     $script:Folders.Release `
-        -Settings $PSScriptRoot\ScriptAnalyzerSettings.psd1 `
-        -Recurse
+    $Analyzer = @{
+        Path     = $script:Folders.Release
+        Settings = "$PSScriptRoot\ScriptAnalyzerSettings.psd1"
+        Recurse  = $true
+    }
+    Invoke-ScriptAnalyzer @Analyzer
 }
 
 task Test -If { $script:Discovery.HasTests -and $script:Settings.ShouldTest } {
-    Invoke-Pester -OutputFormat NUnitXml -OutputFile TestsResults.xml -PassThru -PesterOption @{ IncludeVSCodeMarker = $true }
+    $PesterSettings = @{
+        OutputFormat = "NUnitXml"
+        OutputFile   = "TestsResults.xml"
+        PassThru     = $True
+        EnableExit   = $True
+        PesterOption = @{
+            IncludeVSCodeMarker = $true
+        }
+    }
+    Invoke-Pester @PesterSettings
 }
 
 task DoInstall {
