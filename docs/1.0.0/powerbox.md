@@ -14,6 +14,9 @@ Locale: en-US
 ### [Connect-nbAPI](Connect-nbAPI.md)
 Connects to the Netbox api for the other nb module commands
 
+### [ConvertTo-nbID](ConvertTo-nbID.md)
+Helper function to lookup ids for a given lookup.
+
 ### [Invoke-nbApi](Invoke-nbApi.md)
 Invokes the Netbox API
 
