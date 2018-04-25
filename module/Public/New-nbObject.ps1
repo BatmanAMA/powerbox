@@ -62,5 +62,5 @@ function New-nbObject {
     }
     $object = New-Object -TypeName psobject -Property $object
 
-    Invoke-nbApi -Resource $Resource -HttpVerb POST -Body ($object | ConvertTo-Json)
+    Invoke-nbApi -Resource $Resource -HttpVerb POST -Body ($object | ConvertTo-Json -Compress)
 }
