@@ -27,9 +27,9 @@
 
     # ExcludeRules = @('PSAvoidUsingWriteHost')
     ExcludeRules = @(
+        # I use wildcards like a jerk
+        'PSUseToExportFieldsInManifest',
         #todo: Implement this functionality
-        'PSUseShouldProcessForStateChangingFunctions',
-        #! this is only used in the tests with a dummy API Key
-        'PSAvoidUsingConvertToSecureStringWithPlainText'
+        'PSUseShouldProcessForStateChangingFunctions'
     )
 }
