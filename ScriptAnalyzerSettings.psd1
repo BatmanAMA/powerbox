@@ -26,6 +26,10 @@
     # will be excluded.
 
     # ExcludeRules = @('PSAvoidUsingWriteHost')
-    #todo: Implement this functionality
-    ExcludeRules = 'PSUseShouldProcessForStateChangingFunctions'
+    ExcludeRules = @(
+        #todo: Implement this functionality
+        'PSUseShouldProcessForStateChangingFunctions',
+        #! this is only used in the tests with a dummy API Key
+        'PSAvoidUsingConvertToSecureStringWithPlainText'
+    )
 }

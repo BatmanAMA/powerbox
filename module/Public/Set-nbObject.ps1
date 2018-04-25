@@ -73,6 +73,9 @@ function Set-nbObject {
         if ($name -in $CustomProperties) {
             $object.custom_fields[$name] = $value
         }
+        elseif ($name -eq 'custom_fields') {
+            $object.custom_fields += $value
+        }
         else {
             $object[$name] = $value
         }
