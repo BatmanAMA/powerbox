@@ -1,4 +1,5 @@
 Describe 'Set object passes stuff through' {
+    [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingConvertToSecureStringWithPlainText')]
     $token = ConvertTo-SecureString -String "APITOKEN" -AsPlainText -Force
     Connect-nbAPI -APIurl 'http://example.com' -Token $token
     Context "Simple Object" {
