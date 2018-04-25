@@ -6,7 +6,7 @@ powerbox is a PowerShell module to interact with [NetBox](https://github.com/dig
 
 ## Documentation
 
-Check out our **[documentation](https://github.com/batmanama/powerbox/tree/master/docs/en-US/powerbox.md)** for information about how to use this project.
+Check out our **[documentation](https://github.com/batmanama/powerbox/tree/master/docs/)** for information about how to use this project.
 
 ## Installation
 
