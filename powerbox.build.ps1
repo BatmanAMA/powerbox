@@ -102,7 +102,7 @@ task Test -If { $script:Discovery.HasTests -and $script:Settings.ShouldTest } {
         PesterOption = @{
             IncludeVSCodeMarker = $true
         }
-        Show = "Fails"
+        Show         = "Fails"
     }
     Invoke-Pester @PesterSettings
 }
@@ -124,6 +124,11 @@ task DoInstall {
 
 task DoPublish {
     if (!$ENV:repo_tag -or !(Test-Path $env:NUGET_API_KEY)) {
+        [pscustomobject]@{
+            REPO_TAG    = $env:REPO_TAG
+            API_KEY     = [bool]$env:NUGET_API_KEY
+            AV_REPO_TAG = $ENV:APPVEYOR_REPO_TAG
+        }
         Write-Host "Not publishing, tag your release to publish" -ForegroundColor Magenta
         exit 0
     }
