@@ -123,7 +123,7 @@ task DoInstall {
 }
 
 task DoPublish {
-    if (!$ENV:repo_tag -or !(Test-Path $env:NUGET_API_KEY)) {
+    if (!$ENV:repo_tag -or !($env:NUGET_API_KEY)) {
         [pscustomobject]@{
             REPO_TAG    = $env:REPO_TAG
             API_KEY     = [bool]$env:NUGET_API_KEY
