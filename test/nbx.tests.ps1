@@ -1,24 +1,24 @@
 Describe 'Set wrapper functions' {
     $token = ConvertTo-SecureString -String "APITOKEN" -AsPlainText -Force
     Connect-nbAPI -APIurl 'http://example.com' -Token $token
+    . $PSScriptRoot\ResourceMap.ps1
 
-    $testCases = get-Command -Verb Set -Module powerbox |
-        Where-Object Name -ne 'Set-nbObject' |
+    $testCases = $ResourceMap.Keys |
         ForEach-Object {
         @{
-            function     = $function.Name
-            resourcename = ($function.Name -replace 'Set-Nb')
+            function     = "Set-nb$_"
+            resourcename = ($ResourceMap[$_])
         }
     }
-    Mock Invoke-nbApi -MockWith {}
+
     it "should map <function> to <resourcename>" -TestCases $testCases {
         param(
             $function,
             $resourceName
         )
-        Mock -CommandName Set-NbObject -MockWith {} -Verifiable -ParameterFilter {
-            ($Resource -replace '^[^\/]*/' -replace '-') -eq $resourceName
-        }
+        #Mock -CommandName Invoke-nbApi -MockWith {} -ModuleName powerbox
+        $filter = [scriptblock]::Create("`$Resource -eq '$resourceName'")
+        Mock -CommandName Set-NbObject -MockWith {} -ModuleName powerbox -Verifiable -ParameterFilter $filter
         {&$function -Id 0} | should -Not -Throw
         Assert-VerifiableMock
     }
@@ -26,14 +26,25 @@ Describe 'Set wrapper functions' {
 Describe 'New wrapper functions' {
     $token = ConvertTo-SecureString -String "APITOKEN" -AsPlainText -Force
     Connect-nbAPI -APIurl 'http://example.com' -Token $token
-    foreach ($function in (get-Command -Verb New -Module powerbox)) {
-        Mock -CommandName New-NbObject -MockWith {} -Verifiable -ParameterFilter {
-            ($Resource -replace '^[^\/]*/' -replace '-') -eq ($function.Name -replace 'New-Nb')
+    . $PSScriptRoot\ResourceMap.ps1
+
+    $testCases = $ResourceMap.Keys |
+        ForEach-Object {
+        @{
+            function     = "New-nb$_"
+            resourcename = ($ResourceMap[$_])
         }
-        Mock Invoke-nbApi -MockWith {}
-        it "$($function.Name) should work" {
-            {&($function.Name)} | should -Not -Throw
-            Assert-VerifiableMock
-        }
+    }
+
+    it "should map <function> to <resourcename>" -TestCases $testCases {
+        param(
+            $function,
+            $resourceName
+        )
+        Mock -CommandName Invoke-nbApi -MockWith {} -ModuleName powerbox
+        $filter = [scriptblock]::Create("`$Resource -eq '$resourceName'")
+        Mock -CommandName New-NbObject -MockWith {} -ModuleName powerbox -Verifiable -ParameterFilter $filter
+        {&$function -Id 0} | should -Not -Throw
+        Assert-VerifiableMock
     }
 }

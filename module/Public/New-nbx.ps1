@@ -1644,7 +1644,7 @@ Function New-nbCluster {
 
 <#
 .SYNOPSIS
-    Creates a new interface in netbox
+    Creates a new VM interface in netbox
 .DESCRIPTION
     This should handle mapping a simple hashtable of values and looking up any references.
 .NOTES
@@ -1665,11 +1665,11 @@ Function New-nbCluster {
         site = 'chicago'
         status = 'active'
     }
-    New-nbInterface -lookup $lookup @device
+    New-nbVMInterface -lookup $lookup @device
 .EXAMPLE
-    New-nbInterface -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
+    New-nbVMInterface -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
 #>
-Function New-nbInterface {
+Function New-nbVMInterface {
     New-nbObject -Resource 'virtualization/interfaces' @args
 }
 

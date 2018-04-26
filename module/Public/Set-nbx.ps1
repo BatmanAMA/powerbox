@@ -1644,7 +1644,7 @@ Function Set-nbCluster {
 
 <#
 .SYNOPSIS
-    Sets properties on a interface in netbox
+    Sets properties on a VMinterface in netbox
 .DESCRIPTION
     This should handle mapping a simple hashtable of values and looking up any references.
 .NOTES
@@ -1665,11 +1665,11 @@ Function Set-nbCluster {
         site = 'chicago'
         status = 'active'
     }
-    Set-nbInterface -id 22 -lookup $lookup @device
+    Set-nbVMInterface -id 22 -lookup $lookup @device
 .EXAMPLE
-    Set-nbInterface -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
+    Set-nbVMInterface -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
 #>
-Function Set-nbInterface {
+Function Set-nbVMInterface {
     Set-nbObject -Resource 'virtualization/interfaces' @args
 }
 
