@@ -92,6 +92,8 @@ task Analyze -If { $script:Settings.ShouldAnalyze } {
 }
 
 task Test -If { $script:Discovery.HasTests -and $script:Settings.ShouldTest } {
+    Remove-Module -Name powerbox -ErrorAction SilentlyContinue
+    Import-Module (Join-Path -Path $script:Folders.Release  -ChildPath "$moduleName.psd1")
     $PesterSettings = @{
         OutputFormat = "NUnitXml"
         OutputFile   = "TestsResult.xml"
