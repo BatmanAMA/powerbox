@@ -102,6 +102,7 @@ task Test -If { $script:Discovery.HasTests -and $script:Settings.ShouldTest } {
         PesterOption = @{
             IncludeVSCodeMarker = $true
         }
+        Show = "Fails"
     }
     Invoke-Pester @PesterSettings
 }
