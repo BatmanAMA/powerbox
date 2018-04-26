@@ -132,7 +132,7 @@ task DoPublish {
         Write-Host "Not publishing, tag your release to publish" -ForegroundColor Magenta
         exit 0
     }
-    Publish-Module -Name $script:Folders.Release -NuGetApiKey $env:NUGET_API_KEY -Confirm
+    Publish-Module -Name $script:Folders.Release -NuGetApiKey $env:NUGET_API_KEY
 }
 
 task Build -Jobs Clean, CopyToRelease
