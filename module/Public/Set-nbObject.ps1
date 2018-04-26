@@ -25,10 +25,15 @@
 function Set-nbObject {
     [CmdletBinding()]
     Param (
-        # ID of the device to set
+        # ID of the object to set
         [Parameter(Mandatory=$true)]
         [Int]
         $Id,
+
+        # Which resource to set
+        [Parameter(Mandatory=$true)]
+        [String]
+        $Resource,
 
         # List of custom properties
         [Parameter()]

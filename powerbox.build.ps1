@@ -1,6 +1,6 @@
 #requires -Module InvokeBuild, PSScriptAnalyzer, Pester, PlatyPS
 [CmdletBinding()]
-[Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSAvoidUsingWriteHost")]
+#[Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSAvoidUsingWriteHost")]
 param()
 
 $moduleName = 'powerbox'
@@ -37,7 +37,7 @@ $script:Folders = @{
 
 $script:Discovery = @{
     HasDocs  = Test-Path ('{0}\{1}\*.md' -f $Folders.Docs, $Settings.Version)
-    HasTests = Test-Path ('{0}\*.Test.ps1' -f $Folders.Test)
+    HasTests = Test-Path ('{0}\*.Tests.ps1' -f $Folders.Test)
 }
 
 task Clean {
@@ -94,7 +94,7 @@ task Analyze -If { $script:Settings.ShouldAnalyze } {
 task Test -If { $script:Discovery.HasTests -and $script:Settings.ShouldTest } {
     $PesterSettings = @{
         OutputFormat = "NUnitXml"
-        OutputFile   = "TestsResults.xml"
+        OutputFile   = "TestsResult.xml"
         PassThru     = $True
         EnableExit   = $True
         PesterOption = @{
