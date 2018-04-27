@@ -19,6 +19,8 @@ build_script:
 - ps: invoke-build
 test_script:
 - ps: invoke-build -task test
+after_test:
+- ps: Invoke-RestMethod -Uri "https://ci.appveyor.com/api/testresults/nunit3/$($env:APPVEYOR_JOB_ID)" -Method POST -InFile .\testresult.xml
 deploy_script:
 - ps: invoke-build -task publish
 before_deploy:
