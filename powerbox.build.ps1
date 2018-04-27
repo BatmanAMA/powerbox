@@ -96,7 +96,7 @@ task Test -If { $script:Discovery.HasTests -and $script:Settings.ShouldTest } {
     Import-Module (Join-Path -Path $script:Folders.Release  -ChildPath "$moduleName.psd1")
     $PesterSettings = @{
         OutputFormat = "NUnitXml"
-        OutputFile   = "TestsResult.xml"
+        OutputFile   = "TestResult.xml"
         PassThru     = $True
         EnableExit   = $True
         PesterOption = @{
