@@ -18,9 +18,7 @@
         site = 'chicago'
         status = 'active'
     }
-    New-nbObject -lookup $lookup @device
-.EXAMPLE
-    New-nbObject -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
+    New-nbObject -lookup $lookup -object $device
 #>
 function New-nbObject {
     [CmdletBinding()]
@@ -42,25 +40,28 @@ function New-nbObject {
         $Lookup,
 
         # you can specify properties as arguments to this command
-        [Parameter(ValueFromRemainingArguments = $true)]
-        $Properties
+        [Parameter(Mandatory=$true)]
+        $Object
     )
 
-    $object = @{custom_fields = @{}}
-    for ($i = 0; $i -lt $Properties.Count; $i += 2) {
-        $Name = $Properties[$i] -replace '-' -replace ':'
-        $value = $Properties[$i + 1]
+    $mapObject = @{custom_fields = @{}}
+    foreach ($property in $object.psobject.properties) {
+        $Name = $Property.name -replace '-' -replace ':'
+        $value = $Property.value
         if ($name -in $lookup.keys) {
             $value = ConvertTo-nbID -source $value -value $name
         }
         if ($name -in $CustomProperties) {
-            $object.custom_fields[$name] = $value
+            $mapObject.custom_fields[$name] = $value
+        }
+        elseif ($name -eq 'custom_fields') {
+            $mapObject.custom_fields += $value
         }
         else {
-            $object[$name] = $value
+            $mapObject[$name] = $value
         }
     }
-    $object = New-Object -TypeName psobject -Property $object
+    $mapObject = New-Object -TypeName psobject -Property $mapObject
 
-    Invoke-nbApi -Resource $Resource -HttpVerb POST -Body ($object | ConvertTo-Json -Compress)
+    Invoke-nbApi -Resource $Resource -HttpVerb POST -Body ($mapObject | ConvertTo-Json -Compress)
 }
