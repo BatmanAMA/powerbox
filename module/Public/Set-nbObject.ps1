@@ -49,9 +49,9 @@ function Set-nbObject {
         [switch]
         $Patch,
 
-        # you can specify properties as arguments to this command
+        # The Object to set
         [Parameter(ValueFromRemainingArguments = $true)]
-        $Properties
+        $Object
     )
     if ($Patch.IsPresent)
     {
@@ -68,29 +68,33 @@ function Set-nbObject {
             }
         }
     }
-    $object = @{custom_fields = @{}}
-    for ($i = 0; $i -lt $Properties.Count; $i += 2) {
-        $Name = $Properties[$i] -replace '-' -replace ':'
-        $value = $Properties[$i + 1]
+    $mapObject = @{custom_fields = @{}}
+    :maploop foreach ($property in $object.psobject.properties) {
+        $Name = $Property.name -replace '-' -replace ':'
+        $value = $Property.value
+        if ($Patch.IsPresent -and $OldObject."$name" -eq $value)
+        {
+            continue :maploop
+        }
         if ($name -in $lookup.keys) {
             $value = ConvertTo-nbID -source $value -value $name
         }
         if ($name -in $CustomProperties) {
-            $object.custom_fields[$name] = $value
+            $mapObject.custom_fields[$name] = $value
         }
         elseif ($name -eq 'custom_fields') {
-            $object.custom_fields += $value
+            $mapObject.custom_fields += $value
         }
         else {
-            $object[$name] = $value
+            $mapObject[$name] = $value
         }
     }
-    $object = New-Object -TypeName psobject -Property $object
+    $mapObject = New-Object -TypeName psobject -Property $mapObject
     if ($Patch.IsPresent)
     {
-        $notChanged = $object | compare-object -ReferenceObject $OldObject -ExcludeDifferent -PassThru
-        $object = $object | Select-Object -ExcludeProperty $notChanged
-        return Invoke-nbApi -Resource $Resource/$id -HttpVerb Patch -Body ($object | ConvertTo-Json)
+        #$notChanged = $mapObject | compare-object -ReferenceObject $OldObject -ExcludeDifferent -PassThru
+        #$mapObject = $mapObject | Select-Object -ExcludeProperty $notChanged
+        return Invoke-nbApi -Resource $Resource/$id -HttpVerb Patch -Body ($mapObject | ConvertTo-Json)
     }
-    return Invoke-nbApi -Resource $Resource/$id -HttpVerb Put -Body ($object | ConvertTo-Json)
+    return Invoke-nbApi -Resource $Resource/$id -HttpVerb Put -Body ($mapObject | ConvertTo-Json)
 }

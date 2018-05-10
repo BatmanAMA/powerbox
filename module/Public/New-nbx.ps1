@@ -1,1705 +1,990 @@
-
-<#
-.SYNOPSIS
-    Creates a new circuittermination in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "New-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
-    }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    New-nbCircuitTermination -lookup $lookup @device
-.EXAMPLE
-    New-nbCircuitTermination -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
 Function New-nbCircuitTermination {
-    New-nbObject -Resource 'circuits/circuit-terminations' @args
-}
+    Param (
+        # you can specify properties as arguments to this command
+        [Parameter(Mandatory = $true)]
+        $Object,
 
-<#
-.SYNOPSIS
-    Creates a new circuittype in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "New-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
-    }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    New-nbCircuitType -lookup $lookup @device
-.EXAMPLE
-    New-nbCircuitType -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup
+    )
+    New-nbObject -Resource 'circuits/circuit-terminations' -Object $Object -CustomProperties $CustomProperties -Lookup $lookup
+}
 Function New-nbCircuitType {
-    New-nbObject -Resource 'circuits/circuit-types' @args
-}
+    Param (
+        # you can specify properties as arguments to this command
+        [Parameter(Mandatory = $true)]
+        $Object,
 
-<#
-.SYNOPSIS
-    Creates a new circuit in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "New-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
-    }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    New-nbCircuit -lookup $lookup @device
-.EXAMPLE
-    New-nbCircuit -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup
+    )
+    New-nbObject -Resource 'circuits/circuit-types' -Object $Object -CustomProperties $CustomProperties -Lookup $lookup
+}
 Function New-nbCircuit {
-    New-nbObject -Resource 'circuits/circuits' @args
-}
+    Param (
+        # you can specify properties as arguments to this command
+        [Parameter(Mandatory = $true)]
+        $Object,
 
-<#
-.SYNOPSIS
-    Creates a new provider in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "New-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
-    }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    New-nbProvider -lookup $lookup @device
-.EXAMPLE
-    New-nbProvider -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup
+    )
+    New-nbObject -Resource 'circuits/circuits' -Object $Object -CustomProperties $CustomProperties -Lookup $lookup
+}
 Function New-nbProvider {
-    New-nbObject -Resource 'circuits/providers' @args
-}
+    Param (
+        # you can specify properties as arguments to this command
+        [Parameter(Mandatory = $true)]
+        $Object,
 
-<#
-.SYNOPSIS
-    Creates a new connecteddevice in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "New-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
-    }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    New-nbConnectedDevice -lookup $lookup @device
-.EXAMPLE
-    New-nbConnectedDevice -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup
+    )
+    New-nbObject -Resource 'circuits/providers' -Object $Object -CustomProperties $CustomProperties -Lookup $lookup
+}
 Function New-nbConnectedDevice {
-    New-nbObject -Resource 'dcim/connected-device' @args
-}
+    Param (
+        # you can specify properties as arguments to this command
+        [Parameter(Mandatory = $true)]
+        $Object,
 
-<#
-.SYNOPSIS
-    Creates a new consoleConnection in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "New-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
-    }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    New-nbConsoleConnection -lookup $lookup @device
-.EXAMPLE
-    New-nbConsoleConnection -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup
+    )
+    New-nbObject -Resource 'dcim/connected-device' -Object $Object -CustomProperties $CustomProperties -Lookup $lookup
+}
 Function New-nbConsoleConnection {
-    New-nbObject -Resource 'dcim/console-connections' @args
-}
+    Param (
+        # you can specify properties as arguments to this command
+        [Parameter(Mandatory = $true)]
+        $Object,
 
-<#
-.SYNOPSIS
-    Creates a new consoleportTemplate in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "New-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
-    }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    New-nbConsolePortTemplate -lookup $lookup @device
-.EXAMPLE
-    New-nbConsolePortTemplate -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup
+    )
+    New-nbObject -Resource 'dcim/console-connections' -Object $Object -CustomProperties $CustomProperties -Lookup $lookup
+}
 Function New-nbConsolePortTemplate {
-    New-nbObject -Resource 'dcim/console-port-templates' @args
-}
+    Param (
+        # you can specify properties as arguments to this command
+        [Parameter(Mandatory = $true)]
+        $Object,
 
-<#
-.SYNOPSIS
-    Creates a new consoleport in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "New-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
-    }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    New-nbConsolePort -lookup $lookup @device
-.EXAMPLE
-    New-nbConsolePort -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup
+    )
+    New-nbObject -Resource 'dcim/console-port-templates' -Object $Object -CustomProperties $CustomProperties -Lookup $lookup
+}
 Function New-nbConsolePort {
-    New-nbObject -Resource 'dcim/console-ports' @args
-}
+    Param (
+        # you can specify properties as arguments to this command
+        [Parameter(Mandatory = $true)]
+        $Object,
 
-<#
-.SYNOPSIS
-    Creates a new consoleserverportTemplate in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "New-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
-    }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    New-nbConsoleServerPortTemplate -lookup $lookup @device
-.EXAMPLE
-    New-nbConsoleServerPortTemplate -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup
+    )
+    New-nbObject -Resource 'dcim/console-ports' -Object $Object -CustomProperties $CustomProperties -Lookup $lookup
+}
 Function New-nbConsoleServerPortTemplate {
-    New-nbObject -Resource 'dcim/console-server-port-templates' @args
-}
+    Param (
+        # you can specify properties as arguments to this command
+        [Parameter(Mandatory = $true)]
+        $Object,
 
-<#
-.SYNOPSIS
-    Creates a new consoleserverport in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "New-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
-    }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    New-nbConsoleServerPort -lookup $lookup @device
-.EXAMPLE
-    New-nbConsoleServerPort -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup
+    )
+    New-nbObject -Resource 'dcim/console-server-port-templates' -Object $Object -CustomProperties $CustomProperties -Lookup $lookup
+}
 Function New-nbConsoleServerPort {
-    New-nbObject -Resource 'dcim/console-server-ports' @args
-}
+    Param (
+        # you can specify properties as arguments to this command
+        [Parameter(Mandatory = $true)]
+        $Object,
 
-<#
-.SYNOPSIS
-    Creates a new devicebayTemplate in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "New-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
-    }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    New-nbDevicebayTemplate -lookup $lookup @device
-.EXAMPLE
-    New-nbDevicebayTemplate -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup
+    )
+    New-nbObject -Resource 'dcim/console-server-ports' -Object $Object -CustomProperties $CustomProperties -Lookup $lookup
+}
 Function New-nbDevicebayTemplate {
-    New-nbObject -Resource 'dcim/device-bay-templates' @args
-}
+    Param (
+        # you can specify properties as arguments to this command
+        [Parameter(Mandatory = $true)]
+        $Object,
 
-<#
-.SYNOPSIS
-    Creates a new devicebay in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "New-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
-    }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    New-nbDevicebay -lookup $lookup @device
-.EXAMPLE
-    New-nbDevicebay -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup
+    )
+    New-nbObject -Resource 'dcim/device-bay-templates' -Object $Object -CustomProperties $CustomProperties -Lookup $lookup
+}
 Function New-nbDevicebay {
-    New-nbObject -Resource 'dcim/device-bays' @args
-}
+    Param (
+        # you can specify properties as arguments to this command
+        [Parameter(Mandatory = $true)]
+        $Object,
 
-<#
-.SYNOPSIS
-    Creates a new devicerole in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "New-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
-    }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    New-nbDeviceRole -lookup $lookup @device
-.EXAMPLE
-    New-nbDeviceRole -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup
+    )
+    New-nbObject -Resource 'dcim/device-bays' -Object $Object -CustomProperties $CustomProperties -Lookup $lookup
+}
 Function New-nbDeviceRole {
-    New-nbObject -Resource 'dcim/device-roles' @args
-}
+    Param (
+        # you can specify properties as arguments to this command
+        [Parameter(Mandatory = $true)]
+        $Object,
 
-<#
-.SYNOPSIS
-    Creates a new devicetype in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "New-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
-    }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    New-nbDeviceType -lookup $lookup @device
-.EXAMPLE
-    New-nbDeviceType -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup
+    )
+    New-nbObject -Resource 'dcim/device-roles' -Object $Object -CustomProperties $CustomProperties -Lookup $lookup
+}
 Function New-nbDeviceType {
-    New-nbObject -Resource 'dcim/device-types' @args
-}
+    Param (
+        # you can specify properties as arguments to this command
+        [Parameter(Mandatory = $true)]
+        $Object,
 
-<#
-.SYNOPSIS
-    Creates a new device in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "New-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
-    }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    New-nbDevice -lookup $lookup @device
-.EXAMPLE
-    New-nbDevice -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup
+    )
+    New-nbObject -Resource 'dcim/device-types' -Object $Object -CustomProperties $CustomProperties -Lookup $lookup
+}
 Function New-nbDevice {
-    New-nbObject -Resource 'dcim/devices' @args
-}
+    Param (
+        # you can specify properties as arguments to this command
+        [Parameter(Mandatory = $true)]
+        $Object,
 
-<#
-.SYNOPSIS
-    Creates a new interfaceConnection in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "New-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
-    }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    New-nbInterfaceConnection -lookup $lookup @device
-.EXAMPLE
-    New-nbInterfaceConnection -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup
+    )
+    New-nbObject -Resource 'dcim/devices' -Object $Object -CustomProperties $CustomProperties -Lookup $lookup
+}
 Function New-nbInterfaceConnection {
-    New-nbObject -Resource 'dcim/interface-connections' @args
-}
+    Param (
+        # you can specify properties as arguments to this command
+        [Parameter(Mandatory = $true)]
+        $Object,
 
-<#
-.SYNOPSIS
-    Creates a new interfaceTemplate in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "New-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
-    }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    New-nbInterfaceTemplate -lookup $lookup @device
-.EXAMPLE
-    New-nbInterfaceTemplate -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup
+    )
+    New-nbObject -Resource 'dcim/interface-connections' -Object $Object -CustomProperties $CustomProperties -Lookup $lookup
+}
 Function New-nbInterfaceTemplate {
-    New-nbObject -Resource 'dcim/interface-templates' @args
-}
+    Param (
+        # you can specify properties as arguments to this command
+        [Parameter(Mandatory = $true)]
+        $Object,
 
-<#
-.SYNOPSIS
-    Creates a new interface in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "New-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
-    }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    New-nbInterface -lookup $lookup @device
-.EXAMPLE
-    New-nbInterface -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup
+    )
+    New-nbObject -Resource 'dcim/interface-templates' -Object $Object -CustomProperties $CustomProperties -Lookup $lookup
+}
 Function New-nbInterface {
-    New-nbObject -Resource 'dcim/interfaces' @args
-}
+    Param (
+        # you can specify properties as arguments to this command
+        [Parameter(Mandatory = $true)]
+        $Object,
 
-<#
-.SYNOPSIS
-    Creates a new inventoryitem in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "New-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
-    }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    New-nbInventoryItem -lookup $lookup @device
-.EXAMPLE
-    New-nbInventoryItem -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup
+    )
+    New-nbObject -Resource 'dcim/interfaces' -Object $Object -CustomProperties $CustomProperties -Lookup $lookup
+}
 Function New-nbInventoryItem {
-    New-nbObject -Resource 'dcim/inventory-items' @args
-}
+    Param (
+        # you can specify properties as arguments to this command
+        [Parameter(Mandatory = $true)]
+        $Object,
 
-<#
-.SYNOPSIS
-    Creates a new manufacturer in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "New-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
-    }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    New-nbManufacturer -lookup $lookup @device
-.EXAMPLE
-    New-nbManufacturer -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup
+    )
+    New-nbObject -Resource 'dcim/inventory-items' -Object $Object -CustomProperties $CustomProperties -Lookup $lookup
+}
 Function New-nbManufacturer {
-    New-nbObject -Resource 'dcim/manufacturers' @args
-}
+    Param (
+        # you can specify properties as arguments to this command
+        [Parameter(Mandatory = $true)]
+        $Object,
 
-<#
-.SYNOPSIS
-    Creates a new platform in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "New-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
-    }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    New-nbPlatform -lookup $lookup @device
-.EXAMPLE
-    New-nbPlatform -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup
+    )
+    New-nbObject -Resource 'dcim/manufacturers' -Object $Object -CustomProperties $CustomProperties -Lookup $lookup
+}
 Function New-nbPlatform {
-    New-nbObject -Resource 'dcim/platforms' @args
-}
+    Param (
+        # you can specify properties as arguments to this command
+        [Parameter(Mandatory = $true)]
+        $Object,
 
-<#
-.SYNOPSIS
-    Creates a new powerConnection in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "New-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
-    }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    New-nbPowerConnection -lookup $lookup @device
-.EXAMPLE
-    New-nbPowerConnection -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup
+    )
+    New-nbObject -Resource 'dcim/platforms' -Object $Object -CustomProperties $CustomProperties -Lookup $lookup
+}
 Function New-nbPowerConnection {
-    New-nbObject -Resource 'dcim/power-connections' @args
-}
+    Param (
+        # you can specify properties as arguments to this command
+        [Parameter(Mandatory = $true)]
+        $Object,
 
-<#
-.SYNOPSIS
-    Creates a new poweroutletTemplate in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "New-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
-    }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    New-nbPowerOutletTemplate -lookup $lookup @device
-.EXAMPLE
-    New-nbPowerOutletTemplate -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup
+    )
+    New-nbObject -Resource 'dcim/power-connections' -Object $Object -CustomProperties $CustomProperties -Lookup $lookup
+}
 Function New-nbPowerOutletTemplate {
-    New-nbObject -Resource 'dcim/power-outlet-templates' @args
-}
+    Param (
+        # you can specify properties as arguments to this command
+        [Parameter(Mandatory = $true)]
+        $Object,
 
-<#
-.SYNOPSIS
-    Creates a new poweroutlet in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "New-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
-    }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    New-nbPowerOutlet -lookup $lookup @device
-.EXAMPLE
-    New-nbPowerOutlet -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup
+    )
+    New-nbObject -Resource 'dcim/power-outlet-templates' -Object $Object -CustomProperties $CustomProperties -Lookup $lookup
+}
 Function New-nbPowerOutlet {
-    New-nbObject -Resource 'dcim/power-outlets' @args
-}
+    Param (
+        # you can specify properties as arguments to this command
+        [Parameter(Mandatory = $true)]
+        $Object,
 
-<#
-.SYNOPSIS
-    Creates a new powerportTemplate in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "New-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
-    }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    New-nbPowerPortTemplate -lookup $lookup @device
-.EXAMPLE
-    New-nbPowerPortTemplate -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup
+    )
+    New-nbObject -Resource 'dcim/power-outlets' -Object $Object -CustomProperties $CustomProperties -Lookup $lookup
+}
 Function New-nbPowerPortTemplate {
-    New-nbObject -Resource 'dcim/power-port-templates' @args
-}
+    Param (
+        # you can specify properties as arguments to this command
+        [Parameter(Mandatory = $true)]
+        $Object,
 
-<#
-.SYNOPSIS
-    Creates a new powerport in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "New-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
-    }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    New-nbPowerPort -lookup $lookup @device
-.EXAMPLE
-    New-nbPowerPort -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup
+    )
+    New-nbObject -Resource 'dcim/power-port-templates' -Object $Object -CustomProperties $CustomProperties -Lookup $lookup
+}
 Function New-nbPowerPort {
-    New-nbObject -Resource 'dcim/power-ports' @args
-}
+    Param (
+        # you can specify properties as arguments to this command
+        [Parameter(Mandatory = $true)]
+        $Object,
 
-<#
-.SYNOPSIS
-    Creates a new rackgroup in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "New-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
-    }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    New-nbRackGroup -lookup $lookup @device
-.EXAMPLE
-    New-nbRackGroup -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup
+    )
+    New-nbObject -Resource 'dcim/power-ports' -Object $Object -CustomProperties $CustomProperties -Lookup $lookup
+}
 Function New-nbRackGroup {
-    New-nbObject -Resource 'dcim/rack-groups' @args
-}
+    Param (
+        # you can specify properties as arguments to this command
+        [Parameter(Mandatory = $true)]
+        $Object,
 
-<#
-.SYNOPSIS
-    Creates a new rackreservation in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "New-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
-    }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    New-nbRackReservation -lookup $lookup @device
-.EXAMPLE
-    New-nbRackReservation -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup
+    )
+    New-nbObject -Resource 'dcim/rack-groups' -Object $Object -CustomProperties $CustomProperties -Lookup $lookup
+}
 Function New-nbRackReservation {
-    New-nbObject -Resource 'dcim/rack-reservations' @args
-}
+    Param (
+        # you can specify properties as arguments to this command
+        [Parameter(Mandatory = $true)]
+        $Object,
 
-<#
-.SYNOPSIS
-    Creates a new rackrole in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "New-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
-    }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    New-nbRackRole -lookup $lookup @device
-.EXAMPLE
-    New-nbRackRole -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup
+    )
+    New-nbObject -Resource 'dcim/rack-reservations' -Object $Object -CustomProperties $CustomProperties -Lookup $lookup
+}
 Function New-nbRackRole {
-    New-nbObject -Resource 'dcim/rack-roles' @args
-}
+    Param (
+        # you can specify properties as arguments to this command
+        [Parameter(Mandatory = $true)]
+        $Object,
 
-<#
-.SYNOPSIS
-    Creates a new rack in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "New-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
-    }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    New-nbRack -lookup $lookup @device
-.EXAMPLE
-    New-nbRack -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup
+    )
+    New-nbObject -Resource 'dcim/rack-roles' -Object $Object -CustomProperties $CustomProperties -Lookup $lookup
+}
 Function New-nbRack {
-    New-nbObject -Resource 'dcim/racks' @args
-}
+    Param (
+        # you can specify properties as arguments to this command
+        [Parameter(Mandatory = $true)]
+        $Object,
 
-<#
-.SYNOPSIS
-    Creates a new region in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "New-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
-    }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    New-nbRegion -lookup $lookup @device
-.EXAMPLE
-    New-nbRegion -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup
+    )
+    New-nbObject -Resource 'dcim/racks' -Object $Object -CustomProperties $CustomProperties -Lookup $lookup
+}
 Function New-nbRegion {
-    New-nbObject -Resource 'dcim/regions' @args
-}
+    Param (
+        # you can specify properties as arguments to this command
+        [Parameter(Mandatory = $true)]
+        $Object,
 
-<#
-.SYNOPSIS
-    Creates a new site in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "New-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
-    }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    New-nbSite -lookup $lookup @device
-.EXAMPLE
-    New-nbSite -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup
+    )
+    New-nbObject -Resource 'dcim/regions' -Object $Object -CustomProperties $CustomProperties -Lookup $lookup
+}
 Function New-nbSite {
-    New-nbObject -Resource 'dcim/sites' @args
-}
+    Param (
+        # you can specify properties as arguments to this command
+        [Parameter(Mandatory = $true)]
+        $Object,
 
-<#
-.SYNOPSIS
-    Creates a new virtualchassi in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "New-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
-    }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    New-nbVirtualChassis -lookup $lookup @device
-.EXAMPLE
-    New-nbVirtualChassis -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup
+    )
+    New-nbObject -Resource 'dcim/sites' -Object $Object -CustomProperties $CustomProperties -Lookup $lookup
+}
 Function New-nbVirtualChassis {
-    New-nbObject -Resource 'dcim/virtual-chassis' @args
-}
+    Param (
+        # you can specify properties as arguments to this command
+        [Parameter(Mandatory = $true)]
+        $Object,
 
-<#
-.SYNOPSIS
-    Creates a new exportTemplate in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "New-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
-    }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    New-nbExportTemplate -lookup $lookup @device
-.EXAMPLE
-    New-nbExportTemplate -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup
+    )
+    New-nbObject -Resource 'dcim/virtual-chassis' -Object $Object -CustomProperties $CustomProperties -Lookup $lookup
+}
 Function New-nbExportTemplate {
-    New-nbObject -Resource 'extras/export-templates' @args
-}
+    Param (
+        # you can specify properties as arguments to this command
+        [Parameter(Mandatory = $true)]
+        $Object,
 
-<#
-.SYNOPSIS
-    Creates a new graph in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "New-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
-    }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    New-nbGraph -lookup $lookup @device
-.EXAMPLE
-    New-nbGraph -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup
+    )
+    New-nbObject -Resource 'extras/export-templates' -Object $Object -CustomProperties $CustomProperties -Lookup $lookup
+}
 Function New-nbGraph {
-    New-nbObject -Resource 'extras/graphs' @args
-}
+    Param (
+        # you can specify properties as arguments to this command
+        [Parameter(Mandatory = $true)]
+        $Object,
 
-<#
-.SYNOPSIS
-    Creates a new imageattachment in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "New-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
-    }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    New-nbImageAttachment -lookup $lookup @device
-.EXAMPLE
-    New-nbImageAttachment -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup
+    )
+    New-nbObject -Resource 'extras/graphs' -Object $Object -CustomProperties $CustomProperties -Lookup $lookup
+}
 Function New-nbImageAttachment {
-    New-nbObject -Resource 'extras/image-attachments' @args
-}
+    Param (
+        # you can specify properties as arguments to this command
+        [Parameter(Mandatory = $true)]
+        $Object,
 
-<#
-.SYNOPSIS
-    Creates a new recentactivity in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "New-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
-    }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    New-nbRecentActivity -lookup $lookup @device
-.EXAMPLE
-    New-nbRecentActivity -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup
+    )
+    New-nbObject -Resource 'extras/image-attachments' -Object $Object -CustomProperties $CustomProperties -Lookup $lookup
+}
 Function New-nbRecentActivity {
-    New-nbObject -Resource 'extras/recent-activity' @args
-}
+    Param (
+        # you can specify properties as arguments to this command
+        [Parameter(Mandatory = $true)]
+        $Object,
 
-<#
-.SYNOPSIS
-    Creates a new report in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "New-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
-    }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    New-nbReport -lookup $lookup @device
-.EXAMPLE
-    New-nbReport -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup
+    )
+    New-nbObject -Resource 'extras/recent-activity' -Object $Object -CustomProperties $CustomProperties -Lookup $lookup
+}
 Function New-nbReport {
-    New-nbObject -Resource 'extras/reports' @args
-}
+    Param (
+        # you can specify properties as arguments to this command
+        [Parameter(Mandatory = $true)]
+        $Object,
 
-<#
-.SYNOPSIS
-    Creates a new topologymap in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "New-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
-    }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    New-nbTopologyMap -lookup $lookup @device
-.EXAMPLE
-    New-nbTopologyMap -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup
+    )
+    New-nbObject -Resource 'extras/reports' -Object $Object -CustomProperties $CustomProperties -Lookup $lookup
+}
 Function New-nbTopologyMap {
-    New-nbObject -Resource 'extras/topology-maps' @args
-}
+    Param (
+        # you can specify properties as arguments to this command
+        [Parameter(Mandatory = $true)]
+        $Object,
 
-<#
-.SYNOPSIS
-    Creates a new aggregate in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "New-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
-    }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    New-nbAggregate -lookup $lookup @device
-.EXAMPLE
-    New-nbAggregate -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup
+    )
+    New-nbObject -Resource 'extras/topology-maps' -Object $Object -CustomProperties $CustomProperties -Lookup $lookup
+}
 Function New-nbAggregate {
-    New-nbObject -Resource 'ipam/aggregates' @args
-}
+    Param (
+        # you can specify properties as arguments to this command
+        [Parameter(Mandatory = $true)]
+        $Object,
 
-<#
-.SYNOPSIS
-    Creates a new ipaddresse in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "New-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
-    }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    New-nbIpAddress -lookup $lookup @device
-.EXAMPLE
-    New-nbIpAddress -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup
+    )
+    New-nbObject -Resource 'ipam/aggregates' -Object $Object -CustomProperties $CustomProperties -Lookup $lookup
+}
 Function New-nbIpAddress {
-    New-nbObject -Resource 'ipam/ip-addresses' @args
-}
+    Param (
+        # you can specify properties as arguments to this command
+        [Parameter(Mandatory = $true)]
+        $Object,
 
-<#
-.SYNOPSIS
-    Creates a new prefix in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "New-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
-    }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    New-nbPrefix -lookup $lookup @device
-.EXAMPLE
-    New-nbPrefix -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup
+    )
+    New-nbObject -Resource 'ipam/ip-addresses' -Object $Object -CustomProperties $CustomProperties -Lookup $lookup
+}
 Function New-nbPrefix {
-    New-nbObject -Resource 'ipam/prefixes' @args
-}
+    Param (
+        # you can specify properties as arguments to this command
+        [Parameter(Mandatory = $true)]
+        $Object,
 
-<#
-.SYNOPSIS
-    Creates a new rir in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "New-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
-    }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    New-nbRir -lookup $lookup @device
-.EXAMPLE
-    New-nbRir -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup
+    )
+    New-nbObject -Resource 'ipam/prefixes' -Object $Object -CustomProperties $CustomProperties -Lookup $lookup
+}
 Function New-nbRir {
-    New-nbObject -Resource 'ipam/rirs' @args
-}
+    Param (
+        # you can specify properties as arguments to this command
+        [Parameter(Mandatory = $true)]
+        $Object,
 
-<#
-.SYNOPSIS
-    Creates a new role in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "New-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
-    }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    New-nbRole -lookup $lookup @device
-.EXAMPLE
-    New-nbRole -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup
+    )
+    New-nbObject -Resource 'ipam/rirs' -Object $Object -CustomProperties $CustomProperties -Lookup $lookup
+}
 Function New-nbRole {
-    New-nbObject -Resource 'ipam/roles' @args
-}
+    Param (
+        # you can specify properties as arguments to this command
+        [Parameter(Mandatory = $true)]
+        $Object,
 
-<#
-.SYNOPSIS
-    Creates a new service in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "New-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
-    }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    New-nbService -lookup $lookup @device
-.EXAMPLE
-    New-nbService -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup
+    )
+    New-nbObject -Resource 'ipam/roles' -Object $Object -CustomProperties $CustomProperties -Lookup $lookup
+}
 Function New-nbService {
-    New-nbObject -Resource 'ipam/services' @args
-}
+    Param (
+        # you can specify properties as arguments to this command
+        [Parameter(Mandatory = $true)]
+        $Object,
 
-<#
-.SYNOPSIS
-    Creates a new vlangroup in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "New-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
-    }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    New-nbVlanGroup -lookup $lookup @device
-.EXAMPLE
-    New-nbVlanGroup -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup
+    )
+    New-nbObject -Resource 'ipam/services' -Object $Object -CustomProperties $CustomProperties -Lookup $lookup
+}
 Function New-nbVlanGroup {
-    New-nbObject -Resource 'ipam/vlan-groups' @args
-}
+    Param (
+        # you can specify properties as arguments to this command
+        [Parameter(Mandatory = $true)]
+        $Object,
 
-<#
-.SYNOPSIS
-    Creates a new vlan in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "New-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
-    }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    New-nbVlan -lookup $lookup @device
-.EXAMPLE
-    New-nbVlan -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup
+    )
+    New-nbObject -Resource 'ipam/vlan-groups' -Object $Object -CustomProperties $CustomProperties -Lookup $lookup
+}
 Function New-nbVlan {
-    New-nbObject -Resource 'ipam/vlans' @args
-}
+    Param (
+        # you can specify properties as arguments to this command
+        [Parameter(Mandatory = $true)]
+        $Object,
 
-<#
-.SYNOPSIS
-    Creates a new vrf in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "New-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
-    }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    New-nbVrf -lookup $lookup @device
-.EXAMPLE
-    New-nbVrf -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup
+    )
+    New-nbObject -Resource 'ipam/vlans' -Object $Object -CustomProperties $CustomProperties -Lookup $lookup
+}
 Function New-nbVrf {
-    New-nbObject -Resource 'ipam/vrfs' @args
-}
+    Param (
+        # you can specify properties as arguments to this command
+        [Parameter(Mandatory = $true)]
+        $Object,
 
-<#
-.SYNOPSIS
-    Creates a new tenantgroup in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "New-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
-    }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    New-nbTenantGroup -lookup $lookup @device
-.EXAMPLE
-    New-nbTenantGroup -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup
+    )
+    New-nbObject -Resource 'ipam/vrfs' -Object $Object -CustomProperties $CustomProperties -Lookup $lookup
+}
 Function New-nbTenantGroup {
-    New-nbObject -Resource 'tenancy/tenant-groups' @args
-}
+    Param (
+        # you can specify properties as arguments to this command
+        [Parameter(Mandatory = $true)]
+        $Object,
 
-<#
-.SYNOPSIS
-    Creates a new tenant in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "New-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
-    }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    New-nbTenant -lookup $lookup @device
-.EXAMPLE
-    New-nbTenant -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup
+    )
+    New-nbObject -Resource 'tenancy/tenant-groups' -Object $Object -CustomProperties $CustomProperties -Lookup $lookup
+}
 Function New-nbTenant {
-    New-nbObject -Resource 'tenancy/tenants' @args
-}
+    Param (
+        # you can specify properties as arguments to this command
+        [Parameter(Mandatory = $true)]
+        $Object,
 
-<#
-.SYNOPSIS
-    Creates a new clustergroup in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "New-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
-    }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    New-nbClusterGroup -lookup $lookup @device
-.EXAMPLE
-    New-nbClusterGroup -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup
+    )
+    New-nbObject -Resource 'tenancy/tenants' -Object $Object -CustomProperties $CustomProperties -Lookup $lookup
+}
 Function New-nbClusterGroup {
-    New-nbObject -Resource 'virtualization/cluster-groups' @args
-}
+    Param (
+        # you can specify properties as arguments to this command
+        [Parameter(Mandatory = $true)]
+        $Object,
 
-<#
-.SYNOPSIS
-    Creates a new clustertype in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "New-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
-    }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    New-nbClusterType -lookup $lookup @device
-.EXAMPLE
-    New-nbClusterType -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup
+    )
+    New-nbObject -Resource 'virtualization/cluster-groups' -Object $Object -CustomProperties $CustomProperties -Lookup $lookup
+}
 Function New-nbClusterType {
-    New-nbObject -Resource 'virtualization/cluster-types' @args
-}
+    Param (
+        # you can specify properties as arguments to this command
+        [Parameter(Mandatory = $true)]
+        $Object,
 
-<#
-.SYNOPSIS
-    Creates a new cluster in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "New-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
-    }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    New-nbCluster -lookup $lookup @device
-.EXAMPLE
-    New-nbCluster -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup
+    )
+    New-nbObject -Resource 'virtualization/cluster-types' -Object $Object -CustomProperties $CustomProperties -Lookup $lookup
+}
 Function New-nbCluster {
-    New-nbObject -Resource 'virtualization/clusters' @args
-}
+    Param (
+        # you can specify properties as arguments to this command
+        [Parameter(Mandatory = $true)]
+        $Object,
 
-<#
-.SYNOPSIS
-    Creates a new VM interface in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "New-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
-    }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    New-nbVMInterface -lookup $lookup @device
-.EXAMPLE
-    New-nbVMInterface -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup
+    )
+    New-nbObject -Resource 'virtualization/clusters' -Object $Object -CustomProperties $CustomProperties -Lookup $lookup
+}
 Function New-nbVMInterface {
-    New-nbObject -Resource 'virtualization/interfaces' @args
-}
+    Param (
+        # you can specify properties as arguments to this command
+        [Parameter(Mandatory = $true)]
+        $Object,
 
-<#
-.SYNOPSIS
-    Creates a new virtual machine in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "New-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
-    }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    New-nbVirtualMachine -lookup $lookup @device
-.EXAMPLE
-    New-nbVirtualMachine -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup
+    )
+    New-nbObject -Resource 'virtualization/interfaces' -Object $Object -CustomProperties $CustomProperties -Lookup $lookup
+}
 Function New-nbVirtualMachine {
-    New-nbObject -Resource 'virtualization/virtual-machines' @args
+    Param (
+        # you can specify properties as arguments to this command
+        [Parameter(Mandatory = $true)]
+        $Object,
+
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup
+    )
+    New-nbObject -Resource 'virtualization/virtual-machines' -Object $Object -CustomProperties $CustomProperties -Lookup $lookup
 }

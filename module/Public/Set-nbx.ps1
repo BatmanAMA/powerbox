@@ -1,1705 +1,1925 @@
-
-<#
-.SYNOPSIS
-    Sets properties on a circuittermination in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "Set-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
-    }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    Set-nbCircuitTermination -id 22 -lookup $lookup @device
-.EXAMPLE
-    Set-nbCircuitTermination -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
 Function Set-nbCircuitTermination {
-    Set-nbObject -Resource 'circuits/circuit-terminations' @args
-}
+    Param (
+        # ID of the object to set
+        [Parameter(Mandatory = $true)]
+        [Int]
+        $Id,
 
-<#
-.SYNOPSIS
-    Sets properties on a circuittype in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "Set-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
+        # The Object to set
+        [Parameter(Mandatory = $true)]
+        $Object,
+
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup,
+
+        #Looks up the current object and only sets changed properties
+        [switch]
+        $Patch
+
+    )
+    $Forward = @{
+        Id               = $id
+        Object           = $object
+        CustomProperties = $CustomProperties
+        Lookup           = $lookup
+        Patch            = $patch
     }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    Set-nbCircuitType -id 22 -lookup $lookup @device
-.EXAMPLE
-    Set-nbCircuitType -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+    Set-nbObject -Resource 'circuits/circuit-terminations' @forward
+}
 Function Set-nbCircuitType {
-    Set-nbObject -Resource 'circuits/circuit-types' @args
-}
+    Param (
+        # ID of the object to set
+        [Parameter(Mandatory = $true)]
+        [Int]
+        $Id,
 
-<#
-.SYNOPSIS
-    Sets properties on a circuit in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "Set-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
+        # The Object to set
+        [Parameter(Mandatory = $true)]
+        $Object,
+
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup,
+
+        #Looks up the current object and only sets changed properties
+        [switch]
+        $Patch
+
+    )
+    $Forward = @{
+        Id               = $id
+        Object           = $object
+        CustomProperties = $CustomProperties
+        Lookup           = $lookup
+        Patch            = $patch
     }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    Set-nbCircuit -id 22 -lookup $lookup @device
-.EXAMPLE
-    Set-nbCircuit -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+    Set-nbObject -Resource 'circuits/circuit-types' @forward
+}
 Function Set-nbCircuit {
-    Set-nbObject -Resource 'circuits/circuits' @args
-}
+    Param (
+        # ID of the object to set
+        [Parameter(Mandatory = $true)]
+        [Int]
+        $Id,
 
-<#
-.SYNOPSIS
-    Sets properties on a provider in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "Set-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
+        # The Object to set
+        [Parameter(Mandatory = $true)]
+        $Object,
+
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup,
+
+        #Looks up the current object and only sets changed properties
+        [switch]
+        $Patch
+
+    )
+    $Forward = @{
+        Id               = $id
+        Object           = $object
+        CustomProperties = $CustomProperties
+        Lookup           = $lookup
+        Patch            = $patch
     }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    Set-nbProvider -id 22 -lookup $lookup @device
-.EXAMPLE
-    Set-nbProvider -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+    Set-nbObject -Resource 'circuits/circuits' @forward
+}
 Function Set-nbProvider {
-    Set-nbObject -Resource 'circuits/providers' @args
-}
+    Param (
+        # ID of the object to set
+        [Parameter(Mandatory = $true)]
+        [Int]
+        $Id,
 
-<#
-.SYNOPSIS
-    Sets properties on a connecteddevice in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "Set-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
+        # The Object to set
+        [Parameter(Mandatory = $true)]
+        $Object,
+
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup,
+
+        #Looks up the current object and only sets changed properties
+        [switch]
+        $Patch
+
+    )
+    $Forward = @{
+        Id               = $id
+        Object           = $object
+        CustomProperties = $CustomProperties
+        Lookup           = $lookup
+        Patch            = $patch
     }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    Set-nbConnectedDevice -id 22 -lookup $lookup @device
-.EXAMPLE
-    Set-nbConnectedDevice -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+    Set-nbObject -Resource 'circuits/providers' @forward
+}
 Function Set-nbConnectedDevice {
-    Set-nbObject -Resource 'dcim/connected-device' @args
-}
+    Param (
+        # ID of the object to set
+        [Parameter(Mandatory = $true)]
+        [Int]
+        $Id,
 
-<#
-.SYNOPSIS
-    Sets properties on a consoleConnection in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "Set-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
+        # The Object to set
+        [Parameter(Mandatory = $true)]
+        $Object,
+
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup,
+
+        #Looks up the current object and only sets changed properties
+        [switch]
+        $Patch
+
+    )
+    $Forward = @{
+        Id               = $id
+        Object           = $object
+        CustomProperties = $CustomProperties
+        Lookup           = $lookup
+        Patch            = $patch
     }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    Set-nbConsoleConnection -id 22 -lookup $lookup @device
-.EXAMPLE
-    Set-nbConsoleConnection -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+    Set-nbObject -Resource 'dcim/connected-device' @forward
+}
 Function Set-nbConsoleConnection {
-    Set-nbObject -Resource 'dcim/console-connections' @args
-}
+    Param (
+        # ID of the object to set
+        [Parameter(Mandatory = $true)]
+        [Int]
+        $Id,
 
-<#
-.SYNOPSIS
-    Sets properties on a consoleportTemplate in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "Set-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
+        # The Object to set
+        [Parameter(Mandatory = $true)]
+        $Object,
+
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup,
+
+        #Looks up the current object and only sets changed properties
+        [switch]
+        $Patch
+
+    )
+    $Forward = @{
+        Id               = $id
+        Object           = $object
+        CustomProperties = $CustomProperties
+        Lookup           = $lookup
+        Patch            = $patch
     }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    Set-nbConsolePortTemplate -id 22 -lookup $lookup @device
-.EXAMPLE
-    Set-nbConsolePortTemplate -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+    Set-nbObject -Resource 'dcim/console-connections' @forward
+}
 Function Set-nbConsolePortTemplate {
-    Set-nbObject -Resource 'dcim/console-port-templates' @args
-}
+    Param (
+        # ID of the object to set
+        [Parameter(Mandatory = $true)]
+        [Int]
+        $Id,
 
-<#
-.SYNOPSIS
-    Sets properties on a consoleport in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "Set-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
+        # The Object to set
+        [Parameter(Mandatory = $true)]
+        $Object,
+
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup,
+
+        #Looks up the current object and only sets changed properties
+        [switch]
+        $Patch
+
+    )
+    $Forward = @{
+        Id               = $id
+        Object           = $object
+        CustomProperties = $CustomProperties
+        Lookup           = $lookup
+        Patch            = $patch
     }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    Set-nbConsolePort -id 22 -lookup $lookup @device
-.EXAMPLE
-    Set-nbConsolePort -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+    Set-nbObject -Resource 'dcim/console-port-templates' @forward
+}
 Function Set-nbConsolePort {
-    Set-nbObject -Resource 'dcim/console-ports' @args
-}
+    Param (
+        # ID of the object to set
+        [Parameter(Mandatory = $true)]
+        [Int]
+        $Id,
 
-<#
-.SYNOPSIS
-    Sets properties on a consoleserverportTemplate in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "Set-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
+        # The Object to set
+        [Parameter(Mandatory = $true)]
+        $Object,
+
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup,
+
+        #Looks up the current object and only sets changed properties
+        [switch]
+        $Patch
+
+    )
+    $Forward = @{
+        Id               = $id
+        Object           = $object
+        CustomProperties = $CustomProperties
+        Lookup           = $lookup
+        Patch            = $patch
     }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    Set-nbConsoleServerPortTemplate -id 22 -lookup $lookup @device
-.EXAMPLE
-    Set-nbConsoleServerPortTemplate -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+    Set-nbObject -Resource 'dcim/console-ports' @forward
+}
 Function Set-nbConsoleServerPortTemplate {
-    Set-nbObject -Resource 'dcim/console-server-port-templates' @args
-}
+    Param (
+        # ID of the object to set
+        [Parameter(Mandatory = $true)]
+        [Int]
+        $Id,
 
-<#
-.SYNOPSIS
-    Sets properties on a consoleserverport in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "Set-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
+        # The Object to set
+        [Parameter(Mandatory = $true)]
+        $Object,
+
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup,
+
+        #Looks up the current object and only sets changed properties
+        [switch]
+        $Patch
+
+    )
+    $Forward = @{
+        Id               = $id
+        Object           = $object
+        CustomProperties = $CustomProperties
+        Lookup           = $lookup
+        Patch            = $patch
     }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    Set-nbConsoleServerPort -id 22 -lookup $lookup @device
-.EXAMPLE
-    Set-nbConsoleServerPort -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+    Set-nbObject -Resource 'dcim/console-server-port-templates' @forward
+}
 Function Set-nbConsoleServerPort {
-    Set-nbObject -Resource 'dcim/console-server-ports' @args
-}
+    Param (
+        # ID of the object to set
+        [Parameter(Mandatory = $true)]
+        [Int]
+        $Id,
 
-<#
-.SYNOPSIS
-    Sets properties on a devicebayTemplate in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "Set-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
+        # The Object to set
+        [Parameter(Mandatory = $true)]
+        $Object,
+
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup,
+
+        #Looks up the current object and only sets changed properties
+        [switch]
+        $Patch
+
+    )
+    $Forward = @{
+        Id               = $id
+        Object           = $object
+        CustomProperties = $CustomProperties
+        Lookup           = $lookup
+        Patch            = $patch
     }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    Set-nbDevicebayTemplate -id 22 -lookup $lookup @device
-.EXAMPLE
-    Set-nbDevicebayTemplate -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+    Set-nbObject -Resource 'dcim/console-server-ports' @forward
+}
 Function Set-nbDevicebayTemplate {
-    Set-nbObject -Resource 'dcim/device-bay-templates' @args
-}
+    Param (
+        # ID of the object to set
+        [Parameter(Mandatory = $true)]
+        [Int]
+        $Id,
 
-<#
-.SYNOPSIS
-    Sets properties on a devicebay in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "Set-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
+        # The Object to set
+        [Parameter(Mandatory = $true)]
+        $Object,
+
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup,
+
+        #Looks up the current object and only sets changed properties
+        [switch]
+        $Patch
+
+    )
+    $Forward = @{
+        Id               = $id
+        Object           = $object
+        CustomProperties = $CustomProperties
+        Lookup           = $lookup
+        Patch            = $patch
     }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    Set-nbDevicebay -id 22 -lookup $lookup @device
-.EXAMPLE
-    Set-nbDevicebay -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+    Set-nbObject -Resource 'dcim/device-bay-templates' @forward
+}
 Function Set-nbDevicebay {
-    Set-nbObject -Resource 'dcim/device-bays' @args
-}
+    Param (
+        # ID of the object to set
+        [Parameter(Mandatory = $true)]
+        [Int]
+        $Id,
 
-<#
-.SYNOPSIS
-    Sets properties on a devicerole in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "Set-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
+        # The Object to set
+        [Parameter(Mandatory = $true)]
+        $Object,
+
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup,
+
+        #Looks up the current object and only sets changed properties
+        [switch]
+        $Patch
+
+    )
+    $Forward = @{
+        Id               = $id
+        Object           = $object
+        CustomProperties = $CustomProperties
+        Lookup           = $lookup
+        Patch            = $patch
     }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    Set-nbDeviceRole -id 22 -lookup $lookup @device
-.EXAMPLE
-    Set-nbDeviceRole -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+    Set-nbObject -Resource 'dcim/device-bays' @forward
+}
 Function Set-nbDeviceRole {
-    Set-nbObject -Resource 'dcim/device-roles' @args
-}
+    Param (
+        # ID of the object to set
+        [Parameter(Mandatory = $true)]
+        [Int]
+        $Id,
 
-<#
-.SYNOPSIS
-    Sets properties on a devicetype in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "Set-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
+        # The Object to set
+        [Parameter(Mandatory = $true)]
+        $Object,
+
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup,
+
+        #Looks up the current object and only sets changed properties
+        [switch]
+        $Patch
+
+    )
+    $Forward = @{
+        Id               = $id
+        Object           = $object
+        CustomProperties = $CustomProperties
+        Lookup           = $lookup
+        Patch            = $patch
     }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    Set-nbDeviceType -id 22 -lookup $lookup @device
-.EXAMPLE
-    Set-nbDeviceType -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+    Set-nbObject -Resource 'dcim/device-roles' @forward
+}
 Function Set-nbDeviceType {
-    Set-nbObject -Resource 'dcim/device-types' @args
-}
+    Param (
+        # ID of the object to set
+        [Parameter(Mandatory = $true)]
+        [Int]
+        $Id,
 
-<#
-.SYNOPSIS
-    Sets properties on a device in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "Set-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
+        # The Object to set
+        [Parameter(Mandatory = $true)]
+        $Object,
+
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup,
+
+        #Looks up the current object and only sets changed properties
+        [switch]
+        $Patch
+
+    )
+    $Forward = @{
+        Id               = $id
+        Object           = $object
+        CustomProperties = $CustomProperties
+        Lookup           = $lookup
+        Patch            = $patch
     }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    Set-nbDevice -id 22 -lookup $lookup @device
-.EXAMPLE
-    Set-nbDevice -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+    Set-nbObject -Resource 'dcim/device-types' @forward
+}
 Function Set-nbDevice {
-    Set-nbObject -Resource 'dcim/devices' @args
-}
+    Param (
+        # ID of the object to set
+        [Parameter(Mandatory = $true)]
+        [Int]
+        $Id,
 
-<#
-.SYNOPSIS
-    Sets properties on a interfaceConnection in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "Set-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
+        # The Object to set
+        [Parameter(Mandatory = $true)]
+        $Object,
+
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup,
+
+        #Looks up the current object and only sets changed properties
+        [switch]
+        $Patch
+
+    )
+    $Forward = @{
+        Id               = $id
+        Object           = $object
+        CustomProperties = $CustomProperties
+        Lookup           = $lookup
+        Patch            = $patch
     }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    Set-nbInterfaceConnection -id 22 -lookup $lookup @device
-.EXAMPLE
-    Set-nbInterfaceConnection -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+    Set-nbObject -Resource 'dcim/devices' @forward
+}
 Function Set-nbInterfaceConnection {
-    Set-nbObject -Resource 'dcim/interface-connections' @args
-}
+    Param (
+        # ID of the object to set
+        [Parameter(Mandatory = $true)]
+        [Int]
+        $Id,
 
-<#
-.SYNOPSIS
-    Sets properties on a interfaceTemplate in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "Set-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
+        # The Object to set
+        [Parameter(Mandatory = $true)]
+        $Object,
+
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup,
+
+        #Looks up the current object and only sets changed properties
+        [switch]
+        $Patch
+
+    )
+    $Forward = @{
+        Id               = $id
+        Object           = $object
+        CustomProperties = $CustomProperties
+        Lookup           = $lookup
+        Patch            = $patch
     }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    Set-nbInterfaceTemplate -id 22 -lookup $lookup @device
-.EXAMPLE
-    Set-nbInterfaceTemplate -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+    Set-nbObject -Resource 'dcim/interface-connections' @forward
+}
 Function Set-nbInterfaceTemplate {
-    Set-nbObject -Resource 'dcim/interface-templates' @args
-}
+    Param (
+        # ID of the object to set
+        [Parameter(Mandatory = $true)]
+        [Int]
+        $Id,
 
-<#
-.SYNOPSIS
-    Sets properties on a interface in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "Set-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
+        # The Object to set
+        [Parameter(Mandatory = $true)]
+        $Object,
+
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup,
+
+        #Looks up the current object and only sets changed properties
+        [switch]
+        $Patch
+
+    )
+    $Forward = @{
+        Id               = $id
+        Object           = $object
+        CustomProperties = $CustomProperties
+        Lookup           = $lookup
+        Patch            = $patch
     }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    Set-nbInterface -id 22 -lookup $lookup @device
-.EXAMPLE
-    Set-nbInterface -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+    Set-nbObject -Resource 'dcim/interface-templates' @forward
+}
 Function Set-nbInterface {
-    Set-nbObject -Resource 'dcim/interfaces' @args
-}
+    Param (
+        # ID of the object to set
+        [Parameter(Mandatory = $true)]
+        [Int]
+        $Id,
 
-<#
-.SYNOPSIS
-    Sets properties on a inventoryitem in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "Set-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
+        # The Object to set
+        [Parameter(Mandatory = $true)]
+        $Object,
+
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup,
+
+        #Looks up the current object and only sets changed properties
+        [switch]
+        $Patch
+
+    )
+    $Forward = @{
+        Id               = $id
+        Object           = $object
+        CustomProperties = $CustomProperties
+        Lookup           = $lookup
+        Patch            = $patch
     }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    Set-nbInventoryItem -id 22 -lookup $lookup @device
-.EXAMPLE
-    Set-nbInventoryItem -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+    Set-nbObject -Resource 'dcim/interfaces' @forward
+}
 Function Set-nbInventoryItem {
-    Set-nbObject -Resource 'dcim/inventory-items' @args
-}
+    Param (
+        # ID of the object to set
+        [Parameter(Mandatory = $true)]
+        [Int]
+        $Id,
 
-<#
-.SYNOPSIS
-    Sets properties on a manufacturer in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "Set-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
+        # The Object to set
+        [Parameter(Mandatory = $true)]
+        $Object,
+
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup,
+
+        #Looks up the current object and only sets changed properties
+        [switch]
+        $Patch
+
+    )
+    $Forward = @{
+        Id               = $id
+        Object           = $object
+        CustomProperties = $CustomProperties
+        Lookup           = $lookup
+        Patch            = $patch
     }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    Set-nbManufacturer -id 22 -lookup $lookup @device
-.EXAMPLE
-    Set-nbManufacturer -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+    Set-nbObject -Resource 'dcim/inventory-items' @forward
+}
 Function Set-nbManufacturer {
-    Set-nbObject -Resource 'dcim/manufacturers' @args
-}
+    Param (
+        # ID of the object to set
+        [Parameter(Mandatory = $true)]
+        [Int]
+        $Id,
 
-<#
-.SYNOPSIS
-    Sets properties on a platform in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "Set-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
+        # The Object to set
+        [Parameter(Mandatory = $true)]
+        $Object,
+
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup,
+
+        #Looks up the current object and only sets changed properties
+        [switch]
+        $Patch
+
+    )
+    $Forward = @{
+        Id               = $id
+        Object           = $object
+        CustomProperties = $CustomProperties
+        Lookup           = $lookup
+        Patch            = $patch
     }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    Set-nbPlatform -id 22 -lookup $lookup @device
-.EXAMPLE
-    Set-nbPlatform -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+    Set-nbObject -Resource 'dcim/manufacturers' @forward
+}
 Function Set-nbPlatform {
-    Set-nbObject -Resource 'dcim/platforms' @args
-}
+    Param (
+        # ID of the object to set
+        [Parameter(Mandatory = $true)]
+        [Int]
+        $Id,
 
-<#
-.SYNOPSIS
-    Sets properties on a powerConnection in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "Set-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
+        # The Object to set
+        [Parameter(Mandatory = $true)]
+        $Object,
+
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup,
+
+        #Looks up the current object and only sets changed properties
+        [switch]
+        $Patch
+
+    )
+    $Forward = @{
+        Id               = $id
+        Object           = $object
+        CustomProperties = $CustomProperties
+        Lookup           = $lookup
+        Patch            = $patch
     }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    Set-nbPowerConnection -id 22 -lookup $lookup @device
-.EXAMPLE
-    Set-nbPowerConnection -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+    Set-nbObject -Resource 'dcim/platforms' @forward
+}
 Function Set-nbPowerConnection {
-    Set-nbObject -Resource 'dcim/power-connections' @args
-}
+    Param (
+        # ID of the object to set
+        [Parameter(Mandatory = $true)]
+        [Int]
+        $Id,
 
-<#
-.SYNOPSIS
-    Sets properties on a poweroutletTemplate in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "Set-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
+        # The Object to set
+        [Parameter(Mandatory = $true)]
+        $Object,
+
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup,
+
+        #Looks up the current object and only sets changed properties
+        [switch]
+        $Patch
+
+    )
+    $Forward = @{
+        Id               = $id
+        Object           = $object
+        CustomProperties = $CustomProperties
+        Lookup           = $lookup
+        Patch            = $patch
     }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    Set-nbPowerOutletTemplate -id 22 -lookup $lookup @device
-.EXAMPLE
-    Set-nbPowerOutletTemplate -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+    Set-nbObject -Resource 'dcim/power-connections' @forward
+}
 Function Set-nbPowerOutletTemplate {
-    Set-nbObject -Resource 'dcim/power-outlet-templates' @args
-}
+    Param (
+        # ID of the object to set
+        [Parameter(Mandatory = $true)]
+        [Int]
+        $Id,
 
-<#
-.SYNOPSIS
-    Sets properties on a poweroutlet in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "Set-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
+        # The Object to set
+        [Parameter(Mandatory = $true)]
+        $Object,
+
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup,
+
+        #Looks up the current object and only sets changed properties
+        [switch]
+        $Patch
+
+    )
+    $Forward = @{
+        Id               = $id
+        Object           = $object
+        CustomProperties = $CustomProperties
+        Lookup           = $lookup
+        Patch            = $patch
     }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    Set-nbPowerOutlet -id 22 -lookup $lookup @device
-.EXAMPLE
-    Set-nbPowerOutlet -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+    Set-nbObject -Resource 'dcim/power-outlet-templates' @forward
+}
 Function Set-nbPowerOutlet {
-    Set-nbObject -Resource 'dcim/power-outlets' @args
-}
+    Param (
+        # ID of the object to set
+        [Parameter(Mandatory = $true)]
+        [Int]
+        $Id,
 
-<#
-.SYNOPSIS
-    Sets properties on a powerportTemplate in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "Set-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
+        # The Object to set
+        [Parameter(Mandatory = $true)]
+        $Object,
+
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup,
+
+        #Looks up the current object and only sets changed properties
+        [switch]
+        $Patch
+
+    )
+    $Forward = @{
+        Id               = $id
+        Object           = $object
+        CustomProperties = $CustomProperties
+        Lookup           = $lookup
+        Patch            = $patch
     }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    Set-nbPowerPortTemplate -id 22 -lookup $lookup @device
-.EXAMPLE
-    Set-nbPowerPortTemplate -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+    Set-nbObject -Resource 'dcim/power-outlets' @forward
+}
 Function Set-nbPowerPortTemplate {
-    Set-nbObject -Resource 'dcim/power-port-templates' @args
-}
+    Param (
+        # ID of the object to set
+        [Parameter(Mandatory = $true)]
+        [Int]
+        $Id,
 
-<#
-.SYNOPSIS
-    Sets properties on a powerport in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "Set-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
+        # The Object to set
+        [Parameter(Mandatory = $true)]
+        $Object,
+
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup,
+
+        #Looks up the current object and only sets changed properties
+        [switch]
+        $Patch
+
+    )
+    $Forward = @{
+        Id               = $id
+        Object           = $object
+        CustomProperties = $CustomProperties
+        Lookup           = $lookup
+        Patch            = $patch
     }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    Set-nbPowerPort -id 22 -lookup $lookup @device
-.EXAMPLE
-    Set-nbPowerPort -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+    Set-nbObject -Resource 'dcim/power-port-templates' @forward
+}
 Function Set-nbPowerPort {
-    Set-nbObject -Resource 'dcim/power-ports' @args
-}
+    Param (
+        # ID of the object to set
+        [Parameter(Mandatory = $true)]
+        [Int]
+        $Id,
 
-<#
-.SYNOPSIS
-    Sets properties on a rackgroup in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "Set-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
+        # The Object to set
+        [Parameter(Mandatory = $true)]
+        $Object,
+
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup,
+
+        #Looks up the current object and only sets changed properties
+        [switch]
+        $Patch
+
+    )
+    $Forward = @{
+        Id               = $id
+        Object           = $object
+        CustomProperties = $CustomProperties
+        Lookup           = $lookup
+        Patch            = $patch
     }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    Set-nbRackGroup -id 22 -lookup $lookup @device
-.EXAMPLE
-    Set-nbRackGroup -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+    Set-nbObject -Resource 'dcim/power-ports' @forward
+}
 Function Set-nbRackGroup {
-    Set-nbObject -Resource 'dcim/rack-groups' @args
-}
+    Param (
+        # ID of the object to set
+        [Parameter(Mandatory = $true)]
+        [Int]
+        $Id,
 
-<#
-.SYNOPSIS
-    Sets properties on a rackreservation in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "Set-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
+        # The Object to set
+        [Parameter(Mandatory = $true)]
+        $Object,
+
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup,
+
+        #Looks up the current object and only sets changed properties
+        [switch]
+        $Patch
+
+    )
+    $Forward = @{
+        Id               = $id
+        Object           = $object
+        CustomProperties = $CustomProperties
+        Lookup           = $lookup
+        Patch            = $patch
     }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    Set-nbRackReservation -id 22 -lookup $lookup @device
-.EXAMPLE
-    Set-nbRackReservation -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+    Set-nbObject -Resource 'dcim/rack-groups' @forward
+}
 Function Set-nbRackReservation {
-    Set-nbObject -Resource 'dcim/rack-reservations' @args
-}
+    Param (
+        # ID of the object to set
+        [Parameter(Mandatory = $true)]
+        [Int]
+        $Id,
 
-<#
-.SYNOPSIS
-    Sets properties on a rackrole in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "Set-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
+        # The Object to set
+        [Parameter(Mandatory = $true)]
+        $Object,
+
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup,
+
+        #Looks up the current object and only sets changed properties
+        [switch]
+        $Patch
+
+    )
+    $Forward = @{
+        Id               = $id
+        Object           = $object
+        CustomProperties = $CustomProperties
+        Lookup           = $lookup
+        Patch            = $patch
     }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    Set-nbRackRole -id 22 -lookup $lookup @device
-.EXAMPLE
-    Set-nbRackRole -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+    Set-nbObject -Resource 'dcim/rack-reservations' @forward
+}
 Function Set-nbRackRole {
-    Set-nbObject -Resource 'dcim/rack-roles' @args
-}
+    Param (
+        # ID of the object to set
+        [Parameter(Mandatory = $true)]
+        [Int]
+        $Id,
 
-<#
-.SYNOPSIS
-    Sets properties on a rack in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "Set-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
+        # The Object to set
+        [Parameter(Mandatory = $true)]
+        $Object,
+
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup,
+
+        #Looks up the current object and only sets changed properties
+        [switch]
+        $Patch
+
+    )
+    $Forward = @{
+        Id               = $id
+        Object           = $object
+        CustomProperties = $CustomProperties
+        Lookup           = $lookup
+        Patch            = $patch
     }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    Set-nbRack -id 22 -lookup $lookup @device
-.EXAMPLE
-    Set-nbRack -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+    Set-nbObject -Resource 'dcim/rack-roles' @forward
+}
 Function Set-nbRack {
-    Set-nbObject -Resource 'dcim/racks' @args
-}
+    Param (
+        # ID of the object to set
+        [Parameter(Mandatory = $true)]
+        [Int]
+        $Id,
 
-<#
-.SYNOPSIS
-    Sets properties on a region in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "Set-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
+        # The Object to set
+        [Parameter(Mandatory = $true)]
+        $Object,
+
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup,
+
+        #Looks up the current object and only sets changed properties
+        [switch]
+        $Patch
+
+    )
+    $Forward = @{
+        Id               = $id
+        Object           = $object
+        CustomProperties = $CustomProperties
+        Lookup           = $lookup
+        Patch            = $patch
     }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    Set-nbRegion -id 22 -lookup $lookup @device
-.EXAMPLE
-    Set-nbRegion -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+    Set-nbObject -Resource 'dcim/racks' @forward
+}
 Function Set-nbRegion {
-    Set-nbObject -Resource 'dcim/regions' @args
-}
+    Param (
+        # ID of the object to set
+        [Parameter(Mandatory = $true)]
+        [Int]
+        $Id,
 
-<#
-.SYNOPSIS
-    Sets properties on a site in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "Set-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
+        # The Object to set
+        [Parameter(Mandatory = $true)]
+        $Object,
+
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup,
+
+        #Looks up the current object and only sets changed properties
+        [switch]
+        $Patch
+
+    )
+    $Forward = @{
+        Id               = $id
+        Object           = $object
+        CustomProperties = $CustomProperties
+        Lookup           = $lookup
+        Patch            = $patch
     }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    Set-nbSite -id 22 -lookup $lookup @device
-.EXAMPLE
-    Set-nbSite -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+    Set-nbObject -Resource 'dcim/regions' @forward
+}
 Function Set-nbSite {
-    Set-nbObject -Resource 'dcim/sites' @args
-}
+    Param (
+        # ID of the object to set
+        [Parameter(Mandatory = $true)]
+        [Int]
+        $Id,
 
-<#
-.SYNOPSIS
-    Sets properties on a virtualchassis in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "Set-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
+        # The Object to set
+        [Parameter(Mandatory = $true)]
+        $Object,
+
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup,
+
+        #Looks up the current object and only sets changed properties
+        [switch]
+        $Patch
+
+    )
+    $Forward = @{
+        Id               = $id
+        Object           = $object
+        CustomProperties = $CustomProperties
+        Lookup           = $lookup
+        Patch            = $patch
     }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    Set-nbVirtualChassis -id 22 -lookup $lookup @device
-.EXAMPLE
-    Set-nbVirtualChassis -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+    Set-nbObject -Resource 'dcim/sites' @forward
+}
 Function Set-nbVirtualChassis {
-    Set-nbObject -Resource 'dcim/virtual-chassis' @args
-}
+    Param (
+        # ID of the object to set
+        [Parameter(Mandatory = $true)]
+        [Int]
+        $Id,
 
-<#
-.SYNOPSIS
-    Sets properties on a exportTemplate in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "Set-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
+        # The Object to set
+        [Parameter(Mandatory = $true)]
+        $Object,
+
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup,
+
+        #Looks up the current object and only sets changed properties
+        [switch]
+        $Patch
+
+    )
+    $Forward = @{
+        Id               = $id
+        Object           = $object
+        CustomProperties = $CustomProperties
+        Lookup           = $lookup
+        Patch            = $patch
     }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    Set-nbExportTemplate -id 22 -lookup $lookup @device
-.EXAMPLE
-    Set-nbExportTemplate -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+    Set-nbObject -Resource 'dcim/virtual-chassis' @forward
+}
 Function Set-nbExportTemplate {
-    Set-nbObject -Resource 'extras/export-templates' @args
-}
+    Param (
+        # ID of the object to set
+        [Parameter(Mandatory = $true)]
+        [Int]
+        $Id,
 
-<#
-.SYNOPSIS
-    Sets properties on a graph in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "Set-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
+        # The Object to set
+        [Parameter(Mandatory = $true)]
+        $Object,
+
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup,
+
+        #Looks up the current object and only sets changed properties
+        [switch]
+        $Patch
+
+    )
+    $Forward = @{
+        Id               = $id
+        Object           = $object
+        CustomProperties = $CustomProperties
+        Lookup           = $lookup
+        Patch            = $patch
     }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    Set-nbGraph -id 22 -lookup $lookup @device
-.EXAMPLE
-    Set-nbGraph -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+    Set-nbObject -Resource 'extras/export-templates' @forward
+}
 Function Set-nbGraph {
-    Set-nbObject -Resource 'extras/graphs' @args
-}
+    Param (
+        # ID of the object to set
+        [Parameter(Mandatory = $true)]
+        [Int]
+        $Id,
 
-<#
-.SYNOPSIS
-    Sets properties on a imageattachment in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "Set-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
+        # The Object to set
+        [Parameter(Mandatory = $true)]
+        $Object,
+
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup,
+
+        #Looks up the current object and only sets changed properties
+        [switch]
+        $Patch
+
+    )
+    $Forward = @{
+        Id               = $id
+        Object           = $object
+        CustomProperties = $CustomProperties
+        Lookup           = $lookup
+        Patch            = $patch
     }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    Set-nbImageAttachment -id 22 -lookup $lookup @device
-.EXAMPLE
-    Set-nbImageAttachment -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+    Set-nbObject -Resource 'extras/graphs' @forward
+}
 Function Set-nbImageAttachment {
-    Set-nbObject -Resource 'extras/image-attachments' @args
-}
+    Param (
+        # ID of the object to set
+        [Parameter(Mandatory = $true)]
+        [Int]
+        $Id,
 
-<#
-.SYNOPSIS
-    Sets properties on a recentactivity in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "Set-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
+        # The Object to set
+        [Parameter(Mandatory = $true)]
+        $Object,
+
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup,
+
+        #Looks up the current object and only sets changed properties
+        [switch]
+        $Patch
+
+    )
+    $Forward = @{
+        Id               = $id
+        Object           = $object
+        CustomProperties = $CustomProperties
+        Lookup           = $lookup
+        Patch            = $patch
     }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    Set-nbRecentActivity -id 22 -lookup $lookup @device
-.EXAMPLE
-    Set-nbRecentActivity -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+    Set-nbObject -Resource 'extras/image-attachments' @forward
+}
 Function Set-nbRecentActivity {
-    Set-nbObject -Resource 'extras/recent-activity' @args
-}
+    Param (
+        # ID of the object to set
+        [Parameter(Mandatory = $true)]
+        [Int]
+        $Id,
 
-<#
-.SYNOPSIS
-    Sets properties on a report in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "Set-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
+        # The Object to set
+        [Parameter(Mandatory = $true)]
+        $Object,
+
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup,
+
+        #Looks up the current object and only sets changed properties
+        [switch]
+        $Patch
+
+    )
+    $Forward = @{
+        Id               = $id
+        Object           = $object
+        CustomProperties = $CustomProperties
+        Lookup           = $lookup
+        Patch            = $patch
     }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    Set-nbReport -id 22 -lookup $lookup @device
-.EXAMPLE
-    Set-nbReport -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+    Set-nbObject -Resource 'extras/recent-activity' @forward
+}
 Function Set-nbReport {
-    Set-nbObject -Resource 'extras/reports' @args
-}
+    Param (
+        # ID of the object to set
+        [Parameter(Mandatory = $true)]
+        [Int]
+        $Id,
 
-<#
-.SYNOPSIS
-    Sets properties on a topologymap in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "Set-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
+        # The Object to set
+        [Parameter(Mandatory = $true)]
+        $Object,
+
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup,
+
+        #Looks up the current object and only sets changed properties
+        [switch]
+        $Patch
+
+    )
+    $Forward = @{
+        Id               = $id
+        Object           = $object
+        CustomProperties = $CustomProperties
+        Lookup           = $lookup
+        Patch            = $patch
     }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    Set-nbTopologyMap -id 22 -lookup $lookup @device
-.EXAMPLE
-    Set-nbTopologyMap -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+    Set-nbObject -Resource 'extras/reports' @forward
+}
 Function Set-nbTopologyMap {
-    Set-nbObject -Resource 'extras/topology-maps' @args
-}
+    Param (
+        # ID of the object to set
+        [Parameter(Mandatory = $true)]
+        [Int]
+        $Id,
 
-<#
-.SYNOPSIS
-    Sets properties on a aggregate in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "Set-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
+        # The Object to set
+        [Parameter(Mandatory = $true)]
+        $Object,
+
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup,
+
+        #Looks up the current object and only sets changed properties
+        [switch]
+        $Patch
+
+    )
+    $Forward = @{
+        Id               = $id
+        Object           = $object
+        CustomProperties = $CustomProperties
+        Lookup           = $lookup
+        Patch            = $patch
     }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    Set-nbAggregate -id 22 -lookup $lookup @device
-.EXAMPLE
-    Set-nbAggregate -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+    Set-nbObject -Resource 'extras/topology-maps' @forward
+}
 Function Set-nbAggregate {
-    Set-nbObject -Resource 'ipam/aggregates' @args
-}
+    Param (
+        # ID of the object to set
+        [Parameter(Mandatory = $true)]
+        [Int]
+        $Id,
 
-<#
-.SYNOPSIS
-    Sets properties on a ipaddresse in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "Set-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
+        # The Object to set
+        [Parameter(Mandatory = $true)]
+        $Object,
+
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup,
+
+        #Looks up the current object and only sets changed properties
+        [switch]
+        $Patch
+
+    )
+    $Forward = @{
+        Id               = $id
+        Object           = $object
+        CustomProperties = $CustomProperties
+        Lookup           = $lookup
+        Patch            = $patch
     }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    Set-nbIpAddress -id 22 -lookup $lookup @device
-.EXAMPLE
-    Set-nbIpAddress -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+    Set-nbObject -Resource 'ipam/aggregates' @forward
+}
 Function Set-nbIpAddress {
-    Set-nbObject -Resource 'ipam/ip-addresses' @args
-}
+    Param (
+        # ID of the object to set
+        [Parameter(Mandatory = $true)]
+        [Int]
+        $Id,
 
-<#
-.SYNOPSIS
-    Sets properties on a prefix in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "Set-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
+        # The Object to set
+        [Parameter(Mandatory = $true)]
+        $Object,
+
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup,
+
+        #Looks up the current object and only sets changed properties
+        [switch]
+        $Patch
+
+    )
+    $Forward = @{
+        Id               = $id
+        Object           = $object
+        CustomProperties = $CustomProperties
+        Lookup           = $lookup
+        Patch            = $patch
     }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    Set-nbPrefix -id 22 -lookup $lookup @device
-.EXAMPLE
-    Set-nbPrefix -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+    Set-nbObject -Resource 'ipam/ip-addresses' @forward
+}
 Function Set-nbPrefix {
-    Set-nbObject -Resource 'ipam/prefixes' @args
-}
+    Param (
+        # ID of the object to set
+        [Parameter(Mandatory = $true)]
+        [Int]
+        $Id,
 
-<#
-.SYNOPSIS
-    Sets properties on a rir in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "Set-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
+        # The Object to set
+        [Parameter(Mandatory = $true)]
+        $Object,
+
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup,
+
+        #Looks up the current object and only sets changed properties
+        [switch]
+        $Patch
+
+    )
+    $Forward = @{
+        Id               = $id
+        Object           = $object
+        CustomProperties = $CustomProperties
+        Lookup           = $lookup
+        Patch            = $patch
     }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    Set-nbRir -id 22 -lookup $lookup @device
-.EXAMPLE
-    Set-nbRir -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+    Set-nbObject -Resource 'ipam/prefixes' @forward
+}
 Function Set-nbRir {
-    Set-nbObject -Resource 'ipam/rirs' @args
-}
+    Param (
+        # ID of the object to set
+        [Parameter(Mandatory = $true)]
+        [Int]
+        $Id,
 
-<#
-.SYNOPSIS
-    Sets properties on a role in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "Set-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
+        # The Object to set
+        [Parameter(Mandatory = $true)]
+        $Object,
+
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup,
+
+        #Looks up the current object and only sets changed properties
+        [switch]
+        $Patch
+
+    )
+    $Forward = @{
+        Id               = $id
+        Object           = $object
+        CustomProperties = $CustomProperties
+        Lookup           = $lookup
+        Patch            = $patch
     }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    Set-nbRole -id 22 -lookup $lookup @device
-.EXAMPLE
-    Set-nbRole -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+    Set-nbObject -Resource 'ipam/rirs' @forward
+}
 Function Set-nbRole {
-    Set-nbObject -Resource 'ipam/roles' @args
-}
+    Param (
+        # ID of the object to set
+        [Parameter(Mandatory = $true)]
+        [Int]
+        $Id,
 
-<#
-.SYNOPSIS
-    Sets properties on a service in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "Set-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
+        # The Object to set
+        [Parameter(Mandatory = $true)]
+        $Object,
+
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup,
+
+        #Looks up the current object and only sets changed properties
+        [switch]
+        $Patch
+
+    )
+    $Forward = @{
+        Id               = $id
+        Object           = $object
+        CustomProperties = $CustomProperties
+        Lookup           = $lookup
+        Patch            = $patch
     }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    Set-nbService -id 22 -lookup $lookup @device
-.EXAMPLE
-    Set-nbService -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+    Set-nbObject -Resource 'ipam/roles' @forward
+}
 Function Set-nbService {
-    Set-nbObject -Resource 'ipam/services' @args
-}
+    Param (
+        # ID of the object to set
+        [Parameter(Mandatory = $true)]
+        [Int]
+        $Id,
 
-<#
-.SYNOPSIS
-    Sets properties on a vlangroup in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "Set-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
+        # The Object to set
+        [Parameter(Mandatory = $true)]
+        $Object,
+
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup,
+
+        #Looks up the current object and only sets changed properties
+        [switch]
+        $Patch
+
+    )
+    $Forward = @{
+        Id               = $id
+        Object           = $object
+        CustomProperties = $CustomProperties
+        Lookup           = $lookup
+        Patch            = $patch
     }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    Set-nbVlanGroup -id 22 -lookup $lookup @device
-.EXAMPLE
-    Set-nbVlanGroup -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+    Set-nbObject -Resource 'ipam/services' @forward
+}
 Function Set-nbVlanGroup {
-    Set-nbObject -Resource 'ipam/vlan-groups' @args
-}
+    Param (
+        # ID of the object to set
+        [Parameter(Mandatory = $true)]
+        [Int]
+        $Id,
 
-<#
-.SYNOPSIS
-    Sets properties on a vlan in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "Set-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
+        # The Object to set
+        [Parameter(Mandatory = $true)]
+        $Object,
+
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup,
+
+        #Looks up the current object and only sets changed properties
+        [switch]
+        $Patch
+
+    )
+    $Forward = @{
+        Id               = $id
+        Object           = $object
+        CustomProperties = $CustomProperties
+        Lookup           = $lookup
+        Patch            = $patch
     }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    Set-nbVlan -id 22 -lookup $lookup @device
-.EXAMPLE
-    Set-nbVlan -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+    Set-nbObject -Resource 'ipam/vlan-groups' @forward
+}
 Function Set-nbVlan {
-    Set-nbObject -Resource 'ipam/vlans' @args
-}
+    Param (
+        # ID of the object to set
+        [Parameter(Mandatory = $true)]
+        [Int]
+        $Id,
 
-<#
-.SYNOPSIS
-    Sets properties on a vrf in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "Set-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
+        # The Object to set
+        [Parameter(Mandatory = $true)]
+        $Object,
+
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup,
+
+        #Looks up the current object and only sets changed properties
+        [switch]
+        $Patch
+
+    )
+    $Forward = @{
+        Id               = $id
+        Object           = $object
+        CustomProperties = $CustomProperties
+        Lookup           = $lookup
+        Patch            = $patch
     }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    Set-nbVrf -id 22 -lookup $lookup @device
-.EXAMPLE
-    Set-nbVrf -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+    Set-nbObject -Resource 'ipam/vlans' @forward
+}
 Function Set-nbVrf {
-    Set-nbObject -Resource 'ipam/vrfs' @args
-}
+    Param (
+        # ID of the object to set
+        [Parameter(Mandatory = $true)]
+        [Int]
+        $Id,
 
-<#
-.SYNOPSIS
-    Sets properties on a tenantgroup in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "Set-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
+        # The Object to set
+        [Parameter(Mandatory = $true)]
+        $Object,
+
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup,
+
+        #Looks up the current object and only sets changed properties
+        [switch]
+        $Patch
+
+    )
+    $Forward = @{
+        Id               = $id
+        Object           = $object
+        CustomProperties = $CustomProperties
+        Lookup           = $lookup
+        Patch            = $patch
     }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    Set-nbTenantGroup -id 22 -lookup $lookup @device
-.EXAMPLE
-    Set-nbTenantGroup -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+    Set-nbObject -Resource 'ipam/vrfs' @forward
+}
 Function Set-nbTenantGroup {
-    Set-nbObject -Resource 'tenancy/tenant-groups' @args
-}
+    Param (
+        # ID of the object to set
+        [Parameter(Mandatory = $true)]
+        [Int]
+        $Id,
 
-<#
-.SYNOPSIS
-    Sets properties on a tenant in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "Set-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
+        # The Object to set
+        [Parameter(Mandatory = $true)]
+        $Object,
+
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup,
+
+        #Looks up the current object and only sets changed properties
+        [switch]
+        $Patch
+
+    )
+    $Forward = @{
+        Id               = $id
+        Object           = $object
+        CustomProperties = $CustomProperties
+        Lookup           = $lookup
+        Patch            = $patch
     }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    Set-nbTenant -id 22 -lookup $lookup @device
-.EXAMPLE
-    Set-nbTenant -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+    Set-nbObject -Resource 'tenancy/tenant-groups' @forward
+}
 Function Set-nbTenant {
-    Set-nbObject -Resource 'tenancy/tenants' @args
-}
+    Param (
+        # ID of the object to set
+        [Parameter(Mandatory = $true)]
+        [Int]
+        $Id,
 
-<#
-.SYNOPSIS
-    Sets properties on a clustergroup in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "Set-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
+        # The Object to set
+        [Parameter(Mandatory = $true)]
+        $Object,
+
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup,
+
+        #Looks up the current object and only sets changed properties
+        [switch]
+        $Patch
+
+    )
+    $Forward = @{
+        Id               = $id
+        Object           = $object
+        CustomProperties = $CustomProperties
+        Lookup           = $lookup
+        Patch            = $patch
     }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    Set-nbClusterGroup -id 22 -lookup $lookup @device
-.EXAMPLE
-    Set-nbClusterGroup -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+    Set-nbObject -Resource 'tenancy/tenants' @forward
+}
 Function Set-nbClusterGroup {
-    Set-nbObject -Resource 'virtualization/cluster-groups' @args
-}
+    Param (
+        # ID of the object to set
+        [Parameter(Mandatory = $true)]
+        [Int]
+        $Id,
 
-<#
-.SYNOPSIS
-    Sets properties on a clustertype in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "Set-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
+        # The Object to set
+        [Parameter(Mandatory = $true)]
+        $Object,
+
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup,
+
+        #Looks up the current object and only sets changed properties
+        [switch]
+        $Patch
+
+    )
+    $Forward = @{
+        Id               = $id
+        Object           = $object
+        CustomProperties = $CustomProperties
+        Lookup           = $lookup
+        Patch            = $patch
     }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    Set-nbClusterType -id 22 -lookup $lookup @device
-.EXAMPLE
-    Set-nbClusterType -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+    Set-nbObject -Resource 'virtualization/cluster-groups' @forward
+}
 Function Set-nbClusterType {
-    Set-nbObject -Resource 'virtualization/cluster-types' @args
-}
+    Param (
+        # ID of the object to set
+        [Parameter(Mandatory = $true)]
+        [Int]
+        $Id,
 
-<#
-.SYNOPSIS
-    Sets properties on a cluster in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "Set-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
+        # The Object to set
+        [Parameter(Mandatory = $true)]
+        $Object,
+
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup,
+
+        #Looks up the current object and only sets changed properties
+        [switch]
+        $Patch
+
+    )
+    $Forward = @{
+        Id               = $id
+        Object           = $object
+        CustomProperties = $CustomProperties
+        Lookup           = $lookup
+        Patch            = $patch
     }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    Set-nbCluster -id 22 -lookup $lookup @device
-.EXAMPLE
-    Set-nbCluster -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+    Set-nbObject -Resource 'virtualization/cluster-types' @forward
+}
 Function Set-nbCluster {
-    Set-nbObject -Resource 'virtualization/clusters' @args
-}
+    Param (
+        # ID of the object to set
+        [Parameter(Mandatory = $true)]
+        [Int]
+        $Id,
 
-<#
-.SYNOPSIS
-    Sets properties on a VMinterface in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "Set-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
+        # The Object to set
+        [Parameter(Mandatory = $true)]
+        $Object,
+
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup,
+
+        #Looks up the current object and only sets changed properties
+        [switch]
+        $Patch
+
+    )
+    $Forward = @{
+        Id               = $id
+        Object           = $object
+        CustomProperties = $CustomProperties
+        Lookup           = $lookup
+        Patch            = $patch
     }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    Set-nbVMInterface -id 22 -lookup $lookup @device
-.EXAMPLE
-    Set-nbVMInterface -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+    Set-nbObject -Resource 'virtualization/clusters' @forward
+}
 Function Set-nbVMInterface {
-    Set-nbObject -Resource 'virtualization/interfaces' @args
-}
+    Param (
+        # ID of the object to set
+        [Parameter(Mandatory = $true)]
+        [Int]
+        $Id,
 
-<#
-.SYNOPSIS
-    Sets properties on a virtual machine in netbox
-.DESCRIPTION
-    This should handle mapping a simple hashtable of values and looking up any references.
-.NOTES
-    This function wraps the "Set-nbObject" function and just recalls it with the type specified
-.EXAMPLE
-    (note - example is generic - customize to your object type)
-    $lookup = @{
-        device_type='dcim/device-types'
-        device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
+        # The Object to set
+        [Parameter(Mandatory = $true)]
+        $Object,
+
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup,
+
+        #Looks up the current object and only sets changed properties
+        [switch]
+        $Patch
+
+    )
+    $Forward = @{
+        Id               = $id
+        Object           = $object
+        CustomProperties = $CustomProperties
+        Lookup           = $lookup
+        Patch            = $patch
     }
-    $device = @{
-        name = 'example'
-        serial = 'aka123457'
-        device_type = 'dl380-g9'
-        device_role = 'oracle'
-        site = 'chicago'
-        status = 'active'
-    }
-    Set-nbVirtualMachine -id 22 -lookup $lookup @device
-.EXAMPLE
-    Set-nbVirtualMachine -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
-#>
+    Set-nbObject -Resource 'virtualization/interfaces' @forward
+}
 Function Set-nbVirtualMachine {
-    Set-nbObject -Resource 'virtualization/virtual-machines' @args
+    Param (
+        # ID of the object to set
+        [Parameter(Mandatory = $true)]
+        [Int]
+        $Id,
+
+        # The Object to set
+        [Parameter(Mandatory = $true)]
+        $Object,
+
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup,
+
+        #Looks up the current object and only sets changed properties
+        [switch]
+        $Patch
+
+    )
+    $Forward = @{
+        Id               = $id
+        Object           = $object
+        CustomProperties = $CustomProperties
+        Lookup           = $lookup
+        Patch            = $patch
+    }
+    Set-nbObject -Resource 'virtualization/virtual-machines' @forward
 }
