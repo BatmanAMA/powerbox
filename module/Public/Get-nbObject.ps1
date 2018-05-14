@@ -20,6 +20,7 @@ function Get-nbObject {
         [Parameter(Mandatory = $true, ParameterSetName = 'id')]
         [Parameter(Mandatory = $true, ParameterSetName = 'query')]
         [String]
+        [Alias("type")]
         $Resource,
 
         # Query to find what you want
@@ -30,17 +31,17 @@ function Get-nbObject {
         # Passthrough to invoke-nbapi
         [Parameter(ValueFromRemainingArguments = $true)]
         [HashTable]
-        $PassThrough,
+        $AdditionalParams,
 
         # Don't flatten the object
         [Switch]
         $UnFlatten
     )
     if ($PSCmdlet.ParameterSetName -eq 'id') {
-        $object = Invoke-nbApi -Resource $Resource/$id @PassThrough
+        $object = Invoke-nbApi -Resource $Resource/$id @AdditionalParams
     }
     elseif ($PSCmdlet.ParameterSetName -eq 'query') {
-        $object = Invoke-nbApi -Resource $Resource -Query $Query @PassThrough
+        $object = Invoke-nbApi -Resource $Resource -Query $Query @AdditionalParams
     }
     if ($object.count) {
         $object = $object.results

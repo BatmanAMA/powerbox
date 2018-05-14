@@ -26,7 +26,7 @@ function New-nbObject {
         # object/resource type
         [parameter(Mandatory=$true)]
         [String]
-        [Alias("type","object")]
+        [Alias("type")]
         $Resource,
 
         # List of custom properties
@@ -41,7 +41,12 @@ function New-nbObject {
 
         # you can specify properties as arguments to this command
         [Parameter(Mandatory=$true)]
-        $Object
+        $Object,
+
+        # Passthrough to invoke-nbapi
+        [Parameter(ValueFromRemainingArguments = $true)]
+        [HashTable]
+        $AdditionalParams
     )
 
     $mapObject = @{custom_fields = @{}}

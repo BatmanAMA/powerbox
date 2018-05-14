@@ -33,6 +33,7 @@ function Set-nbObject {
         # Which resource to set
         [Parameter(Mandatory=$true)]
         [String]
+        [Alias("type")]
         $Resource,
 
         # List of custom properties
@@ -51,7 +52,12 @@ function Set-nbObject {
 
         # The Object to set
         [Parameter(ValueFromRemainingArguments = $true)]
-        $Object
+        $Object,
+
+        # Passthrough to invoke-nbapi
+        [Parameter(ValueFromRemainingArguments = $true)]
+        [HashTable]
+        $AdditionalParams
     )
     if ($Patch.IsPresent)
     {

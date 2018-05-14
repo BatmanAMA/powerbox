@@ -5,11 +5,11 @@ Describe 'Set wrapper functions' {
 
     $testCases = $ResourceMap.Keys |
         ForEach-Object {
-        @{
-            function     = "Set-nb$_"
-            resourcename = ($ResourceMap[$_])
+            @{
+                function     = "Set-nb$_"
+                resourcename = ($ResourceMap[$_])
+            }
         }
-    }
 
     it "should map <function> to <resourcename>" -TestCases $testCases {
         param(
@@ -19,7 +19,7 @@ Describe 'Set wrapper functions' {
         #Mock -CommandName Invoke-nbApi -MockWith {} -ModuleName powerbox
         $filter = [scriptblock]::Create("`$Resource -eq '$resourceName'")
         Mock -CommandName Set-NbObject -MockWith {} -ModuleName powerbox -Verifiable -ParameterFilter $filter
-        {&$function -Id 0} | should -Not -Throw
+        {&$function -Id 0 -object [pscustomobject]@{name='stuff'}} | should -Not -Throw
         Assert-VerifiableMock
     }
 }
@@ -30,11 +30,11 @@ Describe 'New wrapper functions' {
 
     $testCases = $ResourceMap.Keys |
         ForEach-Object {
-        @{
-            function     = "New-nb$_"
-            resourcename = ($ResourceMap[$_])
+            @{
+                function     = "New-nb$_"
+                resourcename = ($ResourceMap[$_])
+            }
         }
-    }
 
     it "should map <function> to <resourcename>" -TestCases $testCases {
         param(
@@ -44,7 +44,7 @@ Describe 'New wrapper functions' {
         Mock -CommandName Invoke-nbApi -MockWith {} -ModuleName powerbox
         $filter = [scriptblock]::Create("`$Resource -eq '$resourceName'")
         Mock -CommandName New-NbObject -MockWith {} -ModuleName powerbox -Verifiable -ParameterFilter $filter
-        {&$function -Id 0} | should -Not -Throw
+        {&$function -object [pscustomobject]@{name='stuff'}} | should -Not -Throw
         Assert-VerifiableMock
     }
 }
