@@ -100,8 +100,8 @@ task Test -If { $script:Discovery.HasTests -and $script:Settings.ShouldTest } {
         Where-Object name -notlike '*build*' |
         Where-Object name -NotLike '*ResourceMap*'
     $PesterSettings = @{
-        #OutputFormat = "NUnitXml"
-        #OutputFile   = "TestResult.xml"
+        OutputFormat = "NUnitXml"
+        OutputFile   = "TestResult.xml"
         PassThru     = $True
         EnableExit   = $True
         PesterOption = @{
