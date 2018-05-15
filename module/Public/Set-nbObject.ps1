@@ -61,19 +61,34 @@ function Set-nbObject {
     )
     if ($Patch.IsPresent)
     {
-        $OldObject = Invoke-nbApi -Resource $Resource/$id
-        #flatten the object
-        Foreach ($prop in ($OldObject | get-Member -MemberType Properties))
-        {
-            if ($oldObject.($prop.name).ID -ge 0)
-            {
-                $OldObject.($prop.name) = $OldObject.($prop.name).id
-            }elseif ($oldObject.($prop.name).value -ge 0)
-            {
-                $OldObject.($prop.name) = $OldObject.($prop.name).value
+        $OldObject = Get-nbobject -Resource $Resource/$id #-UnFlatten
+        foreach ($property in $OldObject._lookup) {
+            if ($OldObject."_$Property:id") {
+                $OldObject."$property" = $OldObject."_$Property:id"
+            }
+            else {
+                $Lookup += $property
+            }
+        }
+        $OldObject = $OldObject | Select-Object -Property * -ExcludeProperty _*
+    }
+    #put ids that are still on the object back and maybe pull
+    if ($Object._lookup) {
+        foreach ($property in $Object._lookup) {
+            if ($Object."_$Property:id") {
+                $Object."$property" = $Object."_$Property:id"
+            }
+            else {
+                $Lookup += $property
             }
         }
     }
+    if ($Object._CustomProperties) {
+        $CustomProperties += $Object._CustomProperties
+    }
+    #Automatically rip out all of the _ properties returned by get-nbobject
+    $object = $Object | Select-Object -Property * -ExcludeProperty _*
+
     $mapObject = @{custom_fields = @{}}
     :maploop foreach ($property in $object.psobject.properties) {
         $Name = $Property.name -replace '-' -replace ':'
