@@ -41,10 +41,10 @@ $script:Discovery = @{
 }
 
 task Clean {
-    if (Test-Path $script:Folders.Release) {
-        Remove-Item $script:Folders.Release -Recurse
+    if (Test-Path "$PSScriptRoot\Release") {
+        Remove-Item "$PSScriptRoot\Release" -Recurse -Force
     }
-    $null = New-Item $script:Folders.Release -ItemType Directory
+    $null = New-Item $script:Folders.Release -ItemType Directory -Force
 }
 
 task BuildDocs {
@@ -94,15 +94,21 @@ task Analyze -If { $script:Settings.ShouldAnalyze } {
 task Test -If { $script:Discovery.HasTests -and $script:Settings.ShouldTest } {
     Remove-Module -Name powerbox -ErrorAction SilentlyContinue
     Import-Module (Join-Path -Path $script:Folders.Release  -ChildPath "$moduleName.psd1")
+    $files = Get-ChildItem -Path $script:Folders.Release -Recurse -Include *.ps1 |
+        Where-Object name -NotLike '*test*' |
+        Where-Object name -notlike '*debug*' |
+        Where-Object name -notlike '*build*' |
+        Where-Object name -NotLike '*ResourceMap*'
     $PesterSettings = @{
-        OutputFormat = "NUnitXml"
-        OutputFile   = "TestResult.xml"
+        #OutputFormat = "NUnitXml"
+        #OutputFile   = "TestResult.xml"
         PassThru     = $True
         EnableExit   = $True
         PesterOption = @{
             IncludeVSCodeMarker = $true
         }
         Show         = "Fails"
+        CodeCoverage = $files
     }
     Invoke-Pester @PesterSettings
 }
