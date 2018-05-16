@@ -138,14 +138,23 @@ task BumpVersion {
         {
             $version = $version.Build++
         }
+        Remove-Module $ModuleName -force
+        $functions = Get-ChildItem Function:\ | select-Object -ExpandProperty Name
+        $publicFunctions = "$script:Folders.powershell\public"
+        Get-ChildItem $publicFunctions -Include *.ps1 |
+            ForEach-Object {. $_}
+        $functions = Get-ChildItem Function:\ |
+            Where-Object Name -NotIn $functions |
+            Select-Object -ExpandProperty Name
         $manifestUpdate = @{
             Path          = "$PSScriptRoot\module\$moduleName.psd1"
             ModuleVersion = $version
             ReleaseNotes  = $env:COMMIT_MESSAGE
+            FunctionsToExport = $functions
         }
         Update-ModuleManifest @manifestUpdate
         git add .
-        git commit -m "Update version to $version"
+        git commit -m "AUTO: Update version to $version"
         git push
         $env:REPO_VERSION = $version
     }
