@@ -131,7 +131,8 @@ task DoPublish {
 
 task BumpVersion {
     if ($env:CI) {
-        git checkout master
+        #TODO: Generalize this variable
+        git checkout $ENV:APPVEYOR_REPO_BRANCH
         $version = [version]$env:REPO_VERSION
         if ($ENV:manifest.version -eq $env:REPO_VERSION)
         {
