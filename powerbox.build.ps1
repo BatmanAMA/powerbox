@@ -5,18 +5,6 @@ param()
 
 $moduleName = 'powerbox'
 
-if ($env:CI -and $env:REPO_TAG -and $task -contains 'dopublish') {
-    git checkout master
-    $mainfestUpdate = @{
-        Path          = "$PSScriptRoot\module\$moduleName.psd1"
-        ModuleVersion = $env:REPO_VERSION
-        ReleaseNotes  = $env:COMMIT_MESSAGE
-    }
-    Update-ModuleManifest @mainfestUpdate
-    git add .
-    git commit -m "Update version to $env:REPO_VERSION"
-    git push
-}
 $manifest = Test-ModuleManifest -Path $PSScriptRoot\module\$moduleName.psd1 -ErrorAction Ignore -WarningAction Ignore
 $script:Settings = @{
     Name          = $moduleName
@@ -139,6 +127,27 @@ task DoPublish {
         exit 0
     }
     Publish-Module -Name $script:Folders.Release -NuGetApiKey $env:NUGET_API_KEY
+}
+
+task BumpVersion {
+    if ($env:CI) {
+        git checkout master
+        $version = [version]$env:REPO_VERSION
+        if ($ENV:manifest.version -eq $env:REPO_VERSION)
+        {
+            $version = $version.Build++
+        }
+        $manifestUpdate = @{
+            Path          = "$PSScriptRoot\module\$moduleName.psd1"
+            ModuleVersion = $version
+            ReleaseNotes  = $env:COMMIT_MESSAGE
+        }
+        Update-ModuleManifest @manifestUpdate
+        git add .
+        git commit -m "Update version to $version"
+        git push
+        $env:REPO_VERSION = $version
+    }
 }
 
 task Build -Jobs Clean, CopyToRelease
