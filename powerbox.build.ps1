@@ -5,18 +5,6 @@ param()
 
 $moduleName = 'powerbox'
 
-if ($env:CI -and $env:REPO_TAG -and $task -contains 'dopublish') {
-    git checkout master
-    $mainfestUpdate = @{
-        Path          = "$PSScriptRoot\module\$moduleName.psd1"
-        ModuleVersion = $env:REPO_VERSION
-        ReleaseNotes  = $env:COMMIT_MESSAGE
-    }
-    Update-ModuleManifest @mainfestUpdate
-    git add .
-    git commit -m "Update version to $env:REPO_VERSION"
-    git push
-}
 $manifest = Test-ModuleManifest -Path $PSScriptRoot\module\$moduleName.psd1 -ErrorAction Ignore -WarningAction Ignore
 $script:Settings = @{
     Name          = $moduleName
@@ -41,10 +29,10 @@ $script:Discovery = @{
 }
 
 task Clean {
-    if (Test-Path $script:Folders.Release) {
-        Remove-Item $script:Folders.Release -Recurse
+    if (Test-Path "$PSScriptRoot\Release") {
+        Remove-Item "$PSScriptRoot\Release" -Recurse -Force
     }
-    $null = New-Item $script:Folders.Release -ItemType Directory
+    $null = New-Item $script:Folders.Release -ItemType Directory -Force
 }
 
 task BuildDocs {
@@ -94,6 +82,11 @@ task Analyze -If { $script:Settings.ShouldAnalyze } {
 task Test -If { $script:Discovery.HasTests -and $script:Settings.ShouldTest } {
     Remove-Module -Name powerbox -ErrorAction SilentlyContinue
     Import-Module (Join-Path -Path $script:Folders.Release  -ChildPath "$moduleName.psd1")
+    $files = Get-ChildItem -Path $script:Folders.Release -Recurse -Include *.ps1 |
+        Where-Object name -NotLike '*test*' |
+        Where-Object name -notlike '*debug*' |
+        Where-Object name -notlike '*build*' |
+        Where-Object name -NotLike '*ResourceMap*'
     $PesterSettings = @{
         OutputFormat = "NUnitXml"
         OutputFile   = "TestResult.xml"
@@ -103,6 +96,7 @@ task Test -If { $script:Discovery.HasTests -and $script:Settings.ShouldTest } {
             IncludeVSCodeMarker = $true
         }
         Show         = "Fails"
+        CodeCoverage = $files
     }
     Invoke-Pester @PesterSettings
 }
@@ -133,6 +127,37 @@ task DoPublish {
         exit 0
     }
     Publish-Module -Name $script:Folders.Release -NuGetApiKey $env:NUGET_API_KEY
+}
+
+task BumpVersion {
+    if ($env:CI) {
+        #TODO: Generalize this variable
+        git checkout $ENV:APPVEYOR_REPO_BRANCH
+        $version = [version]$env:REPO_VERSION
+        if ($ENV:manifest.version -eq $env:REPO_VERSION)
+        {
+            $version = $version.Build++
+        }
+        Remove-Module $ModuleName -force -ErrorAction SilentlyContinue
+        $functions = Get-ChildItem Function:\ | select-Object -ExpandProperty Name
+        $publicFunctions = "$($script:Folders.powershell)\public"
+        Get-ChildItem $publicFunctions -Include *.ps1 -Recurse |
+            ForEach-Object {. $_}
+        $functions = Get-ChildItem Function:\ |
+            Where-Object Name -NotIn $functions |
+            Select-Object -ExpandProperty Name
+        $manifestUpdate = @{
+            Path          = "$PSScriptRoot\module\$moduleName.psd1"
+            ModuleVersion = $version
+            ReleaseNotes  = $env:COMMIT_MESSAGE
+            FunctionsToExport = $functions
+        }
+        Update-ModuleManifest @manifestUpdate
+        git add .
+        git commit -m "AUTO: Update version to $version"
+        git push
+        $env:REPO_VERSION = $version
+    }
 }
 
 task Build -Jobs Clean, CopyToRelease
