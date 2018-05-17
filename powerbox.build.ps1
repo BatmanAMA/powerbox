@@ -141,7 +141,7 @@ task BumpVersion {
         Remove-Module $ModuleName -force -ErrorAction SilentlyContinue
         $functions = Get-ChildItem Function:\ | select-Object -ExpandProperty Name
         $publicFunctions = "$($script:Folders.powershell)\public"
-        Get-ChildItem $publicFunctions -Include *.ps1 |
+        Get-ChildItem $publicFunctions -Include *.ps1 -Recurse |
             ForEach-Object {. $_}
         $functions = Get-ChildItem Function:\ |
             Where-Object Name -NotIn $functions |
