@@ -138,9 +138,9 @@ task BumpVersion {
         {
             $version = $version.Build++
         }
-        Remove-Module $ModuleName -force
+        Remove-Module $ModuleName -force -ErrorAction SilentlyContinue
         $functions = Get-ChildItem Function:\ | select-Object -ExpandProperty Name
-        $publicFunctions = "$script:Folders.powershell\public"
+        $publicFunctions = "$($script:Folders.powershell)\public"
         Get-ChildItem $publicFunctions -Include *.ps1 |
             ForEach-Object {. $_}
         $functions = Get-ChildItem Function:\ |
