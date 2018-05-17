@@ -14,8 +14,7 @@ install:
 - ps: Update-AppveyorBuild -Version $ENV:repo_version
 
 skip_commits:
-  message: ^AUTO:.*
-  message: ^SKIPBUILD:.*
+  message: ^(AUTO|SKIPBUILD):.*
 
 environment:
   nuget_api_key:
