@@ -136,6 +136,7 @@ task BumpVersion {
         #$ErrorActionPreference = 'silentlycontinue'
         git config --global user.email "batmanama@outlook.com"
         git config --global user.name "build"
+        git config --global core.safecrlf false
         git checkout $ENV:APPVEYOR_REPO_BRANCH -qf
         $version = [version]$env:REPO_VERSION
         if ($ENV:manifest.version -eq $env:REPO_VERSION) {
