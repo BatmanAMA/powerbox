@@ -12,11 +12,7 @@
 RootModule = 'powerbox.psm1'
 
 # Version number of this module.
-<<<<<<< Updated upstream
-ModuleVersion = '1.0.1'
-=======
 ModuleVersion = '1.3.0'
->>>>>>> Stashed changes
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -73,45 +69,45 @@ CLRVersion = '4.0'
 # NestedModules = @()
 
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
-FunctionsToExport = 'Connect-nbAPI', 'ConvertTo-nbID', 'Get-nbObject', 'Invoke-nbApi', 
-               'New-nbAggregate', 'New-nbCircuit', 'New-nbCircuitTermination', 
-               'New-nbCircuitType', 'New-nbCluster', 'New-nbClusterGroup', 
-               'New-nbClusterType', 'New-nbConnectedDevice', 
-               'New-nbConsoleConnection', 'New-nbConsolePort', 
-               'New-nbConsolePortTemplate', 'New-nbConsoleServerPort', 
-               'New-nbConsoleServerPortTemplate', 'New-nbDevice', 'New-nbDevicebay', 
-               'New-nbDevicebayTemplate', 'New-nbDeviceRole', 'New-nbDeviceType', 
-               'New-nbExportTemplate', 'New-nbGraph', 'New-nbImageAttachment', 
-               'New-nbInterface', 'New-nbInterfaceConnection', 
-               'New-nbInterfaceTemplate', 'New-nbInventoryItem', 'New-nbIpAddress', 
-               'New-nbManufacturer', 'New-nbObject', 'New-nbPlatform', 
-               'New-nbPowerConnection', 'New-nbPowerOutlet', 
-               'New-nbPowerOutletTemplate', 'New-nbPowerPort', 
-               'New-nbPowerPortTemplate', 'New-nbPrefix', 'New-nbProvider', 
-               'New-nbRack', 'New-nbRackGroup', 'New-nbRackReservation', 
-               'New-nbRackRole', 'New-nbRecentActivity', 'New-nbRegion', 
-               'New-nbReport', 'New-nbRir', 'New-nbRole', 'New-nbService', 'New-nbSite', 
-               'New-nbTenant', 'New-nbTenantGroup', 'New-nbTopologyMap', 
-               'New-nbVirtualChassis', 'New-nbVirtualMachine', 'New-nbVlan', 
-               'New-nbVlanGroup', 'New-nbVMInterface', 'New-nbVrf', 'Set-nbAggregate', 
-               'Set-nbCircuit', 'Set-nbCircuitTermination', 'Set-nbCircuitType', 
-               'Set-nbCluster', 'Set-nbClusterGroup', 'Set-nbClusterType', 
-               'Set-nbConnectedDevice', 'Set-nbConsoleConnection', 
-               'Set-nbConsolePort', 'Set-nbConsolePortTemplate', 
-               'Set-nbConsoleServerPort', 'Set-nbConsoleServerPortTemplate', 
-               'Set-nbDevice', 'Set-nbDevicebay', 'Set-nbDevicebayTemplate', 
-               'Set-nbDeviceRole', 'Set-nbDeviceType', 'Set-nbExportTemplate', 
-               'Set-nbGraph', 'Set-nbImageAttachment', 'Set-nbInterface', 
-               'Set-nbInterfaceConnection', 'Set-nbInterfaceTemplate', 
-               'Set-nbInventoryItem', 'Set-nbIpAddress', 'Set-nbManufacturer', 
-               'Set-nbObject', 'Set-nbPlatform', 'Set-nbPowerConnection', 
-               'Set-nbPowerOutlet', 'Set-nbPowerOutletTemplate', 'Set-nbPowerPort', 
-               'Set-nbPowerPortTemplate', 'Set-nbPrefix', 'Set-nbProvider', 
-               'Set-nbRack', 'Set-nbRackGroup', 'Set-nbRackReservation', 
-               'Set-nbRackRole', 'Set-nbRecentActivity', 'Set-nbRegion', 
-               'Set-nbReport', 'Set-nbRir', 'Set-nbRole', 'Set-nbService', 'Set-nbSite', 
-               'Set-nbTenant', 'Set-nbTenantGroup', 'Set-nbTopologyMap', 
-               'Set-nbVirtualChassis', 'Set-nbVirtualMachine', 'Set-nbVlan', 
+FunctionsToExport = 'Connect-nbAPI', 'ConvertTo-nbID', 'Get-nbObject', 'Invoke-nbApi',
+               'New-nbAggregate', 'New-nbCircuit', 'New-nbCircuitTermination',
+               'New-nbCircuitType', 'New-nbCluster', 'New-nbClusterGroup',
+               'New-nbClusterType', 'New-nbConnectedDevice',
+               'New-nbConsoleConnection', 'New-nbConsolePort',
+               'New-nbConsolePortTemplate', 'New-nbConsoleServerPort',
+               'New-nbConsoleServerPortTemplate', 'New-nbDevice', 'New-nbDevicebay',
+               'New-nbDevicebayTemplate', 'New-nbDeviceRole', 'New-nbDeviceType',
+               'New-nbExportTemplate', 'New-nbGraph', 'New-nbImageAttachment',
+               'New-nbInterface', 'New-nbInterfaceConnection',
+               'New-nbInterfaceTemplate', 'New-nbInventoryItem', 'New-nbIpAddress',
+               'New-nbManufacturer', 'New-nbObject', 'New-nbPlatform',
+               'New-nbPowerConnection', 'New-nbPowerOutlet',
+               'New-nbPowerOutletTemplate', 'New-nbPowerPort',
+               'New-nbPowerPortTemplate', 'New-nbPrefix', 'New-nbProvider',
+               'New-nbRack', 'New-nbRackGroup', 'New-nbRackReservation',
+               'New-nbRackRole', 'New-nbRecentActivity', 'New-nbRegion',
+               'New-nbReport', 'New-nbRir', 'New-nbRole', 'New-nbService', 'New-nbSite',
+               'New-nbTenant', 'New-nbTenantGroup', 'New-nbTopologyMap',
+               'New-nbVirtualChassis', 'New-nbVirtualMachine', 'New-nbVlan',
+               'New-nbVlanGroup', 'New-nbVMInterface', 'New-nbVrf', 'Set-nbAggregate',
+               'Set-nbCircuit', 'Set-nbCircuitTermination', 'Set-nbCircuitType',
+               'Set-nbCluster', 'Set-nbClusterGroup', 'Set-nbClusterType',
+               'Set-nbConnectedDevice', 'Set-nbConsoleConnection',
+               'Set-nbConsolePort', 'Set-nbConsolePortTemplate',
+               'Set-nbConsoleServerPort', 'Set-nbConsoleServerPortTemplate',
+               'Set-nbDevice', 'Set-nbDevicebay', 'Set-nbDevicebayTemplate',
+               'Set-nbDeviceRole', 'Set-nbDeviceType', 'Set-nbExportTemplate',
+               'Set-nbGraph', 'Set-nbImageAttachment', 'Set-nbInterface',
+               'Set-nbInterfaceConnection', 'Set-nbInterfaceTemplate',
+               'Set-nbInventoryItem', 'Set-nbIpAddress', 'Set-nbManufacturer',
+               'Set-nbObject', 'Set-nbPlatform', 'Set-nbPowerConnection',
+               'Set-nbPowerOutlet', 'Set-nbPowerOutletTemplate', 'Set-nbPowerPort',
+               'Set-nbPowerPortTemplate', 'Set-nbPrefix', 'Set-nbProvider',
+               'Set-nbRack', 'Set-nbRackGroup', 'Set-nbRackReservation',
+               'Set-nbRackRole', 'Set-nbRecentActivity', 'Set-nbRegion',
+               'Set-nbReport', 'Set-nbRir', 'Set-nbRole', 'Set-nbService', 'Set-nbSite',
+               'Set-nbTenant', 'Set-nbTenantGroup', 'Set-nbTopologyMap',
+               'Set-nbVirtualChassis', 'Set-nbVirtualMachine', 'Set-nbVlan',
                'Set-nbVlanGroup', 'Set-nbVMInterface', 'Set-nbVrf'
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
@@ -156,7 +152,7 @@ PrivateData = @{
         # ExternalModuleDependencies = ''
 
     } # End of PSData hashtable
-    
+
  } # End of PrivateData hashtable
 
 # HelpInfo URI of this module
