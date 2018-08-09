@@ -132,7 +132,9 @@ task DoPublish {
 task BumpVersion {
     if ($env:CI) {
         #TODO: Generalize this variable
-        git checkout $ENV:APPVEYOR_REPO_BRANCH
+        $ErrorActionPreference = 'silentlycontinue'
+        git checkout $ENV:APPVEYOR_REPO_BRANCH 2>$null
+        $ErrorActionPreference = 'stop'
         $version = [version]$env:REPO_VERSION
         if ($ENV:manifest.version -eq $env:REPO_VERSION)
         {
