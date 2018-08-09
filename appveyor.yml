@@ -38,7 +38,5 @@ after_test:
 before_deploy:
   - git config --global credential.helper store
   - ps: Add-Content "$HOME\.git-credentials" "https://$($env:access_token):x-oauth-basic@github.com`n"
-  - git config --global user.email "batmanama@outlook.com"
-  - git config --global user.name "build"
 deploy_script:
 - ps: invoke-build -task publish
