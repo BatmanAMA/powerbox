@@ -15,7 +15,7 @@ skip_branch_with_pr: true
 skip_commits:
   message: ^(AUTO|SKIPBUILD):.*
 
-environment:
+#environment:
 #  nuget_api_key:
 #    secure: TVDL0yRh7Mq8p85ZHiK1/bnBhxCfnKFogJqtuPKY39zJAzRUf8fHYTdVxbAbOEGU
 #  access_token:
