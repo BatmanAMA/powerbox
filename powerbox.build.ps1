@@ -155,7 +155,9 @@ task BumpVersion {
             FunctionsToExport = $functions
         }
         Update-ModuleManifest @manifestUpdate
+        $ErrorActionPreference = 'silentlycontinue'
         git add .
+        $ErrorActionPreference = 'stop'
         git commit -m "AUTO: Update version to $version"
         git push
         $env:REPO_VERSION = $version
