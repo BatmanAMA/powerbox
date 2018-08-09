@@ -130,14 +130,13 @@ task DoPublish {
 }
 
 task BumpVersion {
+    $ErrorActionPreference = 'Continue'
     if ($env:CI) {
         #TODO: Generalize this variable
-        $ErrorActionPreference = 'silentlycontinue'
-        git checkout $ENV:APPVEYOR_REPO_BRANCH 2>$null
-        $ErrorActionPreference = 'stop'
+        #$ErrorActionPreference = 'silentlycontinue'
+        git checkout $ENV:APPVEYOR_REPO_BRANCH -qf
         $version = [version]$env:REPO_VERSION
-        if ($ENV:manifest.version -eq $env:REPO_VERSION)
-        {
+        if ($ENV:manifest.version -eq $env:REPO_VERSION) {
             $version = $version.Build++
         }
         Remove-Module $ModuleName -force -ErrorAction SilentlyContinue
@@ -149,19 +148,28 @@ task BumpVersion {
             Where-Object Name -NotIn $functions |
             Select-Object -ExpandProperty Name
         $manifestUpdate = @{
-            Path          = "$PSScriptRoot\module\$moduleName.psd1"
-            ModuleVersion = $version
-            ReleaseNotes  = $env:COMMIT_MESSAGE
+            Path              = "$PSScriptRoot\module\$moduleName.psd1"
+            ModuleVersion     = $version
+            ReleaseNotes      = $env:COMMIT_MESSAGE
             FunctionsToExport = $functions
         }
         Update-ModuleManifest @manifestUpdate
-        $ErrorActionPreference = 'silentlycontinue'
-        git add .
-        $ErrorActionPreference = 'stop'
-        git commit -m "AUTO: Update version to $version"
+        try {
+            git add .
+        }
+        catch {
+            Write-Host $_.Exception.Message -ForegroundColor Red
+        }
+        try {
+            git commit -m "AUTO: Update version to $version" -q
+        }
+        catch {
+            Write-Host $_.Exception.Message -ForegroundColor Red
+        }
         git push
         $env:REPO_VERSION = $version
     }
+    $ErrorActionPreference = 'stop'
 }
 
 task Build -Jobs Clean, CopyToRelease
