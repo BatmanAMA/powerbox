@@ -114,13 +114,21 @@ function Invoke-nbApi {
             $Response
         }
         Catch {
-            Write-Error -Message ("NB API failure: {0}" -f $_.Exception.Message)
+            #$PSCmdlet.WriteError($_)
+            $PSCmdlet.ThrowTerminatingError(
+                [System.Management.Automation.ErrorRecord]::new(
+                    $_.Exception,#([system.web.httpunhandledexception]::CreateFromLastError($_)),
+                    'Netbox.Unhandled',
+                    [System.Management.Automation.ErrorCategory]::NotSpecified,
+                    $Resource
+                )
+            )
         }
         finally {
             #Clean up the insecure stuff
             [System.Runtime.InteropServices.Marshal]::ZeroFreeGlobalAllocUnicode($unmanagedString)
-            Remove-Variable unmanagedString -Force
-            Remove-Variable Params -Force
+            Remove-Variable unmanagedString -Force -ErrorAction SilentlyContinue
+            Remove-Variable Params -Force -ErrorAction SilentlyContinue
         }
     }
     end {
