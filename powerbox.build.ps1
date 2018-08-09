@@ -129,52 +129,6 @@ task DoPublish {
     Publish-Module -Name $script:Folders.Release -NuGetApiKey $env:NUGET_API_KEY
 }
 
-task BumpVersion {
-    $ErrorActionPreference = 'Continue'
-    if ($env:CI) {
-        #TODO: Generalize this variable
-        #$ErrorActionPreference = 'silentlycontinue'
-        git config --global user.email "batmanama@outlook.com"
-        git config --global user.name "build"
-        git config --global core.safecrlf false
-        git checkout $ENV:APPVEYOR_REPO_BRANCH -qf
-        $version = [version]$env:REPO_VERSION
-        if ($ENV:manifest.version -eq $env:REPO_VERSION) {
-            $version = $version.Build++
-        }
-        Remove-Module $ModuleName -force -ErrorAction SilentlyContinue
-        $functions = Get-ChildItem Function:\ | select-Object -ExpandProperty Name
-        $publicFunctions = "$($script:Folders.powershell)\public"
-        Get-ChildItem $publicFunctions -Include *.ps1 -Recurse |
-            ForEach-Object {. $_}
-        $functions = Get-ChildItem Function:\ |
-            Where-Object Name -NotIn $functions |
-            Select-Object -ExpandProperty Name
-        $manifestUpdate = @{
-            Path              = "$PSScriptRoot\module\$moduleName.psd1"
-            ModuleVersion     = $version
-            ReleaseNotes      = $env:COMMIT_MESSAGE
-            FunctionsToExport = $functions
-        }
-        Update-ModuleManifest @manifestUpdate
-        try {
-            git add .
-        }
-        catch {
-            Write-Host $_.Exception.Message -ForegroundColor Red
-        }
-        try {
-            git commit -m "AUTO: Update version to $version" -q
-        }
-        catch {
-            Write-Host $_.Exception.Message -ForegroundColor Red
-        }
-        git push
-        $env:REPO_VERSION = $version
-    }
-    $ErrorActionPreference = 'stop'
-}
-
 task Build -Jobs Clean, CopyToRelease
 
 task PreRelease -Jobs Build, Analyze, Test

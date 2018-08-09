@@ -6,27 +6,31 @@ install:
 - ps: Install-Module -Name PlatyPS -RequiredVersion 0.9.0
 - ps: #Generalize environment variables to allow build to more readily run in other build systems
 - ps: $ENV:COMMIT_MESSAGE = $ENV:APPVEYOR_REPO_COMMIT_MESSAGE + "`n" + $ENV:APPVEYOR_REPO_COMMIT_MESSAGE_EXTENDED
-- ps: $ENV:manifest_version = (Test-ModuleManifest -Path .\module\powerbox.psd1).version
-- ps: $ENV:repo_version = IF ($ENV:APPVEYOR_REPO_TAG_NAME){$ENV:APPVEYOR_REPO_TAG_NAME} else {$ENV:manifest_version}
-- ps: $ENV:REPO_TAG = $ENV:APPVEYOR_REPO_TAG
-- ps: if ($ENV:REPO_TAG) { Write-Host "Publishing version $($ENV:repo_version)" -foregroundcolor Magenta}
-- ps: Invoke-Build -task bumpversion
+- ps: $ENV:repo_version = (Test-ModuleManifest -Path .\module\powerbox.psd1).version
+- ps: if ($ENV:APPVEYOR_REPO_BRANCH -like 'master') { Write-Host "Publishing version $($ENV:repo_version)" -foregroundcolor Magenta}
 - ps: Update-AppveyorBuild -Version $ENV:repo_version
+- ps: $ENV:PR = [bool]$ENV:APPVEYOR_PULL_REQUEST_NUMBER
 
+skip_branch_with_pr: true
 skip_commits:
   message: ^(AUTO|SKIPBUILD):.*
 
 environment:
-  nuget_api_key:
-    secure: TVDL0yRh7Mq8p85ZHiK1/bnBhxCfnKFogJqtuPKY39zJAzRUf8fHYTdVxbAbOEGU
-  access_token:
-    secure: aT1eVpfAKwN03D9Lx+W6uPuotoW2gOqEisBtTpnrZx5rf1A54XztZTw+NbcA6lqQ
+#  nuget_api_key:
+#    secure: TVDL0yRh7Mq8p85ZHiK1/bnBhxCfnKFogJqtuPKY39zJAzRUf8fHYTdVxbAbOEGU
+#  access_token:
+#    secure: aT1eVpfAKwN03D9Lx+W6uPuotoW2gOqEisBtTpnrZx5rf1A54XztZTw+NbcA6lqQ
 
 build_script:
 - ps: invoke-build
 after_build:
-- ps: Compress-Archive -Path .\Release\powerbox -destination .\powerbox.zip
-- ps: Push-AppveyorArtifact .\powerbox.zip -FileName powerbox.zip
+- ps: Compress-Archive -Path .\Release\powerbox\$ENV:repo_version -destination .\powerbox.zip
+
+artifacts:
+  - path: powerbox.zip
+    name: module
+  - path: release\powerbox
+    name: module-folder
 
 test_script:
 - ps: invoke-build -task test
@@ -35,8 +39,17 @@ after_test:
      $wc = New-Object 'System.Net.WebClient'
      $wc.uploadfile("https://ci.appveyor.com/api/testresults/nunit3/$($env:APPVEYOR_JOB_ID)", (Resolve-Path .\testresult.xml))
 
-before_deploy:
-  - git config --global credential.helper store
-  - ps: Add-Content "$HOME\.git-credentials" "https://$($env:access_token):x-oauth-basic@github.com`n"
-deploy_script:
-- ps: invoke-build -task publish
+deploy:
+  - provider: Environment
+    name: gh-release
+    on:
+      branch: master
+  - provider: Environment
+    name: powershellgallery
+    on:
+      branch: master
+  - provider: Environment
+    name: gh-prerelease
+    on:
+      pr: true
+
