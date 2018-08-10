@@ -1,7 +1,6 @@
 version: 1.0.{build}
 skip_tags: true
 #skip_branch_with_pr: true
-image: WMF 5
 install:
 - ps: Install-Module -Name InvokeBuild -RequiredVersion 5.4.1
 - ps: Install-Module -Name PSScriptAnalyzer -RequiredVersion 1.16.1
