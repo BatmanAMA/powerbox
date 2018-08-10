@@ -48,7 +48,11 @@ function Invoke-nbApi {
     )
 
     begin {
-        if (!($Script:APIUrl) -and $PSCmdlet.ParameterSetName -ne 'Connect') {
+        if (
+            !($Script:APIUrl) -and
+            $PSCmdlet.ParameterSetName -ne 'Connect' -and
+            $HttpVerb -ne [Microsoft.PowerShell.Commands.WebRequestMethod]::Get
+            ) {
             $errorRecord = New-Object System.Management.Automation.ErrorRecord(
                 (New-Object Exception "You must connect (using Connect-nbApi) before using this module"),
                 'Not.Connected',

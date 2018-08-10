@@ -12,7 +12,7 @@
 RootModule = 'powerbox.psm1'
 
 # Version number of this module.
-ModuleVersion = '1.2.5'
+ModuleVersion = '1.2.6'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -69,7 +69,26 @@ CLRVersion = '4.0'
 # NestedModules = @()
 
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
-FunctionsToExport = 'Connect-nbAPI', 'ConvertTo-nbID', 'Get-nbObject', 'Invoke-nbApi', 
+FunctionsToExport = 'Connect-nbAPI', 'ConvertTo-nbID', 'Get-nbAggregate', 'Get-nbCircuit', 
+               'Get-nbCircuitTermination', 'Get-nbCircuitType', 'Get-nbCluster', 
+               'Get-nbClusterGroup', 'Get-nbClusterType', 'Get-nbConnectedDevice', 
+               'Get-nbConsoleConnection', 'Get-nbConsolePort', 
+               'Get-nbConsolePortTemplate', 'Get-nbConsoleServerPort', 
+               'Get-nbConsoleServerPortTemplate', 'Get-nbDevice', 'Get-nbDevicebay', 
+               'Get-nbDevicebayTemplate', 'Get-nbDeviceRole', 'Get-nbDeviceType', 
+               'Get-nbExportTemplate', 'Get-nbGraph', 'Get-nbImageAttachment', 
+               'Get-nbInterface', 'Get-nbInterfaceConnection', 
+               'Get-nbInterfaceTemplate', 'Get-nbInventoryItem', 'Get-nbIpAddress', 
+               'Get-nbManufacturer', 'Get-nbObject', 'Get-nbPlatform', 
+               'Get-nbPowerConnection', 'Get-nbPowerOutlet', 
+               'Get-nbPowerOutletTemplate', 'Get-nbPowerPort', 
+               'Get-nbPowerPortTemplate', 'Get-nbPrefix', 'Get-nbProvider', 
+               'Get-nbRack', 'Get-nbRackGroup', 'Get-nbRackReservation', 
+               'Get-nbRackRole', 'Get-nbRecentActivity', 'Get-nbRegion', 
+               'Get-nbReport', 'Get-nbRir', 'Get-nbRole', 'Get-nbService', 'Get-nbSite', 
+               'Get-nbTenant', 'Get-nbTenantGroup', 'Get-nbTopologyMap', 
+               'Get-nbVirtualChassis', 'Get-nbVirtualMachine', 'Get-nbVlan', 
+               'Get-nbVlanGroup', 'Get-nbVMInterface', 'Get-nbVrf', 'Invoke-nbApi', 
                'New-nbAggregate', 'New-nbCircuit', 'New-nbCircuitTermination', 
                'New-nbCircuitType', 'New-nbCluster', 'New-nbClusterGroup', 
                'New-nbClusterType', 'New-nbConnectedDevice', 
@@ -126,11 +145,12 @@ AliasesToExport = @()
 # ModuleList = @()
 
 # List of all files packaged with this module
-FileList = 'powerbox.psd1', 'powerbox.psm1', 'Version', 'Private\ResourceMap.ps1', 
+FileList = 'powerbox.psd1', 'powerbox.psm1', 'Version', 
+               'Private\CreateCommands.ps1', 'Private\ResourceMap.ps1', 
                'Public\Connect-nbApi.ps1', 'Public\ConvertTo-nbId.ps1', 
-               'Public\Get-nbObject.ps1', 'Public\Invoke-nbApi.ps1', 
-               'Public\New-nbObject.ps1', 'Public\New-nbx.ps1', 
-               'Public\Set-nbObject.ps1', 'Public\Set-nbx.ps1'
+               'Public\Get-nbObject.ps1', 'Public\Get-nbx.ps1', 
+               'Public\Invoke-nbApi.ps1', 'Public\New-nbObject.ps1', 
+               'Public\New-nbx.ps1', 'Public\Set-nbObject.ps1', 'Public\Set-nbx.ps1'
 
 # Private data to pass to the module specified in RootModule/ModuleToProcess. This may also contain a PSData hashtable with additional module metadata used by PowerShell.
 PrivateData = @{
