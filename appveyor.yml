@@ -56,6 +56,4 @@ deploy:
     description: Automatic Prerelease for $(APPVEYOR_REPO_BRANCH)
     prerelease: true
     force_update: true
-    on:
-      branch: /update.*/
 
