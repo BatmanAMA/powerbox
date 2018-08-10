@@ -29,8 +29,10 @@ test_script:
 - ps: invoke-build -task test
 after_test:
 - ps: |
+     $TestResult = (Resolve-Path .\testresult.xml)
+     $TestResult
      $wc = New-Object 'System.Net.WebClient'
-     $wc.uploadfile("https://ci.appveyor.com/api/testresults/nunit3/$($env:APPVEYOR_JOB_ID)", (Resolve-Path .\testresult.xml))
+     $wc.uploadfile("https://ci.appveyor.com/api/testresults/nunit3/$($env:APPVEYOR_JOB_ID)", $TestResult)
 
 deploy:
   - provider: Environment
