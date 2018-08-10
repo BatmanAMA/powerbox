@@ -11,6 +11,8 @@ install:
 - ps: Update-AppveyorBuild -Version $ENV:repo_version
 - ps: $ENV:PR = [bool]$ENV:APPVEYOR_PULL_REQUEST_NUMBER
 
+#not using tags so they are only created by AppVeyor
+skip_tags: true
 skip_branch_with_pr: true
 skip_commits:
   message: ^(AUTO|SKIPBUILD):.*
@@ -41,7 +43,7 @@ after_test:
 
 deploy:
   - provider: Environment
-    name: gh-release
+    name: gh
     on:
       branch: master
   - provider: Environment
@@ -49,7 +51,11 @@ deploy:
     on:
       branch: master
   - provider: Environment
-    name: gh-prerelease
+    name: gh
+    tag: prerelease-$(APPVEYOR_PROJECT_NAME)-$(APPVEYOR_BUILD_VERSION)
+    description: Automatic Prerelease for $(APPVEYOR_REPO_BRANCH)
+    prerelease: true
+    force_update: true
     on:
-      pr: true
+      branch: /update.*/
 
