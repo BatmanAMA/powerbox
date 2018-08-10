@@ -1,4 +1,7 @@
 version: 1.0.{build}
+skip_tags: true
+#skip_branch_with_pr: true
+image: WMF 5
 install:
 - ps: Install-Module -Name InvokeBuild -RequiredVersion 5.4.1
 - ps: Install-Module -Name PSScriptAnalyzer -RequiredVersion 1.16.1
@@ -11,17 +14,6 @@ install:
 - ps: Update-AppveyorBuild -Version $ENV:repo_version
 - ps: $ENV:PR = [bool]$ENV:APPVEYOR_PULL_REQUEST_NUMBER
 
-#not using tags so they are only created by AppVeyor
-skip_tags: true
-skip_branch_with_pr: true
-skip_commits:
-  message: ^(AUTO|SKIPBUILD):.*
-
-#environment:
-#  nuget_api_key:
-#    secure: TVDL0yRh7Mq8p85ZHiK1/bnBhxCfnKFogJqtuPKY39zJAzRUf8fHYTdVxbAbOEGU
-#  access_token:
-#    secure: aT1eVpfAKwN03D9Lx+W6uPuotoW2gOqEisBtTpnrZx5rf1A54XztZTw+NbcA6lqQ
 
 build_script:
 - ps: invoke-build
@@ -56,4 +48,11 @@ deploy:
     description: Automatic Prerelease for $(APPVEYOR_REPO_BRANCH)
     prerelease: true
     force_update: true
+    on:
+      branch: /update.*/
 
+#environment:
+#  nuget_api_key:
+#    secure: TVDL0yRh7Mq8p85ZHiK1/bnBhxCfnKFogJqtuPKY39zJAzRUf8fHYTdVxbAbOEGU
+#  access_token:
+#    secure: aT1eVpfAKwN03D9Lx+W6uPuotoW2gOqEisBtTpnrZx5rf1A54XztZTw+NbcA6lqQ
