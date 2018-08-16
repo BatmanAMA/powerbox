@@ -2,23 +2,34 @@
 .SYNOPSIS
     Gets an object from Netbox
 .DESCRIPTION
-    Automatically flattens netbox objects down to full things.
+    Retrieves objects from netbox and automatically flattens them and preps
+    them for further processing
 .EXAMPLE
     Get-nbObject -resource dcim/devices -id 22
 .EXAMPLE
     Get-nbObject -resource dcim/devices -query @{name='myserver'}
+.EXAMPLE
+    Get-nbObject myserver -resource dcim/devices
+.NOTES
+    If you want a better experience, try the other get-nb* commands - they are
+    all based off of this one, but don't require the resource argument
 #>
 function Get-nbObject {
-    [CmdletBinding()]
+    [CmdletBinding(DefaultParameterSetName='query')]
     Param (
+        # Simple string based search
+        [Parameter(ParameterSetName = 'query', Position = 0)]
+        [String]
+        $Search,
+
         # ID of the object to set
-        [Parameter(Mandatory = $true, ParameterSetName = 'id')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'id', Position = 0)]
         [Int]
         $Id,
 
         # Which resource to set
-        [Parameter(Mandatory = $true, ParameterSetName = 'id')]
-        [Parameter(Mandatory = $true, ParameterSetName = 'query')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'id', Position = 1)]
+        [Parameter(Mandatory = $true, ParameterSetName = 'query', Position = 1)]
         [String]
         [Alias("type")]
         $Resource,
@@ -28,21 +39,43 @@ function Get-nbObject {
         [HashTable]
         $Query,
 
-        # Passthrough to invoke-nbapi
-        [Parameter(ValueFromRemainingArguments = $true)]
-        [HashTable]
-        $AdditionalParams,
-
         # Don't flatten the object
+        [Parameter(ParameterSetName = 'id')]
+        [Parameter(ParameterSetName = 'query')]
         [Switch]
-        $UnFlatten
+        $UnFlatten,
+
+        # API Url for running without connecting
+        [Parameter(ParameterSetName = 'id')]
+        [Parameter(ParameterSetName = 'query')]
+        [uri]
+        $APIUrl
     )
+    $params = @{}
+    if ($AdditionalParams) {
+        $params += $AdditionalParams
+    }
     if ($PSCmdlet.ParameterSetName -eq 'id') {
-        $object = Invoke-nbApi -Resource $Resource/$id @AdditionalParams
+        $params['Resource'] = "$Resource/$id"
     }
     elseif ($PSCmdlet.ParameterSetName -eq 'query') {
-        $object = Invoke-nbApi -Resource $Resource -Query $Query @AdditionalParams
+        if (![String]::IsNullOrEmpty($Search))
+        {
+            if ($Query) {
+                $Query['s'] = $Search
+            } else {
+                $Query = @{
+                    s = $Search
+                }
+            }
+        }
+        $params['Resource'] = $Resource
+        $params['Query'] = $Query
     }
+    if ($APIUrl) {
+        $params['APIUrl'] = $APIUrl
+    }
+    $object = Invoke-nbApi @params
     if ($object.count) {
         $object = $object.results
     }

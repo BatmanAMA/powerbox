@@ -11,7 +11,7 @@ install:
 - ps: $ENV:repo_version = (Test-ModuleManifest -Path .\module\powerbox.psd1).version
 - ps: if ($ENV:APPVEYOR_REPO_BRANCH -like 'master') { Write-Host "Publishing version $($ENV:repo_version)" -foregroundcolor Magenta}
 - ps: Update-AppveyorBuild -Version $ENV:repo_version
-- ps: $ENV:PR = [bool]$ENV:APPVEYOR_PULL_REQUEST_NUMBER
+- ps: Set-AppveyorBuildVariable -Name pr -Value [bool]$ENV:APPVEYOR_PULL_REQUEST_NUMBER
 
 
 build_script:
@@ -27,12 +27,6 @@ artifacts:
 
 test_script:
 - ps: invoke-build -task test
-after_test:
-- ps: |
-     $TestResult = (Resolve-Path .\testresult.xml)
-     $TestResult
-     $wc = New-Object 'System.Net.WebClient'
-     $wc.uploadfile("https://ci.appveyor.com/api/testresults/nunit3/$($env:APPVEYOR_JOB_ID)", $TestResult)
 
 deploy:
   - provider: Environment
