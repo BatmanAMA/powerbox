@@ -29,8 +29,6 @@ after_build:
 artifacts:
   - path: powerbox.zip
     name: module
-  - path: release\powerbox
-    name: module-folder
 
 test_script:
 - ps: invoke-build -task test
@@ -45,7 +43,7 @@ deploy:
     on:
       branch: /update.*/
 
-deploy_script:
+after_deploy:
   - ps: Invoke-Build -task Publish
 
 
