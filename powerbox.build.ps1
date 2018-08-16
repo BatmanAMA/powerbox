@@ -99,7 +99,7 @@ task Test -If { $Discovery.HasTests -and $Settings.ShouldTest } {
         #OutputFormat = "NUnitXml"
         #OutputFile   = "TestResult.xml"
         PassThru     = $True
-        EnableExit   = $True
+        #EnableExit   = $True
         Show         = "None"
         CodeCoverage = $files
     }
@@ -136,6 +136,10 @@ task Test -If { $Discovery.HasTests -and $Settings.ShouldTest } {
             $test | Select-Object Result, Name
         }
     }
+    $cov = ($Tests.CodeCoverage.NumberOfCommandsExecuted /$Tests.CodeCoverage.NumberOfCommandsAnalyzed * 100)
+    [System.Math]::Round($cov,2)
+    "Code Coverage: $cov%"
+    if ($ENV:CI) {exit $tests.FailedCount}
 }
 
 task DoInstall {
@@ -153,18 +157,18 @@ task DoInstall {
         -Recurse
 }
 
-task DoPublish {
-    if (!$ENV:repo_tag -or !($env:NUGET_API_KEY)) {
-        [pscustomobject]@{
-            REPO_TAG    = $env:REPO_TAG
-            API_KEY     = [bool]$env:NUGET_API_KEY
-            AV_REPO_TAG = $ENV:APPVEYOR_REPO_TAG
-        }
-        Write-Host "Not publishing, tag your release to publish" -ForegroundColor Magenta
-        exit 0
-    }
-    Publish-Module -Name $Folders.Release -NuGetApiKey $env:NUGET_API_KEY
-}
+# task DoPublish {
+#     if (!$ENV:repo_tag -or !($env:NUGET_API_KEY)) {
+#         [pscustomobject]@{
+#             REPO_TAG    = $env:REPO_TAG
+#             API_KEY     = [bool]$env:NUGET_API_KEY
+#             AV_REPO_TAG = $ENV:APPVEYOR_REPO_TAG
+#         }
+#         Write-Host "Not publishing, tag your release to publish" -ForegroundColor Magenta
+#         exit 0
+#     }
+#     Publish-Module -Name $Folders.Release -NuGetApiKey $env:NUGET_API_KEY
+# }
 
 task Build -Jobs Clean, CopyToRelease
 
@@ -172,7 +176,7 @@ task PreRelease -Jobs Build, Analyze, Test
 
 task Install -Jobs PreRelease, DoInstall
 
-task Publish -Jobs PreRelease, DoPublish
+#task Publish -Jobs PreRelease, DoPublish
 
 task . Build
 
