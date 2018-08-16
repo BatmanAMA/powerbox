@@ -9,8 +9,12 @@ install:
 - ps: #Generalize environment variables to allow build to more readily run in other build systems
 - ps: Set-AppveyorBuildVariable -Name repo_version -Value (Test-ModuleManifest -Path .\module\powerbox.psd1).version
 - ps: if ($ENV:APPVEYOR_REPO_BRANCH -like 'master') { Add-AppveyorMessage "Publishing version $($ENV:repo_version)" -Category Information}
+- ps: if ($ENV:APPVEYOR_REPO_BRANCH -notlike 'master') {Set-AppveyorBuildVariable -Name repo_version -Value ("{0}-{1}" -f $ENV:REPO_VERSION, $ENV:APPVEYOR_REPO_BRANCH}
 - ps: Update-AppveyorBuild -Version $ENV:repo_version
 
+environment:
+  nuget_api_key:
+    secure: TVDL0yRh7Mq8p85ZHiK1/bnBhxCfnKFogJqtuPKY39zJAzRUf8fHYTdVxbAbOEGU
 
 build_script:
 - ps: invoke-build
@@ -32,18 +36,13 @@ deploy:
     on:
       branch: master
   - provider: Environment
-    name: powershellgallery
-    on:
-      branch: master
-  - provider: Environment
     name: prerelease
     on:
       branch: /update.*/
 
+deploy_script:
+  - ps: Invoke-Build -task Publish
+
+
 on_failure:
   ps: Update-AppveyorBuild -Version "FAILED-$($ENV:APPVEYOR_BUILD_VERSION)"
-#environment:
-#  nuget_api_key:
-#    secure: TVDL0yRh7Mq8p85ZHiK1/bnBhxCfnKFogJqtuPKY39zJAzRUf8fHYTdVxbAbOEGU
-#  access_token:
-#    secure: aT1eVpfAKwN03D9Lx+W6uPuotoW2gOqEisBtTpnrZx5rf1A54XztZTw+NbcA6lqQ

@@ -43,7 +43,7 @@ task BuildDocs {
     Remove-Module $moduleName -ErrorAction SilentlyContinue
     $modulePath = Join-Path -Path $Folders.Release  -ChildPath "$moduleName.psd1"
     Import-Module $modulePath -Force
-    $DocVersion = $Settings.Version.tostring() -replace '(\d*)\..*','$1.x'
+    $DocVersion = $Settings.Version.tostring() -replace '(\d*)\..*', '$1.x'
     $DocPath = '{0}\{1}' -f $Folders.Docs, $DocVersion
     if ($Discovery.HasDocs) {
         $doc = @{
@@ -53,8 +53,7 @@ task BuildDocs {
             LogPath               = "$($Folders.Logs)\docs.log"
         }
         $null = Update-MarkdownHelpModule @doc
-    }
-    else {
+    } else {
         $doc = @{
             Module                = $moduleName
             OutputFolder          = $DocPath
@@ -104,42 +103,46 @@ task Test -If { $Discovery.HasTests -and $Settings.ShouldTest } {
         CodeCoverage = $files
     }
     if (!$ENV:APPVEYOR) {
-         $PesterSettings['PesterOption'] = @{IncludeVSCodeMarker = $true}
-         #$PesterSettings['Show'] = "Fails"
+        $PesterSettings['PesterOption'] = @{IncludeVSCodeMarker = $true}
+        #$PesterSettings['Show'] = "Fails"
     }
     $Tests = (Invoke-Pester @PesterSettings)
-     foreach ($test in $Tests.TestResult) {
+    foreach ($test in $Tests.TestResult) {
         if ($ENV:APPVEYOR) {
+            $acceptable = 'None','Running','Passed','Failed','Ignored','Skipped','Inconclusive','NotFound',' Cancelled','NotRunnable'
             $appveyorTest = @{
                 # string
-                Name = $test.Name
+                Name            = $test.Name
                 # string
-                Framework = 'nunit3'
+                Framework       = 'nunit3'
                 # string
-                FileName = '.'
-                # None | Running | Passed | Failed | Ignored | Skipped | Inconclusive
-                # NotFound |  Cancelled | NotRunnable
-                Outcome         = $test.Result
+                FileName        = '.'
+                #must be in the list defined above
+                Outcome         = if ($test.Result -in $acceptable) {$test.result} else {'NotFound'}
                 #long
                 Duration        = [long]$test.Time.TotalMilliseconds
                 # string
-                ErrorMessage = $test.ErrorRecord.Exception.Message
+                ErrorMessage    = $test.ErrorRecord.Exception.Message
                 # string
                 ErrorStackTrace = $test.StackTrace
                 # string
-                StdOut = ("{0}: {1} - {2}" -f $test.Describe, $test.Name, $test.Result)
+                StdOut          = ("{0}: {1} - {2}" -f $test.Describe, $test.Name, $test.Result)
                 # string
-                StdErr = $test.FailureMessage
+                StdErr          = $test.FailureMessage
             }
             Add-AppveyorTest @appveyorTest -verbose
         } else {
             $test | Select-Object Result, Name
         }
     }
-    $cov = ($Tests.CodeCoverage.NumberOfCommandsExecuted /$Tests.CodeCoverage.NumberOfCommandsAnalyzed * 100)
-    [System.Math]::Round($cov,2)
+    $cov = ($Tests.CodeCoverage.NumberOfCommandsExecuted / $Tests.CodeCoverage.NumberOfCommandsAnalyzed * 100)
+    $cov = [System.Math]::Round($cov, 2)
     "Code Coverage: $cov%"
-    if ($ENV:CI) {exit $tests.FailedCount}
+    if ($ENV:AppVeyor) {
+        $Sev = if ($cov -lt 50) {"Error"} elseif ($cov -lt 100) {"Warning"} else {"Information"}
+        Add-AppveyorMessage "Code Coverage: $cov%" -Category $Sev
+        exit $tests.FailedCount
+    }
 }
 
 task DoInstall {
@@ -151,24 +154,23 @@ task DoInstall {
         $null = New-Item $installPath -ItemType Directory
     }
 
-    Copy-Item -Path ('{0}\*' -f $Folders.Release) `
-        -Destination $installPath `
-        -Force `
-        -Recurse
+    $Install = @{
+        Path        = ('{0}\*' -f $Folders.Release)
+        Destination = $installPath
+        Force       = $true
+        Recurse     = $true
+    }
+    Copy-Item @install
 }
 
-# task DoPublish {
-#     if (!$ENV:repo_tag -or !($env:NUGET_API_KEY)) {
-#         [pscustomobject]@{
-#             REPO_TAG    = $env:REPO_TAG
-#             API_KEY     = [bool]$env:NUGET_API_KEY
-#             AV_REPO_TAG = $ENV:APPVEYOR_REPO_TAG
-#         }
-#         Write-Host "Not publishing, tag your release to publish" -ForegroundColor Magenta
-#         exit 0
-#     }
-#     Publish-Module -Name $Folders.Release -NuGetApiKey $env:NUGET_API_KEY
-# }
+task DoPublish {
+    $Publish = @{
+        Path         = $Folders.Release
+        NuGetApiKey  = $env:NUGET_API_KEY
+        ReleaseNotes = ($ENV:APPVEYOR_REPO_COMMIT_MESSAGE + "`n" + $ENV:APPVEYOR_REPO_COMMIT_MESSAGE_EXTENDED)
+    }
+    Publish-Module @Publish
+}
 
 task Build -Jobs Clean, CopyToRelease
 
