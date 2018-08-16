@@ -191,8 +191,8 @@ task DoInstall {
 }
 
 task DoPublish {
-    if ($ENV:CI -and $ENV:APPVEYOR_REPO_BRANCH_NAME -ne 'master') {
-        Add-AppveyorMessage "Not publishing (branch is $($ENV:APPVEYOR_REPO_BRANCH_NAME))" -Category Information
+    if ($ENV:CI -and $ENV:APPVEYOR_REPO_BRANCH -ne 'master') {
+        Add-AppveyorMessage "Not publishing (branch is $($ENV:APPVEYOR_REPO_BRANCH))" -Category Information
         exit 0
     }
     $error.Clear()
