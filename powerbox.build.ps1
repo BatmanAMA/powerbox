@@ -84,7 +84,6 @@ task Analyze -If { $Settings.ShouldAnalyze } {
         Recurse  = $true
     }
     $analyzer = Invoke-ScriptAnalyzer @Analyzer
-
     foreach ($Rule in $analyzer) {
         if ($ENV:APPVEYOR) {
             $appveyorTest = @{
@@ -210,6 +209,7 @@ task DoPublish {
     }
     Publish-Module @Publish
 }
+
 
 task Build -Jobs Clean, CopyToRelease
 
