@@ -11,7 +11,6 @@ install:
 - ps: $ENV:repo_version = (Test-ModuleManifest -Path .\module\powerbox.psd1).version
 - ps: if ($ENV:APPVEYOR_REPO_BRANCH -like 'master') { Write-Host "Publishing version $($ENV:repo_version)" -foregroundcolor Magenta}
 - ps: Update-AppveyorBuild -Version $ENV:repo_version
-- ps: Set-AppveyorBuildVariable -Name pr -Value [bool]$ENV:APPVEYOR_PULL_REQUEST_NUMBER
 
 
 build_script:
@@ -46,6 +45,8 @@ deploy:
     on:
       branch: /update.*/
 
+on_failure:
+  ps: Update-AppveyorBuild -Version "FAILED-$($ENV:APPVEYOR_BUILD_VERSION)"
 #environment:
 #  nuget_api_key:
 #    secure: TVDL0yRh7Mq8p85ZHiK1/bnBhxCfnKFogJqtuPKY39zJAzRUf8fHYTdVxbAbOEGU
