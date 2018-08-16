@@ -43,7 +43,8 @@ task BuildDocs {
     Remove-Module $moduleName -ErrorAction SilentlyContinue
     $modulePath = Join-Path -Path $Folders.Release  -ChildPath "$moduleName.psd1"
     Import-Module $modulePath -Force
-    $DocPath = '{0}\{1}' -f $Folders.Docs, $Settings.Version
+    $DocVersion = $Settings.Version.tostring() -replace '(\d*)\..*','$1.x'
+    $DocPath = '{0}\{1}' -f $Folders.Docs, $DocVersion
     if ($Discovery.HasDocs) {
         $doc = @{
             Path                  = $docPath
