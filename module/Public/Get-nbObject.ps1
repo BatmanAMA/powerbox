@@ -62,7 +62,7 @@ function Get-nbObject {
         if (![String]::IsNullOrEmpty($Search))
         {
             if ($Query) {
-                $Query['s'] = $Search
+                $Query['q'] = $Search
             } else {
                 $Query = @{
                     s = $Search
