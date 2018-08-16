@@ -9,7 +9,7 @@ install:
 - ps: #Generalize environment variables to allow build to more readily run in other build systems
 - ps: Set-AppveyorBuildVariable -Name repo_version -Value (Test-ModuleManifest -Path .\module\powerbox.psd1).version
 - ps: if ($ENV:APPVEYOR_REPO_BRANCH -like 'master') { Add-AppveyorMessage "Publishing version $($ENV:repo_version)" -Category Information}
-- ps: if ($ENV:APPVEYOR_REPO_BRANCH -notlike 'master') {Set-AppveyorBuildVariable -Name repo_version -Value ("{0}-{1}" -f $ENV:REPO_VERSION, $ENV:APPVEYOR_REPO_BRANCH}
+- ps: if ($ENV:APPVEYOR_REPO_BRANCH -notlike 'master') {Set-AppveyorBuildVariable -Name repo_version -Value ("{0}-{1}" -f $ENV:REPO_VERSION, $ENV:APPVEYOR_REPO_BRANCH)}
 - ps: Update-AppveyorBuild -Version $ENV:repo_version
 
 environment:
