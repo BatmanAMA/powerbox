@@ -1,0 +1,61 @@
+<#
+.SYNOPSIS
+    Gets a |short| from Netbox
+.DESCRIPTION
+    Rerieves |short| objects from netbox and automatically flattens them and
+    preps them for further processing
+.EXAMPLE
+    Get-nb|short| -id 22
+.EXAMPLE
+    Get-nb|short| -query @{name='my|short|'}
+.EXAMPLE
+    Get-nb|short| my|short|
+#>
+Function Get-nb|short| {
+    [CmdletBinding(DefaultParameterSetName = 'query')]
+    Param (
+        # Simple string based search
+        [Parameter(ParameterSetName = 'query', Position = 0)]
+        [String]
+        $Search,
+
+        # ID of the object to set
+        [Parameter(Mandatory = $true, ParameterSetName = 'id', Position = 0)]
+        [Int]
+        $Id,
+
+        # Query to find what you want
+        [Parameter(ParameterSetName = 'query')]
+        [HashTable]
+        $Query,
+
+        # Don't flatten the object
+        [Parameter(ParameterSetName = 'id')]
+        [Parameter(ParameterSetName = 'query')]
+        [Switch]
+        $UnFlatten,
+
+        # API Url for running without connecting
+        [Parameter(ParameterSetName = 'id')]
+        [Parameter(ParameterSetName = 'query')]
+        [uri]
+        $APIUrl
+    )
+    $forward = @{
+        UnFlatten = $UnFlatten
+    }
+    if ($AdditionalParams) {
+        $forward += $AdditionalParams
+    }
+    if ($PSCmdlet.ParameterSetName -eq 'id') {
+        $forward['Resource'] = "|long|/$id"
+    } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
+        $forward['Resource'] = "|long|"
+        $forward['Query'] = $Query
+        $forward['Search'] = $search
+    }
+    if ($APIUrl) {
+        $forward['APIUrl'] = $APIUrl
+    }
+    Get-nbObject @forward
+}
