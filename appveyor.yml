@@ -7,9 +7,8 @@ install:
 - ps: Install-Module -Name Pester -RequiredVersion 4.3.1
 - ps: Install-Module -Name PlatyPS -RequiredVersion 0.9.0
 - ps: #Generalize environment variables to allow build to more readily run in other build systems
-- ps: $ENV:COMMIT_MESSAGE = $ENV:APPVEYOR_REPO_COMMIT_MESSAGE + "`n" + $ENV:APPVEYOR_REPO_COMMIT_MESSAGE_EXTENDED
-- ps: $ENV:repo_version = (Test-ModuleManifest -Path .\module\powerbox.psd1).version
-- ps: if ($ENV:APPVEYOR_REPO_BRANCH -like 'master') { Write-Host "Publishing version $($ENV:repo_version)" -foregroundcolor Magenta}
+- ps: Set-AppveyorBuildVariable -Name $ENV:repo_version -Value (Test-ModuleManifest -Path .\module\powerbox.psd1).version
+- ps: if ($ENV:APPVEYOR_REPO_BRANCH -like 'master') { Add-AppveyorMessage "Publishing version $($ENV:repo_version)" -Category Information}
 - ps: Update-AppveyorBuild -Version $ENV:repo_version
 
 
@@ -37,11 +36,7 @@ deploy:
     on:
       branch: master
   - provider: Environment
-    name: gh
-    tag: prerelease-$(APPVEYOR_PROJECT_NAME)-$(APPVEYOR_BUILD_VERSION)
-    description: Automatic Prerelease for $(APPVEYOR_REPO_BRANCH)
-    prerelease: true
-    force_update: true
+    name: prerelease
     on:
       branch: /update.*/
 

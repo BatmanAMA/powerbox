@@ -72,5 +72,16 @@ Describe 'Get wrapper functions' {
         {&$function} | should -Not -Throw
         Assert-VerifiableMock
     }
+    it "should map <function> -id 0 to <resourcename>/0" -TestCases $testCases {
+        param(
+            $function,
+            $resourceName
+        )
+        Mock -CommandName Invoke-nbApi -MockWith {} -ModuleName powerbox
+        $filter = [scriptblock]::Create("`$Resource -eq '$resourceName/0'")
+        Mock -CommandName Get-NbObject -MockWith {} -ModuleName powerbox -Verifiable -ParameterFilter $filter
+        {&$function -id 0} | should -Not -Throw
+        Assert-VerifiableMock
+    }
 }
 
