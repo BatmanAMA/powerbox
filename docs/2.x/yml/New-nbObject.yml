@@ -1,0 +1,74 @@
+﻿examples:
+- name: EXAMPLE 1
+  preCode: ''
+  code: $lookup = @{
+  postCode: device_type='dcim/device-types'     device_role='dcim/device-roles'     site='organization/sites'     status='dcim/_choices' } $device = @{     name = 'example'     serial = 'aka123457'     device_type = 'dl380-g9'     device_role = 'oracle'     site = 'chicago'     status = 'active' } New-nbObject -lookup $lookup -object $device
+inputs: []
+links: []
+module:
+  name: powerbox
+name: New-nbObject
+notes: ''
+optionalParameters:
+- name: CustomProperties
+  aliases: []
+  defaultValue: None
+  description: List of custom properties
+  parameterValueGroup: []
+  pipelineInput: False
+  position: Named
+  type: String[]
+- name: Lookup
+  aliases: []
+  defaultValue: None
+  description: List of properties to lookup
+  parameterValueGroup: []
+  pipelineInput: False
+  position: Named
+  type: Hashtable
+outputs: []
+requiredParameters:
+- name: APIUrl
+  aliases: []
+  defaultValue: None
+  description: AccessKey for this API
+  parameterValueGroup: []
+  pipelineInput: False
+  position: Named
+  type: Uri
+- name: Object
+  aliases: []
+  defaultValue: None
+  description: you can specify properties as arguments to this command
+  parameterValueGroup: []
+  pipelineInput: False
+  position: Named
+  type: Object
+- name: Resource
+  aliases:
+  - type
+  defaultValue: None
+  description: object/resource type
+  parameterValueGroup: []
+  pipelineInput: False
+  position: Named
+  type: String
+- name: Token
+  aliases: []
+  defaultValue: None
+  description: AccessId for this API
+  parameterValueGroup: []
+  pipelineInput: False
+  position: Named
+  type: SecureString
+remarks: This should handle mapping a simple hashtable of values and looking up any references.
+summary: Creates a new device in netbox
+syntaxes:
+- parameterValueGroup: Connect
+  parameters:
+  - APIUrl
+  - CustomProperties
+  - Lookup
+  - Object
+  - Resource
+  - Token
