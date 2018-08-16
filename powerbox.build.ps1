@@ -105,32 +105,35 @@ task Test -If { $Discovery.HasTests -and $Settings.ShouldTest } {
     }
     if (!$ENV:APPVEYOR) {
          $PesterSettings['PesterOption'] = @{IncludeVSCodeMarker = $true}
-         $PesterSettings['Show'] = "Fails"
+         #$PesterSettings['Show'] = "Fails"
     }
-    (Invoke-Pester @PesterSettings).TestResult | ForEach-Object {
-        $appveyorTest = @{
-            # string
-            Name = $_.Name
-            # string
-            Framework = 'nunit3'
-            # string
-            FileName = '.'
-            # None | Running | Passed | Failed | Ignored | Skipped | Inconclusive
-            # NotFound |  Cancelled | NotRunnable
-            Outcome         = $_.Result
-            #long
-            Duration        = [long]$tests.TestResult[0].Time.TotalMilliseconds
-            # string
-            ErrorMessage = $_.ErrorRecord.Exception.Message
-            # string
-            ErrorStackTrace = $_.StackTrace
-            # string
-            StdOut = ("{0}: {1} - {2}" -f $_.Describe, $_.Name, $_.Result)
-            # string
-            StdErr = $_.FailureMessage
-        }
+    $Tests = (Invoke-Pester @PesterSettings)
+     foreach ($test in $Tests.TestResult) {
         if ($ENV:APPVEYOR) {
-         Add-AppveyorTest @appveyorTest
+            $appveyorTest = @{
+                # string
+                Name = $test.Name
+                # string
+                Framework = 'nunit3'
+                # string
+                FileName = '.'
+                # None | Running | Passed | Failed | Ignored | Skipped | Inconclusive
+                # NotFound |  Cancelled | NotRunnable
+                Outcome         = $test.Result
+                #long
+                Duration        = [long]$test.Time.TotalMilliseconds
+                # string
+                ErrorMessage = $test.ErrorRecord.Exception.Message
+                # string
+                ErrorStackTrace = $test.StackTrace
+                # string
+                StdOut = ("{0}: {1} - {2}" -f $test.Describe, $test.Name, $test.Result)
+                # string
+                StdErr = $test.FailureMessage
+            }
+            Add-AppveyorTest @appveyorTest -verbose
+        } else {
+            $test | Select-Object Result, Name
         }
     }
 }
