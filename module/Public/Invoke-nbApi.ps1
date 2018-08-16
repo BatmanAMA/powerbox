@@ -47,7 +47,7 @@ function Invoke-nbApi {
         } else {
             $False
         }
-        if (!$get -and !$_apiurl -or !$Script:Token) {
+        if (!$get -and (!$_apiurl -or !$Script:Token)) {
             $errorRecord = New-Object System.Management.Automation.ErrorRecord(
                 (New-Object Exception "You must connect (using Connect-nbApi) before using this module"),
                 'Not.Connected',
