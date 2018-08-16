@@ -83,7 +83,34 @@ task Analyze -If { $Settings.ShouldAnalyze } {
         Settings = "$cwd\ScriptAnalyzerSettings.psd1"
         Recurse  = $true
     }
-    Invoke-ScriptAnalyzer @Analyzer
+    $analyzer = Invoke-ScriptAnalyzer @Analyzer
+
+    foreach ($Rule in $analyzer) {
+        if ($ENV:APPVEYOR) {
+            $appveyorTest = @{
+                # string
+                Name            = $Rule.RuleName
+                # string
+                Framework       = 'nunit3'
+                # string
+                FileName        = $rule.ScriptName
+                Outcome         = "Failed"
+                #long
+                Duration        = ($rule.Line * $rule.Column)
+                # string
+                ErrorMessage    = $Rule.Message
+                # string
+                ErrorStackTrace = $Rule.Extent
+                # string
+                StdOut          = $Rule.SuggestedCorrections
+                # string
+                StdErr          = $Rule.Severity
+            }
+            Add-AppveyorTest @appveyorTest -verbose
+        } else {
+            $Rule | Select-Object Severity, RuleName
+        }
+    }
 }
 
 task Test -If { $Discovery.HasTests -and $Settings.ShouldTest } {
@@ -164,10 +191,22 @@ task DoInstall {
 }
 
 task DoPublish {
+    if ($ENV:CI -and $ENV:APPVEYOR_REPO_BRANCH_NAME -ne 'master') {
+        Add-AppveyorMessage "Not publishing (branch is $($ENV:APPVEYOR_REPO_BRANCH_NAME))" -Category Information
+        exit 0
+    }
+    $error.Clear()
+    $Rel = @{
+        Path = Join-path -path $Folders.Release -ChildPath "$moduleName.psd1"
+        ReleaseNotes = ($ENV:APPVEYOR_REPO_COMMIT_MESSAGE + "`n" + $ENV:APPVEYOR_REPO_COMMIT_MESSAGE_EXTENDED)
+    }
+    Update-ModuleManifest @rel
     $Publish = @{
         Path         = $Folders.Release
         NuGetApiKey  = $env:NUGET_API_KEY
-        ReleaseNotes = ($ENV:APPVEYOR_REPO_COMMIT_MESSAGE + "`n" + $ENV:APPVEYOR_REPO_COMMIT_MESSAGE_EXTENDED)
+    }
+    if (!$ENV:CI) {
+        $Publish['whatif'] = $true
     }
     Publish-Module @Publish
 }
@@ -178,7 +217,7 @@ task PreRelease -Jobs Build, Analyze, Test
 
 task Install -Jobs PreRelease, DoInstall
 
-#task Publish -Jobs PreRelease, DoPublish
+task Publish -Jobs Build, DoPublish
 
 task . Build
 
