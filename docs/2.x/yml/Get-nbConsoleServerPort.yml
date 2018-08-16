@@ -1,0 +1,76 @@
+﻿examples:
+- name: EXAMPLE 1
+  preCode: ''
+  code: Get-nbConsoleServerPort -id 22
+  postCode: ''
+- name: EXAMPLE 2
+  preCode: ''
+  code: Get-nbConsoleServerPort -query @{name='myConsoleServerPort'}
+  postCode: ''
+- name: EXAMPLE 3
+  preCode: ''
+  code: Get-nbConsoleServerPort myConsoleServerPort
+  postCode: ''
+inputs: []
+links: []
+module:
+  name: powerbox
+name: Get-nbConsoleServerPort
+notes: ''
+optionalParameters:
+- name: APIUrl
+  aliases: []
+  defaultValue: None
+  description: API Url for running without connecting
+  parameterValueGroup: []
+  pipelineInput: False
+  position: Named
+  type: Uri
+- name: Query
+  aliases: []
+  defaultValue: None
+  description: Query to find what you want
+  parameterValueGroup: []
+  pipelineInput: False
+  position: Named
+  type: Hashtable
+- name: Search
+  aliases: []
+  defaultValue: None
+  description: Simple string based search
+  parameterValueGroup: []
+  pipelineInput: False
+  position: 1
+  type: String
+- name: UnFlatten
+  aliases: []
+  defaultValue: False
+  description: Don't flatten the object
+  parameterValueGroup: []
+  pipelineInput: False
+  position: Named
+  type: SwitchParameter
+outputs: []
+requiredParameters:
+- name: Id
+  aliases: []
+  defaultValue: 0
+  description: ID of the object to set
+  parameterValueGroup: []
+  pipelineInput: False
+  position: 1
+  type: Int32
+remarks: Rerieves ConsoleServerPort objects from netbox and automatically flattens them and preps them for further processing
+summary: Gets a ConsoleServerPort from Netbox
+syntaxes:
+- parameterValueGroup: id
+  parameters:
+  - Id
+  - APIUrl
+  - UnFlatten
+- parameterValueGroup: query
+  parameters:
+  - Search
+  - APIUrl
+  - Query
+  - UnFlatten

@@ -1,0 +1,67 @@
+﻿examples:
+- name: EXAMPLE 1
+  preCode: ''
+  code: $lookup = @{
+  postCode: device_type='dcim/device-types'     device_role='dcim/device-roles'     site='organization/sites'     status='dcim/_choices' } $Report = @{     name = 'example'     serial = 'aka123457'     device_type = 'dl380-g9'     device_role = 'oracle'     site = 'chicago'     status = 'active' } Set-nbReport -id 22 -lookup $lookup $Report
+- name: EXAMPLE 2
+  preCode: ''
+  code: Get-nbReport | Foreach {$_.site = 'Seattle'; $_} | Set-nbReport
+  postCode: ''
+inputs: []
+links: []
+module:
+  name: powerbox
+name: Set-nbReport
+notes: ''
+optionalParameters:
+- name: CustomProperties
+  aliases: []
+  defaultValue: None
+  description: List of custom properties
+  parameterValueGroup: []
+  pipelineInput: False
+  position: 3
+  type: String[]
+- name: Id
+  aliases: []
+  defaultValue: 0
+  description: ID of the Report to set
+  parameterValueGroup: []
+  pipelineInput: False
+  position: 2
+  type: Int32
+- name: Lookup
+  aliases: []
+  defaultValue: None
+  description: List of properties to lookup
+  parameterValueGroup: []
+  pipelineInput: False
+  position: 4
+  type: Hashtable
+- name: Patch
+  aliases: []
+  defaultValue: False
+  description: Looks up the current object and only sets changed properties
+  parameterValueGroup: []
+  pipelineInput: False
+  position: Named
+  type: SwitchParameter
+outputs: []
+requiredParameters:
+- name: object
+  aliases: []
+  defaultValue: None
+  description: The Report to set
+  parameterValueGroup: []
+  pipelineInput: False
+  position: 1
+  type: Object
+remarks: This should handle mapping a simple hashtable of values and looking up any references.
+summary: Sets properties on a Report in Netbox
+syntaxes:
+- parameters:
+  - object
+  - Id
+  - CustomProperties
+  - Lookup
+  - Patch
