@@ -1,30 +1,49 @@
 version: 1.0.{build}
+skip_tags: true
+#skip_branch_with_pr: true
 install:
 - ps: Install-Module -Name InvokeBuild -RequiredVersion 5.4.1
 - ps: Install-Module -Name PSScriptAnalyzer -RequiredVersion 1.16.1
 - ps: Install-Module -Name Pester -RequiredVersion 4.3.1
 - ps: Install-Module -Name PlatyPS -RequiredVersion 0.9.0
-- ps: $ENV:COMMIT_MESSAGE = $ENV:APPVEYOR_REPO_COMMIT_MESSAGE + "`n" + $ENV:APPVEYOR_REPO_COMMIT_MESSAGE_EXTENDED
-- ps: $ENV:repo_version = IF ($ENV:APPVEYOR_REPO_TAG_NAME){$ENV:APPVEYOR_REPO_TAG_NAME} else {$ENV:APPVEYOR_BUILD_VERSION}
-- ps: $ENV:REPO_TAG = $ENV:APPVEYOR_REPO_TAG
-- ps: if ($ENV:REPO_TAG) { Write-Host "Publishing version $($ENV:repo_version)" -foregroundcolor Magenta}
+- ps: #Generalize environment variables to allow build to more readily run in other build systems
+- ps: Set-AppveyorBuildVariable -Name repo_version -Value (Test-ModuleManifest -Path .\module\powerbox.psd1).version
+- ps: if ($ENV:APPVEYOR_REPO_BRANCH -like 'master') { Add-AppveyorMessage "Publishing version $($ENV:repo_version)" -Category Information}
+- ps: Update-AppveyorBuild -Version $ENV:repo_version
 
-environment:
-  nuget_api_key:
-    secure: TVDL0yRh7Mq8p85ZHiK1/bnBhxCfnKFogJqtuPKY39zJAzRUf8fHYTdVxbAbOEGU
-  access_token:
-    secure: aT1eVpfAKwN03D9Lx+W6uPuotoW2gOqEisBtTpnrZx5rf1A54XztZTw+NbcA6lqQ
 
 build_script:
 - ps: invoke-build
+after_build:
+- ps: Compress-Archive -Path .\Release\powerbox\$ENV:repo_version -destination .\powerbox.zip
+
+artifacts:
+  - path: powerbox.zip
+    name: module
+  - path: release\powerbox
+    name: module-folder
+
 test_script:
 - ps: invoke-build -task test
-after_test:
-- ps: Invoke-RestMethod -Uri "https://ci.appveyor.com/api/testresults/nunit3/$($env:APPVEYOR_JOB_ID)" -Method POST -InFile .\testresult.xml -ContentType multipart/form-data
-deploy_script:
-- ps: invoke-build -task publish
-before_deploy:
-  - git config --global credential.helper store
-  - ps: Add-Content "$HOME\.git-credentials" "https://$($env:access_token):x-oauth-basic@github.com`n"
-  - git config --global user.email "batmanama@outlook.com"
-  - git config --global user.name "build"
+
+deploy:
+  - provider: Environment
+    name: gh
+    on:
+      branch: master
+  - provider: Environment
+    name: powershellgallery
+    on:
+      branch: master
+  - provider: Environment
+    name: prerelease
+    on:
+      branch: /update.*/
+
+on_failure:
+  ps: Update-AppveyorBuild -Version "FAILED-$($ENV:APPVEYOR_BUILD_VERSION)"
+#environment:
+#  nuget_api_key:
+#    secure: TVDL0yRh7Mq8p85ZHiK1/bnBhxCfnKFogJqtuPKY39zJAzRUf8fHYTdVxbAbOEGU
+#  access_token:
+#    secure: aT1eVpfAKwN03D9Lx+W6uPuotoW2gOqEisBtTpnrZx5rf1A54XztZTw+NbcA6lqQ

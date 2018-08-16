@@ -21,27 +21,46 @@
     New-nbObject -lookup $lookup -object $device
 #>
 function New-nbObject {
-    [CmdletBinding()]
+    [CmdletBinding(DefaultParameterSetName = 'Normal')]
     Param (
         # object/resource type
-        [parameter(Mandatory=$true)]
+        [Parameter(Mandatory = $true, ParameterSetName = 'Normal')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'Connect')]
         [String]
-        [Alias("type","object")]
+        [Alias("type")]
         $Resource,
 
         # List of custom properties
-        [Parameter()]
+        [Parameter(ParameterSetName = 'Normal')]
+        [Parameter(ParameterSetName = 'Connect')]
         [string[]]
         $CustomProperties,
 
         #List of properties to lookup
-        [parameter()]
+        [Parameter(ParameterSetName = 'Normal')]
+        [Parameter(ParameterSetName = 'Connect')]
         [hashtable]
         $Lookup,
 
         # you can specify properties as arguments to this command
         [Parameter(Mandatory=$true)]
-        $Object
+        $Object,
+
+        # Passthrough to invoke-nbapi
+        # [Parameter(ValueFromRemainingArguments = $true, ParameterSetName = 'Normal')]
+        # [Parameter(ValueFromRemainingArguments = $true, ParameterSetName = 'Connect')]
+        # [HashTable]
+        # $AdditionalParams,
+
+        #AccessId for this API
+        [Parameter(Mandatory = $true, ParameterSetName = 'Connect')]
+        [SecureString]
+        $Token,
+
+        #AccessKey for this API
+        [Parameter(Mandatory = $true, ParameterSetName = 'Connect')]
+        [uri]
+        $APIUrl
     )
 
     $mapObject = @{custom_fields = @{}}

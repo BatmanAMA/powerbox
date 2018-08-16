@@ -1,0 +1,59 @@
+<#
+.SYNOPSIS
+    Sets properties on a |short| in Netbox
+.DESCRIPTION
+    This should handle mapping a simple hashtable of values and looking up any references.
+.EXAMPLE
+    $lookup = @{
+        device_type='dcim/device-types'
+        device_role='dcim/device-roles'
+        site='organization/sites'
+        status='dcim/_choices'
+    }
+    $|short| = @{
+        name = 'example'
+        serial = 'aka123457'
+        device_type = 'dl380-g9'
+        device_role = 'oracle'
+        site = 'chicago'
+        status = 'active'
+    }
+    Set-nb|short| -id 22 -lookup $lookup $|short|
+.EXAMPLE
+    Get-nb|short| | Foreach {$_.site = 'Seattle'; $_} | Set-nb|short|
+#>
+Function Set-nb|short| {
+    Param (
+        # The |short| to set
+        [Parameter(Mandatory=$true)]
+        $object,
+
+        # ID of the |short| to set
+        [Parameter()]
+        [Int]
+        $Id,
+
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [Parameter()]
+        [hashtable]
+        $Lookup,
+
+        #Looks up the current object and only sets changed properties
+        [Parameter()]
+        [switch]
+        $Patch
+    )
+    $Forward = @{
+        Id               = $id
+        Object           = $object
+        CustomProperties = $CustomProperties
+        Lookup           = $lookup
+        Patch            = $patch
+    }
+    Set-nbObject -Resource '|long|' @forward
+}

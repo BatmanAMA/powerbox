@@ -26,13 +26,14 @@ function Set-nbObject {
     [CmdletBinding()]
     Param (
         # ID of the object to set
-        [Parameter(Mandatory=$true)]
+        [Parameter()]
         [Int]
         $Id,
 
         # Which resource to set
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory = $true)]
         [String]
+        [Alias("type")]
         $Resource,
 
         # List of custom properties
@@ -41,39 +42,63 @@ function Set-nbObject {
         $CustomProperties,
 
         #List of properties to lookup
-        [parameter()]
+        [Parameter()]
         [hashtable]
         $Lookup,
 
         #Looks up the current object and only sets changed properties
+        [Parameter()]
         [switch]
         $Patch,
 
         # The Object to set
-        [Parameter(ValueFromRemainingArguments = $true)]
+        [Parameter(Mandatory=$true)]
         $Object
     )
-    if ($Patch.IsPresent)
-    {
-        $OldObject = Invoke-nbApi -Resource $Resource/$id
-        #flatten the object
-        Foreach ($prop in ($OldObject | get-Member -MemberType Properties))
-        {
-            if ($oldObject.($prop.name).ID -ge 0)
-            {
-                $OldObject.($prop.name) = $OldObject.($prop.name).id
-            }elseif ($oldObject.($prop.name).value -ge 0)
-            {
-                $OldObject.($prop.name) = $OldObject.($prop.name).value
+    if (!$id) {
+        if (!($Object.id)) {
+            $errorRecord = New-Object System.Management.Automation.ErrorRecord(
+                (New-Object Exception "No ID specified to set. Maybe you wanted $($myinvocation.Line -replace 'Set-nb','New-nb')"),
+                'No.ID',
+                [System.Management.Automation.ErrorCategory]::ObjectNotFound,
+                $Resource
+            )
+            $PSCmdlet.ThrowTerminatingError($errorRecord)
+        }
+        $id = $object.id
+    }
+    if ($Patch.IsPresent) {
+        $OldObject = Get-nbobject -Resource $Resource/$id #-UnFlatten
+        foreach ($property in $OldObject._lookup) {
+            if ($OldObject."_$Property:id") {
+                $OldObject."$property" = $OldObject."_$Property:id"
+            } else {
+                $Lookup += $property
+            }
+        }
+        $OldObject = $OldObject | Select-Object -Property * -ExcludeProperty _*
+    }
+    #put ids that are still on the object back and maybe pull
+    if ($Object._lookup) {
+        foreach ($property in $Object._lookup) {
+            if ($Object."_$Property:id") {
+                $Object."$property" = $Object."_$Property:id"
+            } else {
+                $Lookup += $property
             }
         }
     }
+    if ($Object._CustomProperties) {
+        $CustomProperties += $Object._CustomProperties
+    }
+    #Automatically rip out all of the _ properties returned by get-nbobject
+    $object = $Object | Select-Object -Property * -ExcludeProperty _*
+
     $mapObject = @{custom_fields = @{}}
     :maploop foreach ($property in $object.psobject.properties) {
         $Name = $Property.name -replace '-' -replace ':'
         $value = $Property.value
-        if ($Patch.IsPresent -and $OldObject."$name" -eq $value)
-        {
+        if ($Patch.IsPresent -and $OldObject."$name" -eq $value) {
             continue :maploop
         }
         if ($name -in $lookup.keys) {
@@ -81,17 +106,14 @@ function Set-nbObject {
         }
         if ($name -in $CustomProperties) {
             $mapObject.custom_fields[$name] = $value
-        }
-        elseif ($name -eq 'custom_fields') {
+        } elseif ($name -eq 'custom_fields') {
             $mapObject.custom_fields += $value
-        }
-        else {
+        } else {
             $mapObject[$name] = $value
         }
     }
     $mapObject = New-Object -TypeName psobject -Property $mapObject
-    if ($Patch.IsPresent)
-    {
+    if ($Patch.IsPresent) {
         #$notChanged = $mapObject | compare-object -ReferenceObject $OldObject -ExcludeDifferent -PassThru
         #$mapObject = $mapObject | Select-Object -ExcludeProperty $notChanged
         return Invoke-nbApi -Resource $Resource/$id -HttpVerb Patch -Body ($mapObject | ConvertTo-Json)

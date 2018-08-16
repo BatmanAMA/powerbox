@@ -1,0 +1,22 @@
+﻿examples:
+- name: EXAMPLE 1
+  preCode: ''
+  code: (note - example is generic - customize to your object type)
+  postCode: $lookup = @{     device_type='dcim/device-types'     device_role='dcim/device-roles'     site='organization/sites'     status='dcim/_choices' } $device = @{     name = 'example'     serial = 'aka123457'     device_type = 'dl380-g9'     device_role = 'oracle'     site = 'chicago'     status = 'active' } Set-nbaggregate -id 22 -lookup $lookup @device
+- name: EXAMPLE 2
+  preCode: ''
+  code: Set-nbaggregate -id 22 -name example2 -serial madeup -device_type dl380-gen8 -site chicago -lookup device_type
+  postCode: ''
+inputs: []
+links: []
+module:
+  name: powerbox
+name: Set-nbAggregate
+notes: This function wraps the "Set-nbObject" function and just recalls it with the type specified
+optionalParameters: []
+outputs: []
+requiredParameters: []
+remarks: This should handle mapping a simple hashtable of values and looking up any references.
+summary: Sets properties on a aggregate in netbox
+syntaxes:
+- parameters: []

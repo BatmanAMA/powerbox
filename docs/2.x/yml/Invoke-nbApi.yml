@@ -1,0 +1,74 @@
+﻿examples:
+- name: EXAMPLE 1
+  preCode: ''
+  code: '#Get devices from site 1'
+  postCode: Invoke-nbApi -Resource dcim/racks -Query @{site_id=1} -APIurl https://nb.contoso.com/ -token asd1239asd13lsdfs
+inputs: []
+links: []
+module:
+  name: powerbox
+name: Invoke-nbApi
+notes: ''
+optionalParameters:
+- name: APIUrl
+  aliases: []
+  defaultValue: None
+  description: URL to run it against (for unauthenticated get requests)
+  parameterValueGroup: []
+  pipelineInput: False
+  position: Named
+  type: Uri
+- name: Body
+  aliases: []
+  defaultValue: None
+  description: Body of the request
+  parameterValueGroup: []
+  pipelineInput: False
+  position: Named
+  type: Object
+- name: HttpVerb
+  aliases:
+  - Verb
+  defaultValue: Get
+  description: The HTTP verb to use for this request
+  parameterValueGroup:
+  - Default
+  - Get
+  - Head
+  - Post
+  - Put
+  - Delete
+  - Trace
+  - Options
+  - Merge
+  - Patch
+  pipelineInput: False
+  position: Named
+  type: WebRequestMethod
+- name: Query
+  aliases: []
+  defaultValue: None
+  description: Dictionary to be constructed into a QueryString
+  parameterValueGroup: []
+  pipelineInput: False
+  position: Named
+  type: Hashtable
+outputs: []
+requiredParameters:
+- name: Resource
+  aliases: []
+  defaultValue: None
+  description: The resource path to connect to
+  parameterValueGroup: []
+  pipelineInput: False
+  position: 1
+  type: String
+remarks: This wraps the netbox API to make it a little simpler to work with in powershell.
+summary: Invokes the Netbox API
+syntaxes:
+- parameters:
+  - Resource
+  - APIUrl
+  - Body
+  - HttpVerb
+  - Query

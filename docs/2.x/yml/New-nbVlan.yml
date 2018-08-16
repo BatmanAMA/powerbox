@@ -1,0 +1,45 @@
+﻿examples:
+- name: EXAMPLE 1
+  preCode: ''
+  code: $lookup = @{
+  postCode: device_type='dcim/device-types'     device_role='dcim/device-roles'     site='organization/sites'     status='dcim/_choices' } $Vlan = @{     name = 'example'     serial = 'aka123457'     device_type = 'dl380-g9'     device_role = 'oracle'     site = 'chicago'     status = 'active' } New-nbVlan -lookup $lookup -object $Vlan
+inputs: []
+links: []
+module:
+  name: powerbox
+name: New-nbVlan
+notes: ''
+optionalParameters:
+- name: CustomProperties
+  aliases: []
+  defaultValue: None
+  description: List of custom properties
+  parameterValueGroup: []
+  pipelineInput: False
+  position: 2
+  type: String[]
+- name: Lookup
+  aliases: []
+  defaultValue: None
+  description: List of properties to lookup
+  parameterValueGroup: []
+  pipelineInput: False
+  position: 3
+  type: Hashtable
+outputs: []
+requiredParameters:
+- name: Object
+  aliases: []
+  defaultValue: None
+  description: Vlan to create
+  parameterValueGroup: []
+  pipelineInput: False
+  position: 1
+  type: Object
+remarks: This should handle mapping a simple hashtable of values and looking up any references.
+summary: Creates a new Vlan in netbox
+syntaxes:
+- parameters:
+  - Object
+  - CustomProperties
+  - Lookup
