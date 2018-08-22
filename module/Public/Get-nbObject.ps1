@@ -15,7 +15,7 @@
     all based off of this one, but don't require the resource argument
 #>
 function Get-nbObject {
-    [CmdletBinding(DefaultParameterSetName='query')]
+    [CmdletBinding(DefaultParameterSetName = 'query')]
     Param (
         # Simple string based search
         [Parameter(ParameterSetName = 'query', Position = 0)]
@@ -57,10 +57,8 @@ function Get-nbObject {
     }
     if ($PSCmdlet.ParameterSetName -eq 'id') {
         $params['Resource'] = "$Resource/$id"
-    }
-    elseif ($PSCmdlet.ParameterSetName -eq 'query') {
-        if (![String]::IsNullOrEmpty($Search))
-        {
+    } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
+        if (![String]::IsNullOrEmpty($Search)) {
             if ($Query) {
                 $Query['q'] = $Search
             } else {
@@ -89,29 +87,28 @@ function Get-nbObject {
             Add-Member -Name "_lookups" -Value (@()) -MemberType NoteProperty
         $obj |
             Add-Member -Name "_CustomProperties" -Value (@()) -MemberType NoteProperty
-        foreach ($prop in ($obj.custom_fields | get-Member -MemberType Properties)) {
-            $obj._CustomProperties += $prop.name
-            $obj |
-                Add-Member -Name ($prop.name) -Value $obj.custom_fields.($prop.name) -MemberType NoteProperty
+        if ($obj.custom_fields) {
+            foreach ($prop in ($obj.custom_fields | get-Member -MemberType Properties)) {
+                $obj._CustomProperties += $prop.name
+                $obj |
+                    Add-Member -Name ($prop.name) -Value $obj.custom_fields.($prop.name) -MemberType NoteProperty
+            }
         }
         $obj = $obj | select-object -ExcludeProperty custom_fields -Property *
         #loop through all the properties
         Foreach ($prop in ($obj | get-Member -MemberType Properties)) {
-            if ($obj.($prop.name).ID -ge 0) {
+            if ($obj.($prop.name).ID -gt 0) {
                 $obj._lookups += $prop.name
                 $obj |
                     Add-Member -Name "_$($prop.name):id" -Value ($obj.($prop.name).id) -MemberType NoteProperty
                 if ($obj.($prop.name).name) {
                     $obj.($prop.name) = $obj.($prop.name).name
-                }
-                elseif ($obj.($prop.name).address) {
+                } elseif ($obj.($prop.name).address) {
                     $obj.($prop.name) = $obj.($prop.name).address
-                }
-                elseif ($obj.($prop.name).slug) {
+                } elseif ($obj.($prop.name).slug) {
                     $obj.($prop.name) = $obj.($prop.name).slug
                 }
-            }
-            elseif ($obj.($prop.name).value -ge 0) {
+            } elseif ($obj.($prop.name).value -gt 0) {
                 $obj._lookups += $prop.name
                 $obj |
                     Add-Member -Name "_$($prop.name):id" -Value $obj.($prop.name).value -MemberType NoteProperty
