@@ -63,7 +63,7 @@ function Get-nbObject {
                 $Query['q'] = $Search
             } else {
                 $Query = @{
-                    s = $Search
+                    q = $Search
                 }
             }
         }
