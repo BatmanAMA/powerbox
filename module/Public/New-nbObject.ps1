@@ -68,7 +68,7 @@ function New-nbObject {
         $Name = $Property.name -replace '-' -replace ':'
         $value = $Property.value
         if ($name -in $lookup.keys) {
-            $value = ConvertTo-nbID -source $value -value $name
+            $value = ConvertTo-nbID -source $lookup[$name] -value $value
         }
         if ($name -in $CustomProperties) {
             $mapObject.custom_fields[$name] = $value
