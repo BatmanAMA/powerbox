@@ -129,8 +129,9 @@ task Test -If { $Discovery.HasTests -and $Settings.ShouldTest } {
         CodeCoverage = $files
     }
     if (!$ENV:APPVEYOR) {
+        $PesterSettings['CodeCoverage'] = ''
         $PesterSettings['PesterOption'] = @{IncludeVSCodeMarker = $true}
-        #$PesterSettings['Show'] = "Fails"
+        $PesterSettings['Show'] = "Fails"
     }
     $Tests = (Invoke-Pester @PesterSettings)
     foreach ($test in $Tests.TestResult) {
@@ -157,14 +158,12 @@ task Test -If { $Discovery.HasTests -and $Settings.ShouldTest } {
                 StdErr          = $test.FailureMessage
             }
             Add-AppveyorTest @appveyorTest -verbose
-        } else {
-            $test | Select-Object Result, Name
         }
     }
-    $cov = ($Tests.CodeCoverage.NumberOfCommandsExecuted / $Tests.CodeCoverage.NumberOfCommandsAnalyzed * 100)
-    $cov = [System.Math]::Round($cov, 2)
-    "Code Coverage: $cov%"
     if ($ENV:AppVeyor) {
+        $cov = ($Tests.CodeCoverage.NumberOfCommandsExecuted / $Tests.CodeCoverage.NumberOfCommandsAnalyzed * 100)
+        $cov = [System.Math]::Round($cov, 2)
+        "Code Coverage: $cov%"
         $Sev = if ($cov -lt 50) {"Error"} elseif ($cov -lt 100) {"Warning"} else {"Information"}
         Add-AppveyorMessage "Code Coverage: $cov%" -Category $Sev
         exit $tests.FailedCount
