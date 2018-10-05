@@ -33,17 +33,20 @@ function Invoke-nbApi {
         # URL to run it against (for unauthenticated get requests)
         [Parameter()]
         [uri]
-        $APIUrl
+        $APIUrl,
+        [Parameter()]
+        [uri]
+        $rawUrl
     )
 
     begin {
         #make this easier to refer to (eventually we'll use using statements)
         $get = $HttpVerb -eq [Microsoft.PowerShell.Commands.WebRequestMethod]::Get
         #allow overriding the connection for unauthenticated get requests
-        $_apiurl = if ($get -and $APIUrl) {
-            $APIUrl
-        } elseif ($Script:APIUrl) {
+        $_apiurl = if ($Script:APIUrl) {
             $Script:APIUrl
+        } elseif ($get -and $APIUrl) {
+            $APIUrl
         } else {
             $False
         }
@@ -87,6 +90,7 @@ function Invoke-nbApi {
             Path   = $_APIUrl.LocalPath.TrimEnd('/') + '/' + $Resource
             Query  = $QueryString
         }
+        if ($rawUrl) { $URI = $rawUrl }
         #make this easier to refer to
         $marshal = [System.Runtime.InteropServices.Marshal]
         try {

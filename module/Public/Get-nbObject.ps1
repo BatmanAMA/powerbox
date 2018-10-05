@@ -75,14 +75,18 @@ function Get-nbObject {
     }
     $object = Invoke-nbApi @params
     if ($object.count) {
-        $object = $object.results
+        $results = $object.results
+        while ($object.next) {
+            $object = Invoke-nbApi -rawUrl $object.next
+            $results += $object.results
+        }
     }
     if ($UnFlatten.IsPresent) {
         #return before the flatten loop if we're not flattening
-        return $object
+        return $results
     }
     #flatten loop
-    foreach ($obj in $object) {
+    foreach ($obj in $results) {
         $obj |
             Add-Member -Name "_lookups" -Value (@()) -MemberType NoteProperty
         $obj |
