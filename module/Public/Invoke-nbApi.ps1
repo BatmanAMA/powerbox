@@ -124,10 +124,13 @@ function Invoke-nbApi {
             ###}
             $Response
         } catch {
-            ###$PSCmdlet.WriteError($_)
+            $message = $_.Exception.Message
+            if ($_.ErrorDetails) {
+                $message += " Detail: " + ($_.ErrorDetails.Message | ConvertFrom-Json).detail
+            }
             $PSCmdlet.ThrowTerminatingError(
                 [System.Management.Automation.ErrorRecord]::new(
-                    $_.Exception, ###([system.web.httpunhandledexception]::CreateFromLastError($_)),
+                    ([exception]::new($message)), ###([system.web.httpunhandledexception]::CreateFromLastError($_)),
                     'Netbox.Unhandled',
                     [System.Management.Automation.ErrorCategory]::NotSpecified,
                     $Resource
