@@ -78,7 +78,7 @@ function Get-nbObject {
         $results = $object.results
         while ($object.next) {
             #TODO: change resource and rawurl to be different parametersets so that this isn't as gross.
-            $object = Invoke-nbApi -rawUrl $object.next -resource 'ignore'
+            $object = Invoke-nbApi -rawUrl $object.next -resource 'ignore' -APIUrl $object.next
             $results += $object.results
         }
     }
