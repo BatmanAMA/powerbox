@@ -76,9 +76,14 @@ function Get-nbObject {
     $object = Invoke-nbApi @params
     if ($object.count) {
         $results = $object.results
-        while ($object.next) {
-            #TODO: change resource and rawurl to be different parametersets so that this isn't as gross.
-            $object = Invoke-nbApi -rawUrl $object.next -resource 'ignore' -APIUrl $object.next
+        while (![string]::IsNullOrEmpty($object.next)) {
+            Write-Verbose $object.next
+            $url = if ($APIUrl.Scheme -eq 'https' -or $Script:APIUrl.Scheme -eq 'https') {
+                $object.next -replace 'http','https'
+            } else {
+                $object.next
+            }
+            $object = Invoke-nbApi -rawUrl $url
             $results += $object.results
         }
     }

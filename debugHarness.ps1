@@ -5,5 +5,5 @@ Import-Module -Name $PSScriptRoot\module\powerbox.psd1
 $apiurl = "https://netbox.contoso.com/api"
 #Connect-nbAPI -Token $token -APIUrl $apiurl
 
-Get-nbPlatform -APIUrl $apiurl
+Get-nbVirtualMachine -APIUrl $apiurl | measure
 #Get-nbObject -Resource virtualization/virtual-machines -APIUrl $apiurl

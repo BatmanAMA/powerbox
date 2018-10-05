@@ -9,88 +9,97 @@
     Invoke-nbApi -Resource dcim/racks -Query @{site_id=1} -APIurl https://nb.contoso.com/ -token asd1239asd13lsdfs
 #>
 function Invoke-nbApi {
-    [CmdletBinding()]
+    [CmdletBinding(DefaultParameterSetName = 'resource')]
     [Alias("inb")]
     Param (
         # The resource path to connect to
         [Parameter(Mandatory = $true,
-            Position = 0)]
+            Position = 0,
+            ParameterSetName = 'resource')]
         [String]
         $Resource,
         # The HTTP verb to use for this request
-        [Parameter()]
+        [Parameter(ParameterSetName = 'resource')]
         [Alias("Verb")]
         [Microsoft.PowerShell.Commands.WebRequestMethod]
         $HttpVerb = "Get",
         #Dictionary to be constructed into a QueryString
-        [Parameter()]
+        [Parameter(ParameterSetName = 'resource')]
         [hashtable]
         $Query,
         #Body of the request
-        [Parameter()]
+        [Parameter(ParameterSetName = 'resource')]
+        [Parameter(ParameterSetName = 'rawurl')]
         [Object]
         $Body,
         # URL to run it against (for unauthenticated get requests)
-        [Parameter()]
+        [Parameter(ParameterSetName = 'resource')]
         [uri]
         $APIUrl,
-        [Parameter()]
+        [Parameter(ParameterSetName = 'rawurl')]
         [uri]
         $rawUrl
     )
 
     begin {
-        #make this easier to refer to (eventually we'll use using statements)
-        $get = $HttpVerb -eq [Microsoft.PowerShell.Commands.WebRequestMethod]::Get
-        #allow overriding the connection for unauthenticated get requests
-        $_apiurl = if ($Script:APIUrl) {
-            $Script:APIUrl
-        } elseif ($get -and $APIUrl) {
-            $APIUrl
-        } else {
-            $False
-        }
-        if (!$get -and (!$_apiurl -or !$Script:Token)) {
-            $errorRecord = New-Object System.Management.Automation.ErrorRecord(
-                (New-Object Exception "You must connect (using Connect-nbApi) before using this module"),
-                'Not.Connected',
-                [System.Management.Automation.ErrorCategory]::ConnectionError,
-                $Resource
-            )
-            $PSCmdlet.ThrowTerminatingError($errorRecord)
-        }
-        if ($get -and !$_apiurl) {
-            $errorRecord = New-Object System.Management.Automation.ErrorRecord(
-                (New-Object Exception "You must specify APIUrl or connect (using Connect-nbApi)"),
-                'No.Url',
-                [System.Management.Automation.ErrorCategory]::ConnectionError,
-                $Resource
-            )
-            $PSCmdlet.ThrowTerminatingError($errorRecord)
+        if ($PSCmdlet.ParameterSetName -eq 'resource') {
+            #make this easier to refer to (eventually we'll use using statements)
+            $get = $HttpVerb -eq [Microsoft.PowerShell.Commands.WebRequestMethod]::Get
+            #allow overriding the connection for unauthenticated get requests
+            $_apiurl = if ($Script:APIUrl) {
+                $Script:APIUrl
+            }
+            elseif ($get -and $APIUrl) {
+                $APIUrl
+            }
+            else {
+                $False
+            }
+            if (!$get -and (!$_apiurl -or !$Script:Token)) {
+                $errorRecord = New-Object System.Management.Automation.ErrorRecord(
+                    (New-Object Exception "You must connect (using Connect-nbApi) before using this module"),
+                    'Not.Connected',
+                    [System.Management.Automation.ErrorCategory]::ConnectionError,
+                    $Resource
+                )
+                $PSCmdlet.ThrowTerminatingError($errorRecord)
+            }
+            if ($get -and !$_apiurl) {
+                $errorRecord = New-Object System.Management.Automation.ErrorRecord(
+                    (New-Object Exception "You must specify APIUrl or connect (using Connect-nbApi)"),
+                    'No.Url',
+                    [System.Management.Automation.ErrorCategory]::ConnectionError,
+                    $Resource
+                )
+                $PSCmdlet.ThrowTerminatingError($errorRecord)
+            }
         }
     }
     process {
-        if (-not $Query) {
-            $Query = @{}
-        }
-        $Query["format"] = "json"
-        $QueryString = ""
-        #Format a hashtable to key=value&key2=value2 format.
-        $QueryString = (
-            $Query.Keys |
-                ForEach-Object {
-                "{0}={1}" -f $_, $Query[$_]
+        if ($PSCmdlet.ParameterSetName -eq 'resource') {
+            if (-not $Query) {
+                $Query = @{}
             }
-        ) -join '&'
-        $Resource = "$($Resource.Trim('/'))/"
-        #construct the uri
-        $URI = new-Object UriBuilder -Property @{
-            Scheme = $_APIUrl.Scheme
-            Host   = $_APIUrl.DnsSafeHost
-            Path   = $_APIUrl.LocalPath.TrimEnd('/') + '/' + $Resource
-            Query  = $QueryString
+            $Query["format"] = "json"
+            $QueryString = ""
+            #Format a hashtable to key=value&key2=value2 format.
+            $QueryString = (
+                $Query.Keys |
+                    ForEach-Object {
+                    "{0}={1}" -f $_, $Query[$_]
+                }
+            ) -join '&'
+            $Resource = "$($Resource.Trim('/'))/"
+            #construct the uri
+            $URI = new-Object UriBuilder -Property @{
+                Scheme = $_APIUrl.Scheme
+                Host   = $_APIUrl.DnsSafeHost
+                Path   = $_APIUrl.LocalPath.TrimEnd('/') + '/' + $Resource
+                Query  = $QueryString
+            }
+        } else {
+            $URI = [UriBuilder]::new($rawUrl)
         }
-        if ($rawUrl) { $URI = $rawUrl }
         #make this easier to refer to
         $marshal = [System.Runtime.InteropServices.Marshal]
         try {
@@ -123,7 +132,8 @@ function Invoke-nbApi {
             ###    Write-Error -Message "Call to NB failed! $($Response.errmsg)" -ErrorId $Response.status
             ###}
             $Response
-        } catch {
+        }
+        catch {
             $message = $_.Exception.Message
             if ($_.ErrorDetails) {
                 $message += " Detail: " + ($_.ErrorDetails.Message | ConvertFrom-Json).detail
@@ -136,7 +146,8 @@ function Invoke-nbApi {
                     $Resource
                 )
             )
-        } finally {
+        }
+        finally {
             if ($null -ne $unmanagedString) {
                 # Clean up the insecure stuff
                 $marshal::ZeroFreeGlobalAllocUnicode($unmanagedString)
