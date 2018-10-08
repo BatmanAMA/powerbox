@@ -67,6 +67,13 @@ function Get-nbObject {
                 }
             }
         }
+        if ($Query -and $Query.Keys -notcontains 'limit') {
+            $Query['limit'] = $Script:QueryLimit
+        } else {
+            $Query = @{
+                q = $Script:QueryLimit
+            }
+        }
         $params['Resource'] = $Resource
         $params['Query'] = $Query
     }

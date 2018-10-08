@@ -22,7 +22,10 @@ function Connect-nbAPI {
         #APIurl for this API
         [Parameter(Mandatory = $true)]
         [uri]
-        $APIurl
+        $APIurl,
+        #Query limit for this connection
+        [int]
+        $QueryLimit = 250
     )
     process {
         $Script:Token = $Token
@@ -32,6 +35,7 @@ function Connect-nbAPI {
             Write-Warning -Message "Inconsistent behavior can happen with non-absolute URLs. Recommend specifying HTTP:// or HTTPS://"
         }
         $Script:APIUrl = $APIUrl
+        $Script:QueryLimit = $QueryLimit
         Write-Verbose "Saved connection to $Script:APIUrl"
     }
 }
