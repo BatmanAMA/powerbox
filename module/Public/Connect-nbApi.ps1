@@ -23,9 +23,10 @@ function Connect-nbAPI {
         [Parameter(Mandatory = $true)]
         [uri]
         $APIurl,
-        #Query limit for this connection
+        # Size of pages returned by "Get-nb*" commands.
         [int]
-        $QueryLimit = 250
+        $QueryLimit = 250 
+        #I find the default 50 very slow as the overhead is absurd.
     )
     process {
         $Script:Token = $Token
