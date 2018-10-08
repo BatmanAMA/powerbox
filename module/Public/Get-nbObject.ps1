@@ -71,7 +71,7 @@ function Get-nbObject {
             $Query['limit'] = $Script:QueryLimit
         } else {
             $Query = @{
-                q = $Script:QueryLimit
+                limit = $Script:QueryLimit
             }
         }
         $params['Resource'] = $Resource
