@@ -74,7 +74,7 @@ function Get-nbObject {
         $params['APIUrl'] = $APIUrl
     }
     $object = Invoke-nbApi @params
-    if ($object.count) {
+    if ($object.count -and $object.results) {
         $results = $object.results
         while (![string]::IsNullOrEmpty($object.next)) {
             Write-Verbose $object.next
@@ -86,6 +86,9 @@ function Get-nbObject {
             $object = Invoke-nbApi -rawUrl $url
             $results += $object.results
         }
+    }
+    elseif (@($object).count -eq 1) {
+        $results = @($object)
     }
     if ($UnFlatten.IsPresent) {
         #return before the flatten loop if we're not flattening
