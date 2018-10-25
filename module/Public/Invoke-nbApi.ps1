@@ -118,7 +118,7 @@ function Invoke-nbApi {
                 ###MaximumRedirection
                 ###TransferEncoding
             }
-            if ($Script:Token -and $HttpVerb -ne $get) {
+            if ($Script:Token) {
                 $unmanagedString = $marshal::SecureStringToGlobalAllocUnicode($Script:Token)
                 $Params['Headers'] = @{
                     Authorization = "token {0}" -f $marshal::PtrToStringUni($unmanagedString)
