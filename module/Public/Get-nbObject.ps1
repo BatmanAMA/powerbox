@@ -67,6 +67,13 @@ function Get-nbObject {
                 }
             }
         }
+        if ($Query -and $Query.Keys -notcontains 'limit') {
+            $Query['limit'] = $Script:QueryLimit
+        } else {
+            $Query = @{
+                limit = $Script:QueryLimit
+            }
+        }
         $params['Resource'] = $Resource
         $params['Query'] = $Query
     }
@@ -74,15 +81,28 @@ function Get-nbObject {
         $params['APIUrl'] = $APIUrl
     }
     $object = Invoke-nbApi @params
-    if ($object.count) {
-        $object = $object.results
+    if ($object.count -and $object.results) {
+        $results = $object.results
+        while (![string]::IsNullOrEmpty($object.next)) {
+            Write-Verbose $object.next
+            $url = if ($APIUrl.Scheme -eq 'https' -or $Script:APIUrl.Scheme -eq 'https') {
+                $object.next -replace 'http','https'
+            } else {
+                $object.next
+            }
+            $object = Invoke-nbApi -rawUrl $url
+            $results += $object.results
+        }
+    }
+    elseif (@($object).count -eq 1) {
+        $results = @($object)
     }
     if ($UnFlatten.IsPresent) {
         #return before the flatten loop if we're not flattening
-        return $object
+        return $results
     }
     #flatten loop
-    foreach ($obj in $object) {
+    foreach ($obj in $results) {
         $obj |
             Add-Member -Name "_lookups" -Value (@()) -MemberType NoteProperty
         $obj |
