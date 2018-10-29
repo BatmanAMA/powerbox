@@ -112,7 +112,7 @@ task Analyze -If { $Settings.ShouldAnalyze } {
     }
 }
 
-task Test -If { $Discovery.HasTests -and $Settings.ShouldTest } {
+task Test {#-If { $Discovery.HasTests -and $Settings.ShouldTest } {
     Remove-Module -Name powerbox -ErrorAction SilentlyContinue
     Import-Module (Join-Path -Path $Folders.Release  -ChildPath "$moduleName.psd1")
     $files = Get-ChildItem -Path $Folders.Release -Recurse -Include *.ps1 |
@@ -129,7 +129,7 @@ task Test -If { $Discovery.HasTests -and $Settings.ShouldTest } {
         CodeCoverage = $files
     }
     if (!$ENV:APPVEYOR) {
-        $PesterSettings['CodeCoverage'] = ''
+        $PesterSettings['CodeCoverage'] = $null
         $PesterSettings['PesterOption'] = @{IncludeVSCodeMarker = $true}
         $PesterSettings['Show'] = "Fails"
     }
