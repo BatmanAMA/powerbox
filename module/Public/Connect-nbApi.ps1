@@ -22,7 +22,11 @@ function Connect-nbAPI {
         #APIurl for this API
         [Parameter(Mandatory = $true)]
         [uri]
-        $APIurl
+        $APIurl,
+        # Size of pages returned by "Get-nb*" commands.
+        [int]
+        $QueryLimit = 250 
+        #I find the default 50 very slow as the overhead is absurd.
     )
     process {
         $Script:Token = $Token
@@ -32,6 +36,7 @@ function Connect-nbAPI {
             Write-Warning -Message "Inconsistent behavior can happen with non-absolute URLs. Recommend specifying HTTP:// or HTTPS://"
         }
         $Script:APIUrl = $APIUrl
+        $Script:QueryLimit = $QueryLimit
         Write-Verbose "Saved connection to $Script:APIUrl"
     }
 }
