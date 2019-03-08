@@ -1,6 +1,6 @@
 ################################################################################
-##  AUTO GENERATED FILE#########################################################
-##   Regenerate using CreateCommands.ps1 from private functions#################
+##  AUTO GENERATED FILE                                                        #
+##  Regenerate using CreateCommands.ps1 from private functions                 #
 ################################################################################
 
 <#
