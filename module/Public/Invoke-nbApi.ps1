@@ -96,6 +96,7 @@ function Invoke-nbApi {
                 Host   = $_APIUrl.DnsSafeHost
                 Path   = $_APIUrl.LocalPath.TrimEnd('/') + '/' + $Resource
                 Query  = $QueryString
+                Port   = $_APIUrl.Port
             }
         } else {
             $URI = [UriBuilder]::new($rawUrl)
