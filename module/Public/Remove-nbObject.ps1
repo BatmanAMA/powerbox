@@ -27,6 +27,6 @@ function Remove-nbObject {
 
 
     process {
-        Invoke-nbApi -Resource $Resource -Query @{id=$Id} -HttpVerb Delete
+        Invoke-nbApi -Resource "$Resource/$id" -HttpVerb Delete
     }
 }

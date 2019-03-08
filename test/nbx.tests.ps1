@@ -102,7 +102,7 @@ Describe 'Remove wrapper functions' {
             $resourceName
         )
         Mock -CommandName Invoke-nbApi -MockWith {} -ModuleName powerbox
-        $filter = [scriptblock]::Create("`$Resource -eq '$resourceName'")
+        $filter = [scriptblock]::Create("`$Resource -eq '$resourceName' -and `$Id -eq '$id'")
         Mock -CommandName Remove-NbObject -MockWith {} -ModuleName powerbox -Verifiable -ParameterFilter $filter
         {&$function -id 0} | should -Not -Throw
         Assert-VerifiableMock
