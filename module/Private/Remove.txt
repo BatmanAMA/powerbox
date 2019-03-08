@@ -1,0 +1,22 @@
+<#
+.SYNOPSIS
+    Deletes a |short| in Netbox
+.DESCRIPTION
+    Deletes a netbox |short| by ID or via the pipeline.
+.EXAMPLE
+    # Remove the |short| by id
+    Remove-nb|short| -id 1
+.EXAMPLE
+    #Remove |short| returned from a get-nb|short|
+    Get-Nb|short| -search mything.contoso.com -Resource 'virtualization/virtual-machines' |
+        Remove-nb|short| -Resource 'virtualization/virtual-machines'
+#>
+Function Remove-nb|short| {
+    Param (
+        # ID of the |short| to delete
+        [Parameter()]
+        [Int]
+        $Id
+    )
+    Remove-nbObject -Resource '|long|' -id $id
+}
