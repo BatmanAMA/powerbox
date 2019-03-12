@@ -86,7 +86,7 @@ function Get-nbObject {
         while (![string]::IsNullOrEmpty($object.next)) {
             Write-Verbose $object.next
             $url = if ($APIUrl.Scheme -eq 'https' -or $Script:APIUrl.Scheme -eq 'https') {
-                $object.next -replace 'http','https'
+                $object.next -replace '^http:', 'https:'
             } else {
                 $object.next
             }

@@ -16,6 +16,11 @@ Function createcommands {
                 Name    = 'New'
                 OutFile = '..\public\New-nbx.ps1'
                 InFile  = 'New.txt'
+            },
+            [PSCustomObject]@{
+                Name    = 'Remove'
+                OutFile = '..\public\Remove-nbx.ps1'
+                InFile  = 'Remove.txt'
             }
         )
     )
@@ -32,8 +37,8 @@ Function createcommands {
         foreach ($command in $commands) {
             $ScriptPath = Join-Path -Path $cwd -ChildPath $command.Outfile -Resolve
             ("#" * 80 + "`n" +
-                "##  AUTO GENERATED FILE" + "#" * 57 + "`n" +
-                "##   Regenerate using CreateCommands.ps1 from private functions" + "#" * 17 + "`n" +
+                "##  AUTO GENERATED FILE".PadRight(79,' ') + "#`n" +
+                "##  Regenerate using CreateCommands.ps1 from private functions".PadRight(79,' ') + "#`n" +
                 "#" * 80 + "`n") | Out-File -FilePath $ScriptPath -Encoding default -Force
             foreach ($key in $ResourceMap.Keys) {
                 $defPath = (Join-Path -Path $cwd -ChildPath $command.InFile)
@@ -46,3 +51,4 @@ Function createcommands {
     end {
     }
 }
+createcommands
