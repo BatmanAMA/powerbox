@@ -84,4 +84,28 @@ Describe 'Get wrapper functions' {
         Assert-VerifiableMock
     }
 }
+Describe 'Remove wrapper functions' {
+    $token = ConvertTo-SecureString -String "APITOKEN" -AsPlainText -Force
+    Connect-nbAPI -APIurl 'http://example.com' -Token $token
+    . $PSScriptRoot\ResourceMap.ps1
+
+    $testCases = $ResourceMap.Keys |
+        ForEach-Object {
+            @{
+                function     = "Remove-nb$_"
+                resourcename = ($ResourceMap[$_])
+            }
+        }
+    it "should map <function> to <resourcename>" -TestCases $testCases {
+        param(
+            $function,
+            $resourceName
+        )
+        Mock -CommandName Invoke-nbApi -MockWith {} -ModuleName powerbox
+        $filter = [scriptblock]::Create("`$Resource -eq '$resourceName' -and `$Id -eq '$id'")
+        Mock -CommandName Remove-NbObject -MockWith {} -ModuleName powerbox -Verifiable -ParameterFilter $filter
+        {&$function -id 0} | should -Not -Throw
+        Assert-VerifiableMock
+    }
+}
 
