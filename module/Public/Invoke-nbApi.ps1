@@ -73,6 +73,11 @@ function Invoke-nbApi {
                 )
                 $PSCmdlet.ThrowTerminatingError($errorRecord)
             }
+            if ($Body.GetType().FullName -eq [hashtable].FullName)
+            {
+                Write-Verbose -Message "Converting the hashtable body into an object"
+                $Body = [PSCustomObject]$Body
+            }
         }
     }
     process {
@@ -119,6 +124,7 @@ function Invoke-nbApi {
                 ###MaximumRedirection
                 ###TransferEncoding
             }
+            Write-Debug -Message ($params | ConvertTo-Json)
             if ($Script:Token) {
                 $unmanagedString = $marshal::SecureStringToGlobalAllocUnicode($Script:Token)
                 $Params['Headers'] = @{
@@ -135,18 +141,9 @@ function Invoke-nbApi {
             $Response
         }
         catch {
-            $message = $_.Exception.Message
-            if ($_.ErrorDetails) {
-                $message += " Detail: " + ($_.ErrorDetails.Message | ConvertFrom-Json).detail
-            }
-            $PSCmdlet.ThrowTerminatingError(
-                [System.Management.Automation.ErrorRecord]::new(
-                    ([exception]::new($message)), ###([system.web.httpunhandledexception]::CreateFromLastError($_)),
-                    'Netbox.Unhandled',
-                    [System.Management.Automation.ErrorCategory]::NotSpecified,
-                    $Resource
-                )
-            )
+            ## I'm going to stop trying to be fancy.
+            ## The error that irm throws is better then what I was trying to do.
+            $PSCmdlet.ThrowTerminatingError($_)
         }
         finally {
             if ($null -ne $unmanagedString) {
