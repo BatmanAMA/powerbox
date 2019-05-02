@@ -98,8 +98,15 @@ function Set-nbObject {
     :maploop foreach ($property in $object.psobject.properties) {
         $Name = $Property.name -replace '-' -replace ':'
         $value = $Property.value
-        if ($Patch.IsPresent -and $OldObject."$name" -eq $value) {
-            continue :maploop
+        if ($Patch.IsPresent) {
+            if( [string]::IsNullOrEmpty( $($OldObject."$name") ) -and [string]::IsNullOrEmpty($value) ) {
+                Write-Verbose "Bypassing property $name (values are empty)"
+                continue :maploop
+            }
+            If( ($OldObject."$name" -eq $value) -and ( $object."$name" -isnot [System.Array]) ) {
+                Write-Verbose "Bypassing property $name (Values are similar and object isn't an array)"
+                continue :maploop
+            }
         }
         if ($name -in $lookup.keys) {
             $value = ConvertTo-nbID -source $value -value $name
@@ -109,6 +116,7 @@ function Set-nbObject {
         } elseif ($name -eq 'custom_fields') {
             $mapObject.custom_fields += $value
         } else {
+            Write-Verbose "Adding property $name"
             $mapObject[$name] = $value
         }
     }
