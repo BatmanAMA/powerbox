@@ -73,7 +73,7 @@ function Invoke-nbApi {
                 )
                 $PSCmdlet.ThrowTerminatingError($errorRecord)
             }
-            if ($Body.GetType().FullName -eq [hashtable].FullName)
+            if ($null -ne $Body -and $Body.GetType().FullName -eq [hashtable].FullName)
             {
                 Write-Verbose -Message "Converting the hashtable body into an object"
                 $Body = [PSCustomObject]$Body
