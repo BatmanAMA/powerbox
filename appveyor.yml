@@ -40,7 +40,7 @@ deploy:
   - provider: Environment
     name: prerelease
     on:
-      branch: /update.*/
+      branch: /(update|patch).*/
 
 
 after_deploy:
