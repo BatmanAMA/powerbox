@@ -40,3 +40,4 @@ Imports powerbox into the current session.
 
 We would love to incorporate community contributions into this project.  If you would like to
 contribute code, documentation, tests, or bug reports, please read our [Contribution Guide](https://github.com/batmanama/powerbox/tree/master/docs/CONTRIBUTING.md) to learn more.
+
