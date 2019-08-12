@@ -1679,6 +1679,68 @@ Function Get-nbVirtualChassis {
 
 <#
 .SYNOPSIS
+    Gets a ObjectChanges from Netbox
+.DESCRIPTION
+    Rerieves ObjectChanges objects from netbox and automatically flattens them and
+    preps them for further processing
+.EXAMPLE
+    Get-nbObjectChanges -id 22
+.EXAMPLE
+    Get-nbObjectChanges -query @{name='myObjectChanges'}
+.EXAMPLE
+    Get-nbObjectChanges myObjectChanges
+#>
+Function Get-nbObjectChanges {
+    [CmdletBinding(DefaultParameterSetName = 'query')]
+    Param (
+        # Simple string based search
+        [Parameter(ParameterSetName = 'query', Position = 0)]
+        [String]
+        $Search,
+
+        # ID of the object to set
+        [Parameter(Mandatory = $true, ParameterSetName = 'id', Position = 0)]
+        [Int]
+        $Id,
+
+        # Query to find what you want
+        [Parameter(ParameterSetName = 'query')]
+        [HashTable]
+        $Query,
+
+        # Don't flatten the object
+        [Parameter(ParameterSetName = 'id')]
+        [Parameter(ParameterSetName = 'query')]
+        [Switch]
+        $UnFlatten,
+
+        # API Url for running without connecting
+        [Parameter(ParameterSetName = 'id')]
+        [Parameter(ParameterSetName = 'query')]
+        [uri]
+        $APIUrl
+    )
+    $forward = @{
+        UnFlatten = $UnFlatten
+    }
+    if ($AdditionalParams) {
+        $forward += $AdditionalParams
+    }
+    if ($PSCmdlet.ParameterSetName -eq 'id') {
+        $forward['Resource'] = "extras/object-changes/$id"
+    } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
+        $forward['Resource'] = "extras/object-changes"
+        $forward['Query'] = $Query
+        $forward['Search'] = $search
+    }
+    if ($APIUrl) {
+        $forward['APIUrl'] = $APIUrl
+    }
+    Get-nbObject @forward
+}
+
+<#
+.SYNOPSIS
     Gets a DevicebayTemplate from Netbox
 .DESCRIPTION
     Rerieves DevicebayTemplate objects from netbox and automatically flattens them and

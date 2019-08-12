@@ -36,6 +36,7 @@ $Script:ResourceMap = @{
     Graph                     = 'extras/graphs'
     ImageAttachment           = 'extras/image-attachments'
     RecentActivity            = 'extras/recent-activity'
+    ObjectChanges             = 'extras/object-changes'
     Report                    = 'extras/reports'
     TopologyMap               = 'extras/topology-maps'
     Aggregate                 = 'ipam/aggregates'

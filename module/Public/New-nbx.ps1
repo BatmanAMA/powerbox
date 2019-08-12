@@ -1247,6 +1247,52 @@ Function New-nbVirtualChassis {
 
 <#
 .SYNOPSIS
+    Creates a new ObjectChanges in netbox
+.DESCRIPTION
+    This should handle mapping a simple hashtable of values and looking up any references.
+.EXAMPLE
+    $lookup = @{
+        device_type='dcim/device-types'
+        device_role='dcim/device-roles'
+        site='organization/sites'
+        status='dcim/_choices'
+    }
+    $ObjectChanges = @{
+        name = 'example'
+        serial = 'aka123457'
+        device_type = 'dl380-g9'
+        device_role = 'oracle'
+        site = 'chicago'
+        status = 'active'
+    }
+    New-nbObjectChanges -lookup $lookup -object $ObjectChanges
+#>
+Function New-nbObjectChanges {
+    Param (
+        # ObjectChanges to create
+        [Parameter(Mandatory = $true)]
+        $Object,
+
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [parameter()]
+        [hashtable]
+        $Lookup
+    )
+    $forward = @{
+        Object=$Object
+        CustomProperties=$CustomProperties
+        Lookup=$lookup
+    }
+    New-nbObject -Resource 'extras/object-changes' @forward
+}
+
+<#
+.SYNOPSIS
     Creates a new DevicebayTemplate in netbox
 .DESCRIPTION
     This should handle mapping a simple hashtable of values and looking up any references.

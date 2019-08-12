@@ -626,6 +626,29 @@ Function Remove-nbVirtualChassis {
 
 <#
 .SYNOPSIS
+    Deletes a ObjectChanges in Netbox
+.DESCRIPTION
+    Deletes a netbox ObjectChanges by ID or via the pipeline.
+.EXAMPLE
+    # Remove the ObjectChanges by id
+    Remove-nbObjectChanges -id 1
+.EXAMPLE
+    #Remove ObjectChanges returned from a get-nbObjectChanges
+    Get-NbObjectChanges -search mything.contoso.com -Resource 'virtualization/virtual-machines' |
+        Remove-nbObjectChanges -Resource 'virtualization/virtual-machines'
+#>
+Function Remove-nbObjectChanges {
+    Param (
+        # ID of the ObjectChanges to delete
+        [Parameter()]
+        [Int]
+        $Id
+    )
+    Remove-nbObject -Resource 'extras/object-changes' -id $id
+}
+
+<#
+.SYNOPSIS
     Deletes a DevicebayTemplate in Netbox
 .DESCRIPTION
     Deletes a netbox DevicebayTemplate by ID or via the pipeline.

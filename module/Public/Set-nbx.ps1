@@ -1625,6 +1625,66 @@ Function Set-nbVirtualChassis {
 
 <#
 .SYNOPSIS
+    Sets properties on a ObjectChanges in Netbox
+.DESCRIPTION
+    This should handle mapping a simple hashtable of values and looking up any references.
+.EXAMPLE
+    $lookup = @{
+        device_type='dcim/device-types'
+        device_role='dcim/device-roles'
+        site='organization/sites'
+        status='dcim/_choices'
+    }
+    $ObjectChanges = @{
+        name = 'example'
+        serial = 'aka123457'
+        device_type = 'dl380-g9'
+        device_role = 'oracle'
+        site = 'chicago'
+        status = 'active'
+    }
+    Set-nbObjectChanges -id 22 -lookup $lookup $ObjectChanges
+.EXAMPLE
+    Get-nbObjectChanges | Foreach {$_.site = 'Seattle'; $_} | Set-nbObjectChanges
+#>
+Function Set-nbObjectChanges {
+    Param (
+        # The ObjectChanges to set
+        [Parameter(Mandatory=$true)]
+        $object,
+
+        # ID of the ObjectChanges to set
+        [Parameter()]
+        [Int]
+        $Id,
+
+        # List of custom properties
+        [Parameter()]
+        [string[]]
+        $CustomProperties,
+
+        #List of properties to lookup
+        [Parameter()]
+        [hashtable]
+        $Lookup,
+
+        #Looks up the current object and only sets changed properties
+        [Parameter()]
+        [switch]
+        $Patch
+    )
+    $Forward = @{
+        Id               = $id
+        Object           = $object
+        CustomProperties = $CustomProperties
+        Lookup           = $lookup
+        Patch            = $patch
+    }
+    Set-nbObject -Resource 'extras/object-changes' @forward
+}
+
+<#
+.SYNOPSIS
     Sets properties on a DevicebayTemplate in Netbox
 .DESCRIPTION
     This should handle mapping a simple hashtable of values and looking up any references.

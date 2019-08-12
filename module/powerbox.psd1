@@ -12,7 +12,7 @@
     RootModule             = 'powerbox.psm1'
 
     # Version number of this module.
-    ModuleVersion          = '2.3.5'
+    ModuleVersion          = '2.3.6'
 
     # Supported PSEditions
     # CompatiblePSEditions = @()
