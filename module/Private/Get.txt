@@ -41,6 +41,9 @@ Function Get-nb|short| {
         [uri]
         $APIUrl
     )
+    trap {
+        $PSCmdlet.ThrowTerminatingError($_)
+    }
     $forward = @{
         UnFlatten = $UnFlatten
     }
