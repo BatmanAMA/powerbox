@@ -25,8 +25,11 @@ function Remove-nbObject {
         $Resource
     )
 
-
     process {
-        Invoke-nbApi -Resource "$Resource/$id" -HttpVerb Delete
+        try {
+            Invoke-nbApi -Resource "$Resource/$id" -HttpVerb Delete
+        } catch {
+            $PSCmdlet.ThrowTerminatingError($_)
+        }
     }
 }

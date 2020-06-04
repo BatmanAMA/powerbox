@@ -36,10 +36,14 @@ Function New-nb|short| {
         [hashtable]
         $Lookup
     )
-    $forward = @{
-        Object=$Object
-        CustomProperties=$CustomProperties
-        Lookup=$lookup
+    try {
+        $forward = @{
+            Object=$Object
+            CustomProperties=$CustomProperties
+            Lookup=$lookup
+        }
+        New-nbObject -Resource '|long|' @forward
+    } catch {
+        $PSCmdlet.ThrowTerminatingError($_)
     }
-    New-nbObject -Resource '|long|' @forward
 }

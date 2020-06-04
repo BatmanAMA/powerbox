@@ -51,6 +51,9 @@ function Get-nbObject {
         [uri]
         $APIUrl
     )
+    trap {
+        $PSCmdlet.ThrowTerminatingError($_)
+    }
     $params = @{}
     if ($AdditionalParams) {
         $params += $AdditionalParams

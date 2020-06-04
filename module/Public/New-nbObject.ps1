@@ -43,7 +43,7 @@ function New-nbObject {
         $Lookup,
 
         # you can specify properties as arguments to this command
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory = $true)]
         $Object,
 
         # Passthrough to invoke-nbapi
@@ -62,25 +62,29 @@ function New-nbObject {
         [uri]
         $APIUrl
     )
+    try {
+        $mapObject = @{custom_fields = @{} }
+        foreach ($property in $object.psobject.properties) {
+            $Name = $Property.name -replace '-' -replace ':'
+            $value = $Property.value
+            if ($name -in $lookup.keys) {
+                $value = ConvertTo-nbID -source $lookup[$name] -value $value
+            }
+            if ($name -in $CustomProperties) {
+                $mapObject.custom_fields[$name] = $value
+            }
+            elseif ($name -eq 'custom_fields') {
+                $mapObject.custom_fields += $value
+            }
+            else {
+                $mapObject[$name] = $value
+            }
+        }
+        $mapObject = New-Object -TypeName psobject -Property $mapObject
 
-    $mapObject = @{custom_fields = @{}}
-    foreach ($property in $object.psobject.properties) {
-        $Name = $Property.name -replace '-' -replace ':'
-        $value = $Property.value
-        if ($name -in $lookup.keys) {
-            $value = ConvertTo-nbID -source $lookup[$name] -value $value
-        }
-        if ($name -in $CustomProperties) {
-            $mapObject.custom_fields[$name] = $value
-        }
-        elseif ($name -eq 'custom_fields') {
-            $mapObject.custom_fields += $value
-        }
-        else {
-            $mapObject[$name] = $value
-        }
+        Invoke-nbApi -Resource $Resource -HttpVerb POST -Body ($mapObject | ConvertTo-Json -Compress)
     }
-    $mapObject = New-Object -TypeName psobject -Property $mapObject
-
-    Invoke-nbApi -Resource $Resource -HttpVerb POST -Body ($mapObject | ConvertTo-Json -Compress)
+    catch {
+        $PSCmdlet.ThrowTerminatingError($_)
+    }
 }

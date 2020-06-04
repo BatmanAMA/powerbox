@@ -48,12 +48,16 @@ Function Set-nb|short| {
         [switch]
         $Patch
     )
-    $Forward = @{
-        Id               = $id
-        Object           = $object
-        CustomProperties = $CustomProperties
-        Lookup           = $lookup
-        Patch            = $patch
+    try {
+        $Forward = @{
+            Id               = $id
+            Object           = $object
+            CustomProperties = $CustomProperties
+            Lookup           = $lookup
+            Patch            = $patch
+        }
+        Set-nbObject -Resource '|long|' @forward
+    } catch {
+        $PSCmdlet.ThrowTerminatingError($_)
     }
-    Set-nbObject -Resource '|long|' @forward
 }
