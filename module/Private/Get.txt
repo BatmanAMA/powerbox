@@ -41,24 +41,25 @@ Function Get-nb|short| {
         [uri]
         $APIUrl
     )
-    trap {
+    try {
+        $forward = @{
+            UnFlatten = $UnFlatten
+        }
+        if ($AdditionalParams) {
+            $forward += $AdditionalParams
+        }
+        if ($PSCmdlet.ParameterSetName -eq 'id') {
+            $forward['Resource'] = "|long|/$id"
+        } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
+            $forward['Resource'] = "|long|"
+            $forward['Query'] = $Query
+            $forward['Search'] = $search
+        }
+        if ($APIUrl) {
+            $forward['APIUrl'] = $APIUrl
+        }
+        Get-nbObject @forward
+    } catch {
         $PSCmdlet.ThrowTerminatingError($_)
     }
-    $forward = @{
-        UnFlatten = $UnFlatten
-    }
-    if ($AdditionalParams) {
-        $forward += $AdditionalParams
-    }
-    if ($PSCmdlet.ParameterSetName -eq 'id') {
-        $forward['Resource'] = "|long|/$id"
-    } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
-        $forward['Resource'] = "|long|"
-        $forward['Query'] = $Query
-        $forward['Search'] = $search
-    }
-    if ($APIUrl) {
-        $forward['APIUrl'] = $APIUrl
-    }
-    Get-nbObject @forward
 }

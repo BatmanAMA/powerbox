@@ -23,7 +23,11 @@ Function Remove-nbVlanGroup {
         [Int]
         $Id
     )
-    Remove-nbObject -Resource 'ipam/vlan-groups' -id $id
+    try {
+        Remove-nbObject -Resource 'ipam/vlan-groups' -id $id
+    } catch {
+        $PSCmdlet.ThrowTerminatingError($_)
+    }
 }
 
 <#
@@ -46,7 +50,11 @@ Function Remove-nbClusterGroup {
         [Int]
         $Id
     )
-    Remove-nbObject -Resource 'virtualization/cluster-groups' -id $id
+    try {
+        Remove-nbObject -Resource 'virtualization/cluster-groups' -id $id
+    } catch {
+        $PSCmdlet.ThrowTerminatingError($_)
+    }
 }
 
 <#
@@ -69,7 +77,11 @@ Function Remove-nbDeviceType {
         [Int]
         $Id
     )
-    Remove-nbObject -Resource 'dcim/device-types' -id $id
+    try {
+        Remove-nbObject -Resource 'dcim/device-types' -id $id
+    } catch {
+        $PSCmdlet.ThrowTerminatingError($_)
+    }
 }
 
 <#
@@ -92,7 +104,11 @@ Function Remove-nbPowerOutlet {
         [Int]
         $Id
     )
-    Remove-nbObject -Resource 'dcim/power-outlets' -id $id
+    try {
+        Remove-nbObject -Resource 'dcim/power-outlets' -id $id
+    } catch {
+        $PSCmdlet.ThrowTerminatingError($_)
+    }
 }
 
 <#
@@ -115,7 +131,11 @@ Function Remove-nbConnectedDevice {
         [Int]
         $Id
     )
-    Remove-nbObject -Resource 'dcim/connected-device' -id $id
+    try {
+        Remove-nbObject -Resource 'dcim/connected-device' -id $id
+    } catch {
+        $PSCmdlet.ThrowTerminatingError($_)
+    }
 }
 
 <#
@@ -138,7 +158,11 @@ Function Remove-nbRegion {
         [Int]
         $Id
     )
-    Remove-nbObject -Resource 'dcim/regions' -id $id
+    try {
+        Remove-nbObject -Resource 'dcim/regions' -id $id
+    } catch {
+        $PSCmdlet.ThrowTerminatingError($_)
+    }
 }
 
 <#
@@ -161,7 +185,11 @@ Function Remove-nbConsoleServerPortTemplate {
         [Int]
         $Id
     )
-    Remove-nbObject -Resource 'dcim/console-server-port-templates' -id $id
+    try {
+        Remove-nbObject -Resource 'dcim/console-server-port-templates' -id $id
+    } catch {
+        $PSCmdlet.ThrowTerminatingError($_)
+    }
 }
 
 <#
@@ -184,7 +212,11 @@ Function Remove-nbAggregate {
         [Int]
         $Id
     )
-    Remove-nbObject -Resource 'ipam/aggregates' -id $id
+    try {
+        Remove-nbObject -Resource 'ipam/aggregates' -id $id
+    } catch {
+        $PSCmdlet.ThrowTerminatingError($_)
+    }
 }
 
 <#
@@ -207,7 +239,11 @@ Function Remove-nbClusterType {
         [Int]
         $Id
     )
-    Remove-nbObject -Resource 'virtualization/cluster-types' -id $id
+    try {
+        Remove-nbObject -Resource 'virtualization/cluster-types' -id $id
+    } catch {
+        $PSCmdlet.ThrowTerminatingError($_)
+    }
 }
 
 <#
@@ -230,7 +266,11 @@ Function Remove-nbVlan {
         [Int]
         $Id
     )
-    Remove-nbObject -Resource 'ipam/vlans' -id $id
+    try {
+        Remove-nbObject -Resource 'ipam/vlans' -id $id
+    } catch {
+        $PSCmdlet.ThrowTerminatingError($_)
+    }
 }
 
 <#
@@ -253,7 +293,11 @@ Function Remove-nbProvider {
         [Int]
         $Id
     )
-    Remove-nbObject -Resource 'circuits/providers' -id $id
+    try {
+        Remove-nbObject -Resource 'circuits/providers' -id $id
+    } catch {
+        $PSCmdlet.ThrowTerminatingError($_)
+    }
 }
 
 <#
@@ -276,7 +320,11 @@ Function Remove-nbPowerConnection {
         [Int]
         $Id
     )
-    Remove-nbObject -Resource 'dcim/power-connections' -id $id
+    try {
+        Remove-nbObject -Resource 'dcim/power-connections' -id $id
+    } catch {
+        $PSCmdlet.ThrowTerminatingError($_)
+    }
 }
 
 <#
@@ -299,7 +347,11 @@ Function Remove-nbConsolePort {
         [Int]
         $Id
     )
-    Remove-nbObject -Resource 'dcim/console-ports' -id $id
+    try {
+        Remove-nbObject -Resource 'dcim/console-ports' -id $id
+    } catch {
+        $PSCmdlet.ThrowTerminatingError($_)
+    }
 }
 
 <#
@@ -322,7 +374,11 @@ Function Remove-nbVMInterface {
         [Int]
         $Id
     )
-    Remove-nbObject -Resource 'virtualization/interfaces' -id $id
+    try {
+        Remove-nbObject -Resource 'virtualization/interfaces' -id $id
+    } catch {
+        $PSCmdlet.ThrowTerminatingError($_)
+    }
 }
 
 <#
@@ -345,7 +401,11 @@ Function Remove-nbPlatform {
         [Int]
         $Id
     )
-    Remove-nbObject -Resource 'dcim/platforms' -id $id
+    try {
+        Remove-nbObject -Resource 'dcim/platforms' -id $id
+    } catch {
+        $PSCmdlet.ThrowTerminatingError($_)
+    }
 }
 
 <#
@@ -368,7 +428,11 @@ Function Remove-nbCircuit {
         [Int]
         $Id
     )
-    Remove-nbObject -Resource 'circuits/circuits' -id $id
+    try {
+        Remove-nbObject -Resource 'circuits/circuits' -id $id
+    } catch {
+        $PSCmdlet.ThrowTerminatingError($_)
+    }
 }
 
 <#
@@ -391,7 +455,11 @@ Function Remove-nbRackReservation {
         [Int]
         $Id
     )
-    Remove-nbObject -Resource 'dcim/rack-reservations' -id $id
+    try {
+        Remove-nbObject -Resource 'dcim/rack-reservations' -id $id
+    } catch {
+        $PSCmdlet.ThrowTerminatingError($_)
+    }
 }
 
 <#
@@ -414,7 +482,11 @@ Function Remove-nbTenantGroup {
         [Int]
         $Id
     )
-    Remove-nbObject -Resource 'tenancy/tenant-groups' -id $id
+    try {
+        Remove-nbObject -Resource 'tenancy/tenant-groups' -id $id
+    } catch {
+        $PSCmdlet.ThrowTerminatingError($_)
+    }
 }
 
 <#
@@ -437,7 +509,11 @@ Function Remove-nbDevicebay {
         [Int]
         $Id
     )
-    Remove-nbObject -Resource 'dcim/device-bays' -id $id
+    try {
+        Remove-nbObject -Resource 'dcim/device-bays' -id $id
+    } catch {
+        $PSCmdlet.ThrowTerminatingError($_)
+    }
 }
 
 <#
@@ -460,7 +536,11 @@ Function Remove-nbRir {
         [Int]
         $Id
     )
-    Remove-nbObject -Resource 'ipam/rirs' -id $id
+    try {
+        Remove-nbObject -Resource 'ipam/rirs' -id $id
+    } catch {
+        $PSCmdlet.ThrowTerminatingError($_)
+    }
 }
 
 <#
@@ -483,7 +563,11 @@ Function Remove-nbDevicebayTemplate {
         [Int]
         $Id
     )
-    Remove-nbObject -Resource 'dcim/device-bay-templates' -id $id
+    try {
+        Remove-nbObject -Resource 'dcim/device-bay-templates' -id $id
+    } catch {
+        $PSCmdlet.ThrowTerminatingError($_)
+    }
 }
 
 <#
@@ -506,7 +590,11 @@ Function Remove-nbGraph {
         [Int]
         $Id
     )
-    Remove-nbObject -Resource 'extras/graphs' -id $id
+    try {
+        Remove-nbObject -Resource 'extras/graphs' -id $id
+    } catch {
+        $PSCmdlet.ThrowTerminatingError($_)
+    }
 }
 
 <#
@@ -529,7 +617,11 @@ Function Remove-nbInterface {
         [Int]
         $Id
     )
-    Remove-nbObject -Resource 'dcim/interfaces' -id $id
+    try {
+        Remove-nbObject -Resource 'dcim/interfaces' -id $id
+    } catch {
+        $PSCmdlet.ThrowTerminatingError($_)
+    }
 }
 
 <#
@@ -552,7 +644,11 @@ Function Remove-nbInterfaceConnection {
         [Int]
         $Id
     )
-    Remove-nbObject -Resource 'dcim/interface-connections' -id $id
+    try {
+        Remove-nbObject -Resource 'dcim/interface-connections' -id $id
+    } catch {
+        $PSCmdlet.ThrowTerminatingError($_)
+    }
 }
 
 <#
@@ -575,7 +671,11 @@ Function Remove-nbRole {
         [Int]
         $Id
     )
-    Remove-nbObject -Resource 'ipam/roles' -id $id
+    try {
+        Remove-nbObject -Resource 'ipam/roles' -id $id
+    } catch {
+        $PSCmdlet.ThrowTerminatingError($_)
+    }
 }
 
 <#
@@ -598,7 +698,11 @@ Function Remove-nbImageAttachment {
         [Int]
         $Id
     )
-    Remove-nbObject -Resource 'extras/image-attachments' -id $id
+    try {
+        Remove-nbObject -Resource 'extras/image-attachments' -id $id
+    } catch {
+        $PSCmdlet.ThrowTerminatingError($_)
+    }
 }
 
 <#
@@ -621,7 +725,11 @@ Function Remove-nbRack {
         [Int]
         $Id
     )
-    Remove-nbObject -Resource 'dcim/racks' -id $id
+    try {
+        Remove-nbObject -Resource 'dcim/racks' -id $id
+    } catch {
+        $PSCmdlet.ThrowTerminatingError($_)
+    }
 }
 
 <#
@@ -644,7 +752,11 @@ Function Remove-nbConsolePortTemplate {
         [Int]
         $Id
     )
-    Remove-nbObject -Resource 'dcim/console-port-templates' -id $id
+    try {
+        Remove-nbObject -Resource 'dcim/console-port-templates' -id $id
+    } catch {
+        $PSCmdlet.ThrowTerminatingError($_)
+    }
 }
 
 <#
@@ -667,7 +779,11 @@ Function Remove-nbInterfaceTemplate {
         [Int]
         $Id
     )
-    Remove-nbObject -Resource 'dcim/interface-templates' -id $id
+    try {
+        Remove-nbObject -Resource 'dcim/interface-templates' -id $id
+    } catch {
+        $PSCmdlet.ThrowTerminatingError($_)
+    }
 }
 
 <#
@@ -690,7 +806,11 @@ Function Remove-nbExportTemplate {
         [Int]
         $Id
     )
-    Remove-nbObject -Resource 'extras/export-templates' -id $id
+    try {
+        Remove-nbObject -Resource 'extras/export-templates' -id $id
+    } catch {
+        $PSCmdlet.ThrowTerminatingError($_)
+    }
 }
 
 <#
@@ -713,7 +833,11 @@ Function Remove-nbCluster {
         [Int]
         $Id
     )
-    Remove-nbObject -Resource 'virtualization/clusters' -id $id
+    try {
+        Remove-nbObject -Resource 'virtualization/clusters' -id $id
+    } catch {
+        $PSCmdlet.ThrowTerminatingError($_)
+    }
 }
 
 <#
@@ -736,7 +860,11 @@ Function Remove-nbService {
         [Int]
         $Id
     )
-    Remove-nbObject -Resource 'ipam/services' -id $id
+    try {
+        Remove-nbObject -Resource 'ipam/services' -id $id
+    } catch {
+        $PSCmdlet.ThrowTerminatingError($_)
+    }
 }
 
 <#
@@ -759,7 +887,11 @@ Function Remove-nbRackRole {
         [Int]
         $Id
     )
-    Remove-nbObject -Resource 'dcim/rack-roles' -id $id
+    try {
+        Remove-nbObject -Resource 'dcim/rack-roles' -id $id
+    } catch {
+        $PSCmdlet.ThrowTerminatingError($_)
+    }
 }
 
 <#
@@ -782,7 +914,11 @@ Function Remove-nbCircuitType {
         [Int]
         $Id
     )
-    Remove-nbObject -Resource 'circuits/circuit-types' -id $id
+    try {
+        Remove-nbObject -Resource 'circuits/circuit-types' -id $id
+    } catch {
+        $PSCmdlet.ThrowTerminatingError($_)
+    }
 }
 
 <#
@@ -805,7 +941,11 @@ Function Remove-nbReport {
         [Int]
         $Id
     )
-    Remove-nbObject -Resource 'extras/reports' -id $id
+    try {
+        Remove-nbObject -Resource 'extras/reports' -id $id
+    } catch {
+        $PSCmdlet.ThrowTerminatingError($_)
+    }
 }
 
 <#
@@ -828,7 +968,11 @@ Function Remove-nbManufacturer {
         [Int]
         $Id
     )
-    Remove-nbObject -Resource 'dcim/manufacturers' -id $id
+    try {
+        Remove-nbObject -Resource 'dcim/manufacturers' -id $id
+    } catch {
+        $PSCmdlet.ThrowTerminatingError($_)
+    }
 }
 
 <#
@@ -851,7 +995,11 @@ Function Remove-nbRackGroup {
         [Int]
         $Id
     )
-    Remove-nbObject -Resource 'dcim/rack-groups' -id $id
+    try {
+        Remove-nbObject -Resource 'dcim/rack-groups' -id $id
+    } catch {
+        $PSCmdlet.ThrowTerminatingError($_)
+    }
 }
 
 <#
@@ -874,7 +1022,11 @@ Function Remove-nbIpAddress {
         [Int]
         $Id
     )
-    Remove-nbObject -Resource 'ipam/ip-addresses' -id $id
+    try {
+        Remove-nbObject -Resource 'ipam/ip-addresses' -id $id
+    } catch {
+        $PSCmdlet.ThrowTerminatingError($_)
+    }
 }
 
 <#
@@ -897,7 +1049,11 @@ Function Remove-nbVrf {
         [Int]
         $Id
     )
-    Remove-nbObject -Resource 'ipam/vrfs' -id $id
+    try {
+        Remove-nbObject -Resource 'ipam/vrfs' -id $id
+    } catch {
+        $PSCmdlet.ThrowTerminatingError($_)
+    }
 }
 
 <#
@@ -920,7 +1076,11 @@ Function Remove-nbDevice {
         [Int]
         $Id
     )
-    Remove-nbObject -Resource 'dcim/devices' -id $id
+    try {
+        Remove-nbObject -Resource 'dcim/devices' -id $id
+    } catch {
+        $PSCmdlet.ThrowTerminatingError($_)
+    }
 }
 
 <#
@@ -943,7 +1103,11 @@ Function Remove-nbTenant {
         [Int]
         $Id
     )
-    Remove-nbObject -Resource 'tenancy/tenants' -id $id
+    try {
+        Remove-nbObject -Resource 'tenancy/tenants' -id $id
+    } catch {
+        $PSCmdlet.ThrowTerminatingError($_)
+    }
 }
 
 <#
@@ -966,7 +1130,11 @@ Function Remove-nbPowerOutletTemplate {
         [Int]
         $Id
     )
-    Remove-nbObject -Resource 'dcim/power-outlet-templates' -id $id
+    try {
+        Remove-nbObject -Resource 'dcim/power-outlet-templates' -id $id
+    } catch {
+        $PSCmdlet.ThrowTerminatingError($_)
+    }
 }
 
 <#
@@ -989,7 +1157,11 @@ Function Remove-nbInventoryItem {
         [Int]
         $Id
     )
-    Remove-nbObject -Resource 'dcim/inventory-items' -id $id
+    try {
+        Remove-nbObject -Resource 'dcim/inventory-items' -id $id
+    } catch {
+        $PSCmdlet.ThrowTerminatingError($_)
+    }
 }
 
 <#
@@ -1012,7 +1184,11 @@ Function Remove-nbConsoleServerPort {
         [Int]
         $Id
     )
-    Remove-nbObject -Resource 'dcim/console-server-ports' -id $id
+    try {
+        Remove-nbObject -Resource 'dcim/console-server-ports' -id $id
+    } catch {
+        $PSCmdlet.ThrowTerminatingError($_)
+    }
 }
 
 <#
@@ -1035,7 +1211,11 @@ Function Remove-nbVirtualChassis {
         [Int]
         $Id
     )
-    Remove-nbObject -Resource 'dcim/virtual-chassis' -id $id
+    try {
+        Remove-nbObject -Resource 'dcim/virtual-chassis' -id $id
+    } catch {
+        $PSCmdlet.ThrowTerminatingError($_)
+    }
 }
 
 <#
@@ -1058,7 +1238,11 @@ Function Remove-nbVirtualMachine {
         [Int]
         $Id
     )
-    Remove-nbObject -Resource 'virtualization/virtual-machines' -id $id
+    try {
+        Remove-nbObject -Resource 'virtualization/virtual-machines' -id $id
+    } catch {
+        $PSCmdlet.ThrowTerminatingError($_)
+    }
 }
 
 <#
@@ -1081,7 +1265,11 @@ Function Remove-nbPowerPort {
         [Int]
         $Id
     )
-    Remove-nbObject -Resource 'dcim/power-ports' -id $id
+    try {
+        Remove-nbObject -Resource 'dcim/power-ports' -id $id
+    } catch {
+        $PSCmdlet.ThrowTerminatingError($_)
+    }
 }
 
 <#
@@ -1104,7 +1292,11 @@ Function Remove-nbPowerPortTemplate {
         [Int]
         $Id
     )
-    Remove-nbObject -Resource 'dcim/power-port-templates' -id $id
+    try {
+        Remove-nbObject -Resource 'dcim/power-port-templates' -id $id
+    } catch {
+        $PSCmdlet.ThrowTerminatingError($_)
+    }
 }
 
 <#
@@ -1127,7 +1319,11 @@ Function Remove-nbConsoleConnection {
         [Int]
         $Id
     )
-    Remove-nbObject -Resource 'dcim/console-connections' -id $id
+    try {
+        Remove-nbObject -Resource 'dcim/console-connections' -id $id
+    } catch {
+        $PSCmdlet.ThrowTerminatingError($_)
+    }
 }
 
 <#
@@ -1150,7 +1346,11 @@ Function Remove-nbTopologyMap {
         [Int]
         $Id
     )
-    Remove-nbObject -Resource 'extras/topology-maps' -id $id
+    try {
+        Remove-nbObject -Resource 'extras/topology-maps' -id $id
+    } catch {
+        $PSCmdlet.ThrowTerminatingError($_)
+    }
 }
 
 <#
@@ -1173,7 +1373,11 @@ Function Remove-nbCircuitTermination {
         [Int]
         $Id
     )
-    Remove-nbObject -Resource 'circuits/circuit-terminations' -id $id
+    try {
+        Remove-nbObject -Resource 'circuits/circuit-terminations' -id $id
+    } catch {
+        $PSCmdlet.ThrowTerminatingError($_)
+    }
 }
 
 <#
@@ -1196,7 +1400,11 @@ Function Remove-nbRecentActivity {
         [Int]
         $Id
     )
-    Remove-nbObject -Resource 'extras/recent-activity' -id $id
+    try {
+        Remove-nbObject -Resource 'extras/recent-activity' -id $id
+    } catch {
+        $PSCmdlet.ThrowTerminatingError($_)
+    }
 }
 
 <#
@@ -1219,7 +1427,11 @@ Function Remove-nbPrefix {
         [Int]
         $Id
     )
-    Remove-nbObject -Resource 'ipam/prefixes' -id $id
+    try {
+        Remove-nbObject -Resource 'ipam/prefixes' -id $id
+    } catch {
+        $PSCmdlet.ThrowTerminatingError($_)
+    }
 }
 
 <#
@@ -1242,7 +1454,11 @@ Function Remove-nbDeviceRole {
         [Int]
         $Id
     )
-    Remove-nbObject -Resource 'dcim/device-roles' -id $id
+    try {
+        Remove-nbObject -Resource 'dcim/device-roles' -id $id
+    } catch {
+        $PSCmdlet.ThrowTerminatingError($_)
+    }
 }
 
 <#
@@ -1265,6 +1481,10 @@ Function Remove-nbSite {
         [Int]
         $Id
     )
-    Remove-nbObject -Resource 'dcim/sites' -id $id
+    try {
+        Remove-nbObject -Resource 'dcim/sites' -id $id
+    } catch {
+        $PSCmdlet.ThrowTerminatingError($_)
+    }
 }
 

@@ -18,5 +18,9 @@ Function Remove-nb|short| {
         [Int]
         $Id
     )
-    Remove-nbObject -Resource '|long|' -id $id
+    try {
+        Remove-nbObject -Resource '|long|' -id $id
+    } catch {
+        $PSCmdlet.ThrowTerminatingError($_)
+    }
 }

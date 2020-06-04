@@ -46,26 +46,27 @@ Function Get-nbVlanGroup {
         [uri]
         $APIUrl
     )
-    trap {
+    try {
+        $forward = @{
+            UnFlatten = $UnFlatten
+        }
+        if ($AdditionalParams) {
+            $forward += $AdditionalParams
+        }
+        if ($PSCmdlet.ParameterSetName -eq 'id') {
+            $forward['Resource'] = "ipam/vlan-groups/$id"
+        } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
+            $forward['Resource'] = "ipam/vlan-groups"
+            $forward['Query'] = $Query
+            $forward['Search'] = $search
+        }
+        if ($APIUrl) {
+            $forward['APIUrl'] = $APIUrl
+        }
+        Get-nbObject @forward
+    } catch {
         $PSCmdlet.ThrowTerminatingError($_)
     }
-    $forward = @{
-        UnFlatten = $UnFlatten
-    }
-    if ($AdditionalParams) {
-        $forward += $AdditionalParams
-    }
-    if ($PSCmdlet.ParameterSetName -eq 'id') {
-        $forward['Resource'] = "ipam/vlan-groups/$id"
-    } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
-        $forward['Resource'] = "ipam/vlan-groups"
-        $forward['Query'] = $Query
-        $forward['Search'] = $search
-    }
-    if ($APIUrl) {
-        $forward['APIUrl'] = $APIUrl
-    }
-    Get-nbObject @forward
 }
 
 <#
@@ -111,26 +112,27 @@ Function Get-nbClusterGroup {
         [uri]
         $APIUrl
     )
-    trap {
+    try {
+        $forward = @{
+            UnFlatten = $UnFlatten
+        }
+        if ($AdditionalParams) {
+            $forward += $AdditionalParams
+        }
+        if ($PSCmdlet.ParameterSetName -eq 'id') {
+            $forward['Resource'] = "virtualization/cluster-groups/$id"
+        } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
+            $forward['Resource'] = "virtualization/cluster-groups"
+            $forward['Query'] = $Query
+            $forward['Search'] = $search
+        }
+        if ($APIUrl) {
+            $forward['APIUrl'] = $APIUrl
+        }
+        Get-nbObject @forward
+    } catch {
         $PSCmdlet.ThrowTerminatingError($_)
     }
-    $forward = @{
-        UnFlatten = $UnFlatten
-    }
-    if ($AdditionalParams) {
-        $forward += $AdditionalParams
-    }
-    if ($PSCmdlet.ParameterSetName -eq 'id') {
-        $forward['Resource'] = "virtualization/cluster-groups/$id"
-    } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
-        $forward['Resource'] = "virtualization/cluster-groups"
-        $forward['Query'] = $Query
-        $forward['Search'] = $search
-    }
-    if ($APIUrl) {
-        $forward['APIUrl'] = $APIUrl
-    }
-    Get-nbObject @forward
 }
 
 <#
@@ -176,26 +178,27 @@ Function Get-nbDeviceType {
         [uri]
         $APIUrl
     )
-    trap {
+    try {
+        $forward = @{
+            UnFlatten = $UnFlatten
+        }
+        if ($AdditionalParams) {
+            $forward += $AdditionalParams
+        }
+        if ($PSCmdlet.ParameterSetName -eq 'id') {
+            $forward['Resource'] = "dcim/device-types/$id"
+        } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
+            $forward['Resource'] = "dcim/device-types"
+            $forward['Query'] = $Query
+            $forward['Search'] = $search
+        }
+        if ($APIUrl) {
+            $forward['APIUrl'] = $APIUrl
+        }
+        Get-nbObject @forward
+    } catch {
         $PSCmdlet.ThrowTerminatingError($_)
     }
-    $forward = @{
-        UnFlatten = $UnFlatten
-    }
-    if ($AdditionalParams) {
-        $forward += $AdditionalParams
-    }
-    if ($PSCmdlet.ParameterSetName -eq 'id') {
-        $forward['Resource'] = "dcim/device-types/$id"
-    } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
-        $forward['Resource'] = "dcim/device-types"
-        $forward['Query'] = $Query
-        $forward['Search'] = $search
-    }
-    if ($APIUrl) {
-        $forward['APIUrl'] = $APIUrl
-    }
-    Get-nbObject @forward
 }
 
 <#
@@ -241,26 +244,27 @@ Function Get-nbPowerOutlet {
         [uri]
         $APIUrl
     )
-    trap {
+    try {
+        $forward = @{
+            UnFlatten = $UnFlatten
+        }
+        if ($AdditionalParams) {
+            $forward += $AdditionalParams
+        }
+        if ($PSCmdlet.ParameterSetName -eq 'id') {
+            $forward['Resource'] = "dcim/power-outlets/$id"
+        } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
+            $forward['Resource'] = "dcim/power-outlets"
+            $forward['Query'] = $Query
+            $forward['Search'] = $search
+        }
+        if ($APIUrl) {
+            $forward['APIUrl'] = $APIUrl
+        }
+        Get-nbObject @forward
+    } catch {
         $PSCmdlet.ThrowTerminatingError($_)
     }
-    $forward = @{
-        UnFlatten = $UnFlatten
-    }
-    if ($AdditionalParams) {
-        $forward += $AdditionalParams
-    }
-    if ($PSCmdlet.ParameterSetName -eq 'id') {
-        $forward['Resource'] = "dcim/power-outlets/$id"
-    } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
-        $forward['Resource'] = "dcim/power-outlets"
-        $forward['Query'] = $Query
-        $forward['Search'] = $search
-    }
-    if ($APIUrl) {
-        $forward['APIUrl'] = $APIUrl
-    }
-    Get-nbObject @forward
 }
 
 <#
@@ -306,26 +310,27 @@ Function Get-nbConnectedDevice {
         [uri]
         $APIUrl
     )
-    trap {
+    try {
+        $forward = @{
+            UnFlatten = $UnFlatten
+        }
+        if ($AdditionalParams) {
+            $forward += $AdditionalParams
+        }
+        if ($PSCmdlet.ParameterSetName -eq 'id') {
+            $forward['Resource'] = "dcim/connected-device/$id"
+        } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
+            $forward['Resource'] = "dcim/connected-device"
+            $forward['Query'] = $Query
+            $forward['Search'] = $search
+        }
+        if ($APIUrl) {
+            $forward['APIUrl'] = $APIUrl
+        }
+        Get-nbObject @forward
+    } catch {
         $PSCmdlet.ThrowTerminatingError($_)
     }
-    $forward = @{
-        UnFlatten = $UnFlatten
-    }
-    if ($AdditionalParams) {
-        $forward += $AdditionalParams
-    }
-    if ($PSCmdlet.ParameterSetName -eq 'id') {
-        $forward['Resource'] = "dcim/connected-device/$id"
-    } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
-        $forward['Resource'] = "dcim/connected-device"
-        $forward['Query'] = $Query
-        $forward['Search'] = $search
-    }
-    if ($APIUrl) {
-        $forward['APIUrl'] = $APIUrl
-    }
-    Get-nbObject @forward
 }
 
 <#
@@ -371,26 +376,27 @@ Function Get-nbRegion {
         [uri]
         $APIUrl
     )
-    trap {
+    try {
+        $forward = @{
+            UnFlatten = $UnFlatten
+        }
+        if ($AdditionalParams) {
+            $forward += $AdditionalParams
+        }
+        if ($PSCmdlet.ParameterSetName -eq 'id') {
+            $forward['Resource'] = "dcim/regions/$id"
+        } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
+            $forward['Resource'] = "dcim/regions"
+            $forward['Query'] = $Query
+            $forward['Search'] = $search
+        }
+        if ($APIUrl) {
+            $forward['APIUrl'] = $APIUrl
+        }
+        Get-nbObject @forward
+    } catch {
         $PSCmdlet.ThrowTerminatingError($_)
     }
-    $forward = @{
-        UnFlatten = $UnFlatten
-    }
-    if ($AdditionalParams) {
-        $forward += $AdditionalParams
-    }
-    if ($PSCmdlet.ParameterSetName -eq 'id') {
-        $forward['Resource'] = "dcim/regions/$id"
-    } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
-        $forward['Resource'] = "dcim/regions"
-        $forward['Query'] = $Query
-        $forward['Search'] = $search
-    }
-    if ($APIUrl) {
-        $forward['APIUrl'] = $APIUrl
-    }
-    Get-nbObject @forward
 }
 
 <#
@@ -436,26 +442,27 @@ Function Get-nbConsoleServerPortTemplate {
         [uri]
         $APIUrl
     )
-    trap {
+    try {
+        $forward = @{
+            UnFlatten = $UnFlatten
+        }
+        if ($AdditionalParams) {
+            $forward += $AdditionalParams
+        }
+        if ($PSCmdlet.ParameterSetName -eq 'id') {
+            $forward['Resource'] = "dcim/console-server-port-templates/$id"
+        } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
+            $forward['Resource'] = "dcim/console-server-port-templates"
+            $forward['Query'] = $Query
+            $forward['Search'] = $search
+        }
+        if ($APIUrl) {
+            $forward['APIUrl'] = $APIUrl
+        }
+        Get-nbObject @forward
+    } catch {
         $PSCmdlet.ThrowTerminatingError($_)
     }
-    $forward = @{
-        UnFlatten = $UnFlatten
-    }
-    if ($AdditionalParams) {
-        $forward += $AdditionalParams
-    }
-    if ($PSCmdlet.ParameterSetName -eq 'id') {
-        $forward['Resource'] = "dcim/console-server-port-templates/$id"
-    } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
-        $forward['Resource'] = "dcim/console-server-port-templates"
-        $forward['Query'] = $Query
-        $forward['Search'] = $search
-    }
-    if ($APIUrl) {
-        $forward['APIUrl'] = $APIUrl
-    }
-    Get-nbObject @forward
 }
 
 <#
@@ -501,26 +508,27 @@ Function Get-nbAggregate {
         [uri]
         $APIUrl
     )
-    trap {
+    try {
+        $forward = @{
+            UnFlatten = $UnFlatten
+        }
+        if ($AdditionalParams) {
+            $forward += $AdditionalParams
+        }
+        if ($PSCmdlet.ParameterSetName -eq 'id') {
+            $forward['Resource'] = "ipam/aggregates/$id"
+        } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
+            $forward['Resource'] = "ipam/aggregates"
+            $forward['Query'] = $Query
+            $forward['Search'] = $search
+        }
+        if ($APIUrl) {
+            $forward['APIUrl'] = $APIUrl
+        }
+        Get-nbObject @forward
+    } catch {
         $PSCmdlet.ThrowTerminatingError($_)
     }
-    $forward = @{
-        UnFlatten = $UnFlatten
-    }
-    if ($AdditionalParams) {
-        $forward += $AdditionalParams
-    }
-    if ($PSCmdlet.ParameterSetName -eq 'id') {
-        $forward['Resource'] = "ipam/aggregates/$id"
-    } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
-        $forward['Resource'] = "ipam/aggregates"
-        $forward['Query'] = $Query
-        $forward['Search'] = $search
-    }
-    if ($APIUrl) {
-        $forward['APIUrl'] = $APIUrl
-    }
-    Get-nbObject @forward
 }
 
 <#
@@ -566,26 +574,27 @@ Function Get-nbClusterType {
         [uri]
         $APIUrl
     )
-    trap {
+    try {
+        $forward = @{
+            UnFlatten = $UnFlatten
+        }
+        if ($AdditionalParams) {
+            $forward += $AdditionalParams
+        }
+        if ($PSCmdlet.ParameterSetName -eq 'id') {
+            $forward['Resource'] = "virtualization/cluster-types/$id"
+        } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
+            $forward['Resource'] = "virtualization/cluster-types"
+            $forward['Query'] = $Query
+            $forward['Search'] = $search
+        }
+        if ($APIUrl) {
+            $forward['APIUrl'] = $APIUrl
+        }
+        Get-nbObject @forward
+    } catch {
         $PSCmdlet.ThrowTerminatingError($_)
     }
-    $forward = @{
-        UnFlatten = $UnFlatten
-    }
-    if ($AdditionalParams) {
-        $forward += $AdditionalParams
-    }
-    if ($PSCmdlet.ParameterSetName -eq 'id') {
-        $forward['Resource'] = "virtualization/cluster-types/$id"
-    } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
-        $forward['Resource'] = "virtualization/cluster-types"
-        $forward['Query'] = $Query
-        $forward['Search'] = $search
-    }
-    if ($APIUrl) {
-        $forward['APIUrl'] = $APIUrl
-    }
-    Get-nbObject @forward
 }
 
 <#
@@ -631,26 +640,27 @@ Function Get-nbVlan {
         [uri]
         $APIUrl
     )
-    trap {
+    try {
+        $forward = @{
+            UnFlatten = $UnFlatten
+        }
+        if ($AdditionalParams) {
+            $forward += $AdditionalParams
+        }
+        if ($PSCmdlet.ParameterSetName -eq 'id') {
+            $forward['Resource'] = "ipam/vlans/$id"
+        } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
+            $forward['Resource'] = "ipam/vlans"
+            $forward['Query'] = $Query
+            $forward['Search'] = $search
+        }
+        if ($APIUrl) {
+            $forward['APIUrl'] = $APIUrl
+        }
+        Get-nbObject @forward
+    } catch {
         $PSCmdlet.ThrowTerminatingError($_)
     }
-    $forward = @{
-        UnFlatten = $UnFlatten
-    }
-    if ($AdditionalParams) {
-        $forward += $AdditionalParams
-    }
-    if ($PSCmdlet.ParameterSetName -eq 'id') {
-        $forward['Resource'] = "ipam/vlans/$id"
-    } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
-        $forward['Resource'] = "ipam/vlans"
-        $forward['Query'] = $Query
-        $forward['Search'] = $search
-    }
-    if ($APIUrl) {
-        $forward['APIUrl'] = $APIUrl
-    }
-    Get-nbObject @forward
 }
 
 <#
@@ -696,26 +706,27 @@ Function Get-nbProvider {
         [uri]
         $APIUrl
     )
-    trap {
+    try {
+        $forward = @{
+            UnFlatten = $UnFlatten
+        }
+        if ($AdditionalParams) {
+            $forward += $AdditionalParams
+        }
+        if ($PSCmdlet.ParameterSetName -eq 'id') {
+            $forward['Resource'] = "circuits/providers/$id"
+        } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
+            $forward['Resource'] = "circuits/providers"
+            $forward['Query'] = $Query
+            $forward['Search'] = $search
+        }
+        if ($APIUrl) {
+            $forward['APIUrl'] = $APIUrl
+        }
+        Get-nbObject @forward
+    } catch {
         $PSCmdlet.ThrowTerminatingError($_)
     }
-    $forward = @{
-        UnFlatten = $UnFlatten
-    }
-    if ($AdditionalParams) {
-        $forward += $AdditionalParams
-    }
-    if ($PSCmdlet.ParameterSetName -eq 'id') {
-        $forward['Resource'] = "circuits/providers/$id"
-    } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
-        $forward['Resource'] = "circuits/providers"
-        $forward['Query'] = $Query
-        $forward['Search'] = $search
-    }
-    if ($APIUrl) {
-        $forward['APIUrl'] = $APIUrl
-    }
-    Get-nbObject @forward
 }
 
 <#
@@ -761,26 +772,27 @@ Function Get-nbPowerConnection {
         [uri]
         $APIUrl
     )
-    trap {
+    try {
+        $forward = @{
+            UnFlatten = $UnFlatten
+        }
+        if ($AdditionalParams) {
+            $forward += $AdditionalParams
+        }
+        if ($PSCmdlet.ParameterSetName -eq 'id') {
+            $forward['Resource'] = "dcim/power-connections/$id"
+        } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
+            $forward['Resource'] = "dcim/power-connections"
+            $forward['Query'] = $Query
+            $forward['Search'] = $search
+        }
+        if ($APIUrl) {
+            $forward['APIUrl'] = $APIUrl
+        }
+        Get-nbObject @forward
+    } catch {
         $PSCmdlet.ThrowTerminatingError($_)
     }
-    $forward = @{
-        UnFlatten = $UnFlatten
-    }
-    if ($AdditionalParams) {
-        $forward += $AdditionalParams
-    }
-    if ($PSCmdlet.ParameterSetName -eq 'id') {
-        $forward['Resource'] = "dcim/power-connections/$id"
-    } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
-        $forward['Resource'] = "dcim/power-connections"
-        $forward['Query'] = $Query
-        $forward['Search'] = $search
-    }
-    if ($APIUrl) {
-        $forward['APIUrl'] = $APIUrl
-    }
-    Get-nbObject @forward
 }
 
 <#
@@ -826,26 +838,27 @@ Function Get-nbConsolePort {
         [uri]
         $APIUrl
     )
-    trap {
+    try {
+        $forward = @{
+            UnFlatten = $UnFlatten
+        }
+        if ($AdditionalParams) {
+            $forward += $AdditionalParams
+        }
+        if ($PSCmdlet.ParameterSetName -eq 'id') {
+            $forward['Resource'] = "dcim/console-ports/$id"
+        } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
+            $forward['Resource'] = "dcim/console-ports"
+            $forward['Query'] = $Query
+            $forward['Search'] = $search
+        }
+        if ($APIUrl) {
+            $forward['APIUrl'] = $APIUrl
+        }
+        Get-nbObject @forward
+    } catch {
         $PSCmdlet.ThrowTerminatingError($_)
     }
-    $forward = @{
-        UnFlatten = $UnFlatten
-    }
-    if ($AdditionalParams) {
-        $forward += $AdditionalParams
-    }
-    if ($PSCmdlet.ParameterSetName -eq 'id') {
-        $forward['Resource'] = "dcim/console-ports/$id"
-    } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
-        $forward['Resource'] = "dcim/console-ports"
-        $forward['Query'] = $Query
-        $forward['Search'] = $search
-    }
-    if ($APIUrl) {
-        $forward['APIUrl'] = $APIUrl
-    }
-    Get-nbObject @forward
 }
 
 <#
@@ -891,26 +904,27 @@ Function Get-nbVMInterface {
         [uri]
         $APIUrl
     )
-    trap {
+    try {
+        $forward = @{
+            UnFlatten = $UnFlatten
+        }
+        if ($AdditionalParams) {
+            $forward += $AdditionalParams
+        }
+        if ($PSCmdlet.ParameterSetName -eq 'id') {
+            $forward['Resource'] = "virtualization/interfaces/$id"
+        } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
+            $forward['Resource'] = "virtualization/interfaces"
+            $forward['Query'] = $Query
+            $forward['Search'] = $search
+        }
+        if ($APIUrl) {
+            $forward['APIUrl'] = $APIUrl
+        }
+        Get-nbObject @forward
+    } catch {
         $PSCmdlet.ThrowTerminatingError($_)
     }
-    $forward = @{
-        UnFlatten = $UnFlatten
-    }
-    if ($AdditionalParams) {
-        $forward += $AdditionalParams
-    }
-    if ($PSCmdlet.ParameterSetName -eq 'id') {
-        $forward['Resource'] = "virtualization/interfaces/$id"
-    } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
-        $forward['Resource'] = "virtualization/interfaces"
-        $forward['Query'] = $Query
-        $forward['Search'] = $search
-    }
-    if ($APIUrl) {
-        $forward['APIUrl'] = $APIUrl
-    }
-    Get-nbObject @forward
 }
 
 <#
@@ -956,26 +970,27 @@ Function Get-nbPlatform {
         [uri]
         $APIUrl
     )
-    trap {
+    try {
+        $forward = @{
+            UnFlatten = $UnFlatten
+        }
+        if ($AdditionalParams) {
+            $forward += $AdditionalParams
+        }
+        if ($PSCmdlet.ParameterSetName -eq 'id') {
+            $forward['Resource'] = "dcim/platforms/$id"
+        } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
+            $forward['Resource'] = "dcim/platforms"
+            $forward['Query'] = $Query
+            $forward['Search'] = $search
+        }
+        if ($APIUrl) {
+            $forward['APIUrl'] = $APIUrl
+        }
+        Get-nbObject @forward
+    } catch {
         $PSCmdlet.ThrowTerminatingError($_)
     }
-    $forward = @{
-        UnFlatten = $UnFlatten
-    }
-    if ($AdditionalParams) {
-        $forward += $AdditionalParams
-    }
-    if ($PSCmdlet.ParameterSetName -eq 'id') {
-        $forward['Resource'] = "dcim/platforms/$id"
-    } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
-        $forward['Resource'] = "dcim/platforms"
-        $forward['Query'] = $Query
-        $forward['Search'] = $search
-    }
-    if ($APIUrl) {
-        $forward['APIUrl'] = $APIUrl
-    }
-    Get-nbObject @forward
 }
 
 <#
@@ -1021,26 +1036,27 @@ Function Get-nbCircuit {
         [uri]
         $APIUrl
     )
-    trap {
+    try {
+        $forward = @{
+            UnFlatten = $UnFlatten
+        }
+        if ($AdditionalParams) {
+            $forward += $AdditionalParams
+        }
+        if ($PSCmdlet.ParameterSetName -eq 'id') {
+            $forward['Resource'] = "circuits/circuits/$id"
+        } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
+            $forward['Resource'] = "circuits/circuits"
+            $forward['Query'] = $Query
+            $forward['Search'] = $search
+        }
+        if ($APIUrl) {
+            $forward['APIUrl'] = $APIUrl
+        }
+        Get-nbObject @forward
+    } catch {
         $PSCmdlet.ThrowTerminatingError($_)
     }
-    $forward = @{
-        UnFlatten = $UnFlatten
-    }
-    if ($AdditionalParams) {
-        $forward += $AdditionalParams
-    }
-    if ($PSCmdlet.ParameterSetName -eq 'id') {
-        $forward['Resource'] = "circuits/circuits/$id"
-    } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
-        $forward['Resource'] = "circuits/circuits"
-        $forward['Query'] = $Query
-        $forward['Search'] = $search
-    }
-    if ($APIUrl) {
-        $forward['APIUrl'] = $APIUrl
-    }
-    Get-nbObject @forward
 }
 
 <#
@@ -1086,26 +1102,27 @@ Function Get-nbRackReservation {
         [uri]
         $APIUrl
     )
-    trap {
+    try {
+        $forward = @{
+            UnFlatten = $UnFlatten
+        }
+        if ($AdditionalParams) {
+            $forward += $AdditionalParams
+        }
+        if ($PSCmdlet.ParameterSetName -eq 'id') {
+            $forward['Resource'] = "dcim/rack-reservations/$id"
+        } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
+            $forward['Resource'] = "dcim/rack-reservations"
+            $forward['Query'] = $Query
+            $forward['Search'] = $search
+        }
+        if ($APIUrl) {
+            $forward['APIUrl'] = $APIUrl
+        }
+        Get-nbObject @forward
+    } catch {
         $PSCmdlet.ThrowTerminatingError($_)
     }
-    $forward = @{
-        UnFlatten = $UnFlatten
-    }
-    if ($AdditionalParams) {
-        $forward += $AdditionalParams
-    }
-    if ($PSCmdlet.ParameterSetName -eq 'id') {
-        $forward['Resource'] = "dcim/rack-reservations/$id"
-    } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
-        $forward['Resource'] = "dcim/rack-reservations"
-        $forward['Query'] = $Query
-        $forward['Search'] = $search
-    }
-    if ($APIUrl) {
-        $forward['APIUrl'] = $APIUrl
-    }
-    Get-nbObject @forward
 }
 
 <#
@@ -1151,26 +1168,27 @@ Function Get-nbTenantGroup {
         [uri]
         $APIUrl
     )
-    trap {
+    try {
+        $forward = @{
+            UnFlatten = $UnFlatten
+        }
+        if ($AdditionalParams) {
+            $forward += $AdditionalParams
+        }
+        if ($PSCmdlet.ParameterSetName -eq 'id') {
+            $forward['Resource'] = "tenancy/tenant-groups/$id"
+        } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
+            $forward['Resource'] = "tenancy/tenant-groups"
+            $forward['Query'] = $Query
+            $forward['Search'] = $search
+        }
+        if ($APIUrl) {
+            $forward['APIUrl'] = $APIUrl
+        }
+        Get-nbObject @forward
+    } catch {
         $PSCmdlet.ThrowTerminatingError($_)
     }
-    $forward = @{
-        UnFlatten = $UnFlatten
-    }
-    if ($AdditionalParams) {
-        $forward += $AdditionalParams
-    }
-    if ($PSCmdlet.ParameterSetName -eq 'id') {
-        $forward['Resource'] = "tenancy/tenant-groups/$id"
-    } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
-        $forward['Resource'] = "tenancy/tenant-groups"
-        $forward['Query'] = $Query
-        $forward['Search'] = $search
-    }
-    if ($APIUrl) {
-        $forward['APIUrl'] = $APIUrl
-    }
-    Get-nbObject @forward
 }
 
 <#
@@ -1216,26 +1234,27 @@ Function Get-nbDevicebay {
         [uri]
         $APIUrl
     )
-    trap {
+    try {
+        $forward = @{
+            UnFlatten = $UnFlatten
+        }
+        if ($AdditionalParams) {
+            $forward += $AdditionalParams
+        }
+        if ($PSCmdlet.ParameterSetName -eq 'id') {
+            $forward['Resource'] = "dcim/device-bays/$id"
+        } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
+            $forward['Resource'] = "dcim/device-bays"
+            $forward['Query'] = $Query
+            $forward['Search'] = $search
+        }
+        if ($APIUrl) {
+            $forward['APIUrl'] = $APIUrl
+        }
+        Get-nbObject @forward
+    } catch {
         $PSCmdlet.ThrowTerminatingError($_)
     }
-    $forward = @{
-        UnFlatten = $UnFlatten
-    }
-    if ($AdditionalParams) {
-        $forward += $AdditionalParams
-    }
-    if ($PSCmdlet.ParameterSetName -eq 'id') {
-        $forward['Resource'] = "dcim/device-bays/$id"
-    } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
-        $forward['Resource'] = "dcim/device-bays"
-        $forward['Query'] = $Query
-        $forward['Search'] = $search
-    }
-    if ($APIUrl) {
-        $forward['APIUrl'] = $APIUrl
-    }
-    Get-nbObject @forward
 }
 
 <#
@@ -1281,26 +1300,27 @@ Function Get-nbRir {
         [uri]
         $APIUrl
     )
-    trap {
+    try {
+        $forward = @{
+            UnFlatten = $UnFlatten
+        }
+        if ($AdditionalParams) {
+            $forward += $AdditionalParams
+        }
+        if ($PSCmdlet.ParameterSetName -eq 'id') {
+            $forward['Resource'] = "ipam/rirs/$id"
+        } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
+            $forward['Resource'] = "ipam/rirs"
+            $forward['Query'] = $Query
+            $forward['Search'] = $search
+        }
+        if ($APIUrl) {
+            $forward['APIUrl'] = $APIUrl
+        }
+        Get-nbObject @forward
+    } catch {
         $PSCmdlet.ThrowTerminatingError($_)
     }
-    $forward = @{
-        UnFlatten = $UnFlatten
-    }
-    if ($AdditionalParams) {
-        $forward += $AdditionalParams
-    }
-    if ($PSCmdlet.ParameterSetName -eq 'id') {
-        $forward['Resource'] = "ipam/rirs/$id"
-    } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
-        $forward['Resource'] = "ipam/rirs"
-        $forward['Query'] = $Query
-        $forward['Search'] = $search
-    }
-    if ($APIUrl) {
-        $forward['APIUrl'] = $APIUrl
-    }
-    Get-nbObject @forward
 }
 
 <#
@@ -1346,26 +1366,27 @@ Function Get-nbDevicebayTemplate {
         [uri]
         $APIUrl
     )
-    trap {
+    try {
+        $forward = @{
+            UnFlatten = $UnFlatten
+        }
+        if ($AdditionalParams) {
+            $forward += $AdditionalParams
+        }
+        if ($PSCmdlet.ParameterSetName -eq 'id') {
+            $forward['Resource'] = "dcim/device-bay-templates/$id"
+        } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
+            $forward['Resource'] = "dcim/device-bay-templates"
+            $forward['Query'] = $Query
+            $forward['Search'] = $search
+        }
+        if ($APIUrl) {
+            $forward['APIUrl'] = $APIUrl
+        }
+        Get-nbObject @forward
+    } catch {
         $PSCmdlet.ThrowTerminatingError($_)
     }
-    $forward = @{
-        UnFlatten = $UnFlatten
-    }
-    if ($AdditionalParams) {
-        $forward += $AdditionalParams
-    }
-    if ($PSCmdlet.ParameterSetName -eq 'id') {
-        $forward['Resource'] = "dcim/device-bay-templates/$id"
-    } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
-        $forward['Resource'] = "dcim/device-bay-templates"
-        $forward['Query'] = $Query
-        $forward['Search'] = $search
-    }
-    if ($APIUrl) {
-        $forward['APIUrl'] = $APIUrl
-    }
-    Get-nbObject @forward
 }
 
 <#
@@ -1411,26 +1432,27 @@ Function Get-nbGraph {
         [uri]
         $APIUrl
     )
-    trap {
+    try {
+        $forward = @{
+            UnFlatten = $UnFlatten
+        }
+        if ($AdditionalParams) {
+            $forward += $AdditionalParams
+        }
+        if ($PSCmdlet.ParameterSetName -eq 'id') {
+            $forward['Resource'] = "extras/graphs/$id"
+        } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
+            $forward['Resource'] = "extras/graphs"
+            $forward['Query'] = $Query
+            $forward['Search'] = $search
+        }
+        if ($APIUrl) {
+            $forward['APIUrl'] = $APIUrl
+        }
+        Get-nbObject @forward
+    } catch {
         $PSCmdlet.ThrowTerminatingError($_)
     }
-    $forward = @{
-        UnFlatten = $UnFlatten
-    }
-    if ($AdditionalParams) {
-        $forward += $AdditionalParams
-    }
-    if ($PSCmdlet.ParameterSetName -eq 'id') {
-        $forward['Resource'] = "extras/graphs/$id"
-    } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
-        $forward['Resource'] = "extras/graphs"
-        $forward['Query'] = $Query
-        $forward['Search'] = $search
-    }
-    if ($APIUrl) {
-        $forward['APIUrl'] = $APIUrl
-    }
-    Get-nbObject @forward
 }
 
 <#
@@ -1476,26 +1498,27 @@ Function Get-nbInterface {
         [uri]
         $APIUrl
     )
-    trap {
+    try {
+        $forward = @{
+            UnFlatten = $UnFlatten
+        }
+        if ($AdditionalParams) {
+            $forward += $AdditionalParams
+        }
+        if ($PSCmdlet.ParameterSetName -eq 'id') {
+            $forward['Resource'] = "dcim/interfaces/$id"
+        } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
+            $forward['Resource'] = "dcim/interfaces"
+            $forward['Query'] = $Query
+            $forward['Search'] = $search
+        }
+        if ($APIUrl) {
+            $forward['APIUrl'] = $APIUrl
+        }
+        Get-nbObject @forward
+    } catch {
         $PSCmdlet.ThrowTerminatingError($_)
     }
-    $forward = @{
-        UnFlatten = $UnFlatten
-    }
-    if ($AdditionalParams) {
-        $forward += $AdditionalParams
-    }
-    if ($PSCmdlet.ParameterSetName -eq 'id') {
-        $forward['Resource'] = "dcim/interfaces/$id"
-    } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
-        $forward['Resource'] = "dcim/interfaces"
-        $forward['Query'] = $Query
-        $forward['Search'] = $search
-    }
-    if ($APIUrl) {
-        $forward['APIUrl'] = $APIUrl
-    }
-    Get-nbObject @forward
 }
 
 <#
@@ -1541,26 +1564,27 @@ Function Get-nbInterfaceConnection {
         [uri]
         $APIUrl
     )
-    trap {
+    try {
+        $forward = @{
+            UnFlatten = $UnFlatten
+        }
+        if ($AdditionalParams) {
+            $forward += $AdditionalParams
+        }
+        if ($PSCmdlet.ParameterSetName -eq 'id') {
+            $forward['Resource'] = "dcim/interface-connections/$id"
+        } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
+            $forward['Resource'] = "dcim/interface-connections"
+            $forward['Query'] = $Query
+            $forward['Search'] = $search
+        }
+        if ($APIUrl) {
+            $forward['APIUrl'] = $APIUrl
+        }
+        Get-nbObject @forward
+    } catch {
         $PSCmdlet.ThrowTerminatingError($_)
     }
-    $forward = @{
-        UnFlatten = $UnFlatten
-    }
-    if ($AdditionalParams) {
-        $forward += $AdditionalParams
-    }
-    if ($PSCmdlet.ParameterSetName -eq 'id') {
-        $forward['Resource'] = "dcim/interface-connections/$id"
-    } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
-        $forward['Resource'] = "dcim/interface-connections"
-        $forward['Query'] = $Query
-        $forward['Search'] = $search
-    }
-    if ($APIUrl) {
-        $forward['APIUrl'] = $APIUrl
-    }
-    Get-nbObject @forward
 }
 
 <#
@@ -1606,26 +1630,27 @@ Function Get-nbRole {
         [uri]
         $APIUrl
     )
-    trap {
+    try {
+        $forward = @{
+            UnFlatten = $UnFlatten
+        }
+        if ($AdditionalParams) {
+            $forward += $AdditionalParams
+        }
+        if ($PSCmdlet.ParameterSetName -eq 'id') {
+            $forward['Resource'] = "ipam/roles/$id"
+        } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
+            $forward['Resource'] = "ipam/roles"
+            $forward['Query'] = $Query
+            $forward['Search'] = $search
+        }
+        if ($APIUrl) {
+            $forward['APIUrl'] = $APIUrl
+        }
+        Get-nbObject @forward
+    } catch {
         $PSCmdlet.ThrowTerminatingError($_)
     }
-    $forward = @{
-        UnFlatten = $UnFlatten
-    }
-    if ($AdditionalParams) {
-        $forward += $AdditionalParams
-    }
-    if ($PSCmdlet.ParameterSetName -eq 'id') {
-        $forward['Resource'] = "ipam/roles/$id"
-    } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
-        $forward['Resource'] = "ipam/roles"
-        $forward['Query'] = $Query
-        $forward['Search'] = $search
-    }
-    if ($APIUrl) {
-        $forward['APIUrl'] = $APIUrl
-    }
-    Get-nbObject @forward
 }
 
 <#
@@ -1671,26 +1696,27 @@ Function Get-nbImageAttachment {
         [uri]
         $APIUrl
     )
-    trap {
+    try {
+        $forward = @{
+            UnFlatten = $UnFlatten
+        }
+        if ($AdditionalParams) {
+            $forward += $AdditionalParams
+        }
+        if ($PSCmdlet.ParameterSetName -eq 'id') {
+            $forward['Resource'] = "extras/image-attachments/$id"
+        } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
+            $forward['Resource'] = "extras/image-attachments"
+            $forward['Query'] = $Query
+            $forward['Search'] = $search
+        }
+        if ($APIUrl) {
+            $forward['APIUrl'] = $APIUrl
+        }
+        Get-nbObject @forward
+    } catch {
         $PSCmdlet.ThrowTerminatingError($_)
     }
-    $forward = @{
-        UnFlatten = $UnFlatten
-    }
-    if ($AdditionalParams) {
-        $forward += $AdditionalParams
-    }
-    if ($PSCmdlet.ParameterSetName -eq 'id') {
-        $forward['Resource'] = "extras/image-attachments/$id"
-    } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
-        $forward['Resource'] = "extras/image-attachments"
-        $forward['Query'] = $Query
-        $forward['Search'] = $search
-    }
-    if ($APIUrl) {
-        $forward['APIUrl'] = $APIUrl
-    }
-    Get-nbObject @forward
 }
 
 <#
@@ -1736,26 +1762,27 @@ Function Get-nbRack {
         [uri]
         $APIUrl
     )
-    trap {
+    try {
+        $forward = @{
+            UnFlatten = $UnFlatten
+        }
+        if ($AdditionalParams) {
+            $forward += $AdditionalParams
+        }
+        if ($PSCmdlet.ParameterSetName -eq 'id') {
+            $forward['Resource'] = "dcim/racks/$id"
+        } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
+            $forward['Resource'] = "dcim/racks"
+            $forward['Query'] = $Query
+            $forward['Search'] = $search
+        }
+        if ($APIUrl) {
+            $forward['APIUrl'] = $APIUrl
+        }
+        Get-nbObject @forward
+    } catch {
         $PSCmdlet.ThrowTerminatingError($_)
     }
-    $forward = @{
-        UnFlatten = $UnFlatten
-    }
-    if ($AdditionalParams) {
-        $forward += $AdditionalParams
-    }
-    if ($PSCmdlet.ParameterSetName -eq 'id') {
-        $forward['Resource'] = "dcim/racks/$id"
-    } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
-        $forward['Resource'] = "dcim/racks"
-        $forward['Query'] = $Query
-        $forward['Search'] = $search
-    }
-    if ($APIUrl) {
-        $forward['APIUrl'] = $APIUrl
-    }
-    Get-nbObject @forward
 }
 
 <#
@@ -1801,26 +1828,27 @@ Function Get-nbConsolePortTemplate {
         [uri]
         $APIUrl
     )
-    trap {
+    try {
+        $forward = @{
+            UnFlatten = $UnFlatten
+        }
+        if ($AdditionalParams) {
+            $forward += $AdditionalParams
+        }
+        if ($PSCmdlet.ParameterSetName -eq 'id') {
+            $forward['Resource'] = "dcim/console-port-templates/$id"
+        } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
+            $forward['Resource'] = "dcim/console-port-templates"
+            $forward['Query'] = $Query
+            $forward['Search'] = $search
+        }
+        if ($APIUrl) {
+            $forward['APIUrl'] = $APIUrl
+        }
+        Get-nbObject @forward
+    } catch {
         $PSCmdlet.ThrowTerminatingError($_)
     }
-    $forward = @{
-        UnFlatten = $UnFlatten
-    }
-    if ($AdditionalParams) {
-        $forward += $AdditionalParams
-    }
-    if ($PSCmdlet.ParameterSetName -eq 'id') {
-        $forward['Resource'] = "dcim/console-port-templates/$id"
-    } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
-        $forward['Resource'] = "dcim/console-port-templates"
-        $forward['Query'] = $Query
-        $forward['Search'] = $search
-    }
-    if ($APIUrl) {
-        $forward['APIUrl'] = $APIUrl
-    }
-    Get-nbObject @forward
 }
 
 <#
@@ -1866,26 +1894,27 @@ Function Get-nbInterfaceTemplate {
         [uri]
         $APIUrl
     )
-    trap {
+    try {
+        $forward = @{
+            UnFlatten = $UnFlatten
+        }
+        if ($AdditionalParams) {
+            $forward += $AdditionalParams
+        }
+        if ($PSCmdlet.ParameterSetName -eq 'id') {
+            $forward['Resource'] = "dcim/interface-templates/$id"
+        } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
+            $forward['Resource'] = "dcim/interface-templates"
+            $forward['Query'] = $Query
+            $forward['Search'] = $search
+        }
+        if ($APIUrl) {
+            $forward['APIUrl'] = $APIUrl
+        }
+        Get-nbObject @forward
+    } catch {
         $PSCmdlet.ThrowTerminatingError($_)
     }
-    $forward = @{
-        UnFlatten = $UnFlatten
-    }
-    if ($AdditionalParams) {
-        $forward += $AdditionalParams
-    }
-    if ($PSCmdlet.ParameterSetName -eq 'id') {
-        $forward['Resource'] = "dcim/interface-templates/$id"
-    } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
-        $forward['Resource'] = "dcim/interface-templates"
-        $forward['Query'] = $Query
-        $forward['Search'] = $search
-    }
-    if ($APIUrl) {
-        $forward['APIUrl'] = $APIUrl
-    }
-    Get-nbObject @forward
 }
 
 <#
@@ -1931,26 +1960,27 @@ Function Get-nbExportTemplate {
         [uri]
         $APIUrl
     )
-    trap {
+    try {
+        $forward = @{
+            UnFlatten = $UnFlatten
+        }
+        if ($AdditionalParams) {
+            $forward += $AdditionalParams
+        }
+        if ($PSCmdlet.ParameterSetName -eq 'id') {
+            $forward['Resource'] = "extras/export-templates/$id"
+        } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
+            $forward['Resource'] = "extras/export-templates"
+            $forward['Query'] = $Query
+            $forward['Search'] = $search
+        }
+        if ($APIUrl) {
+            $forward['APIUrl'] = $APIUrl
+        }
+        Get-nbObject @forward
+    } catch {
         $PSCmdlet.ThrowTerminatingError($_)
     }
-    $forward = @{
-        UnFlatten = $UnFlatten
-    }
-    if ($AdditionalParams) {
-        $forward += $AdditionalParams
-    }
-    if ($PSCmdlet.ParameterSetName -eq 'id') {
-        $forward['Resource'] = "extras/export-templates/$id"
-    } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
-        $forward['Resource'] = "extras/export-templates"
-        $forward['Query'] = $Query
-        $forward['Search'] = $search
-    }
-    if ($APIUrl) {
-        $forward['APIUrl'] = $APIUrl
-    }
-    Get-nbObject @forward
 }
 
 <#
@@ -1996,26 +2026,27 @@ Function Get-nbCluster {
         [uri]
         $APIUrl
     )
-    trap {
+    try {
+        $forward = @{
+            UnFlatten = $UnFlatten
+        }
+        if ($AdditionalParams) {
+            $forward += $AdditionalParams
+        }
+        if ($PSCmdlet.ParameterSetName -eq 'id') {
+            $forward['Resource'] = "virtualization/clusters/$id"
+        } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
+            $forward['Resource'] = "virtualization/clusters"
+            $forward['Query'] = $Query
+            $forward['Search'] = $search
+        }
+        if ($APIUrl) {
+            $forward['APIUrl'] = $APIUrl
+        }
+        Get-nbObject @forward
+    } catch {
         $PSCmdlet.ThrowTerminatingError($_)
     }
-    $forward = @{
-        UnFlatten = $UnFlatten
-    }
-    if ($AdditionalParams) {
-        $forward += $AdditionalParams
-    }
-    if ($PSCmdlet.ParameterSetName -eq 'id') {
-        $forward['Resource'] = "virtualization/clusters/$id"
-    } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
-        $forward['Resource'] = "virtualization/clusters"
-        $forward['Query'] = $Query
-        $forward['Search'] = $search
-    }
-    if ($APIUrl) {
-        $forward['APIUrl'] = $APIUrl
-    }
-    Get-nbObject @forward
 }
 
 <#
@@ -2061,26 +2092,27 @@ Function Get-nbService {
         [uri]
         $APIUrl
     )
-    trap {
+    try {
+        $forward = @{
+            UnFlatten = $UnFlatten
+        }
+        if ($AdditionalParams) {
+            $forward += $AdditionalParams
+        }
+        if ($PSCmdlet.ParameterSetName -eq 'id') {
+            $forward['Resource'] = "ipam/services/$id"
+        } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
+            $forward['Resource'] = "ipam/services"
+            $forward['Query'] = $Query
+            $forward['Search'] = $search
+        }
+        if ($APIUrl) {
+            $forward['APIUrl'] = $APIUrl
+        }
+        Get-nbObject @forward
+    } catch {
         $PSCmdlet.ThrowTerminatingError($_)
     }
-    $forward = @{
-        UnFlatten = $UnFlatten
-    }
-    if ($AdditionalParams) {
-        $forward += $AdditionalParams
-    }
-    if ($PSCmdlet.ParameterSetName -eq 'id') {
-        $forward['Resource'] = "ipam/services/$id"
-    } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
-        $forward['Resource'] = "ipam/services"
-        $forward['Query'] = $Query
-        $forward['Search'] = $search
-    }
-    if ($APIUrl) {
-        $forward['APIUrl'] = $APIUrl
-    }
-    Get-nbObject @forward
 }
 
 <#
@@ -2126,26 +2158,27 @@ Function Get-nbRackRole {
         [uri]
         $APIUrl
     )
-    trap {
+    try {
+        $forward = @{
+            UnFlatten = $UnFlatten
+        }
+        if ($AdditionalParams) {
+            $forward += $AdditionalParams
+        }
+        if ($PSCmdlet.ParameterSetName -eq 'id') {
+            $forward['Resource'] = "dcim/rack-roles/$id"
+        } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
+            $forward['Resource'] = "dcim/rack-roles"
+            $forward['Query'] = $Query
+            $forward['Search'] = $search
+        }
+        if ($APIUrl) {
+            $forward['APIUrl'] = $APIUrl
+        }
+        Get-nbObject @forward
+    } catch {
         $PSCmdlet.ThrowTerminatingError($_)
     }
-    $forward = @{
-        UnFlatten = $UnFlatten
-    }
-    if ($AdditionalParams) {
-        $forward += $AdditionalParams
-    }
-    if ($PSCmdlet.ParameterSetName -eq 'id') {
-        $forward['Resource'] = "dcim/rack-roles/$id"
-    } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
-        $forward['Resource'] = "dcim/rack-roles"
-        $forward['Query'] = $Query
-        $forward['Search'] = $search
-    }
-    if ($APIUrl) {
-        $forward['APIUrl'] = $APIUrl
-    }
-    Get-nbObject @forward
 }
 
 <#
@@ -2191,26 +2224,27 @@ Function Get-nbCircuitType {
         [uri]
         $APIUrl
     )
-    trap {
+    try {
+        $forward = @{
+            UnFlatten = $UnFlatten
+        }
+        if ($AdditionalParams) {
+            $forward += $AdditionalParams
+        }
+        if ($PSCmdlet.ParameterSetName -eq 'id') {
+            $forward['Resource'] = "circuits/circuit-types/$id"
+        } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
+            $forward['Resource'] = "circuits/circuit-types"
+            $forward['Query'] = $Query
+            $forward['Search'] = $search
+        }
+        if ($APIUrl) {
+            $forward['APIUrl'] = $APIUrl
+        }
+        Get-nbObject @forward
+    } catch {
         $PSCmdlet.ThrowTerminatingError($_)
     }
-    $forward = @{
-        UnFlatten = $UnFlatten
-    }
-    if ($AdditionalParams) {
-        $forward += $AdditionalParams
-    }
-    if ($PSCmdlet.ParameterSetName -eq 'id') {
-        $forward['Resource'] = "circuits/circuit-types/$id"
-    } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
-        $forward['Resource'] = "circuits/circuit-types"
-        $forward['Query'] = $Query
-        $forward['Search'] = $search
-    }
-    if ($APIUrl) {
-        $forward['APIUrl'] = $APIUrl
-    }
-    Get-nbObject @forward
 }
 
 <#
@@ -2256,26 +2290,27 @@ Function Get-nbReport {
         [uri]
         $APIUrl
     )
-    trap {
+    try {
+        $forward = @{
+            UnFlatten = $UnFlatten
+        }
+        if ($AdditionalParams) {
+            $forward += $AdditionalParams
+        }
+        if ($PSCmdlet.ParameterSetName -eq 'id') {
+            $forward['Resource'] = "extras/reports/$id"
+        } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
+            $forward['Resource'] = "extras/reports"
+            $forward['Query'] = $Query
+            $forward['Search'] = $search
+        }
+        if ($APIUrl) {
+            $forward['APIUrl'] = $APIUrl
+        }
+        Get-nbObject @forward
+    } catch {
         $PSCmdlet.ThrowTerminatingError($_)
     }
-    $forward = @{
-        UnFlatten = $UnFlatten
-    }
-    if ($AdditionalParams) {
-        $forward += $AdditionalParams
-    }
-    if ($PSCmdlet.ParameterSetName -eq 'id') {
-        $forward['Resource'] = "extras/reports/$id"
-    } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
-        $forward['Resource'] = "extras/reports"
-        $forward['Query'] = $Query
-        $forward['Search'] = $search
-    }
-    if ($APIUrl) {
-        $forward['APIUrl'] = $APIUrl
-    }
-    Get-nbObject @forward
 }
 
 <#
@@ -2321,26 +2356,27 @@ Function Get-nbManufacturer {
         [uri]
         $APIUrl
     )
-    trap {
+    try {
+        $forward = @{
+            UnFlatten = $UnFlatten
+        }
+        if ($AdditionalParams) {
+            $forward += $AdditionalParams
+        }
+        if ($PSCmdlet.ParameterSetName -eq 'id') {
+            $forward['Resource'] = "dcim/manufacturers/$id"
+        } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
+            $forward['Resource'] = "dcim/manufacturers"
+            $forward['Query'] = $Query
+            $forward['Search'] = $search
+        }
+        if ($APIUrl) {
+            $forward['APIUrl'] = $APIUrl
+        }
+        Get-nbObject @forward
+    } catch {
         $PSCmdlet.ThrowTerminatingError($_)
     }
-    $forward = @{
-        UnFlatten = $UnFlatten
-    }
-    if ($AdditionalParams) {
-        $forward += $AdditionalParams
-    }
-    if ($PSCmdlet.ParameterSetName -eq 'id') {
-        $forward['Resource'] = "dcim/manufacturers/$id"
-    } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
-        $forward['Resource'] = "dcim/manufacturers"
-        $forward['Query'] = $Query
-        $forward['Search'] = $search
-    }
-    if ($APIUrl) {
-        $forward['APIUrl'] = $APIUrl
-    }
-    Get-nbObject @forward
 }
 
 <#
@@ -2386,26 +2422,27 @@ Function Get-nbRackGroup {
         [uri]
         $APIUrl
     )
-    trap {
+    try {
+        $forward = @{
+            UnFlatten = $UnFlatten
+        }
+        if ($AdditionalParams) {
+            $forward += $AdditionalParams
+        }
+        if ($PSCmdlet.ParameterSetName -eq 'id') {
+            $forward['Resource'] = "dcim/rack-groups/$id"
+        } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
+            $forward['Resource'] = "dcim/rack-groups"
+            $forward['Query'] = $Query
+            $forward['Search'] = $search
+        }
+        if ($APIUrl) {
+            $forward['APIUrl'] = $APIUrl
+        }
+        Get-nbObject @forward
+    } catch {
         $PSCmdlet.ThrowTerminatingError($_)
     }
-    $forward = @{
-        UnFlatten = $UnFlatten
-    }
-    if ($AdditionalParams) {
-        $forward += $AdditionalParams
-    }
-    if ($PSCmdlet.ParameterSetName -eq 'id') {
-        $forward['Resource'] = "dcim/rack-groups/$id"
-    } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
-        $forward['Resource'] = "dcim/rack-groups"
-        $forward['Query'] = $Query
-        $forward['Search'] = $search
-    }
-    if ($APIUrl) {
-        $forward['APIUrl'] = $APIUrl
-    }
-    Get-nbObject @forward
 }
 
 <#
@@ -2451,26 +2488,27 @@ Function Get-nbIpAddress {
         [uri]
         $APIUrl
     )
-    trap {
+    try {
+        $forward = @{
+            UnFlatten = $UnFlatten
+        }
+        if ($AdditionalParams) {
+            $forward += $AdditionalParams
+        }
+        if ($PSCmdlet.ParameterSetName -eq 'id') {
+            $forward['Resource'] = "ipam/ip-addresses/$id"
+        } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
+            $forward['Resource'] = "ipam/ip-addresses"
+            $forward['Query'] = $Query
+            $forward['Search'] = $search
+        }
+        if ($APIUrl) {
+            $forward['APIUrl'] = $APIUrl
+        }
+        Get-nbObject @forward
+    } catch {
         $PSCmdlet.ThrowTerminatingError($_)
     }
-    $forward = @{
-        UnFlatten = $UnFlatten
-    }
-    if ($AdditionalParams) {
-        $forward += $AdditionalParams
-    }
-    if ($PSCmdlet.ParameterSetName -eq 'id') {
-        $forward['Resource'] = "ipam/ip-addresses/$id"
-    } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
-        $forward['Resource'] = "ipam/ip-addresses"
-        $forward['Query'] = $Query
-        $forward['Search'] = $search
-    }
-    if ($APIUrl) {
-        $forward['APIUrl'] = $APIUrl
-    }
-    Get-nbObject @forward
 }
 
 <#
@@ -2516,26 +2554,27 @@ Function Get-nbVrf {
         [uri]
         $APIUrl
     )
-    trap {
+    try {
+        $forward = @{
+            UnFlatten = $UnFlatten
+        }
+        if ($AdditionalParams) {
+            $forward += $AdditionalParams
+        }
+        if ($PSCmdlet.ParameterSetName -eq 'id') {
+            $forward['Resource'] = "ipam/vrfs/$id"
+        } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
+            $forward['Resource'] = "ipam/vrfs"
+            $forward['Query'] = $Query
+            $forward['Search'] = $search
+        }
+        if ($APIUrl) {
+            $forward['APIUrl'] = $APIUrl
+        }
+        Get-nbObject @forward
+    } catch {
         $PSCmdlet.ThrowTerminatingError($_)
     }
-    $forward = @{
-        UnFlatten = $UnFlatten
-    }
-    if ($AdditionalParams) {
-        $forward += $AdditionalParams
-    }
-    if ($PSCmdlet.ParameterSetName -eq 'id') {
-        $forward['Resource'] = "ipam/vrfs/$id"
-    } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
-        $forward['Resource'] = "ipam/vrfs"
-        $forward['Query'] = $Query
-        $forward['Search'] = $search
-    }
-    if ($APIUrl) {
-        $forward['APIUrl'] = $APIUrl
-    }
-    Get-nbObject @forward
 }
 
 <#
@@ -2581,26 +2620,27 @@ Function Get-nbDevice {
         [uri]
         $APIUrl
     )
-    trap {
+    try {
+        $forward = @{
+            UnFlatten = $UnFlatten
+        }
+        if ($AdditionalParams) {
+            $forward += $AdditionalParams
+        }
+        if ($PSCmdlet.ParameterSetName -eq 'id') {
+            $forward['Resource'] = "dcim/devices/$id"
+        } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
+            $forward['Resource'] = "dcim/devices"
+            $forward['Query'] = $Query
+            $forward['Search'] = $search
+        }
+        if ($APIUrl) {
+            $forward['APIUrl'] = $APIUrl
+        }
+        Get-nbObject @forward
+    } catch {
         $PSCmdlet.ThrowTerminatingError($_)
     }
-    $forward = @{
-        UnFlatten = $UnFlatten
-    }
-    if ($AdditionalParams) {
-        $forward += $AdditionalParams
-    }
-    if ($PSCmdlet.ParameterSetName -eq 'id') {
-        $forward['Resource'] = "dcim/devices/$id"
-    } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
-        $forward['Resource'] = "dcim/devices"
-        $forward['Query'] = $Query
-        $forward['Search'] = $search
-    }
-    if ($APIUrl) {
-        $forward['APIUrl'] = $APIUrl
-    }
-    Get-nbObject @forward
 }
 
 <#
@@ -2646,26 +2686,27 @@ Function Get-nbTenant {
         [uri]
         $APIUrl
     )
-    trap {
+    try {
+        $forward = @{
+            UnFlatten = $UnFlatten
+        }
+        if ($AdditionalParams) {
+            $forward += $AdditionalParams
+        }
+        if ($PSCmdlet.ParameterSetName -eq 'id') {
+            $forward['Resource'] = "tenancy/tenants/$id"
+        } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
+            $forward['Resource'] = "tenancy/tenants"
+            $forward['Query'] = $Query
+            $forward['Search'] = $search
+        }
+        if ($APIUrl) {
+            $forward['APIUrl'] = $APIUrl
+        }
+        Get-nbObject @forward
+    } catch {
         $PSCmdlet.ThrowTerminatingError($_)
     }
-    $forward = @{
-        UnFlatten = $UnFlatten
-    }
-    if ($AdditionalParams) {
-        $forward += $AdditionalParams
-    }
-    if ($PSCmdlet.ParameterSetName -eq 'id') {
-        $forward['Resource'] = "tenancy/tenants/$id"
-    } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
-        $forward['Resource'] = "tenancy/tenants"
-        $forward['Query'] = $Query
-        $forward['Search'] = $search
-    }
-    if ($APIUrl) {
-        $forward['APIUrl'] = $APIUrl
-    }
-    Get-nbObject @forward
 }
 
 <#
@@ -2711,26 +2752,27 @@ Function Get-nbPowerOutletTemplate {
         [uri]
         $APIUrl
     )
-    trap {
+    try {
+        $forward = @{
+            UnFlatten = $UnFlatten
+        }
+        if ($AdditionalParams) {
+            $forward += $AdditionalParams
+        }
+        if ($PSCmdlet.ParameterSetName -eq 'id') {
+            $forward['Resource'] = "dcim/power-outlet-templates/$id"
+        } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
+            $forward['Resource'] = "dcim/power-outlet-templates"
+            $forward['Query'] = $Query
+            $forward['Search'] = $search
+        }
+        if ($APIUrl) {
+            $forward['APIUrl'] = $APIUrl
+        }
+        Get-nbObject @forward
+    } catch {
         $PSCmdlet.ThrowTerminatingError($_)
     }
-    $forward = @{
-        UnFlatten = $UnFlatten
-    }
-    if ($AdditionalParams) {
-        $forward += $AdditionalParams
-    }
-    if ($PSCmdlet.ParameterSetName -eq 'id') {
-        $forward['Resource'] = "dcim/power-outlet-templates/$id"
-    } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
-        $forward['Resource'] = "dcim/power-outlet-templates"
-        $forward['Query'] = $Query
-        $forward['Search'] = $search
-    }
-    if ($APIUrl) {
-        $forward['APIUrl'] = $APIUrl
-    }
-    Get-nbObject @forward
 }
 
 <#
@@ -2776,26 +2818,27 @@ Function Get-nbInventoryItem {
         [uri]
         $APIUrl
     )
-    trap {
+    try {
+        $forward = @{
+            UnFlatten = $UnFlatten
+        }
+        if ($AdditionalParams) {
+            $forward += $AdditionalParams
+        }
+        if ($PSCmdlet.ParameterSetName -eq 'id') {
+            $forward['Resource'] = "dcim/inventory-items/$id"
+        } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
+            $forward['Resource'] = "dcim/inventory-items"
+            $forward['Query'] = $Query
+            $forward['Search'] = $search
+        }
+        if ($APIUrl) {
+            $forward['APIUrl'] = $APIUrl
+        }
+        Get-nbObject @forward
+    } catch {
         $PSCmdlet.ThrowTerminatingError($_)
     }
-    $forward = @{
-        UnFlatten = $UnFlatten
-    }
-    if ($AdditionalParams) {
-        $forward += $AdditionalParams
-    }
-    if ($PSCmdlet.ParameterSetName -eq 'id') {
-        $forward['Resource'] = "dcim/inventory-items/$id"
-    } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
-        $forward['Resource'] = "dcim/inventory-items"
-        $forward['Query'] = $Query
-        $forward['Search'] = $search
-    }
-    if ($APIUrl) {
-        $forward['APIUrl'] = $APIUrl
-    }
-    Get-nbObject @forward
 }
 
 <#
@@ -2841,26 +2884,27 @@ Function Get-nbConsoleServerPort {
         [uri]
         $APIUrl
     )
-    trap {
+    try {
+        $forward = @{
+            UnFlatten = $UnFlatten
+        }
+        if ($AdditionalParams) {
+            $forward += $AdditionalParams
+        }
+        if ($PSCmdlet.ParameterSetName -eq 'id') {
+            $forward['Resource'] = "dcim/console-server-ports/$id"
+        } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
+            $forward['Resource'] = "dcim/console-server-ports"
+            $forward['Query'] = $Query
+            $forward['Search'] = $search
+        }
+        if ($APIUrl) {
+            $forward['APIUrl'] = $APIUrl
+        }
+        Get-nbObject @forward
+    } catch {
         $PSCmdlet.ThrowTerminatingError($_)
     }
-    $forward = @{
-        UnFlatten = $UnFlatten
-    }
-    if ($AdditionalParams) {
-        $forward += $AdditionalParams
-    }
-    if ($PSCmdlet.ParameterSetName -eq 'id') {
-        $forward['Resource'] = "dcim/console-server-ports/$id"
-    } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
-        $forward['Resource'] = "dcim/console-server-ports"
-        $forward['Query'] = $Query
-        $forward['Search'] = $search
-    }
-    if ($APIUrl) {
-        $forward['APIUrl'] = $APIUrl
-    }
-    Get-nbObject @forward
 }
 
 <#
@@ -2906,26 +2950,27 @@ Function Get-nbVirtualChassis {
         [uri]
         $APIUrl
     )
-    trap {
+    try {
+        $forward = @{
+            UnFlatten = $UnFlatten
+        }
+        if ($AdditionalParams) {
+            $forward += $AdditionalParams
+        }
+        if ($PSCmdlet.ParameterSetName -eq 'id') {
+            $forward['Resource'] = "dcim/virtual-chassis/$id"
+        } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
+            $forward['Resource'] = "dcim/virtual-chassis"
+            $forward['Query'] = $Query
+            $forward['Search'] = $search
+        }
+        if ($APIUrl) {
+            $forward['APIUrl'] = $APIUrl
+        }
+        Get-nbObject @forward
+    } catch {
         $PSCmdlet.ThrowTerminatingError($_)
     }
-    $forward = @{
-        UnFlatten = $UnFlatten
-    }
-    if ($AdditionalParams) {
-        $forward += $AdditionalParams
-    }
-    if ($PSCmdlet.ParameterSetName -eq 'id') {
-        $forward['Resource'] = "dcim/virtual-chassis/$id"
-    } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
-        $forward['Resource'] = "dcim/virtual-chassis"
-        $forward['Query'] = $Query
-        $forward['Search'] = $search
-    }
-    if ($APIUrl) {
-        $forward['APIUrl'] = $APIUrl
-    }
-    Get-nbObject @forward
 }
 
 <#
@@ -2971,26 +3016,27 @@ Function Get-nbVirtualMachine {
         [uri]
         $APIUrl
     )
-    trap {
+    try {
+        $forward = @{
+            UnFlatten = $UnFlatten
+        }
+        if ($AdditionalParams) {
+            $forward += $AdditionalParams
+        }
+        if ($PSCmdlet.ParameterSetName -eq 'id') {
+            $forward['Resource'] = "virtualization/virtual-machines/$id"
+        } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
+            $forward['Resource'] = "virtualization/virtual-machines"
+            $forward['Query'] = $Query
+            $forward['Search'] = $search
+        }
+        if ($APIUrl) {
+            $forward['APIUrl'] = $APIUrl
+        }
+        Get-nbObject @forward
+    } catch {
         $PSCmdlet.ThrowTerminatingError($_)
     }
-    $forward = @{
-        UnFlatten = $UnFlatten
-    }
-    if ($AdditionalParams) {
-        $forward += $AdditionalParams
-    }
-    if ($PSCmdlet.ParameterSetName -eq 'id') {
-        $forward['Resource'] = "virtualization/virtual-machines/$id"
-    } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
-        $forward['Resource'] = "virtualization/virtual-machines"
-        $forward['Query'] = $Query
-        $forward['Search'] = $search
-    }
-    if ($APIUrl) {
-        $forward['APIUrl'] = $APIUrl
-    }
-    Get-nbObject @forward
 }
 
 <#
@@ -3036,26 +3082,27 @@ Function Get-nbPowerPort {
         [uri]
         $APIUrl
     )
-    trap {
+    try {
+        $forward = @{
+            UnFlatten = $UnFlatten
+        }
+        if ($AdditionalParams) {
+            $forward += $AdditionalParams
+        }
+        if ($PSCmdlet.ParameterSetName -eq 'id') {
+            $forward['Resource'] = "dcim/power-ports/$id"
+        } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
+            $forward['Resource'] = "dcim/power-ports"
+            $forward['Query'] = $Query
+            $forward['Search'] = $search
+        }
+        if ($APIUrl) {
+            $forward['APIUrl'] = $APIUrl
+        }
+        Get-nbObject @forward
+    } catch {
         $PSCmdlet.ThrowTerminatingError($_)
     }
-    $forward = @{
-        UnFlatten = $UnFlatten
-    }
-    if ($AdditionalParams) {
-        $forward += $AdditionalParams
-    }
-    if ($PSCmdlet.ParameterSetName -eq 'id') {
-        $forward['Resource'] = "dcim/power-ports/$id"
-    } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
-        $forward['Resource'] = "dcim/power-ports"
-        $forward['Query'] = $Query
-        $forward['Search'] = $search
-    }
-    if ($APIUrl) {
-        $forward['APIUrl'] = $APIUrl
-    }
-    Get-nbObject @forward
 }
 
 <#
@@ -3101,26 +3148,27 @@ Function Get-nbPowerPortTemplate {
         [uri]
         $APIUrl
     )
-    trap {
+    try {
+        $forward = @{
+            UnFlatten = $UnFlatten
+        }
+        if ($AdditionalParams) {
+            $forward += $AdditionalParams
+        }
+        if ($PSCmdlet.ParameterSetName -eq 'id') {
+            $forward['Resource'] = "dcim/power-port-templates/$id"
+        } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
+            $forward['Resource'] = "dcim/power-port-templates"
+            $forward['Query'] = $Query
+            $forward['Search'] = $search
+        }
+        if ($APIUrl) {
+            $forward['APIUrl'] = $APIUrl
+        }
+        Get-nbObject @forward
+    } catch {
         $PSCmdlet.ThrowTerminatingError($_)
     }
-    $forward = @{
-        UnFlatten = $UnFlatten
-    }
-    if ($AdditionalParams) {
-        $forward += $AdditionalParams
-    }
-    if ($PSCmdlet.ParameterSetName -eq 'id') {
-        $forward['Resource'] = "dcim/power-port-templates/$id"
-    } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
-        $forward['Resource'] = "dcim/power-port-templates"
-        $forward['Query'] = $Query
-        $forward['Search'] = $search
-    }
-    if ($APIUrl) {
-        $forward['APIUrl'] = $APIUrl
-    }
-    Get-nbObject @forward
 }
 
 <#
@@ -3166,26 +3214,27 @@ Function Get-nbConsoleConnection {
         [uri]
         $APIUrl
     )
-    trap {
+    try {
+        $forward = @{
+            UnFlatten = $UnFlatten
+        }
+        if ($AdditionalParams) {
+            $forward += $AdditionalParams
+        }
+        if ($PSCmdlet.ParameterSetName -eq 'id') {
+            $forward['Resource'] = "dcim/console-connections/$id"
+        } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
+            $forward['Resource'] = "dcim/console-connections"
+            $forward['Query'] = $Query
+            $forward['Search'] = $search
+        }
+        if ($APIUrl) {
+            $forward['APIUrl'] = $APIUrl
+        }
+        Get-nbObject @forward
+    } catch {
         $PSCmdlet.ThrowTerminatingError($_)
     }
-    $forward = @{
-        UnFlatten = $UnFlatten
-    }
-    if ($AdditionalParams) {
-        $forward += $AdditionalParams
-    }
-    if ($PSCmdlet.ParameterSetName -eq 'id') {
-        $forward['Resource'] = "dcim/console-connections/$id"
-    } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
-        $forward['Resource'] = "dcim/console-connections"
-        $forward['Query'] = $Query
-        $forward['Search'] = $search
-    }
-    if ($APIUrl) {
-        $forward['APIUrl'] = $APIUrl
-    }
-    Get-nbObject @forward
 }
 
 <#
@@ -3231,26 +3280,27 @@ Function Get-nbTopologyMap {
         [uri]
         $APIUrl
     )
-    trap {
+    try {
+        $forward = @{
+            UnFlatten = $UnFlatten
+        }
+        if ($AdditionalParams) {
+            $forward += $AdditionalParams
+        }
+        if ($PSCmdlet.ParameterSetName -eq 'id') {
+            $forward['Resource'] = "extras/topology-maps/$id"
+        } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
+            $forward['Resource'] = "extras/topology-maps"
+            $forward['Query'] = $Query
+            $forward['Search'] = $search
+        }
+        if ($APIUrl) {
+            $forward['APIUrl'] = $APIUrl
+        }
+        Get-nbObject @forward
+    } catch {
         $PSCmdlet.ThrowTerminatingError($_)
     }
-    $forward = @{
-        UnFlatten = $UnFlatten
-    }
-    if ($AdditionalParams) {
-        $forward += $AdditionalParams
-    }
-    if ($PSCmdlet.ParameterSetName -eq 'id') {
-        $forward['Resource'] = "extras/topology-maps/$id"
-    } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
-        $forward['Resource'] = "extras/topology-maps"
-        $forward['Query'] = $Query
-        $forward['Search'] = $search
-    }
-    if ($APIUrl) {
-        $forward['APIUrl'] = $APIUrl
-    }
-    Get-nbObject @forward
 }
 
 <#
@@ -3296,26 +3346,27 @@ Function Get-nbCircuitTermination {
         [uri]
         $APIUrl
     )
-    trap {
+    try {
+        $forward = @{
+            UnFlatten = $UnFlatten
+        }
+        if ($AdditionalParams) {
+            $forward += $AdditionalParams
+        }
+        if ($PSCmdlet.ParameterSetName -eq 'id') {
+            $forward['Resource'] = "circuits/circuit-terminations/$id"
+        } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
+            $forward['Resource'] = "circuits/circuit-terminations"
+            $forward['Query'] = $Query
+            $forward['Search'] = $search
+        }
+        if ($APIUrl) {
+            $forward['APIUrl'] = $APIUrl
+        }
+        Get-nbObject @forward
+    } catch {
         $PSCmdlet.ThrowTerminatingError($_)
     }
-    $forward = @{
-        UnFlatten = $UnFlatten
-    }
-    if ($AdditionalParams) {
-        $forward += $AdditionalParams
-    }
-    if ($PSCmdlet.ParameterSetName -eq 'id') {
-        $forward['Resource'] = "circuits/circuit-terminations/$id"
-    } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
-        $forward['Resource'] = "circuits/circuit-terminations"
-        $forward['Query'] = $Query
-        $forward['Search'] = $search
-    }
-    if ($APIUrl) {
-        $forward['APIUrl'] = $APIUrl
-    }
-    Get-nbObject @forward
 }
 
 <#
@@ -3361,26 +3412,27 @@ Function Get-nbRecentActivity {
         [uri]
         $APIUrl
     )
-    trap {
+    try {
+        $forward = @{
+            UnFlatten = $UnFlatten
+        }
+        if ($AdditionalParams) {
+            $forward += $AdditionalParams
+        }
+        if ($PSCmdlet.ParameterSetName -eq 'id') {
+            $forward['Resource'] = "extras/recent-activity/$id"
+        } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
+            $forward['Resource'] = "extras/recent-activity"
+            $forward['Query'] = $Query
+            $forward['Search'] = $search
+        }
+        if ($APIUrl) {
+            $forward['APIUrl'] = $APIUrl
+        }
+        Get-nbObject @forward
+    } catch {
         $PSCmdlet.ThrowTerminatingError($_)
     }
-    $forward = @{
-        UnFlatten = $UnFlatten
-    }
-    if ($AdditionalParams) {
-        $forward += $AdditionalParams
-    }
-    if ($PSCmdlet.ParameterSetName -eq 'id') {
-        $forward['Resource'] = "extras/recent-activity/$id"
-    } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
-        $forward['Resource'] = "extras/recent-activity"
-        $forward['Query'] = $Query
-        $forward['Search'] = $search
-    }
-    if ($APIUrl) {
-        $forward['APIUrl'] = $APIUrl
-    }
-    Get-nbObject @forward
 }
 
 <#
@@ -3426,26 +3478,27 @@ Function Get-nbPrefix {
         [uri]
         $APIUrl
     )
-    trap {
+    try {
+        $forward = @{
+            UnFlatten = $UnFlatten
+        }
+        if ($AdditionalParams) {
+            $forward += $AdditionalParams
+        }
+        if ($PSCmdlet.ParameterSetName -eq 'id') {
+            $forward['Resource'] = "ipam/prefixes/$id"
+        } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
+            $forward['Resource'] = "ipam/prefixes"
+            $forward['Query'] = $Query
+            $forward['Search'] = $search
+        }
+        if ($APIUrl) {
+            $forward['APIUrl'] = $APIUrl
+        }
+        Get-nbObject @forward
+    } catch {
         $PSCmdlet.ThrowTerminatingError($_)
     }
-    $forward = @{
-        UnFlatten = $UnFlatten
-    }
-    if ($AdditionalParams) {
-        $forward += $AdditionalParams
-    }
-    if ($PSCmdlet.ParameterSetName -eq 'id') {
-        $forward['Resource'] = "ipam/prefixes/$id"
-    } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
-        $forward['Resource'] = "ipam/prefixes"
-        $forward['Query'] = $Query
-        $forward['Search'] = $search
-    }
-    if ($APIUrl) {
-        $forward['APIUrl'] = $APIUrl
-    }
-    Get-nbObject @forward
 }
 
 <#
@@ -3491,26 +3544,27 @@ Function Get-nbDeviceRole {
         [uri]
         $APIUrl
     )
-    trap {
+    try {
+        $forward = @{
+            UnFlatten = $UnFlatten
+        }
+        if ($AdditionalParams) {
+            $forward += $AdditionalParams
+        }
+        if ($PSCmdlet.ParameterSetName -eq 'id') {
+            $forward['Resource'] = "dcim/device-roles/$id"
+        } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
+            $forward['Resource'] = "dcim/device-roles"
+            $forward['Query'] = $Query
+            $forward['Search'] = $search
+        }
+        if ($APIUrl) {
+            $forward['APIUrl'] = $APIUrl
+        }
+        Get-nbObject @forward
+    } catch {
         $PSCmdlet.ThrowTerminatingError($_)
     }
-    $forward = @{
-        UnFlatten = $UnFlatten
-    }
-    if ($AdditionalParams) {
-        $forward += $AdditionalParams
-    }
-    if ($PSCmdlet.ParameterSetName -eq 'id') {
-        $forward['Resource'] = "dcim/device-roles/$id"
-    } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
-        $forward['Resource'] = "dcim/device-roles"
-        $forward['Query'] = $Query
-        $forward['Search'] = $search
-    }
-    if ($APIUrl) {
-        $forward['APIUrl'] = $APIUrl
-    }
-    Get-nbObject @forward
 }
 
 <#
@@ -3556,25 +3610,26 @@ Function Get-nbSite {
         [uri]
         $APIUrl
     )
-    trap {
+    try {
+        $forward = @{
+            UnFlatten = $UnFlatten
+        }
+        if ($AdditionalParams) {
+            $forward += $AdditionalParams
+        }
+        if ($PSCmdlet.ParameterSetName -eq 'id') {
+            $forward['Resource'] = "dcim/sites/$id"
+        } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
+            $forward['Resource'] = "dcim/sites"
+            $forward['Query'] = $Query
+            $forward['Search'] = $search
+        }
+        if ($APIUrl) {
+            $forward['APIUrl'] = $APIUrl
+        }
+        Get-nbObject @forward
+    } catch {
         $PSCmdlet.ThrowTerminatingError($_)
     }
-    $forward = @{
-        UnFlatten = $UnFlatten
-    }
-    if ($AdditionalParams) {
-        $forward += $AdditionalParams
-    }
-    if ($PSCmdlet.ParameterSetName -eq 'id') {
-        $forward['Resource'] = "dcim/sites/$id"
-    } elseif ($PSCmdlet.ParameterSetName -eq 'query') {
-        $forward['Resource'] = "dcim/sites"
-        $forward['Query'] = $Query
-        $forward['Search'] = $search
-    }
-    if ($APIUrl) {
-        $forward['APIUrl'] = $APIUrl
-    }
-    Get-nbObject @forward
 }
 
