@@ -129,9 +129,9 @@ function Set-nbObject {
         if ($Patch.IsPresent) {
             #$notChanged = $mapObject | compare-object -ReferenceObject $OldObject -ExcludeDifferent -PassThru
             #$mapObject = $mapObject | Select-Object -ExcludeProperty $notChanged
-            return Invoke-nbApi -Resource $Resource/$id -HttpVerb Patch -Body ($mapObject | ConvertTo-Json)
+            return Invoke-nbApi -Resource $Resource/$id -HttpVerb Patch -Body ($mapObject | ConvertTo-Json -Compress)
         }
-        return Invoke-nbApi -Resource $Resource/$id -HttpVerb Put -Body ($mapObject | ConvertTo-Json)
+        return Invoke-nbApi -Resource $Resource/$id -HttpVerb Put -Body ($mapObject | ConvertTo-Json -Compress)
     }
     catch {
         $PSCmdlet.ThrowTerminatingError($_)
