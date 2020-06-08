@@ -1,10 +1,7 @@
-BeforeAll {
-    $moduleName = 'powerbox'
-    $manifestPath = "$PSScriptRoot\..\Release\$moduleName\*\$moduleName.psd1"
-}
-
 Describe 'module manifest values' {
     It 'can retrieve manfiest data' {
+        $moduleName = 'powerbox'
+        $manifestPath = "$PSScriptRoot\..\Release\$moduleName\*\$moduleName.psd1"
         $script:manifest = Test-ModuleManifest $manifestPath
     }
     It 'has the correct name' {

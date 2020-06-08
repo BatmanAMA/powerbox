@@ -12,7 +12,7 @@
     RootModule             = 'powerbox.psm1'
 
     # Version number of this module.
-    ModuleVersion          = '2.4.1'
+    ModuleVersion          = '2.4.3'
 
     # Supported PSEditions
     # CompatiblePSEditions = @()
@@ -163,7 +163,7 @@
     # ModuleList = @()
 
     # List of all files packaged with this module
-    FileList               = 'powerbox.psd1', 'powerbox.psm1', 'Version',
+    FileList               = 'powerbox.psd1', 'powerbox.psm1',
     'Private\CreateCommands.ps1', 'Private\Get.txt', 'Private\New.txt',
     'Private\ResourceMap.ps1', 'Private\Set.txt',
     'Public\Connect-nbApi.ps1', 'Public\ConvertTo-nbId.ps1',
