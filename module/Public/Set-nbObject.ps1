@@ -125,6 +125,9 @@ function Set-nbObject {
                 $mapObject[$name] = $value
             }
         }
+        if ($mapObject.custom_fields.Keys.Count -eq 0) {
+            $mapObject.Remove("custom_fields")
+        }
         $mapObject = New-Object -TypeName psobject -Property $mapObject
         if ($Patch.IsPresent) {
             #$notChanged = $mapObject | compare-object -ReferenceObject $OldObject -ExcludeDifferent -PassThru
