@@ -52,79 +52,91 @@ function Set-nbObject {
         $Patch,
 
         # The Object to set
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory = $true)]
         $Object
     )
-    if (!$id) {
-        if (!($Object.id)) {
-            $errorRecord = New-Object System.Management.Automation.ErrorRecord(
-                (New-Object Exception "No ID specified to set. Maybe you wanted $($myinvocation.Line -replace 'Set-nb','New-nb')"),
-                'No.ID',
-                [System.Management.Automation.ErrorCategory]::ObjectNotFound,
-                $Resource
-            )
-            $PSCmdlet.ThrowTerminatingError($errorRecord)
-        }
-        $id = $object.id
-    }
-    if ($Patch.IsPresent) {
-        $OldObject = Get-nbobject -Resource $Resource/$id #-UnFlatten
-        foreach ($property in $OldObject._lookup) {
-            if ($OldObject."_$Property:id") {
-                $OldObject."$property" = $OldObject."_$Property:id"
-            } else {
-                $Lookup += $property
+    try {
+        if (!$id) {
+            if (!($Object.id)) {
+                $errorRecord = New-Object System.Management.Automation.ErrorRecord(
+                    (New-Object Exception "No ID specified to set. Maybe you wanted $($myinvocation.Line -replace 'Set-nb','New-nb')"),
+                    'No.ID',
+                    [System.Management.Automation.ErrorCategory]::ObjectNotFound,
+                    $Resource
+                )
+                $PSCmdlet.ThrowTerminatingError($errorRecord)
             }
+            $id = $object.id
         }
-        $OldObject = $OldObject | Select-Object -Property * -ExcludeProperty _*
-    }
-    #put ids that are still on the object back and maybe pull
-    if ($Object._lookup) {
-        foreach ($property in $Object._lookup) {
-            if ($Object."_$Property:id") {
-                $Object."$property" = $Object."_$Property:id"
-            } else {
-                $Lookup += $property
-            }
-        }
-    }
-    if ($Object._CustomProperties) {
-        $CustomProperties += $Object._CustomProperties
-    }
-    #Automatically rip out all of the _ properties returned by get-nbobject
-    $object = $Object | Select-Object -Property * -ExcludeProperty _*
-
-    $mapObject = @{custom_fields = @{}}
-    :maploop foreach ($property in $object.psobject.properties) {
-        $Name = $Property.name -replace '-' -replace ':'
-        $value = $Property.value
         if ($Patch.IsPresent) {
-            if( [string]::IsNullOrEmpty( $($OldObject."$name") ) -and [string]::IsNullOrEmpty($value) ) {
-                Write-Verbose "Bypassing property $name (values are empty)"
-                continue :maploop
+            $OldObject = Get-nbobject -Resource $Resource/$id #-UnFlatten
+            foreach ($property in $OldObject._lookup) {
+                if ($OldObject."_$Property:id") {
+                    $OldObject."$property" = $OldObject."_$Property:id"
+                }
+                else {
+                    $Lookup += $property
+                }
             }
-            If( ($OldObject."$name" -eq $value) -and ( $object."$name" -isnot [System.Array]) ) {
-                Write-Verbose "Bypassing property $name (Values are similar and object isn't an array)"
-                continue :maploop
+            $OldObject = $OldObject | Select-Object -Property * -ExcludeProperty _*
+        }
+        #put ids that are still on the object back and maybe pull
+        if ($Object._lookup) {
+            foreach ($property in $Object._lookup) {
+                if ($Object."_$Property:id") {
+                    $Object."$property" = $Object."_$Property:id"
+                }
+                else {
+                    $Lookup += $property
+                }
             }
         }
-        if ($name -in $lookup.keys) {
-            $value = ConvertTo-nbID -source $value -value $name
+        if ($Object._CustomProperties) {
+            $CustomProperties += $Object._CustomProperties
         }
-        if ($name -in $CustomProperties) {
-            $mapObject.custom_fields[$name] = $value
-        } elseif ($name -eq 'custom_fields') {
-            $mapObject.custom_fields += $value
-        } else {
-            Write-Verbose "Adding property $name"
-            $mapObject[$name] = $value
+        #Automatically rip out all of the _ properties returned by get-nbobject
+        $object = $Object | Select-Object -Property * -ExcludeProperty _*
+
+        $mapObject = @{custom_fields = @{} }
+        :maploop foreach ($property in $object.psobject.properties) {
+            $Name = $Property.name -replace '-' -replace ':'
+            $value = $Property.value
+            if ($Patch.IsPresent) {
+                if ( [string]::IsNullOrEmpty( $($OldObject."$name") ) -and [string]::IsNullOrEmpty($value) ) {
+                    Write-Verbose "Bypassing property $name (values are empty)"
+                    continue :maploop
+                }
+                If ( ($OldObject."$name" -eq $value) -and ( $object."$name" -isnot [System.Array]) ) {
+                    Write-Verbose "Bypassing property $name (Values are similar and object isn't an array)"
+                    continue :maploop
+                }
+            }
+            if ($name -in $lookup.keys) {
+                $value = ConvertTo-nbID -source $value -value $name
+            }
+            if ($name -in $CustomProperties) {
+                $mapObject.custom_fields[$name] = $value
+            }
+            elseif ($name -eq 'custom_fields') {
+                $mapObject.custom_fields += $value
+            }
+            else {
+                Write-Verbose "Adding property $name"
+                $mapObject[$name] = $value
+            }
         }
+        if ($mapObject.custom_fields.Keys.Count -eq 0) {
+            $mapObject.Remove("custom_fields")
+        }
+        $mapObject = New-Object -TypeName psobject -Property $mapObject
+        if ($Patch.IsPresent) {
+            #$notChanged = $mapObject | compare-object -ReferenceObject $OldObject -ExcludeDifferent -PassThru
+            #$mapObject = $mapObject | Select-Object -ExcludeProperty $notChanged
+            return Invoke-nbApi -Resource $Resource/$id -HttpVerb Patch -Body ($mapObject | ConvertTo-Json -Compress)
+        }
+        return Invoke-nbApi -Resource $Resource/$id -HttpVerb Put -Body ($mapObject | ConvertTo-Json -Compress)
     }
-    $mapObject = New-Object -TypeName psobject -Property $mapObject
-    if ($Patch.IsPresent) {
-        #$notChanged = $mapObject | compare-object -ReferenceObject $OldObject -ExcludeDifferent -PassThru
-        #$mapObject = $mapObject | Select-Object -ExcludeProperty $notChanged
-        return Invoke-nbApi -Resource $Resource/$id -HttpVerb Patch -Body ($mapObject | ConvertTo-Json)
+    catch {
+        $PSCmdlet.ThrowTerminatingError($_)
     }
-    return Invoke-nbApi -Resource $Resource/$id -HttpVerb Put -Body ($mapObject | ConvertTo-Json)
 }
