@@ -130,6 +130,11 @@ function Invoke-nbApi {
                 $Params['Headers'] = @{
                     Authorization = "token {0}" -f $marshal::PtrToStringUni($unmanagedString)
                 }
+                if ($HttpVerb -eq "GET") {
+                    $PArams['Headers']['X-Cache-Purge'] = 'true'
+                    $PArams['Headers']['Cache-Control'] = 'no-store'
+                    $PArams['Headers']['Pragma'] = 'no-cache'
+                }
             }
             #splat the paramaters into Invoke-Restmethod
             $Response = Invoke-RestMethod @Params
