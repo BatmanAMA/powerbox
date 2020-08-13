@@ -106,18 +106,11 @@ function Invoke-nbApi {
         } else {
             $URI = [UriBuilder]::new($rawUrl)
         }
-        #make this easier to refer to
-        $marshal = [System.Runtime.InteropServices.Marshal]
         try {
-            <#
-            Code for SecureString to String
-            https://blogs.msdn.microsoft.com/fpintos/2009/06/12/how-to-properly-convert-securestring-to-string/
-            #>
-
             $Params = @{
                 Uri         = $URI.Uri
                 Method      = $HttpVerb
-                UserAgent   = "NB-{0}-PowerShell" -f $ENV:USERNAME
+                UserAgent   = "PowerShell"
                 ContentType = 'application/json'
                 Body        = $Body
                 ###TimeoutSec
@@ -126,9 +119,8 @@ function Invoke-nbApi {
             }
             Write-Debug -Message ($params | ConvertTo-Json)
             if ($Script:Token) {
-                $unmanagedString = $marshal::SecureStringToGlobalAllocUnicode($Script:Token)
                 $Params['Headers'] = @{
-                    Authorization = "token {0}" -f $marshal::PtrToStringUni($unmanagedString)
+                    Authorization = "token {0}" -f [System.Net.NetworkCredential]::new('',$Script:Token).Password
                 }
             }
             #splat the paramaters into Invoke-Restmethod
@@ -148,7 +140,6 @@ function Invoke-nbApi {
         finally {
             if ($null -ne $unmanagedString) {
                 # Clean up the insecure stuff
-                $marshal::ZeroFreeGlobalAllocUnicode($unmanagedString)
                 Remove-Variable unmanagedString -Force -ErrorAction SilentlyContinue
                 Remove-Variable Params -Force -ErrorAction SilentlyContinue
             }
