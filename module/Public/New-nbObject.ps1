@@ -82,5 +82,7 @@ function New-nbObject {
     }
     $mapObject = New-Object -TypeName psobject -Property $mapObject
 
-    Invoke-nbApi -Resource $Resource -HttpVerb POST -Body ($mapObject | ConvertTo-Json -Compress)
+    $jsondata=($mapObject | ConvertTo-Json)
+    #Issues with International Characters like German Umlaut -> so [System.Text.Encoding]::UTF8
+    Invoke-nbApi -Resource $Resource -HttpVerb POST -Body ([System.Text.Encoding]::UTF8.GetBytes($jsondata))
 }
