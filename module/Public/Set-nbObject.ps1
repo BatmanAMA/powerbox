@@ -121,10 +121,13 @@ function Set-nbObject {
         }
     }
     $mapObject = New-Object -TypeName psobject -Property $mapObject
+    $jsondata=($mapObject | ConvertTo-Json)
     if ($Patch.IsPresent) {
         #$notChanged = $mapObject | compare-object -ReferenceObject $OldObject -ExcludeDifferent -PassThru
         #$mapObject = $mapObject | Select-Object -ExcludeProperty $notChanged
-        return Invoke-nbApi -Resource $Resource/$id -HttpVerb Patch -Body ($mapObject | ConvertTo-Json)
+        #Issues with International Characters like German Umlaut -> so [System.Text.Encoding]::UTF8
+        return Invoke-nbApi -Resource $Resource/$id -HttpVerb Patch -Body ([System.Text.Encoding]::UTF8.GetBytes($jsondata))
     }
-    return Invoke-nbApi -Resource $Resource/$id -HttpVerb Put -Body ($mapObject | ConvertTo-Json)
+    #Issues with International Characters like German Umlaut -> so [System.Text.Encoding]::UTF8
+    return Invoke-nbApi -Resource $Resource/$id -HttpVerb Put -Body ([System.Text.Encoding]::UTF8.GetBytes($jsondata))
 }
