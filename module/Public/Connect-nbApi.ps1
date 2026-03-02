@@ -25,8 +25,12 @@ function Connect-nbAPI {
         $APIurl,
         # Size of pages returned by "Get-nb*" commands.
         [int]
-        $QueryLimit = 250 
+        $QueryLimit = 250,
         #I find the default 50 very slow as the overhead is absurd.
+        # Auth header type: Bearer (NetBox v4.5+ default) or Token (legacy)
+        [ValidateSet('Bearer','Token')]
+        [string]
+        $AuthType = 'Bearer'
     )
     process {
         $Script:Token = $Token
@@ -37,6 +41,7 @@ function Connect-nbAPI {
         }
         $Script:APIUrl = $APIUrl
         $Script:QueryLimit = $QueryLimit
-        Write-Verbose "Saved connection to $Script:APIUrl"
+        $Script:AuthType = $AuthType
+        Write-Verbose "Saved connection to $Script:APIUrl (AuthType: $Script:AuthType)"
     }
 }

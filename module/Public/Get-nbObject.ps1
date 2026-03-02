@@ -121,14 +121,16 @@ function Get-nbObject {
                 $obj._lookups += $prop.name
                 $obj |
                     Add-Member -Name "_$($prop.name):id" -Value ($obj.($prop.name).id) -MemberType NoteProperty
-                if ($obj.($prop.name).name) {
+                if ($obj.($prop.name).display) {
+                    $obj.($prop.name) = $obj.($prop.name).display
+                } elseif ($obj.($prop.name).name) {
                     $obj.($prop.name) = $obj.($prop.name).name
                 } elseif ($obj.($prop.name).address) {
                     $obj.($prop.name) = $obj.($prop.name).address
                 } elseif ($obj.($prop.name).slug) {
                     $obj.($prop.name) = $obj.($prop.name).slug
                 }
-            } elseif ($obj.($prop.name).value -gt 0) {
+            } elseif ($null -ne $obj.($prop.name).value -and $null -ne $obj.($prop.name).label) {
                 $obj._lookups += $prop.name
                 $obj |
                     Add-Member -Name "_$($prop.name):id" -Value $obj.($prop.name).value -MemberType NoteProperty

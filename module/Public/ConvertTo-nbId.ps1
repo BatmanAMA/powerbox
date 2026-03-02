@@ -4,7 +4,7 @@
 .DESCRIPTION
     Got a device type and need the ID? here's your guy. You could do it yourself, but let's face it - that's work.
 .EXAMPLE
-    ConvertTo-nbID -source dcim/_choices/device:status -value Active
+    ConvertTo-nbID -source dcim/device-types -value dl380-g9
 #>
 function ConvertTo-nbID {
     [OutputType([String])]
@@ -22,11 +22,6 @@ function ConvertTo-nbID {
         $Value
     )
     try {
-        if ($source -match '.*\/_choices') {
-            Return Invoke-nbApi -resource ($source) |
-                Where-object label -eq $value |
-                Select-Object -ExpandProperty value
-        }
         Return (Invoke-nbApi -resource ($source) -Query @{slug = $Value}).results[0].id
     }
     catch [Microsoft.PowerShell.Commands.WriteErrorException] {

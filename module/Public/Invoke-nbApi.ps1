@@ -127,8 +127,9 @@ function Invoke-nbApi {
             Write-Debug -Message ($params | ConvertTo-Json)
             if ($Script:Token) {
                 $unmanagedString = $marshal::SecureStringToGlobalAllocUnicode($Script:Token)
+                $prefix = if ($Script:AuthType -eq 'Token') { 'token' } else { 'Bearer' }
                 $Params['Headers'] = @{
-                    Authorization = "token {0}" -f $marshal::PtrToStringUni($unmanagedString)
+                    Authorization = "$prefix {0}" -f $marshal::PtrToStringUni($unmanagedString)
                 }
             }
             #splat the paramaters into Invoke-Restmethod
