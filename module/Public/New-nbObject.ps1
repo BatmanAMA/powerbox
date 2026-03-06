@@ -7,8 +7,7 @@
     $lookup = @{
         device_type='dcim/device-types'
         device_role='dcim/device-roles'
-        site='organization/sites'
-        status='dcim/_choices'
+        site='dcim/sites'
     }
     $device = @{
         name = 'example'
